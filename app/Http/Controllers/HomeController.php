@@ -29,11 +29,12 @@ class HomeController extends Controller
     {
         return view('ambulance');
     }
-<<<<<<< HEAD
     public function register()
     {
         return view('auth/register');
     }
-=======
->>>>>>> 0a5026e42558c15984794f941861e560f9c8ebde
+    public function profile()
+    {
+      return view('profile');
+    }
 }
