@@ -71,7 +71,10 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                         <a href="{{ url('/ambulance') }}">Ambulance</a>
+<<<<<<< HEAD
                         <a href="{{ route('register') }}">Registreer gebruikers</a>
+=======
+>>>>>>> 0a5026e42558c15984794f941861e560f9c8ebde
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
