@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notification;
 
 class NotificationController extends Controller
 {
@@ -13,7 +14,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return view("notification.index", compact('posts'));
+        $notifications = Notification::all();
+        return view('notifications.index', compact('notifications'));
     }
 
     /**
@@ -23,7 +25,7 @@ class NotificationController extends Controller
      */
     public function create(Notification $notification)
     {
-        return view('notification.create', compact('notification'));
+        return view('notifications.create', compact('notification'));
     }
 
     /**

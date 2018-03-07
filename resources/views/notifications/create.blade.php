@@ -1,21 +1,10 @@
-@extends('')
-
-@section('content')
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Melding Toevoegen
-                <small>Nieuwe melding toevoegen</small>
+                Nieuwe melding toevoegen
             </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="{{ url('/melding') }}"><i class="fa fa-dashboard"></i> Meldingen</a>
-                </li>
-                <li><a href="{{ route('melding.index') }}">Meldingen</a></li>
-                <li class="active">Nieuw</li>
-            </ol>
         </section>
 
         <!-- Main content -->
@@ -24,19 +13,10 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-body ">
-                            {!! Form::model($post, [
+                            {!! Form::model($notification, [
                                 'method' => 'POST',
                                 'route' => 'melding.store'
                             ]) !!}
-
-                            <div class="form-group {{ $errors->has('id') ? 'has-error' : '' }}">
-                                {!! Form::label('id') !!}
-                                {!! Form::text('id', null, ['class' => 'form-control']) !!}
-
-                                @if($errors->has('id'))
-                                    <span class="help-block">{{ $errors->first('id') }}</span>
-                                @endif
-                            </div>
 
                             <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                                 {!! Form::label('date') !!}
@@ -47,12 +27,30 @@
                                 @endif
                             </div>
 
+                            <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
+                                {!! Form::label('time') !!}
+                                {!! Form::text('time', null, ['class' => 'form-control']) !!}
+
+                                @if($errors->has('time'))
+                                    <span class="help-block">{{ $errors->first('time') }}</span>
+                                @endif
+                            </div>
+
                             <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                                 {!! Form::label('address') !!}
-                                {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('address', null, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('address'))
                                     <span class="help-block">{{ $errors->first('address') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
+                                {!! Form::label('postalcode') !!}
+                                {!! Form::text('postalcode', null, ['class' => 'form-control']) !!}
+
+                                @if($errors->has('postalcode'))
+                                    <span class="help-block">{{ $errors->first('postalcode') }}</span>
                                 @endif
                             </div>
 
@@ -71,5 +69,3 @@
         </section>
         <!-- /.content -->
     </div>
-
-@endsection
