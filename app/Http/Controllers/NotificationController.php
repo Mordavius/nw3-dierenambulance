@@ -37,18 +37,18 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'date' => 'required',
-            'time' => 'required',
-            'address' => 'required',
-            'housenumber' => 'required',
-            'postalcode' => 'required',
-            'city' => 'required'
+        $notification = new Notification([
+            'date' => $request->get('date'),
+            'time' => $request->get('time'),
+            'address' => $request->get('address'),
+            'housenumber' => $request->get('housenumber'),
+            'postalcode' => $request->get('postalcode'),
+            'city' => $request->get('city')
         ]);
 
-        $request->user()->notifications()->create($request->all());
+        $notification->save();
 
-        return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
+       return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }
 
     /**

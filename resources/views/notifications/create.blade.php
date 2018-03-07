@@ -1,3 +1,6 @@
+@extends('layouts.main')
+
+@section('content')
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -9,10 +12,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-body ">
+                        <div class="box-body">
                             {!! Form::model($notification, [
                                 'method' => 'POST',
                                 'route' => 'melding.store'
@@ -79,11 +79,8 @@
                             {!! Form::close() !!}
                         </div>
                         <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-            </div>
-            <!-- ./row -->
         </section>
         <!-- /.content -->
     </div>
+
+@endsection
