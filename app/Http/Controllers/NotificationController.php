@@ -13,7 +13,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        return view("notification.index", compact('posts'));
     }
 
     /**
@@ -21,9 +21,9 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Notification $notification)
     {
-        //
+        return view('notification.create', compact('notification'));
     }
 
     /**
@@ -34,7 +34,15 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'date' => 'required',
+            'time' => 'required',
+            'sddress' => 'required'
+        ]);
+
+        $request->user()->notifications()->create($request->all());
+
+        return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }
 
     /**

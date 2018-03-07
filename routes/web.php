@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('ambulance', 'HomeController@ambulance')->name('ambulance');
+
+
+// CRUD Notification Controller
+Route::resource('melding', 'NotificationController');
