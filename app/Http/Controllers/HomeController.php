@@ -29,4 +29,8 @@ class HomeController extends Controller
     {
         return view('ambulance');
     }
+    public function register()
+    {
+        return view('auth/register');
+    }
 }

@@ -71,9 +71,10 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                         <a href="{{ url('/ambulance') }}">Ambulance</a>
+                        <a href="{{ route('register') }}">Registreer gebruikers</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+
                     @endauth
                 </div>
             @endif

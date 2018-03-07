@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -21,7 +23,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers, ThrottlesLogins;
 
     /**
      * Where to redirect users after registration.
@@ -37,7 +39,19 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+      $this->middleware('guest', ['except' => ['logout', 'register', 'postRegister', 'create']]);
+      $this->user = Auth::check() ?  Auth::user() : null;
+    }
+    /**
+     * Logs the user back in as himself in the event he has registered a new user.
+     *
+     * @return void
+     */
+    public function __destruct()
+    {
+        if (Auth::guard($guard)->check()) {
+            Auth::login($this->user);
+        }
     }
 
     /**
