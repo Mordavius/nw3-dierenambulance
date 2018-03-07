@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-<<<<<<< HEAD
 Route::get('home', 'HomeController@index')->name('home');
 
 Route::get('ambulance', 'HomeController@ambulance')->name('ambulance');
@@ -31,4 +30,3 @@ Route::get('ambulance', 'HomeController@ambulance')->name('ambulance');
 
 // CRUD Notification Controller
 Route::resource('melding', 'NotificationController');
->>>>>>> 0a5026e42558c15984794f941861e560f9c8ebde
