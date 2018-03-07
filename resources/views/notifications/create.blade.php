@@ -45,12 +45,30 @@
                                 @endif
                             </div>
 
+                            <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
+                                {!! Form::label('housenumber') !!}
+                                {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
+
+                                @if($errors->has('housenumber'))
+                                    <span class="help-block">{{ $errors->first('housenumber') }}</span>
+                                @endif
+                            </div>
+
                             <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
                                 {!! Form::label('postalcode') !!}
                                 {!! Form::text('postalcode', null, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('postalcode'))
                                     <span class="help-block">{{ $errors->first('postalcode') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
+                                {!! Form::label('city') !!}
+                                {!! Form::text('city', null, ['class' => 'form-control']) !!}
+
+                                @if($errors->has('city'))
+                                    <span class="help-block">{{ $errors->first('city') }}</span>
                                 @endif
                             </div>
 

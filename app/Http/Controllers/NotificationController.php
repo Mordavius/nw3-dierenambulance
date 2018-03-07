@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Notification;
 
 class NotificationController extends Controller
@@ -39,7 +40,10 @@ class NotificationController extends Controller
         $this->validate($request, [
             'date' => 'required',
             'time' => 'required',
-            'sddress' => 'required'
+            'address' => 'required',
+            'housenumber' => 'required',
+            'postalcode' => 'required',
+            'city' => 'required'
         ]);
 
         $request->user()->notifications()->create($request->all());

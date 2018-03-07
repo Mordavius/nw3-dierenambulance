@@ -15,8 +15,8 @@ class CreateNotificationTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('date');
-            $table->time('time');
+            $table->string('date');
+            $table->string('time');
             $table->string('address');
             $table->integer('housenumber');
             $table->string('postalcode');
@@ -32,6 +32,6 @@ class CreateNotificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notification');
+        Schema::dropIfExists('notifications');
     }
 }
