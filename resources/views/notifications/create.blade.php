@@ -12,15 +12,16 @@
 
         <!-- Main content -->
         <section class="content">
-                        <div class="box-body">
+                        <div class="col-6">
                             {!! Form::model($notification, [
                                 'method' => 'POST',
                                 'route' => 'melding.store'
                             ]) !!}
 
                             <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
-                                {!! Form::label('date') !!}
-                                {!! Form::text('date', null, ['class' => 'form-control']) !!}
+                                {!! Form::label('datum') !!}
+                                <input class="form-control" type="date" name="date" value="{{ \Carbon\Carbon::createFromDate($notification->year,$notification->month,$notification->day)->format('Y-m-d')}}" />
+
 
                                 @if($errors->has('date'))
                                     <span class="help-block">{{ $errors->first('date') }}</span>
@@ -28,16 +29,19 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
-                                {!! Form::label('time') !!}
-                                {!! Form::text('time', null, ['class' => 'form-control']) !!}
+                                {!! Form::label('tijd') !!}
+                                <input class="form-control" type="time" name="time" value="{{ \Carbon\Carbon::createFromTime($notification->hour,$notification->minute,$notification->second)->format('H-m-s')}}" />
 
                                 @if($errors->has('time'))
                                     <span class="help-block">{{ $errors->first('time') }}</span>
                                 @endif
                             </div>
 
+                            <h2>Locatie</h2>
+                            <small>(automatisch adresgegevens aanvullen moet nog)</small>
+
                             <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                                {!! Form::label('address') !!}
+                                {!! Form::label('Adres') !!}
                                 {!! Form::text('address', null, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('address'))
@@ -46,7 +50,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
-                                {!! Form::label('housenumber') !!}
+                                {!! Form::label('Huisnummer') !!}
                                 {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('housenumber'))
@@ -55,7 +59,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
-                                {!! Form::label('postalcode') !!}
+                                {!! Form::label('Postcode') !!}
                                 {!! Form::text('postalcode', null, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('postalcode'))
@@ -64,7 +68,7 @@
                             </div>
 
                             <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
-                                {!! Form::label('city') !!}
+                                {!! Form::label('Plaats') !!}
                                 {!! Form::text('city', null, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('city'))

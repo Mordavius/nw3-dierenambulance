@@ -8,4 +8,5 @@ class Notification extends Model
 {
     protected $primaryKey = 'id';
     protected $fillable = ['date', 'time', 'address', 'housenumber', 'postalcode', 'city'];
+
 }

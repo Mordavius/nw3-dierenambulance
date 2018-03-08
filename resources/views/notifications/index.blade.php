@@ -10,10 +10,11 @@
 
     <!-- Main content -->
     <section class="content">
+        <div class="col-6">
                             <a href="{{ route('melding.index') }}">Alle Meldingen</a><br />
                             <a href="{{ route('melding.create') }}" class="btn btn-success">Nieuwe melding aanmaken</a><br />
                             <a href="{{ url('/profiel') }}">Bekijk profiel</a>
-        <!-- ./row -->
+        </div>
     </section>
     <!-- /.content -->
 </div>
