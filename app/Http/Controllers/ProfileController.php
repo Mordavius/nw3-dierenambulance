@@ -5,19 +5,40 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Profile;
+use Illuminate\Support\Facades\DB;
+use App\User;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-      //$profile = Profile::all();
-      return view('profile', compact('profile'));
-    }
+     public function index()
+     {
+
+       $username = Auth::user()->name;
+      //$user_id = session()->get('user_id');
+
+       //return ($username);
+       return redirect('/profiel/' .$username);
+
+     }
+     /**
+      * Create a new controller instance.
+      *
+      * @return void
+      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +58,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -48,7 +69,8 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+      $user = User::where('name', $id)->get();
+      return view('profile', compact('user'));
     }
 
     /**

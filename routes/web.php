@@ -16,20 +16,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('ambulance', 'HomeController@ambulance')->name('ambulance');
 
 Route::get('register', 'HomeController@register')->name('register');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('ambulance', 'HomeController@ambulance')->name('ambulance');
-
 
 // CRUD Notification Controller
 Route::resource('melding', 'NotificationController');
+Route::resource('profiel','ProfileController');
 
-Route::resource('profiel', 'ProfileController');
-
+//Route::resource('profiel', 'ProfileController');
