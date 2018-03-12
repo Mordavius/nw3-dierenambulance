@@ -21,6 +21,7 @@ class CreateNotificationTable extends Migration
             $table->integer('housenumber')->nullable();
             $table->string('postalcode')->nullable();
             $table->string('city')->nullable();
+            $table->string('centralist');
             $table->timestamps();
         });
     }

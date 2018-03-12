@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Notification;
+use App\User;
 
 class NotificationController extends Controller
 {
@@ -16,6 +17,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = Notification::all();
+
         return view('notifications.index', compact('notifications'));
     }
 
@@ -26,7 +28,8 @@ class NotificationController extends Controller
      */
     public function create(Notification $notification)
     {
-        return view('notifications.create', compact('notification'));
+        $user = User::all('name');
+        return view('notifications.create', compact('notification'), compact('user'));
     }
 
     /**
@@ -37,13 +40,20 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+
         $notification = new Notification([
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'address' => $request->get('address'),
             'housenumber' => $request->get('housenumber'),
             'postalcode' => $request->get('postalcode'),
-            'city' => $request->get('city')
+            'city' => $request->get('city'),
+            'centralist' => $request->get('centralist'),
+        ]);
+
+        $request->validate([
+            'date' => 'required',
+            'time' => 'required',
         ]);
 
         $notification->save();
