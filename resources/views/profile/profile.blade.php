@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
+      @foreach($user as $user)
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Profiel</div>
-
+                <button onclick="location.href='{{$user->name}}/edit'" type="submit" class="btn btn-primary">
+              Edit profile
+            </button>
                 <div class="card-body">
                       <table class="table table-bordered">
                           <thead>
@@ -16,7 +20,7 @@
                           </tr>
                           </thead>
                           <tbody>
-                  @foreach($user as $user)
+
 
                       <tr>
                           <td>{{ $user->id }}</td>
@@ -24,9 +28,11 @@
                           <td>{{ $user->email }}</td>
                       </tr>
                   @endforeach
-                </div>
+
             </div>
         </div>
+
     </div>
 </div>
+@endsection
 <!-- /.box-body -->

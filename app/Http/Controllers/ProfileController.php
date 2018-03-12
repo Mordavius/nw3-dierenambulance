@@ -69,8 +69,8 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-      $user = User::where('name', $id)->get();
-      return view('profile', compact('user'));
+        $user = User::where('name', $id)->get();
+        return view('profile.profile', compact('user'));
     }
 
     /**
@@ -81,7 +81,10 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::where('name',$id)->get();
+
+        //return "test edit" .$user;
+        return view('profile.edit', compact('user'));
     }
 
     /**
@@ -93,7 +96,22 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+          'title' => 'required',
+          'slug' => 'required',
+          'body' => 'required',
+          'category_id' => 'required'
+      ]);
+
+      $user = User::findOrFail($id);
+      $user->name = $request->get('name');
+      $user->password = $request->get('password');
+      $user->email = $request->get('email');
+
+     // $data = $this->handleRequest($request);
+      $user->save();
+
+      return redirect('/profiel')->with('message', 'Artikel is geupdate');
     }
 
     /**
