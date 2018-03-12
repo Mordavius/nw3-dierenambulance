@@ -1,6 +1,18 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Dashboard</div>
+
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -67,12 +79,30 @@
                                 @endif
                             </div>
 
+                            <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
+                                {!! Form::label('Geen Postcode') !!}
+                                {!! Form::checkbox('nocode', null, ['class' => 'form-control']) !!}
+
+                                @if($errors->has('nocode'))
+                                    <span class="help-block">{{ $errors->first('nocode') }}</span>
+                                @endif
+                            </div>
+
                             <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                                 {!! Form::label('Plaats') !!}
                                 {!! Form::text('city', null, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('city'))
                                     <span class="help-block">{{ $errors->first('city') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group {{ $errors->has('') ? 'has-error' : '' }}">
+                                {!! Form::label('Centralist') !!}
+                                {!! Form::select('centralist', $user) !!}
+
+                                @if($errors->has('centralist'))
+                                    <span class="help-block">{{ $errors->first('centralist') }}</span>
                                 @endif
                             </div>
 
