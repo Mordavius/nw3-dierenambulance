@@ -49,11 +49,17 @@ class NotificationController extends Controller
             'postalcode' => $request->get('postalcode'),
             'city' => $request->get('city'),
             'centralist' => $request->get('centralist'),
+            'reportername' => $request->get('reportername'),
+            'telephone' => $request->get('telephone'),
+            'animalspecies' => $request->get('animalspecies'),
+            'gender' => $request->get('gender'),
+            'comments' => $request->get('comments'),
         ]);
 
         $request->validate([
             'date' => 'required',
             'time' => 'required',
+            'telephone' => 'numeric',
         ]);
 
         $notification->save();
@@ -69,7 +75,6 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
