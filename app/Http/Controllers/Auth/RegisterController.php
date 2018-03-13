@@ -42,17 +42,6 @@ class RegisterController extends Controller
       $this->middleware('guest', ['except' => ['logout', 'register', 'postRegister', 'create']]);
       $this->user = Auth::check() ?  Auth::user() : null;
     }
-    /**
-     * Logs the user back in as himself in the event he has registered a new user.
-     *
-     * @return void
-     */
-    public function __destruct()
-    {
-        if (Auth::guard($guard)->check()) {
-            Auth::login($this->user);
-        }
-    }
 
     /**
      * Get a validator for an incoming registration request.

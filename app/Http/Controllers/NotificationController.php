@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Notification;
+use App\User;
 
 class NotificationController extends Controller
 {
@@ -16,6 +17,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = Notification::all();
+
         return view('notifications.index', compact('notifications'));
     }
 
@@ -26,7 +28,8 @@ class NotificationController extends Controller
      */
     public function create(Notification $notification)
     {
-        return view('notifications.create', compact('notification'));
+        $user = User::all('name');
+        return view('notifications.create', compact('notification'), compact('user'));
     }
 
     /**
@@ -37,13 +40,26 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+
         $notification = new Notification([
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'address' => $request->get('address'),
             'housenumber' => $request->get('housenumber'),
             'postalcode' => $request->get('postalcode'),
-            'city' => $request->get('city')
+            'city' => $request->get('city'),
+            'centralist' => $request->get('centralist'),
+            'reportername' => $request->get('reportername'),
+            'telephone' => $request->get('telephone'),
+            'animalspecies' => $request->get('animalspecies'),
+            'gender' => $request->get('gender'),
+            'comments' => $request->get('comments'),
+        ]);
+
+        $request->validate([
+            'date' => 'required',
+            'time' => 'required',
+            'telephone' => 'numeric',
         ]);
 
         $notification->save();
@@ -59,7 +75,9 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::all('name');
+        $notification = Notification::findOrFail($id);
+        return view("notifications.show", compact('notification'), compact('user'));
     }
 
     /**
@@ -70,7 +88,9 @@ class NotificationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::all('name');
+        $notification = Notification::findOrFail($id);
+        return view("notifications.edit", compact('notification'), compact('user'));
     }
 
     /**
@@ -82,7 +102,28 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'date' => 'required',
+            'time' => 'required',
+            'telephone' => 'numeric',
+        ]);
+
+        $notification = Notification::findOrFail($id);
+        $notification->date = $request->get('date');
+        $notification->time = $request->get('time');
+        $notification->address = $request->get('address');
+        $notification->housenumber = $request->get('housenumber');
+        $notification->postalcode = $request->get('postalcode');
+        $notification->city = $request->get('city');
+        $notification->centralist = $request->get('centralist');
+        $notification->reportername = $request->get('reportername');
+        $notification->telephone = $request->get('telephone');
+        $notification->animalspecies = $request->get('animalspecies');
+        $notification->gender = $request->get('gender');
+        $notification->comments = $request->get('comments');
+        $notification->save();
+
+        return redirect('/melding')->with('message', 'Melding is geupdate');
     }
 
     /**
@@ -93,6 +134,7 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Notification::findOrFail($id)->delete();
+        return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 }

@@ -15,12 +15,18 @@ class CreateNotificationTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('date');
-            $table->string('time');
-            $table->string('address');
-            $table->integer('housenumber');
-            $table->string('postalcode');
-            $table->string('city');
+            $table->date('date');
+            $table->time('time');
+            $table->string('address')->nullable();
+            $table->integer('housenumber')->nullable();
+            $table->string('postalcode')->nullable();
+            $table->string('city')->nullable();
+            $table->string('centralist');
+            $table->string('reportername')->nullable();
+            $table->integer('telephone')->nullable();
+            $table->string('animalspecies');
+            $table->string('gender');
+            $table->string('comments')->nullable();
             $table->timestamps();
         });
     }
