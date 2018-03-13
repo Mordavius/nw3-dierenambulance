@@ -77,7 +77,7 @@ class NotificationController extends Controller
     {
         $user = User::all('name');
         $notification = Notification::findOrFail($id);
-        return view("notifications.edit", compact('notification'), compact('user'));
+        return view("notifications.show", compact('notification'), compact('user'));
     }
 
     /**

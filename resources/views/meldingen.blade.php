@@ -17,9 +17,9 @@
                     <!-- Main content -->
                         <section class="content">
                             <div class="col-6">
-                                <a href="{{ route('melding.index') }}" class="btn btn-success">Alle Meldingen</a>
-                                <a href="{{ route('melding.create') }}" class="btn btn-success">Nieuwe melding aanmaken</a>
-                                <a href="{{ url('/profiel') }}" class="btn btn-success">Bekijk profiel</a>
+                                <a href="{{ route('melding.index') }}" class="btn btn-primary">Alle Meldingen</a><br /><br />
+                                <a href="{{ route('melding.create') }}" class="btn btn-primary">Nieuwe melding aanmaken</a><br /><br />
+                                <a href="{{ url('/profiel') }}" class="btn btn-primary">Bekijk profiel</a>
                             </div>
                         </section>
                         <!-- /.content -->

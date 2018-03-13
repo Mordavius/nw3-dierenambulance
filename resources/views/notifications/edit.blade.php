@@ -8,6 +8,7 @@
                     <div class="card-header">Dashboard</div>
 
                     <div class="card-body">
+                        <a href="javascript:history.back()"><div class="btn btn-primary">Ga terug</div></a>
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
