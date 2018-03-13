@@ -75,6 +75,9 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
+        $user = User::all('name');
+        $notification = Notification::findOrFail($id);
+        return view("notifications.edit", compact('notification'), compact('user'));
     }
 
     /**
@@ -85,8 +88,9 @@ class NotificationController extends Controller
      */
     public function edit($id)
     {
-        $notifications = Notification::findOrFail($id);
-        return view("notifications.edit", compact('notifications'));
+        $user = User::all('name');
+        $notification = Notification::findOrFail($id);
+        return view("notifications.edit", compact('notification'), compact('user'));
     }
 
     /**
@@ -98,7 +102,28 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'date' => 'required',
+            'time' => 'required',
+            'telephone' => 'numeric',
+        ]);
+
+        $notification = Notification::findOrFail($id);
+        $notification->date = $request->get('date');
+        $notification->time = $request->get('time');
+        $notification->address = $request->get('address');
+        $notification->housenumber = $request->get('housenumber');
+        $notification->postalcode = $request->get('postalcode');
+        $notification->city = $request->get('city');
+        $notification->centralist = $request->get('centralist');
+        $notification->reportername = $request->get('reportername');
+        $notification->telephone = $request->get('telephone');
+        $notification->animalspecies = $request->get('animalspecies');
+        $notification->gender = $request->get('gender');
+        $notification->comments = $request->get('comments');
+        $notification->save();
+
+        return redirect('/melding')->with('message', 'Melding is geupdate');
     }
 
     /**

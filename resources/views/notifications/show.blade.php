@@ -18,7 +18,7 @@
                             <!-- Content Header (Page header) -->
                             <section class="content-header">
                                 <h1>
-                                    Update een melding
+                                    Bekijk een melding
                                 </h1>
                             </section>
 
@@ -26,8 +26,7 @@
                             <section class="content">
                                 <div class="col-6">
                                     {!! Form::model($notification, [
-                                        'method' => 'PUT',
-                                        'route' => ['melding.update', $notification->id],
+                                        'route' => ['melding.show', $notification->id],
                                         'id' => 'post-form'
                                     ]) !!}
 
@@ -183,8 +182,6 @@
                                     </div>
 
                                     <hr>
-
-                                    {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
 
                                     {!! Form::close() !!}
                                 </div>

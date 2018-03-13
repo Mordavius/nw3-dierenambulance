@@ -30,9 +30,9 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <td>Meldingsnummer</td>
+                <td>Meldings<br />nummer</td>
                 <td>Diersoort</td>
-                <td>Adresgegevens</td>
+                <td>Plaats</td>
                 <td>Datum</td>
                 <td>Tijd</td>
                 <td>Beschrijving</td>
@@ -45,18 +45,24 @@
                 <tr>
                     <td>{{ $notification->id }}</td>
                     <td>{{ $notification->animalspecies }}</td>
-                    <td>{{ $notification->address }}</td>
+                    <td>{{ $notification->city }}</td>
                     <td>{{ $notification->date, $notification->time  }}</td>
                     <td>{{ $notification->time }}</td>
                     <td>{{ $notification->comments }}</td>
                     <td>
                         {!! Form::open(['method' => 'DELETE', 'route' => ['melding.destroy', $notification->id], 'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
                         <a href="{{ route('melding.edit', $notification->id) }}">
-                            <i class="btn btn-primary">Melding aanpassen</i>
+                            <i class="btn btn-primary">Aanpassen</i>
                         </a>
 
-                        <button type="submit">
-                            <i class="btn btn-primary">Verwijder Melding</i>
+                        <br />
+
+                        <a href="{{ route('melding.show', $notification->id) }}"><i class="btn btn-primary">Bekijk</i></a>
+
+                        <br />
+
+                        <button type="submit" class="btn btn-primary">
+                            <i>Verwijderen</i>
                         </button>
                         {!! Form::close() !!}
                     </td>
