@@ -85,7 +85,8 @@ class NotificationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $notifications = Notification::findOrFail($id);
+        return view("notifications.edit", compact('notifications'));
     }
 
     /**
@@ -108,6 +109,7 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Notification::findOrFail($id)->delete();
+        return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 }
