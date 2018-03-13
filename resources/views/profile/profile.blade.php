@@ -8,14 +8,13 @@
             <div class="card">
                 <div class="card-header">Profiel</div>
                 <button onclick="location.href='{{$user->name}}/edit'" type="submit" class="btn btn-primary">
-              Edit profile
+              Profiel aanpassen
             </button>
                 <div class="card-body">
                       <table class="table table-bordered">
                           <thead>
                           <tr>
-                              <td width="80">Id</td>
-                              <td width="80">Naam</td>
+                              <td width="80">Gebruikersnaam</td>
                               <td width="80">E-mail</td>
                           </tr>
                           </thead>
@@ -23,7 +22,6 @@
 
 
                       <tr>
-                          <td>{{ $user->id }}</td>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
                       </tr>

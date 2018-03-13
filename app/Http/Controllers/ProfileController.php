@@ -97,21 +97,20 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
       $this->validate($request, [
-          'title' => 'required',
-          'slug' => 'required',
-          'body' => 'required',
-          'category_id' => 'required'
+          'username' => 'required',
+          'email' => 'required',
       ]);
-
+      //return $request;
       $user = User::findOrFail($id);
-      $user->name = $request->get('name');
-      $user->password = $request->get('password');
+      $user->name = $request->get('username');
       $user->email = $request->get('email');
 
-     // $data = $this->handleRequest($request);
-      $user->save();
-
+      //$data = $this->handleRequest($request);
+       $user->save();
+      // // //
       return redirect('/profiel')->with('message', 'Artikel is geupdate');
+
+      // return "test";
     }
 
     /**
