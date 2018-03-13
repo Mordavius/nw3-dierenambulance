@@ -17,8 +17,14 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = Notification::all();
+       // $filterNotifications = Notification::all()->orderBy('created_at', 'desc')->paginate(3);
+        //with('date')->filter(request('term'))
 
-        return view('notifications.index', compact('notifications'));
+      //  $filterNotifications = Notification::table('notifications')
+      //      ->orderBy('date', 'desc')
+       //     ->get();
+
+        return view('notifications.index', compact('notifications'), compact('filterNotifications'));
     }
 
     /**

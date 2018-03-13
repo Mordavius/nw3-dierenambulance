@@ -10,4 +10,18 @@ class Notification extends Model
     protected $fillable = ['date', 'time', 'address', 'housenumber', 'postalcode', 'city',
         'centralist', 'reportername', 'telephone', 'animalspecies', 'gender', 'comments'];
 
+    /**
+     * @param $query
+     * @param $search
+     */
+    public function scopeFilter($query, $search)
+    {
+        // check term for search function
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->orWhere('title', 'LIKE', "%{$search}%");
+            });
+        }
+    }
+
 }
