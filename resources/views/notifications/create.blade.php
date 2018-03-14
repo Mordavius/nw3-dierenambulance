@@ -33,7 +33,13 @@
 
                             <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                                 {!! Form::label('datum') !!}
-                                <input class="form-control" type="date" name="date" value="{{ \Carbon\Carbon::createFromDate($notification->year,$notification->month,$notification->day)->format('Y-m-d')}}" />
+                                <input class="form-control" type="date" name="date"
+                                    @if($notification && $notification->date)
+                                        value="{{ date('Y-m-d', strtotime($notification->date)) }}"
+                                    @else
+                                        value="{{ date('Y-m-d') }}"
+                                    @endif
+                                />
 
 
                                 @if($errors->has('date'))
@@ -43,7 +49,7 @@
 
                             <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                 {!! Form::label('tijd (idee om een hier een klokje tijdselectie?)') !!}
-                                <input class="form-control" type="time" name="time" value="{{ \Carbon\Carbon::createFromTime($notification->hour,$notification->minute,$notification->second)->format('H-m-s')}}" />
+                                <input class="form-control" type="time" name="time" value="{{ $notification->time }}" />
 
                                 @if($errors->has('time'))
                                     <span class="help-block">{{ $errors->first('time') }}</span>
