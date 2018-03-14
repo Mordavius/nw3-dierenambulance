@@ -111,7 +111,7 @@ class ProfileController extends Controller
       //$data = $this->handleRequest($request);
        $user->save();
 
-      return redirect('/profiel')->with('message', 'Artikel is geupdate');
+      return redirect('/profiel')->with('message', 'Gebruiker is geupdate');
 
       // return "test";
     }

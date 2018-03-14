@@ -6,10 +6,16 @@
       @foreach($user as $user)
         <div class="col-md-8">
             <div class="card">
+              @if(session('status'))
+                  <div class="alert alert-info">
+                      {{ session('status') }}
+                  </div>
+              @endif
                 <div class="card-header">Profiel</div>
                 <button onclick="location.href='{{$user->name}}/edit'" type="submit" class="btn btn-primary">
               Profiel aanpassen
             </button>
+
                 <div class="card-body">
                       <table class="table table-bordered">
                           <thead>
