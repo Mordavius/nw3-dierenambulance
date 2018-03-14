@@ -23,7 +23,7 @@
             {!! Form::text('email', $user->email, ['class' => 'form-control']) !!}
         </div>
 
-        {!! Form::submit('Update Task', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit('Profiel opslaan', ['class' => 'btn btn-primary']) !!}
 
         {!! Form::close() !!}
         @endforeach

@@ -104,10 +104,13 @@ class ProfileController extends Controller
       $user = User::findOrFail($id);
       $user->name = $request->get('username');
       $user->email = $request->get('email');
+      // if ($request->('password') = $user->password){
+      //   $user->password = $request->('password');
+      // }
 
       //$data = $this->handleRequest($request);
        $user->save();
-      // // //
+
       return redirect('/profiel')->with('message', 'Artikel is geupdate');
 
       // return "test";
