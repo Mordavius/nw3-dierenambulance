@@ -34,7 +34,7 @@ class NotificationController extends Controller
      */
     public function create(Notification $notification)
     {
-        $user = User::all('name');
+        $user = User::all()->pluck('name');
         return view('notifications.create', compact('notification'), compact('user'));
     }
 
@@ -82,7 +82,7 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        $user = User::all('name');
+        $user = User::all()->pluck('name');
         $notification = Notification::findOrFail($id);
         return view("notifications.show", compact('notification'), compact('user'));
     }
@@ -95,7 +95,7 @@ class NotificationController extends Controller
      */
     public function edit($id)
     {
-        $user = User::all('name');
+        $user = User::all()->pluck('name');
         $notification = Notification::findOrFail($id);
         return view("notifications.edit", compact('notification'), compact('user'));
     }
