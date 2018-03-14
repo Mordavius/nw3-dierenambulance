@@ -75,7 +75,7 @@
 
                             <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
                                 {!! Form::label('Postcode') !!}
-                                {!! Form::text('postalcode', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('postalcode', false, ['class' => 'form-control']) !!}
 
                                 @if($errors->has('postalcode'))
                                     <span class="help-block">{{ $errors->first('postalcode') }}</span>
@@ -84,7 +84,7 @@
 
                             <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
                                 {!! Form::label('Geen Postcode') !!}
-                                {!! Form::checkbox('nocode', null, ['class' => 'form-control']) !!}
+                                {!! Form::checkbox('nocode', 0, null) !!}
 
                                 @if($errors->has('nocode'))
                                     <span class="help-block">{{ $errors->first('nocode') }}</span>

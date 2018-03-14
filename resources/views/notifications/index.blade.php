@@ -55,7 +55,7 @@
                     <td>{{ $notification->id }}</td>
                     <td>{{ $notification->animalspecies }}</td>
                     <td>{{ $notification->city }}</td>
-                    <td>{{ $notification->date, $notification->time  }}</td>
+                    <td>{{ $notification->date }}</td>
                     <td>{{ $notification->time }}</td>
                     <td>{{ $notification->comments }}</td>
                     <td>

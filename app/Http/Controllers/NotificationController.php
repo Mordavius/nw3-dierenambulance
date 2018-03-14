@@ -65,6 +65,7 @@ class NotificationController extends Controller
         $request->validate([
             'date' => 'required',
             'time' => 'required',
+            'housenumber' => 'numeric',
             'telephone' => 'numeric',
         ]);
 
