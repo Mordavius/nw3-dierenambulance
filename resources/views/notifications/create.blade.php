@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- @TODO: FIX CLOSING OF DIVS!! --}}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -198,5 +199,5 @@
         </section>
         <!-- /.content -->
     </div>
-
+{{-- @TODO: HIER HADDEN VIER OF MEER DIVS AFGESLOTEN MOETEN ZIJN!! --}}
 @endsection
