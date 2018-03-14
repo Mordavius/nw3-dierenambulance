@@ -30,6 +30,6 @@ class User extends Authenticatable
     ];
 
     public function isAdmin() {
-        $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+     return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
     }
 }
