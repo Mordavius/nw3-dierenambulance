@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 
@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/meldingen', 'HomeController@ambulance')->name('meldingen');
 
-Route::get('register', 'HomeController@register')->name('register');
+Route::get('/register', 'HomeController@register')->name('register')->middleware('rolecheck');
 
 Route::get('ambulance', 'HomeController@ambulance')->name('ambulance')->middleware('rolecheck');
 
