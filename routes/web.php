@@ -31,5 +31,6 @@ Route::get('ambulance', 'HomeController@ambulance')->name('ambulance')->middlewa
 // CRUD Notification Controller
 Route::resource('melding', 'NotificationController');
 Route::resource('profiel','ProfileController');
+Route::resource('buswissel', 'BusChangeController');
 
 //Route::resource('profiel', 'ProfileController');
