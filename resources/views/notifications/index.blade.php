@@ -7,9 +7,15 @@
                 <div class="text-center">Laat meldingen zien vanaf</div>
 
                     <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <form action="{{ route('search') }}">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-lg" value="{{ request('search') }}" name="search" placeholder="Zoeken naar...">
+                                <span class="input-group-btn">
+                        <button class="btn btn-lg btn-default" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                            </div>
                         </form>
                     </nav>
                 <div class="card">
@@ -22,6 +28,12 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+
+                        @if ($search = request('search'))
+                            <div class="alert alert-success">
+                               <p>Zoekresultaten: {{ $search }}</p>
+                            </div>
+                    @endif
 
 <!-- /.box-header -->
 <div class="box-body ">
@@ -76,6 +88,9 @@
                         {!! Form::close() !!}
                     </td>
                 </tr>
+
+                <!-- pagination -->
+              
 
             @endforeach
             </tbody>

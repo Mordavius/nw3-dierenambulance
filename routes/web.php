@@ -28,8 +28,14 @@ Route::get('register', 'HomeController@register')->name('register');
 Route::get('ambulance', 'HomeController@ambulance')->name('ambulance')->middleware('rolecheck');
 
 
+Route::get('search', [
+    'uses' => 'NotificationController@index',
+    'as' => 'search',
+]);
+
+
 // CRUD Notification Controller
-Route::resource('melding', 'NotificationController');
+Route::resource('melding','NotificationController');
 Route::resource('profiel','ProfileController');
 
 //Route::resource('profiel', 'ProfileController');

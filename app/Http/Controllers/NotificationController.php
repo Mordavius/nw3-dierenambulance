@@ -20,10 +20,12 @@ class NotificationController extends Controller
        // $filterNotifications = Notification::all()->orderBy('created_at', 'desc')->paginate(3);
         //with('date')->filter(request('term'))
 
-      //  $filterNotifications = Notification::table('notifications')
+     //   $filterNotifications = Notification::table('notifications')
       //      ->orderBy('date', 'desc')
        //     ->get();
+        //$notifications = Notification::with('date')->orderBy('date', 'asc')->get();
 
+        $notifications = Notification::filter(request('search'))->orderBy('date', 'desc')->paginate(3);
         return view('notifications.index', compact('notifications'), compact('filterNotifications'));
     }
 
@@ -84,7 +86,8 @@ class NotificationController extends Controller
     {
         $user = User::all()->pluck('name');
         $notification = Notification::findOrFail($id);
-        return view("notifications.show", compact('notification'), compact('user'));
+        $notifications = Notification::with('date')->orderBy('date', 'asc')->get();
+        return view("notifications.show", compact('notification'), compact('user'), compact('notifications'));
     }
 
     /**
