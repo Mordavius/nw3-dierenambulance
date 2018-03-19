@@ -23,13 +23,19 @@ Route::get('home', 'HomeController@index')->name('home');
 
 Route::get('meldingen', 'HomeController@ambulance')->name('meldingen');
 
-Route::get('register', 'HomeController@register')->name('register')->middleware('rolecheck');
-
 Route::get('ambulance', 'HomeController@ambulance')->name('ambulance')->middleware('rolecheck');
 
-// CRUD Notification Controller
-Route::resource('melding', 'NotificationController');
-Route::resource('profiel','ProfileController');
-Route::resource('buswissel', 'BusChangeController');
 
-//Route::resource('profiel', 'ProfileController');
+Route::get('/register', 'HomeController@register')->name('register')->middleware('rolecheck');
+
+
+Route::get('search', [
+    'uses' => 'NotificationController@index',
+    'as' => 'search',
+]);
+
+// CRUD Notification Controller
+Route::resource('melding','NotificationController');
+Route::resource('profiel','ProfileController');
+
+Route::resource('buswissel', 'BusChangeController');

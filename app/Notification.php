@@ -16,10 +16,10 @@ class Notification extends Model
      */
     public function scopeFilter($query, $search)
     {
-        // check term for search function
+        // check on term for search function
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->orWhere('title', 'LIKE', "%{$search}%");
+                $q->orWhere('animalspecies', 'LIKE', "%{$search}%");
             });
         }
     }

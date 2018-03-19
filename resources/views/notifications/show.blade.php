@@ -182,6 +182,9 @@
                                         @endif
                                     </div>
 
+                                    <!-- pagination -->
+                                    {{ $notifications->links() }}
+
                                     <hr>
 
                                     {!! Form::close() !!}
