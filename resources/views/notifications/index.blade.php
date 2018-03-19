@@ -5,13 +5,16 @@
   <div class="row justify-content-center">
     <div class="col-md-12">
       <div class="text-center">Laat meldingen zien vanaf</div>
-
-      <nav class="navbar navbar-light bg-light">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <nav class="navbar navbar-light bg-light">
+        <form action="{{ route('search') }}">
+            <div class="form-inline">
+                <input type="search" class="form-control mr-sm-2" value="{{ request('search') }}" name="search" placeholder="Zoeken" aria-label="Search">
+                <span class="input-group-btn">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
+                    </span>
+            </div>
         </form>
-      </nav>
+        </nav>
       <div class="card">
         <div class="card-header">Dashboard</div>
         <div class="card-body">
@@ -24,6 +27,11 @@
             <div class="alert alert-success">
               {{ session('status') }}
             </div>
+                @if ($search = request(''))
+                    <div class="alert alert-info">
+                        <p>Zoekresultaten<strong>{{ $search }}</strong></p>
+                    </div>
+                @endif
           @endif
           <div class="box-body ">
             @if(session('message'))
@@ -70,12 +78,17 @@
                             <i>Verwijderen</i>
                         </button>
                         {!! Form::close() !!}
+
                       </td>
                     </tr>
                   @endforeach
                 </tbody>
               </table>
             @endif
+
+            <!-- pagination -->
+                {{ $notifications->links() }}
+
           </div>
         </div>
       </div>

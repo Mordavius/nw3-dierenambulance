@@ -182,13 +182,11 @@
                                         @endif
                                     </div>
 
-                                    <!-- pagination -->
-                                    {{ $notifications->links() }}
-
                                     <hr>
 
                                     {!! Form::close() !!}
                                 </div>
+
                                 <!-- /.box-body -->
                             </section>
                             <!-- /.content -->

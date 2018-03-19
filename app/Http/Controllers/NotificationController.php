@@ -26,7 +26,7 @@ class NotificationController extends Controller
         //$notifications = Notification::with('date')->orderBy('date', 'asc')->get();
 
         $notifications = Notification::filter(request('search'))->orderBy('date', 'desc')->paginate(3);
-        return view('notifications.index', compact('notifications'), compact('filterNotifications'));
+        return view('notifications.index', compact('notifications'));
     }
 
     /**
