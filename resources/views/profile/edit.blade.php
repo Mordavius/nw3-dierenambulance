@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">Profiel aanpassen</div>
 
@@ -18,7 +18,7 @@
         <section class="content-header"></section>
         <section class="content">
           @foreach($user as $user)
-            <div class="col-8">
+            <div class="col-12">
               {!! Form::model($user, [
                 'method' => 'PATCH',
                 'route' => ['profiel.update', $user->id]

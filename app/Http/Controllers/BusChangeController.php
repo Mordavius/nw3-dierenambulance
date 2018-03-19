@@ -45,7 +45,7 @@ class BusChangeController extends Controller
      */
     public function store(Request $request)
     {
-      $request = new Request([
+      $buschange = new BusChange([
           'bus' => $request->get('bus'),
           'from' => $request->get('from'),
           'to' => $request->get('to'),
@@ -55,12 +55,13 @@ class BusChangeController extends Controller
 
       $request->validate([
           'date' => 'required',
-          'time' => 'required',
-       //   'housenumber' => 'sometimes|numeric',
-       //   'telephone' => 'sometimes|numeric',
+          'kilometerstraveled' => 'required',
       ]);
 
-      $request->save();
+      $buschange->save();
+
+      return redirect('/buswissel')->with('message', 'Nieuwe buswissel is aangemaakt!');
+
 
     }
 

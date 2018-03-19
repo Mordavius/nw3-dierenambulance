@@ -41,6 +41,7 @@
                             <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
 
                         @else
+                        <li><a class="nav-link" href="buswissel">Buswissel</a></li>
                         <li><a class="nav-link" href="{{ route('meldingen') }}">Meldingen</a></li>
                         <!--<li><a class="nav-link" href="{{ route('register') }}">Registreer gebruikers</a></li>-->
                             <li class="nav-item dropdown">
@@ -67,7 +68,6 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>

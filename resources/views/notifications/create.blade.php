@@ -1,201 +1,186 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Dashboard</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">Melding maken</div>
 
-                    <div class="card-body">
-                        <a href="../meldingen"><div class="btn btn-primary">Terug naar het menu</div></a><br /><br />
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
+        <div class="card-body">
+          <a href="../meldingen"><div class="btn btn-primary">Terug naar het menu</div></a><br /><br />
+          @if (session('status'))
+            <div class="alert alert-success">
+              {{ session('status') }}
+            </div>
+          @endif
+
+          <div class="content-wrapper">
+
+            <!-- Main content -->
+            <section class="content">
+              <div class="col-12">
+                {!! Form::model($notification, [
+                  'method' => 'POST',
+                  'route' => 'melding.store'
+                  ]) !!}
+
+                  <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
+                    {!! Form::label('datum') !!}
+                      <input class="form-control" type="date" name="date"
+                        @if($notification && $notification->date)
+                          value="{{ date('Y-m-d', strtotime($notification->date)) }}"
+                        @else
+                          value="{{ date('Y-m-d') }}"
                         @endif
-
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Nieuwe melding toevoegen
-            </h1>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-                        <div class="col-6">
-                            {!! Form::model($notification, [
-                                'method' => 'POST',
-                                'route' => 'melding.store'
-                            ]) !!}
-
-                            <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
-                                {!! Form::label('datum') !!}
-                                <input class="form-control" type="date" name="date"
-                                    @if($notification && $notification->date)
-                                        value="{{ date('Y-m-d', strtotime($notification->date)) }}"
-                                    @else
-                                        value="{{ date('Y-m-d') }}"
-                                    @endif
-                                />
+                      />
 
 
-                                @if($errors->has('date'))
-                                    <span class="help-block">{{ $errors->first('date') }}</span>
-                                @endif
-                            </div>
+                    @if($errors->has('date'))
+                      <span class="help-block">{{ $errors->first('date') }}</span>
+                    @endif
+                  </div>
 
-                            <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
-                                {!! Form::label('tijd (idee om een hier een klokje tijdselectie?)') !!}
-                                <input class="form-control" type="time" name="time" value="{{ $notification->time }}" />
+                  <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
+                    {!! Form::label('tijd (idee om een hier een klokje tijdselectie?)') !!}
+                    <input class="form-control" type="time" name="time" value="{{ $notification->time }}" />
+                    @if($errors->has('time'))
+                      <span class="help-block">{{ $errors->first('time') }}</span>
+                    @endif
+                  </div>
+                  <hr>
+                  <h2>Locatie</h2>
+                  <small>(automatisch adresgegevens aanvullen moet nog)</small>
 
-                                @if($errors->has('time'))
-                                    <span class="help-block">{{ $errors->first('time') }}</span>
-                                @endif
-                            </div>
+                  <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
+                    {!! Form::label('Adres') !!}
+                    {!! Form::text('address', null, ['class' => 'form-control']) !!}
+                    @if($errors->has('address'))
+                      <span class="help-block">{{ $errors->first('address') }}</span>
+                    @endif
+                  </div>
 
-                            <hr>
+                  <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
+                    {!! Form::label('Huisnummer') !!}
+                    {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
+                    @if($errors->has('housenumber'))
+                      <span class="help-block">{{ $errors->first('housenumber') }}</span>
+                    @endif
+                  </div>
 
-                            <h2>Locatie</h2>
-                            <small>(automatisch adresgegevens aanvullen moet nog)</small>
+                  <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
+                    {!! Form::label('Postcode') !!}
+                    {!! Form::text('postalcode', false, ['class' => 'form-control']) !!}
+                    @if($errors->has('postalcode'))
+                      <span class="help-block">{{ $errors->first('postalcode') }}</span>
+                    @endif
+                  </div>
 
-                            <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                                {!! Form::label('Adres') !!}
-                                {!! Form::text('address', null, ['class' => 'form-control']) !!}
+                  <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
+                    {!! Form::label('Geen Postcode') !!}
+                    {!! Form::checkbox('nocode', 0, null) !!}
+                    @if($errors->has('nocode'))
+                      <span class="help-block">{{ $errors->first('nocode') }}</span>
+                    @endif
+                  </div>
 
-                                @if($errors->has('address'))
-                                    <span class="help-block">{{ $errors->first('address') }}</span>
-                                @endif
-                            </div>
+                  <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
+                    {!! Form::label('Plaats') !!}
+                    {!! Form::text('city', null, ['class' => 'form-control']) !!}
+                    @if($errors->has('city'))
+                      <span class="help-block">{{ $errors->first('city') }}</span>
+                    @endif
+                  </div>
 
-                            <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
-                                {!! Form::label('Huisnummer') !!}
-                                {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
+                  <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
+                    {!! Form::label('Centralist') !!}
+                    {!! Form::select('centralist', $user) !!}
 
-                                @if($errors->has('housenumber'))
-                                    <span class="help-block">{{ $errors->first('housenumber') }}</span>
-                                @endif
-                            </div>
+                    @if($errors->has('centralist'))
+                      <span class="help-block">{{ $errors->first('centralist') }}</span>
+                    @endif
+                  </div>
+                  <hr>
+                  <h2>Melder</h2>
 
-                            <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
-                                {!! Form::label('Postcode') !!}
-                                {!! Form::text('postalcode', false, ['class' => 'form-control']) !!}
+                  <div class="form-group {{ $errors->has('reportername') ? 'has-error' : '' }}">
+                    {!! Form::label('Naam van melder') !!}
+                    {!! Form::text('reportername', null, ['class' => 'form-control']) !!}
+                    @if($errors->has('meldernaam'))
+                      <span class="help-block">{{ $errors->first('reportername') }}</span>
+                    @endif
+                  </div>
 
-                                @if($errors->has('postalcode'))
-                                    <span class="help-block">{{ $errors->first('postalcode') }}</span>
-                                @endif
-                            </div>
+                  <div class="form-group {{ $errors->has('telephone') ? 'has-error' : '' }}">
+                    {!! Form::label('Telefoonnummer van melder') !!}
+                    {!! Form::text('telephone', null, ['class' => 'form-control']) !!}
+                    @if($errors->has('telephone'))
+                      <span class="help-block">{{ $errors->first('telephone') }}</span>
+                    @endif
+                  </div>
 
-                            <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
-                                {!! Form::label('Geen Postcode') !!}
-                                {!! Form::checkbox('nocode', 0, null) !!}
+                  <h2>Dier</h2>
 
-                                @if($errors->has('nocode'))
-                                    <span class="help-block">{{ $errors->first('nocode') }}</span>
-                                @endif
-                            </div>
+                  <div class="form-group {{ $errors->has('animalspecies') ? 'has-error' : '' }}">
+                    {!! Form::label('Diersoort') !!}
+                    <br />
+                    {!! Form::radio('animalspecies', 'hond') !!}
+                    {!! Form::label('Hond') !!}
 
-                            <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
-                                {!! Form::label('Plaats') !!}
-                                {!! Form::text('city', null, ['class' => 'form-control']) !!}
+                    {!! Form::radio('animalspecies', 'kat', ['class' => 'form-control']) !!}
+                    {!! Form::label('Kat') !!}
 
-                                @if($errors->has('city'))
-                                    <span class="help-block">{{ $errors->first('city') }}</span>
-                                @endif
-                            </div>
+                    {!! Form::radio('animalspecies', 'egel', ['class' => 'form-control']) !!}
+                    {!! Form::label('Egel') !!}
 
-                            <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
-                                {!! Form::label('Centralist') !!}
-                                {!! Form::select('centralist', $user) !!}
+                    {!! Form::radio('animalspecies', 'vogel', ['class' => 'form-control']) !!}
+                    {!! Form::label('Vogel') !!}
 
-                                @if($errors->has('centralist'))
-                                    <span class="help-block">{{ $errors->first('centralist') }}</span>
-                                @endif
-                            </div>
+                    {!! Form::radio('animalspecies', 'anders', ['class' => 'form-control']) !!}
+                    {!! Form::label('Anders') !!}
 
-                            <hr>
+                    @if($errors->has('animalspecies'))
+                      <span class="help-block">{{ $errors->first('animalspecies') }}</span>
+                    @endif
+                  </div>
 
-                            <h2>Melder</h2>
+                  <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
+                    {!! Form::label('Geslacht') !!}
+                    <br />
+                    {!! Form::radio('gender', 'mannelijk', ['class' => 'form-control']) !!}
+                    {!! Form::label('Mannelijk') !!}
 
-                            <div class="form-group {{ $errors->has('reportername') ? 'has-error' : '' }}">
-                                {!! Form::label('Naam van melder') !!}
-                                {!! Form::text('reportername', null, ['class' => 'form-control']) !!}
+                    {!! Form::radio('gender', 'vrouwelijk', ['class' => 'form-control']) !!}
+                    {!! Form::label('Vrouwelijk') !!}
 
-                                @if($errors->has('meldernaam'))
-                                    <span class="help-block">{{ $errors->first('reportername') }}</span>
-                                @endif
-                            </div>
+                    {!! Form::radio('gender', 'onbekend', ['class' => 'form-control']) !!}
+                    {!! Form::label('Onbekend') !!}
 
-                            <div class="form-group {{ $errors->has('telephone') ? 'has-error' : '' }}">
-                                {!! Form::label('Telefoonnummer van melder') !!}
-                                {!! Form::text('telephone', null, ['class' => 'form-control']) !!}
+                    @if($errors->has('gender'))
+                      <span class="help-block">{{ $errors->first('gender') }}</span>
+                    @endif
+                  </div>
 
-                                @if($errors->has('telephone'))
-                                    <span class="help-block">{{ $errors->first('telephone') }}</span>
-                                @endif
-                            </div>
+                  <div class="form-group {{ $errors->has('comments') ? 'has-error' : '' }}">
+                    {!! Form::label('Opmerkingen') !!}
+                    {!! Form::textarea('comments', null, ['class' => 'form-control']) !!}
 
-                            <h2>Dier</h2>
+                    @if($errors->has('comments'))
+                      <span class="help-block">{{ $errors->first('comments') }}</span>
+                    @endif
+                  </div>
+                  <hr>
+                  {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
 
-                            <div class="form-group {{ $errors->has('animalspecies') ? 'has-error' : '' }}">
-                                {!! Form::label('Diersoort') !!}
-                                <br />
-                                {!! Form::radio('animalspecies', 'hond') !!}
-                                {!! Form::label('Hond') !!}
-
-                                {!! Form::radio('animalspecies', 'kat', ['class' => 'form-control']) !!}
-                                {!! Form::label('Kat') !!}
-
-                                {!! Form::radio('animalspecies', 'egel', ['class' => 'form-control']) !!}
-                                {!! Form::label('Egel') !!}
-
-                                {!! Form::radio('animalspecies', 'vogel', ['class' => 'form-control']) !!}
-                                {!! Form::label('Vogel') !!}
-
-                                {!! Form::radio('animalspecies', 'anders', ['class' => 'form-control']) !!}
-                                {!! Form::label('Anders') !!}
-
-                                @if($errors->has('animalspecies'))
-                                    <span class="help-block">{{ $errors->first('animalspecies') }}</span>
-                                @endif
-                            </div>
-
-                            <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
-                                {!! Form::label('Geslacht') !!}
-                                <br />
-                                {!! Form::radio('gender', 'mannelijk', ['class' => 'form-control']) !!}
-                                {!! Form::label('Mannelijk') !!}
-
-                                {!! Form::radio('gender', 'vrouwelijk', ['class' => 'form-control']) !!}
-                                {!! Form::label('Vrouwelijk') !!}
-
-                                {!! Form::radio('gender', 'onbekend', ['class' => 'form-control']) !!}
-                                {!! Form::label('Onbekend') !!}
-
-                                @if($errors->has('gender'))
-                                    <span class="help-block">{{ $errors->first('gender') }}</span>
-                                @endif
-                            </div>
-
-                            <div class="form-group {{ $errors->has('comments') ? 'has-error' : '' }}">
-                                {!! Form::label('Opmerkingen') !!}
-                                {!! Form::textarea('comments', null, ['class' => 'form-control']) !!}
-
-                                @if($errors->has('comments'))
-                                    <span class="help-block">{{ $errors->first('comments') }}</span>
-                                @endif
-                            </div>
-
-                            <hr>
-
-                            {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
-
-                            {!! Form::close() !!}
-                        </div>
-                        <!-- /.box-body -->
-        </section>
-        <!-- /.content -->
+                {!! Form::close()   !!}
+              </div>
+<!-- /.box-body -->
+            </section>
+<!-- /.content -->
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 @endsection
