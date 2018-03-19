@@ -65,8 +65,8 @@ class NotificationController extends Controller
         $request->validate([
             'date' => 'required',
             'time' => 'required',
-            'housenumber' => 'numeric',
-            'telephone' => 'numeric',
+         //   'housenumber' => 'sometimes|numeric',
+         //   'telephone' => 'sometimes|numeric',
         ]);
 
         $notification->save();
@@ -112,7 +112,7 @@ class NotificationController extends Controller
         $this->validate($request, [
             'date' => 'required',
             'time' => 'required',
-            'telephone' => 'numeric',
+        //    'telephone' => 'sometimes|numeric',
         ]);
 
         $notification = Notification::findOrFail($id);
