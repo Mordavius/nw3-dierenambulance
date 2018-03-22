@@ -4,7 +4,15 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12">
-      <div class="text-center">Laat meldingen zien vanaf</div>
+      <div class="text-center"></div>
+        <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
+            {!! Form::label('Laat meldingen zien vanaf') !!}
+            {!! Form::select('filter', ["alles", "week", "month", "year"]) !!}
+
+            @if($errors->has('filter'))
+                <span class="help-block">{{ $errors->first('filter') }}</span>
+            @endif
+        </div>
         <nav class="navbar navbar-light bg-light">
         <form action="{{ route('search') }}">
             <div class="form-inline">

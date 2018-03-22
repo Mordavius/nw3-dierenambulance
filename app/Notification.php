@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Notification extends Model
 {
@@ -14,7 +15,7 @@ class Notification extends Model
      * @param $query
      * @param $search
      */
-    public function scopeFilter($query, $search)
+    public function scopeSearch($query, $search)
     {
         // check on term for search function
         if ($search) {
@@ -24,4 +25,22 @@ class Notification extends Model
         }
     }
 
+    public function scopeFilter($filter)
+    {
+        switch($filter)
+        {
+            case "alles":
+                break;
+            case "week":
+                return dd($filter);
+                return $filter = Carbon::now()->subWeeks(1);
+                break;
+            case "month":
+                return $filter = Carbon::now()->subMonths(1);
+                break;
+            case "year":
+                return $filter = Carbon::now()->subYears(1);
+                break;
+        }
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Notification;
 use App\User;
+use Carbon\Carbon;
 
 class NotificationController extends Controller
 {
@@ -14,19 +15,13 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $notifications = Notification::all();
-       // $filterNotifications = Notification::all()->orderBy('created_at', 'desc')->paginate(3);
-        //with('date')->filter(request('term'))
+        $filter = Notification::all('date');
 
-     //   $filterNotifications = Notification::table('notifications')
-      //      ->orderBy('date', 'desc')
-       //     ->get();
-        //$notifications = Notification::with('date')->orderBy('date', 'asc')->get();
-
-        $notifications = Notification::filter(request('search'))->orderBy('date', 'desc')->paginate(3);
-        return view('notifications.index', compact('notifications'));
+        $notifications = Notification::search(request('search'))->orderBy('date', 'desc')->paginate(15);
+        return view('notifications.index', compact('notifications'), compact('filter'));
     }
 
     /**
@@ -86,7 +81,7 @@ class NotificationController extends Controller
     {
         $user = User::all()->pluck('name');
         $notification = Notification::findOrFail($id);
-        $notifications = Notification::with('date')->orderBy('date', 'asc')->get();
+      //  $notifications = Notification::with('date')->orderBy('date', 'asc')->get();
         return view("notifications.show", compact('notification'), compact('user'), compact('notifications'));
     }
 
