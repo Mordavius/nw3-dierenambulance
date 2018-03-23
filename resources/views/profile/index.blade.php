@@ -26,15 +26,9 @@
                                 @include('profile.table')
                             @endif
 
-                        <div class="box-footer clearfix">
-                            <div class="pull-left">
-                                {{ $users->appends( Request::query() )->render() }}
-                            </div>
                             <div class="pull-right">
                                 <small>{{ $usersCount }} {{ str_plural('gebruikers', $usersCount) }}</small>
-
                             </div>
-                        </div>
                             </section>
                             <!-- /.content -->
                     </div>

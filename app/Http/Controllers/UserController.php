@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Http\Requests\UserUpdateRequest;
+use Hash;
 
 class UserController extends Controller
 {
@@ -64,7 +65,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view("profile.edit", compact('user'));
+        return view("profile.adminedit", compact('user'));
     }
 
     /**
@@ -74,10 +75,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         User::findOrFail($id)->update($request->all());
-        return redirect("/administratie/leden")->with("message", "Gebruiker is geupdate!");
+
+        return redirect("../public/leden")->with("message", "Gebruiker is geupdate!");
     }
 
     /**
@@ -88,21 +90,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-
-        $deleteOption = $request->delete_option;
-        $selectedUser = $request->selected_user;
-
-        if ($deleteOption == "delete") {
-            // delete user posts
-            $user->posts()->withTrashed()->forceDelete();
-        }
-        elseif ($deleteOption == "attribute") {
-            $user->posts()->update(['author_id' => $selectedUser]);
-        }
-
-        $user->delete();
-
-        return redirect("/administratie/leden")->with("message", "Gebruiker is verwijderd!");
+        User::findOrFail($id)->delete();
+        return redirect("/leden")->with("message", "Gebruiker is verwijderd!");
     }
 }

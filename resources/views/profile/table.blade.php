@@ -16,7 +16,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
-                    <a href="" class="btn btn-xs btn-default"> <!-- route('profiel.adminedit', $user->id) -->
+                    <a href="{{ route('leden.edit', $user->id) }}" class="btn btn-xs btn-default">
                         <i class="btn btn-success">Aanpassen</i>
                     </a>
                     @if($user->id == config('') || $user->id == $currentUser->id)
@@ -24,9 +24,12 @@
                             Verwijderen
                         </button>
                     @else
-                        <a href="" class="btn btn-xs btn-danger">  <!-- route('profile.confirm', $user->id) -->
+                        {!! Form::open(['method' => 'DELETE', 'route' => ['leden.destroy', $user->id],
+                        'onsubmit' => 'return confirm("Klik op OK om de gebruiker te verwijderen!")']) !!}
+                        <button type="submit" class="btn btn-xs btn-danger">
                             Verwijderen
-                        </a>
+                        </button>
+                        {!! Form::close() !!}
                     @endif
                 </td>
             </tr>

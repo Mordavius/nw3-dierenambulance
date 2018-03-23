@@ -35,12 +35,14 @@ Route::get('search', [
 ]);
 
 Route::get('/administratie', 'AdministrationController@index')->name('Administratie');
-Route::get('/administratie/leden/', 'UserController@index')->name('Gebruikers');
 
 // CRUD Notification Controllers
 Route::resource('melding','NotificationController');
 
 // CRUD Profile Controllers
 Route::resource('profiel','ProfileController');
+
+// CRUD User Controllers
+Route::resource('leden','UserController');
 
 Route::resource('buswissel', 'BusChangeController');

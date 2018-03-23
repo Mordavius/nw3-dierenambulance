@@ -17,8 +17,8 @@
                     <!-- Main content -->
                         <section class="content">
                             <div class="col-6">
-                                <a href="administratie/leden" class="btn btn-primary">Gebruikers</a><br /><br />
-                                <a href="" class="btn btn-primary">Exporteer Meldingen</a><br /><br />
+                                <a href="../public/leden" class="btn btn-primary">Gebruikers</a><br /><br />
+                                <a href="exporteren" class="btn btn-primary">Exporteer Meldingen</a><br /><br />
                                 <a href="" class="btn btn-primary">Bussen</a><br /><br />
                             </div>
                         </section>
