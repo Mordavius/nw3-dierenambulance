@@ -19,6 +19,7 @@
                             <div class="col-6">
                                 <a href="{{ route('melding.index') }}" class="btn btn-primary">Alle Meldingen</a><br /><br />
                                 <a href="{{ route('melding.create') }}" class="btn btn-primary">Nieuwe melding aanmaken</a><br /><br />
+                                <a href="administratie" class="btn btn-primary">Administratie</a><br /><br />
                                 <a href="{{ url('/profiel') }}" class="btn btn-primary">Bekijk profiel</a>
                             </div>
                         </section>

@@ -52,35 +52,35 @@
                   <h2>Locatie</h2>
                   <small>(automatisch adresgegevens aanvullen moet nog)</small>
 
+                  <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
+                      {!! Form::label('Postcode') !!}
+                      {!! Form::text('postalcode', false, ['class' => 'form-control']) !!}
+                      @if($errors->has('postalcode'))
+                          <span class="help-block">{{ $errors->first('postalcode') }}</span>
+                      @endif
+                  </div>
+
+                  <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
+                      {!! Form::label('Geen Postcode') !!}
+                      {!! Form::checkbox('nocode', 0, null) !!}
+                      @if($errors->has('nocode'))
+                          <span class="help-block">{{ $errors->first('nocode') }}</span>
+                      @endif
+                  </div>
+
+                  <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
+                      {!! Form::label('Huisnummer') !!}
+                      {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
+                      @if($errors->has('housenumber'))
+                          <span class="help-block">{{ $errors->first('housenumber') }}</span>
+                      @endif
+                  </div>
+
                   <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                     {!! Form::label('Adres') !!}
                     {!! Form::text('address', null, ['class' => 'form-control']) !!}
                     @if($errors->has('address'))
                       <span class="help-block">{{ $errors->first('address') }}</span>
-                    @endif
-                  </div>
-
-                  <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
-                    {!! Form::label('Huisnummer') !!}
-                    {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
-                    @if($errors->has('housenumber'))
-                      <span class="help-block">{{ $errors->first('housenumber') }}</span>
-                    @endif
-                  </div>
-
-                  <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
-                    {!! Form::label('Postcode') !!}
-                    {!! Form::text('postalcode', false, ['class' => 'form-control']) !!}
-                    @if($errors->has('postalcode'))
-                      <span class="help-block">{{ $errors->first('postalcode') }}</span>
-                    @endif
-                  </div>
-
-                  <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
-                    {!! Form::label('Geen Postcode') !!}
-                    {!! Form::checkbox('nocode', 0, null) !!}
-                    @if($errors->has('nocode'))
-                      <span class="help-block">{{ $errors->first('nocode') }}</span>
                     @endif
                   </div>
 
