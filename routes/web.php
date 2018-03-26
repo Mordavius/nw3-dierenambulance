@@ -35,6 +35,7 @@ Route::get('search', [
 ]);
 
 Route::get('/administratie', 'AdministrationController@index')->name('Administratie');
+Route::get('/exporteren', 'AdministrationController@export')->name('Exporteren');
 
 // CRUD Notification Controllers
 Route::resource('melding','NotificationController');

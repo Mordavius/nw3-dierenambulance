@@ -16,4 +16,9 @@ class AdministrationController extends Controller
         return view('administration.index');
     }
 
+    public function export()
+    {
+        return view('administration.export');
+    }
+
 }
