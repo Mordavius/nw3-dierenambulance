@@ -38,6 +38,8 @@ Route::get('search', [
 
 Route::get('/administratie', 'AdministrationController@index')->name('Administratie');
 Route::get('/exporteren', 'AdministrationController@export')->name('Exporteren');
+Route::get('downloadExcel', 'AdministrationController@downloadExcel');
+// Route::get('pdfview',array('as'=>'pdfview','uses'=>'AdministrationController@pdfview'));
 
 // CRUD Notification Controllers
 Route::resource('melding','NotificationController');
