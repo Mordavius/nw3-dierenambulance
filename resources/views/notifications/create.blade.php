@@ -56,7 +56,7 @@
 
                   <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
                       {!! Form::label('Postcode') !!}
-                      {!! Form::text('postalcode', false, ['class' => 'form-control']) !!}
+                      {!! Form::text('postalcode', false, ['class' => 'form-control', 'id' => 'postalcode']) !!}
                       @if($errors->has('postalcode'))
                           <span class="help-block">{{ $errors->first('postalcode') }}</span>
                       @endif
@@ -72,15 +72,15 @@
 
                   <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
                       {!! Form::label('Huisnummer') !!}
-                      {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
+                      {!! Form::text('housenumber', null, ['class' => 'form-control', 'id' => 'housenumber']) !!}
                       @if($errors->has('housenumber'))
                           <span class="help-block">{{ $errors->first('housenumber') }}</span>
                       @endif
                   </div>
 
                   <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                    {!! Form::label('Adres') !!}
-                    {!! Form::text('address', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('Straatnaam') !!}
+                    {!! Form::text('address', null, ['class' => 'form-control', 'id'=> 'address']) !!}
                     @if($errors->has('address'))
                       <span class="help-block">{{ $errors->first('address') }}</span>
                     @endif
@@ -88,7 +88,7 @@
 
                   <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                     {!! Form::label('Plaats') !!}
-                    {!! Form::text('city', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('city', null, ['class' => 'form-control', 'id' => 'city']) !!}
                     @if($errors->has('city'))
                       <span class="help-block">{{ $errors->first('city') }}</span>
                     @endif

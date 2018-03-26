@@ -5,9 +5,13 @@
 .btn:not(:disabled):not(.disabled) {
 	margin-top: 10px;
 }
-.open .dropdown-toggle {
-    color: #fff ;
-    background-color: #555 !important;
+
+html, body
+{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
 .main-content
 {
     position: absolute;

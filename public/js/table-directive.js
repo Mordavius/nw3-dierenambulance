@@ -6,7 +6,7 @@ var app = angular.module("app", [])
 	$scope.days = [];
 	$scope.markers = new L.FeatureGroup();
 
-    $scope.map = L.map('map').setView([53, 6], 10);
+    $scope.map = L.map('map').setView([53, 5.7], 10);
     L.tileLayer(
         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors',
@@ -25,11 +25,46 @@ var app = angular.module("app", [])
 	}
 
 	function onMapClick(e) {
-	    //alert("You clicked the map at " + e.latlng);
-			var marker = L.marker(e.latlng).addTo($scope.map);
-			marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+			makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
+				if(err) { throw err; }
+				var marker = L.marker(e.latlng).addTo($scope.map);
+				//console.log(result)
+				var obj = JSON.parse(result);
+				marker.bindPopup("Hello!<br>" + obj.address.suburb).openPopup();
+
+				updateAddressInformation(obj);
+			})
 	}
 
+	function reverseGeocodeQuery(format, lat, lon, zoom) {
+			var url = "https://nominatim.openstreetmap.org/reverse?format=" + format + "&lat=" + lat + "&lon=" + lon + "&zoom=" + zoom + "&addressdetails=1";
+			console.log(url);
+			return url;
+	}
+
+	function makeRequest (method, url, done) {
+		var xhr = new XMLHttpRequest();
+
+		xhr.open(method, url);
+
+		xhr.onload = function() {
+			done(null, xhr.response);
+		}
+
+		xhr.onerror = function() {
+			done(xhr.response);
+		}
+
+		xhr.send();
+	}
+
+	function updateAddressInformation(obj){
+		document.getElementById("postalcode").value = obj.address.postcode ? obj.address.postcode : "Kan postcode niet vinden";
+		document.getElementById("housenumber").value = obj.address.house_number ? obj.address.house_number : "Kan huis nummer niet vinden";
+		document.getElementById("address").value = obj.address.road ? obj.address.road : "Kan straat niet vinden"
+		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
+
+	}
 	$scope.map.on('click', onMapClick);
 
 
