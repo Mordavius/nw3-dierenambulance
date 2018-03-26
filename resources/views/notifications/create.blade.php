@@ -1,7 +1,9 @@
 @extends('layouts.app')
-
-@section('content')
 <div class="container">
+@section('map')
+  @include('map')
+@endsection
+@section('content')
   <div class="row justify-content-center">
     <div class="col-md-12">
       <div class="card">
@@ -183,4 +185,12 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('scripts')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+  <script src = "{!!asset('js/angular.min.js')!!}"></script>
+  <script src = "{!!asset('js/table-directive.js')!!}"></script>
 @endsection

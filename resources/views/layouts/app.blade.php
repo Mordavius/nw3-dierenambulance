@@ -69,12 +69,16 @@
             </div>
         </nav>
         <main class="py-4">
+          @yield('map')
+        </main>
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
 
     <!-- Scripts -->
     <!-- Bootstrap 4.0.0 -->
+    @yield('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

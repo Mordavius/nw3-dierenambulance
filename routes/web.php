@@ -28,6 +28,8 @@ Route::get('ambulance', 'HomeController@ambulance')->name('ambulance')->middlewa
 
 Route::get('/register', 'HomeController@register')->name('register')->middleware('rolecheck');
 
+Route::get('/map', 'HomeController@map')->name('map');
+
 
 Route::get('search', [
     'uses' => 'NotificationController@index',

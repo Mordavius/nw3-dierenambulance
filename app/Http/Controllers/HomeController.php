@@ -33,4 +33,8 @@ class HomeController extends Controller
     {
         return view('auth/register');
     }
+    public function map()
+    {
+        return view('map');
+    }
 }
