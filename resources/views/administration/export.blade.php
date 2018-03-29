@@ -18,7 +18,7 @@
                         <section class="content">
                             <div class="col-6">
 
-                                <!-- /.content -->
+                                <a href="{{ url('downloadExcel') }}"><button class="btn btn-success btn-lg">Exporteren naar Excel</button></a>
 
                             </div>
                     </div>
