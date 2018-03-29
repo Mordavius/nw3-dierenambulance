@@ -93,6 +93,13 @@
                       <span class="help-block">{{ $errors->first('city') }}</span>
                     @endif
                   </div>
+                  <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
+                    {!! Form::label('Gemeente') !!}
+                    {!! Form::text('township', null, ['class' => 'form-control', 'id' => 'township']) !!}
+                    @if($errors->has('gemeente'))
+                      <span class="help-block">{{ $errors->first('gemeente') }}</span>
+                    @endif
+                  </div>
 
                   <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
                     {!! Form::label('Centralist') !!}

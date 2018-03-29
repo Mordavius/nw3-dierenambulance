@@ -63,7 +63,7 @@ var app = angular.module("app", [])
 		document.getElementById("housenumber").value = obj.address.house_number ? obj.address.house_number : "Kan huis nummer niet vinden";
 		document.getElementById("address").value = obj.address.road ? obj.address.road : "Kan straat niet vinden"
 		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
-
+		document.getElementById("township").value = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
 	}
 	$scope.map.on('click', onMapClick);
 

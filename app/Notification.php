@@ -9,7 +9,7 @@ class Notification extends Model
 {
     protected $primaryKey = 'id';
     protected $fillable = ['date', 'time', 'address', 'housenumber', 'postalcode', 'city',
-        'centralist', 'reportername', 'telephone', 'animalspecies', 'gender', 'comments'];
+        'centralist', 'reportername', 'telephone', 'animalspecies', 'gender', 'comments', 'township'];
 
     /**
      * @param $query

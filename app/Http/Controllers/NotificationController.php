@@ -51,6 +51,7 @@ class NotificationController extends Controller
             'housenumber' => $request->get('housenumber'),
             'postalcode' => $request->get('postalcode'),
             'city' => $request->get('city'),
+            'township' => $request->get('township'),
             'centralist' => $request->get('centralist'),
             'reportername' => $request->get('reportername'),
             'telephone' => $request->get('telephone'),
@@ -120,6 +121,7 @@ class NotificationController extends Controller
         $notification->housenumber = $request->get('housenumber');
         $notification->postalcode = $request->get('postalcode');
         $notification->city = $request->get('city');
+        $notification->township = $request->get('township');
         $notification->centralist = $request->get('centralist');
         $notification->reportername = $request->get('reportername');
         $notification->telephone = $request->get('telephone');

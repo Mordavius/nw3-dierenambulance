@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{$user}}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -99,6 +98,14 @@
 
                                         @if($errors->has('city'))
                                             <span class="help-block">{{ $errors->first('city') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
+                                        {!! Form::label('Gemeente') !!}
+                                        {!! Form::text('township', null, ['class' => 'form-control']) !!}
+
+                                        @if($errors->has('township'))
+                                            <span class="help-block">{{ $errors->first('township') }}</span>
                                         @endif
                                     </div>
 
