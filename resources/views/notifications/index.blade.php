@@ -82,11 +82,10 @@
                           <i class="btn btn-primary">Bekijk</i>
                         </a>
                         <br />
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-danger">
                             <i>Verwijderen</i>
                         </button>
                         {!! Form::close() !!}
-
                       </td>
                     </tr>
                   @endforeach
