@@ -19,9 +19,9 @@ class NotificationController extends Controller
     public function index()
     {
         $filter = Notification::all('date');
-
+        $users = User::all();
         $notifications = Notification::search(request('search'))->orderBy('date', 'desc')->paginate(15);
-        return view('notifications.index', compact('notifications'), compact('filter'));
+        return view('notifications.index', compact('notifications'), compact('filter'))->withUsers($users);
     }
 
     /**
@@ -43,7 +43,6 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-
         $notification = new Notification([
             'date' => $request->get('date'),
             'time' => $request->get('time'),

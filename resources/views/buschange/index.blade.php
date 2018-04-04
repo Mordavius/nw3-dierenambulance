@@ -10,7 +10,11 @@
         <div class="card-header">Buswissel</div>
         <div class="card-body">
           <div class="box-body">
+<<<<<<< HEAD
             <a href="{{ route('buswissel.create') }}" class="btn btn-primary">Nieuwe buswissel aanmaken</a><br /><br />
+=======
+            <a href="{{ route('buswissel.create') }}" class="btn btn-primary">Wissel van bus</a><br /><br />
+>>>>>>> 8d2756ebbe6930e7deb6e3c22579e4e63dbb7d33
 
             @if (session('success'))
               <div class="alert alert-success">

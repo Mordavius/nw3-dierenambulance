@@ -27,6 +27,8 @@
                   'route' => 'melding.store'
                   ]) !!}
 
+                  {{ csrf_field() }}
+
                   <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                     {!! Form::label('datum') !!}
                       <input class="form-control" type="date" name="date"

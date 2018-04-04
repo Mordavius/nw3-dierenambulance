@@ -10,7 +10,7 @@ class NotificationExport implements FromCollection
 
     public function collection()
     {
-        return Notification::all('animalspecies');
+        return Notification::all();
     }
 
 }

@@ -29,8 +29,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user = new User();
-        return view("profile.create", compact('user'));
     }
 
     /**
