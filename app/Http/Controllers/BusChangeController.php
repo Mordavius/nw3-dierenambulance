@@ -60,7 +60,7 @@ class BusChangeController extends Controller
 
       $buschange->save();
 
-      return redirect('/buswissel')->with('message', 'Nieuwe buswissel is aangemaakt!');
+      return redirect('/buswissel')->with('success', 'Nieuwe buswissel is aangemaakt!');
 
 
     }

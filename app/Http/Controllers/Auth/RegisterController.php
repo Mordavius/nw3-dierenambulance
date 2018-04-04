@@ -23,7 +23,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers, ThrottlesLogins;
+    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -39,8 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-      $this->middleware('guest', ['except' => ['logout', 'register', 'postRegister', 'create']]);
-      $this->user = Auth::check() ?  Auth::user() : null;
+      $this->middleware('guest', ['except' => ['register', 'create']]);
     }
 
     /**

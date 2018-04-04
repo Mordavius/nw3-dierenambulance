@@ -10,11 +10,11 @@
         <div class="card-header">Buswissel</div>
         <div class="card-body">
           <div class="box-body">
-            <a href="{{ route('buswissel.create') }}" class="btn btn-primary">Nieuwe melding aanmaken</a><br /><br />
+            <a href="{{ route('buswissel.create') }}" class="btn btn-primary">Nieuwe buswissel aanmaken</a><br /><br />
 
-            @if (session('status'))
+            @if (session('success'))
               <div class="alert alert-success">
-                {{ session('status') }}
+                {{ session('success') }}
               </div>
             @endif
           @if (! $buschanges->count())

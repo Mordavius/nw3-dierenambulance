@@ -26,7 +26,7 @@ class AddTownshipToNotificationsTable extends Migration
     public function down()
     {
         Schema::table('notifications', function (Blueprint $table) {
-            $table->dropColumn(['township']);
+            $table->dropColumn('township');
         });
     }
 }

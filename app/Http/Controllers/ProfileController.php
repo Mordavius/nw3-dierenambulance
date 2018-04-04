@@ -14,31 +14,30 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
-     {
+    public function index()
+    {
 
-       $username = Auth::user()->name;
+        $username = Auth::user()->name;
       //$user_id = session()->get('user_id');
 
        //return ($username);
-       return redirect('/profiel/' .$username);
-
-     }
+        return redirect('/profiel/' .$username);
+    }
      /**
       * Create a new controller instance.
       *
       * @return void
       */
-     public function __construct()
-     {
+    public function __construct()
+    {
          $this->middleware('auth');
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +57,6 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -81,7 +79,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('name',$id)->get();
+        $user = User::where('name', $id)->get();
 
         //return "test edit" .$user;
         return view('profile.edit', compact('user'));
@@ -96,23 +94,24 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->validate($request, [
+        $this->validate($request, [
           'username' => 'required',
           'email' => 'required',
-      ]);
+        ]);
       //return $request;
-      $user = User::findOrFail($id);
-      $user->name = $request->get('username');
-      $user->email = $request->get('email');
+        $user = User::findOrFail($id);
+        $user->name = $request->get('username');
+        $user->email = $request->get('email');
       // if ($request->('password') = $user->password){
       //   $user->password = $request->('password');
       // }
 
       //$data = $this->handleRequest($request);
-       $user->save();
+        $user->save();
 
+       //flash('Profiel is geupd')->success()
        //\Session::flash('flash_message','Office successfully added.');
-      return redirect('/profiel')->with('succes', 'Gebruiker is geupdate');
+        return redirect('/profiel/' .$user->name)->with('success', 'Gebruiker is geupdate');
 
       // return "test";
     }

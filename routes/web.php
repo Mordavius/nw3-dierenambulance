@@ -28,9 +28,6 @@ Route::get('ambulance', 'HomeController@ambulance')->name('ambulance')->middlewa
 
 Route::get('/register', 'HomeController@register')->name('register')->middleware('rolecheck');
 
-Route::get('/map', 'HomeController@map')->name('map');
-
-
 Route::get('search', [
     'uses' => 'NotificationController@index',
     'as' => 'search',
@@ -48,6 +45,6 @@ Route::resource('melding','NotificationController');
 Route::resource('profiel','ProfileController');
 
 // CRUD User Controllers
-Route::resource('leden','UserController');
+Route::resource('leden','UserController')->middleware('rolecheck');;
 
 Route::resource('buswissel', 'BusChangeController');

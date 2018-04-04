@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <!-- Bootstrap 4.0.0 -->
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('/') }}/css/style.css">

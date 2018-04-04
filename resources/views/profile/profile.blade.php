@@ -6,13 +6,14 @@
     @foreach($user as $user)
       <div class="col-md-12">
         <div class="card">
-          @if(session('status'))
+          <div class="card-header">Profiel</div>
+            <div class="card-body">
+          @if(session('success'))
             <div class="alert alert-info">
-              {{ session('status') }}
+              {{ session('success') }}
             </div>
           @endif
-          <div class="card-header">Profiel</div>
-          <div class="card-body">
+
             <button onclick="location.href='{{$user->name}}/edit'" type="submit" class="btn btn-primary">
               Profiel aanpassen
             </button>
