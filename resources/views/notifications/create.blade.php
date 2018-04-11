@@ -1,14 +1,16 @@
 @extends('layouts.app')
-<div class="container">
+
 @section('map')
   @include('map')
 @endsection
 @section('content')
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">Melding maken</div>
-
+        <input id="searchTextBox" type="text" />
+        <button id="searchButton">Search</button>
         <div class="card-body">
           <a href="../meldingen"><div class="btn btn-primary">Terug naar het menu</div></a><br /><br />
           @if (session('status'))
@@ -27,7 +29,7 @@
                   'route' => 'melding.store'
                   ]) !!}
 
-                  {{ csrf_field() }}
+                  <!-- {{ csrf_field() }} -->
 
                   <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                     {!! Form::label('datum') !!}
@@ -183,7 +185,7 @@
                   <hr>
                   {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
 
-                {!! Form::close()   !!}
+                {!! Form::close() !!}
               </div>
 <!-- /.box-body -->
             </section>

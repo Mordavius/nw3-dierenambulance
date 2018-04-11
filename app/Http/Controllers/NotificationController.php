@@ -68,7 +68,7 @@ class NotificationController extends Controller
 
         $notification->save();
 
-       return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
+        return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }
 
     /**

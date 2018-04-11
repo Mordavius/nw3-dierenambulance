@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\NotificationExport;
 
-
-
 class AdministrationController extends Controller
 {
 
@@ -24,7 +22,8 @@ class AdministrationController extends Controller
         return view('administration.index');
     }
 
-    public function export() {
+    public function export()
+    {
         return view('administration.export', compact('notification'));
     }
 
@@ -32,10 +31,4 @@ class AdministrationController extends Controller
     {
         return $this->excel->download(new NotificationExport, 'meldingen.xlsx');
     }
-
-
-
-
-
-
 }
