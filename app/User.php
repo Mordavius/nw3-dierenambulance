@@ -29,7 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function isAdmin() {
-     return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+    public function isAdmin()
+    {
+        return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
     }
 }

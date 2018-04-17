@@ -39,12 +39,12 @@ Route::get('downloadExcel', 'AdministrationController@downloadExcel');
 // Route::get('pdfview',array('as'=>'pdfview','uses'=>'AdministrationController@pdfview'));
 
 // CRUD Notification Controllers
-Route::resource('melding','NotificationController');
+Route::resource('melding', 'NotificationController');
 
 // CRUD Profile Controllers
-Route::resource('profiel','ProfileController');
+Route::resource('profiel', 'ProfileController');
 
 // CRUD User Controllers
-Route::resource('leden','UserController')->middleware('rolecheck');;
+Route::resource('leden', 'UserController')->middleware('rolecheck');
 
 Route::resource('buswissel', 'BusChangeController');

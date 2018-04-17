@@ -12,5 +12,4 @@ class NotificationExport implements FromCollection
     {
         return Notification::all();
     }
-
 }

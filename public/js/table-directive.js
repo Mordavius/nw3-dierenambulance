@@ -80,7 +80,7 @@ var app = angular.module("app", [])
 	}
 
 	function geocodeQuery(searchText, format) {
-		var searchedURL = "https://nominatim.openstreetmap.org/search/nl/friesland/" + searchText + "?format=json&addressdetails=1";
+		var searchedURL = "https://nominatim.openstreetmap.org/search/nl/" + searchText + "?format=json&addressdetails=1";
 		return searchedURL;
 	}
 
@@ -90,7 +90,7 @@ var app = angular.module("app", [])
 
 		//var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
 
-		$scope.map.setView(new L.LatLng(searchedLat, searchedLon));
+		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 15);
 	}
 
 	//

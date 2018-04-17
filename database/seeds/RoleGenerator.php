@@ -1,5 +1,7 @@
 <?php
 
+namespace database\seeds;
+
 use Illuminate\Database\Seeder;
 
 class RoleGenerator extends Seeder
@@ -15,6 +17,6 @@ class RoleGenerator extends Seeder
         ['id' => 1, 'name' => "admin"],
         ['id' => 2, 'name' => "centrale"],
         ['id' => 3, 'name' => "ambulance"],
-    ]);
+        ]);
     }
 }

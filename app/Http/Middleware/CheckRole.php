@@ -15,7 +15,7 @@ class CheckRole
      */
 
 
-    public function handle($request,Closure $next)
+    public function handle($request, Closure $next)
     {
         if (! $request->user()->isAdmin()) {
             return redirect('/meldingen');

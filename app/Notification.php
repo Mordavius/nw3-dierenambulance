@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-
 class Notification extends Model
 {
     protected $primaryKey = 'id';
@@ -28,8 +27,7 @@ class Notification extends Model
 
     public function scopeFilter($filter)
     {
-        switch($filter)
-        {
+        switch ($filter) {
             case "alles":
                 break;
             case "week":
