@@ -28,8 +28,8 @@
                         <section class="content">
                             <div class="col-6">
                                 {!! Form::model($notification, [
-                                    'route' => ['melding.show', $notification->id],
-                                    'id' => 'post-form'
+                                    'route' => ['melding.show', $notification->ticket_id],
+                                    'ticket_id' => 'post-form'
                                 ]) !!}
                                     <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                                         {!! Form::label('datum') !!}

@@ -77,13 +77,13 @@
                                                 <td>{{ $notification->comments }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $notification->id],
+                                                    'route' => ['melding.destroy', $notification->ticket_id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $notification->id) }}">
+                                                        <a href="{{ route('melding.edit', $notification->ticket_id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $notification->id) }}">
+                                                        <a href="{{ route('melding.show', $notification->ticket_id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />

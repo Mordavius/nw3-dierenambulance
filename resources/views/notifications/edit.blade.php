@@ -29,8 +29,8 @@
                             <div class="col-6">
                                 {!! Form::model($notification, [
                                     'method' => 'PUT',
-                                    'route' => ['melding.update', $notification->id],
-                                    'id' => 'post-form'
+                                    'route' => ['melding.update', $notification->ticket_id],
+                                    'ticket_id' => 'post-form'
                                 ]) !!}
                                     <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                                         {!! Form::label('datum') !!}

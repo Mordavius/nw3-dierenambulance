@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\NotificationExport;
+use App\TicketExport;
 
 class AdministrationController extends Controller
 {
@@ -29,6 +29,6 @@ class AdministrationController extends Controller
 
     public function downloadExcel()
     {
-        return $this->excel->download(new NotificationExport, 'meldingen.xlsx');
+        return $this->excel->download(new TicketExport, 'meldingen.xlsx');
     }
 }

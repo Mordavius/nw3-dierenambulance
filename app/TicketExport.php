@@ -4,7 +4,7 @@ namespace App;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class NotificationExport implements FromCollection
+class TicketExport implements FromCollection
 {
     use Exportable;
 
