@@ -1,7 +1,5 @@
 <?php
 
-namespace database\migrations;
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +13,7 @@ class CreateFinanceTable extends Migration
      */
     public function up()
     {
-        Schema::create('finance', function (Blueprint $table) {
+        Schema::create('finances', function (Blueprint $table) {
             $table->increments('finance_id');
             $table->integer('payment_invoice');
             $table->string('payment_method_invoice');

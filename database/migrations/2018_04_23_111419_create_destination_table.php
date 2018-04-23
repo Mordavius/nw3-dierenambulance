@@ -1,7 +1,5 @@
 <?php
 
-namespace database\migrations;
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +13,7 @@ class CreateDestinationTable extends Migration
      */
     public function up()
     {
-        Schema::create('destination', function (Blueprint $table) {
+        Schema::create('destinations', function (Blueprint $table) {
             $table->increments('destination_id');
             $table->integer('bus_id');
             $table->integer('known_address_id');

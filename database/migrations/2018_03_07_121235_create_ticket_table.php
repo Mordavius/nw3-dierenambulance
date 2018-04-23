@@ -1,12 +1,10 @@
 <?php
 
-namespace database\migrations;
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotificationTable extends Migration
+class CreateTicketTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +13,7 @@ class CreateNotificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('ticket', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->increments('ticket_id');
             $table->integer('destination_id');
             $table->integer('animal_id');
@@ -23,11 +21,12 @@ class CreateNotificationTable extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('address')->nullable();
-            $table->integer('housenumber')->nullable();
-            $table->string('postalcode')->nullable();
+            $table->integer('house_number')->nullable();
+            $table->string('postal_code')->nullable();
             $table->string('city')->nullable();
+            $table->string('township')->nullable();
             $table->string('centralist');
-            $table->string('reportername')->nullable();
+            $table->string('reporter_name')->nullable();
             $table->integer('telephone')->nullable();
             $table->string('driver');
             $table->string('passenger');
@@ -42,6 +41,6 @@ class CreateNotificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ticket');
+        Schema::dropIfExists('tickets');
     }
 }

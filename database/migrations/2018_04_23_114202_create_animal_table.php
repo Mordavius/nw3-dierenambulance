@@ -1,7 +1,5 @@
 <?php
 
-namespace database\migrations;
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +13,7 @@ class CreateAnimalTable extends Migration
      */
     public function up()
     {
-        Schema::create('animal', function (Blueprint $table) {
+        Schema::create('animals', function (Blueprint $table) {
             $table->increments('animal_id');
             $table->string('species');
             $table->string('breed');
