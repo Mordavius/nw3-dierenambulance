@@ -10,6 +10,6 @@ class TicketExport implements FromCollection
 
     public function collection()
     {
-        return Notification::all();
+        return Ticket::all();
     }
 }
