@@ -8,8 +8,8 @@ use Carbon\Carbon;
 class Ticket extends Model
 {
     protected $primaryKey = 'ticket_id';
-    protected $fillable = ['date', 'time', 'address', 'housenumber', 'postalcode', 'city',
-        'centralist', 'reportername', 'telephone', 'animalspecies', 'gender', 'comments', 'township'];
+    protected $fillable = ['date', 'time', 'address', 'house_number', 'postal_code', 'city',
+        'centralist', 'reporter_name', 'telephone', 'township'];
 
     /**
      * @param $query

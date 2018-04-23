@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Ticket;
 use App\User;
+use App\Animals;
 use Carbon\Carbon;
 
 class TicketController extends Controller
@@ -32,7 +33,7 @@ class TicketController extends Controller
     public function create(Ticket $ticket)
     {
         $user = User::all()->pluck('name');
-        return view('Ticket.create', compact('Ticket'), compact('user'));
+        return view('ticket.create', compact('ticket'), compact('user'));
     }
 
     /**
@@ -47,14 +48,17 @@ class TicketController extends Controller
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'address' => $request->get('address'),
-            'housenumber' => $request->get('housenumber'),
-            'postalcode' => $request->get('postalcode'),
+            'house_number' => $request->get('house_number'),
+            'postal_code' => $request->get('postal_code'),
             'city' => $request->get('city'),
             'township' => $request->get('township'),
             'centralist' => $request->get('centralist'),
-            'reportername' => $request->get('reportername'),
+            'reporter_name' => $request->get('reporter_name'),
+        ]);
+
+        $animal = new Animals([
             'telephone' => $request->get('telephone'),
-            'animalspecies' => $request->get('animalspecies'),
+            'animal_species' => $request->get('animal_species'),
             'gender' => $request->get('gender'),
             'comments' => $request->get('comments'),
         ]);
@@ -67,6 +71,7 @@ class TicketController extends Controller
         ]);
 
         $ticket->save();
+        $animal->save();
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }
