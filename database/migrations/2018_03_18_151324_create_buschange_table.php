@@ -16,10 +16,7 @@ class CreateBuschangeTable extends Migration
     public function up()
     {
         Schema::create('buschanges', function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->date('date');
-            $table->string('bus');
+            $table->increments('buschange_id');
             $table->string('from');
             $table->string('to');
             $table->integer('kilometerstraveled');

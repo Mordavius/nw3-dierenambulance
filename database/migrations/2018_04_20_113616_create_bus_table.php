@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoleTables extends Migration
+class CreateBusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,15 @@ class CreateRoleTables extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->increments('role_id');
-            $table->string('name');
+        Schema::create('bus', function (Blueprint $table) {
             $table->timestamps();
+            $table->increments('bus_id');
+            $table->string('type');
+            $table->integer('milage');
+            $table->boolean('damage');
+            $table->string('damage_description');
+            $table->boolean('clean');
+            $table->integer('buschange_id');
         });
     }
 
@@ -29,6 +34,6 @@ class CreateRoleTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('bus');
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoleTables extends Migration
+class CreateAnimalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,14 @@ class CreateRoleTables extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->increments('role_id');
-            $table->string('name');
+        Schema::create('animal', function (Blueprint $table) {
+            $table->increments('animal_id');
+            $table->string('species');
+            $table->string('breed');
+            $table->string('gender');
+            $table->string('catchcage');
+            $table->string('chipnumber');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ class CreateRoleTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('animal');
     }
 }

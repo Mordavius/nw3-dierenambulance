@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Notification extends Model
+class Ticket extends Model
 {
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'ticket_id';
     protected $fillable = ['date', 'time', 'address', 'housenumber', 'postalcode', 'city',
         'centralist', 'reportername', 'telephone', 'animalspecies', 'gender', 'comments', 'township'];
 

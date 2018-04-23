@@ -15,8 +15,11 @@ class CreateNotificationTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('ticket', function (Blueprint $table) {
+            $table->increments('ticket_id');
+            $table->integer('destination_id');
+            $table->integer('animal_id');
+            $table->integer('finance_id');
             $table->date('date');
             $table->time('time');
             $table->string('address')->nullable();
@@ -26,9 +29,8 @@ class CreateNotificationTable extends Migration
             $table->string('centralist');
             $table->string('reportername')->nullable();
             $table->integer('telephone')->nullable();
-            $table->string('animalspecies');
-            $table->string('gender');
-            $table->string('comments')->nullable();
+            $table->string('driver');
+            $table->string('passenger');
             $table->timestamps();
         });
     }
@@ -40,6 +42,6 @@ class CreateNotificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('ticket');
     }
 }
