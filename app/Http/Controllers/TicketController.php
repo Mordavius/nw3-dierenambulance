@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Notification;
+use App\Ticket;
 use App\User;
 use Carbon\Carbon;
 
-class NotificationController extends Controller
+class TicketController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class NotificationController extends Controller
 
     public function index()
     {
-        $filter = Notification::all('date');
+        $filter = Ticket::all('date');
         $users = User::all();
-        $notifications = Notification::search(request('search'))->orderBy('date', 'desc')->paginate(15);
-        return view('notifications.index', compact('notifications'), compact('filter'))->withUsers($users);
+        $notifications = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
+        return view('Ticket.index', compact('Ticket'), compact('filter'))->withUsers($users);
     }
 
     /**
@@ -29,10 +29,10 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Notification $notification)
+    public function create(Ticket $ticket)
     {
         $user = User::all()->pluck('name');
-        return view('notifications.create', compact('notification'), compact('user'));
+        return view('Ticket.create', compact('Ticket'), compact('user'));
     }
 
     /**
@@ -43,7 +43,7 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        $notification = new Notification([
+        $ticket = new Ticket([
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'address' => $request->get('address'),
@@ -66,7 +66,7 @@ class NotificationController extends Controller
          //   'telephone' => 'sometimes|numeric',
         ]);
 
-        $notification->save();
+        $ticket->save();
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }
@@ -80,9 +80,9 @@ class NotificationController extends Controller
     public function show($ticket_id)
     {
         $user = User::all()->pluck('name');
-        $notification = Notification::findOrFail($ticket_id);
-      //  $notifications = Notification::with('date')->orderBy('date', 'asc')->get();
-        return view("notifications.show", compact('notification'), compact('user'), compact('notifications'));
+        $ticket = Ticket::findOrFail($ticket_id);
+      //  $tickets = Ticket::with('date')->orderBy('date', 'asc')->get();
+        return view("notifications.show", compact('ticket'), compact('user'), compact('tickets'));
     }
 
     /**
@@ -94,8 +94,8 @@ class NotificationController extends Controller
     public function edit($ticket_id)
     {
         $user = User::all()->pluck('name');
-        $notification = Notification::findOrFail($ticket_id);
-        return view("notifications.edit", compact('notification'), compact('user'));
+        $ticket = Ticket::findOrFail($ticket_id);
+        return view("ticket.edit", compact('Ticket'), compact('user'));
     }
 
     /**
@@ -113,21 +113,21 @@ class NotificationController extends Controller
         //    'telephone' => 'sometimes|numeric',
         ]);
 
-        $notification = Notification::findOrFail($ticket_id);
-        $notification->date = $request->get('date');
-        $notification->time = $request->get('time');
-        $notification->address = $request->get('address');
-        $notification->housenumber = $request->get('housenumber');
-        $notification->postalcode = $request->get('postalcode');
-        $notification->city = $request->get('city');
-        $notification->township = $request->get('township');
-        $notification->centralist = $request->get('centralist');
-        $notification->reportername = $request->get('reportername');
-        $notification->telephone = $request->get('telephone');
-        $notification->animalspecies = $request->get('animalspecies');
-        $notification->gender = $request->get('gender');
-        $notification->comments = $request->get('comments');
-        $notification->save();
+        $ticket = Notification::findOrFail($ticket_id);
+        $ticket->date = $request->get('date');
+        $ticket->time = $request->get('time');
+        $ticket->address = $request->get('address');
+        $ticket->housenumber = $request->get('housenumber');
+        $ticket->postalcode = $request->get('postalcode');
+        $ticket->city = $request->get('city');
+        $ticket->township = $request->get('township');
+        $ticket->centralist = $request->get('centralist');
+        $ticket->reportername = $request->get('reportername');
+        $ticket->telephone = $request->get('telephone');
+        $ticket->animalspecies = $request->get('animalspecies');
+        $ticket->gender = $request->get('gender');
+        $ticket->comments = $request->get('comments');
+        $ticket->save();
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
     }
@@ -140,7 +140,7 @@ class NotificationController extends Controller
      */
     public function destroy($ticket_id)
     {
-        Notification::findOrFail($ticket_id)->delete();
+        Ticket::findOrFail($ticket_id)->delete();
         return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 }
