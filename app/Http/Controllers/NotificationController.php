@@ -77,10 +77,10 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($ticket_id)
     {
         $user = User::all()->pluck('name');
-        $notification = Notification::findOrFail($id);
+        $notification = Notification::findOrFail($ticket_id);
       //  $notifications = Notification::with('date')->orderBy('date', 'asc')->get();
         return view("notifications.show", compact('notification'), compact('user'), compact('notifications'));
     }
@@ -91,10 +91,10 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($ticket_id)
     {
         $user = User::all()->pluck('name');
-        $notification = Notification::findOrFail($id);
+        $notification = Notification::findOrFail($ticket_id);
         return view("notifications.edit", compact('notification'), compact('user'));
     }
 
@@ -105,7 +105,7 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $ticket_id)
     {
         $this->validate($request, [
             'date' => 'required',
@@ -113,7 +113,7 @@ class NotificationController extends Controller
         //    'telephone' => 'sometimes|numeric',
         ]);
 
-        $notification = Notification::findOrFail($id);
+        $notification = Notification::findOrFail($ticket_id);
         $notification->date = $request->get('date');
         $notification->time = $request->get('time');
         $notification->address = $request->get('address');
@@ -138,9 +138,9 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($ticket_id)
     {
-        Notification::findOrFail($id)->delete();
+        Notification::findOrFail($ticket_id)->delete();
         return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 }
