@@ -20,8 +20,8 @@ class TicketController extends Controller
     {
         $filter = Ticket::all('date');
         $users = User::all();
-        $notifications = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
-        return view('Ticket.index', compact('Ticket'), compact('filter'))->withUsers($users);
+        $ticket = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
+        return view('Ticket.index', compact('ticket'), compact('filter'))->withUsers($users);
     }
 
     /**
@@ -82,7 +82,7 @@ class TicketController extends Controller
         $user = User::all()->pluck('name');
         $ticket = Ticket::findOrFail($ticket_id);
       //  $tickets = Ticket::with('date')->orderBy('date', 'asc')->get();
-        return view("notifications.show", compact('ticket'), compact('user'), compact('tickets'));
+        return view("ticket.show", compact('ticket'), compact('user'), compact('tickets'));
     }
 
     /**
@@ -113,7 +113,7 @@ class TicketController extends Controller
         //    'telephone' => 'sometimes|numeric',
         ]);
 
-        $ticket = Notification::findOrFail($ticket_id);
+        $ticket = Ticket::findOrFail($ticket_id);
         $ticket->date = $request->get('date');
         $ticket->time = $request->get('time');
         $ticket->address = $request->get('address');

@@ -51,7 +51,7 @@
                                     {{ session('message') }}
                                 </div>
                             @endif
-                            @if (! $notifications->count())
+                            @if (! $ticket->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
                             </div>
@@ -68,22 +68,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($notifications as $notification)
+                                        @foreach($tickets as $ticket)
                                             <tr>
-                                                <td>{{ $notification->animalspecies }}</td>
-                                                <td>{{ $notification->city }}</td>
-                                                <td>{{ $notification->date }}</td>
-                                                <td>{{ $notification->time }}</td>
-                                                <td>{{ $notification->comments }}</td>
+                                                <td>{{ $ticket->animalspecies }}</td>
+                                                <td>{{ $ticket->city }}</td>
+                                                <td>{{ $ticket->date }}</td>
+                                                <td>{{ $ticket->time }}</td>
+                                                <td>{{ $ticket->comments }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $notification->ticket_id],
+                                                    'route' => ['melding.destroy', $ticket->ticket_id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $notification->ticket_id) }}">
+                                                        <a href="{{ route('melding.edit', $ticket->ticket_id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $notification->ticket_id) }}">
+                                                        <a href="{{ route('melding.show', $ticket->ticket_id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />

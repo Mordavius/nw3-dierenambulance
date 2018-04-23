@@ -24,7 +24,7 @@ class AdministrationController extends Controller
 
     public function export()
     {
-        return view('administration.export', compact('notification'));
+        return view('administration.export', compact('ticket'));
     }
 
     public function downloadExcel()

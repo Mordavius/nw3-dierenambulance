@@ -39,7 +39,7 @@ Route::get('downloadExcel', 'AdministrationController@downloadExcel');
 // Route::get('pdfview',array('as'=>'pdfview','uses'=>'AdministrationController@pdfview'));
 
 // CRUD Notification Controllers
-Route::resource('melding', 'NotificationController')->middleware('rolecheck');
+Route::resource('melding', 'TicketController')->middleware('rolecheck');
 
 // CRUD Profile Controllers
 Route::resource('profiel', 'ProfileController');

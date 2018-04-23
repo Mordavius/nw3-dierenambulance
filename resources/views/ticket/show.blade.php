@@ -22,19 +22,18 @@
                     <div class="content-wrapper">
                         <section class="content-header">
                             <h1>
-                                Update een melding
+                                Bekijk een melding
                             </h1>
                         </section>
                         <section class="content">
                             <div class="col-6">
-                                {!! Form::model($notification, [
-                                    'method' => 'PUT',
-                                    'route' => ['melding.update', $notification->ticket_id],
+                                {!! Form::model($ticket, [
+                                    'route' => ['melding.show', $ticket->ticket_id],
                                     'ticket_id' => 'post-form'
                                 ]) !!}
                                     <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                                         {!! Form::label('datum') !!}
-                                        <input class="form-control" type="date" name="date" value="{{ date('Y-m-d', strtotime($notification->date)) }}" />
+                                        <input class="form-control" type="date" name="date" value="{{ \Carbon\Carbon::createFromDate($ticket->year,$ticket->month,$ticket->day)->format('Y-m-d')}}" />
                                         @if($errors->has('date'))
                                             <span class="help-block">
                                                 {{ $errors->first('date') }}
@@ -43,7 +42,7 @@
                                     </div>
                                     <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                         {!! Form::label('tijd (idee om een hier een klokje tijdselectie?)') !!}
-                                        <input class="form-control" type="time" name="time" value="{{ $notification->time }}" />
+                                        <input class="form-control" type="time" name="time" value="{{ \Carbon\Carbon::createFromTime($ticket->hour,$ticket->minute,$ticket->second)->format('H-m-s')}}" />
                                         @if($errors->has('time'))
                                             <span class="help-block">
                                                 {{ $errors->first('time') }}
@@ -97,15 +96,6 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
-                                        {!! Form::label('Gemeente') !!}
-                                        {!! Form::text('township', null, ['class' => 'form-control']) !!}
-                                        @if($errors->has('township'))
-                                            <span class="help-block">
-                                                {{ $errors->first('township') }}
-                                            </span>
-                                        @endif
-                                    </div>
                                     <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
                                         {!! Form::label('Centralist') !!}
                                         {!! Form::select('centralist', $user) !!}
@@ -129,7 +119,6 @@
                                     <div class="form-group {{ $errors->has('telephone') ? 'has-error' : '' }}">
                                         {!! Form::label('Telefoonnummer van melder') !!}
                                         {!! Form::text('telephone', null, ['class' => 'form-control']) !!}
-
                                         @if($errors->has('telephone'))
                                             <span class="help-block">
                                                 {{ $errors->first('telephone') }}
@@ -151,7 +140,9 @@
                                         {!! Form::radio('animalspecies', 'anders', ['class' => 'form-control']) !!}
                                         {!! Form::label('Anders') !!}
                                         @if($errors->has('animalspecies'))
-                                            <span class="help-block">{{ $errors->first('animalspecies') }}</span>
+                                            <span class="help-block">
+                                                {{ $errors->first('animalspecies') }}
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
@@ -164,18 +155,21 @@
                                         {!! Form::radio('gender', 'onbekend', ['class' => 'form-control']) !!}
                                         {!! Form::label('Onbekend') !!}
                                         @if($errors->has('gender'))
-                                            <span class="help-block">{{ $errors->first('gender') }}</span>
+                                            <span class="help-block">
+                                                {{ $errors->first('gender') }}
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="form-group {{ $errors->has('comments') ? 'has-error' : '' }}">
                                         {!! Form::label('Opmerkingen') !!}
                                         {!! Form::textarea('comments', null, ['class' => 'form-control']) !!}
                                         @if($errors->has('comments'))
-                                            <span class="help-block">{{ $errors->first('comments') }}</span>
+                                            <span class="help-block">
+                                                {{ $errors->first('comments') }}
+                                            </span>
                                         @endif
                                     </div>
                                     <hr>
-                                    {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
                                 {!! Form::close() !!}
                             </div>
                         </section>

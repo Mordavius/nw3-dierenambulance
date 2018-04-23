@@ -31,15 +31,15 @@
                     <div class="content-wrapper">
                         <section class="content">
                             <div class="col-12">
-                                {!! Form::model($notification, [
+                                {!! Form::model($ticket, [
                                     'method' => 'POST',
                                     'route' => 'melding.store'
                                 ]) !!}
                                     <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
                                         {!! Form::label('datum') !!}
                                             <input class="form-control" type="date" name="date"
-                                                @if($notification && $notification->date)
-                                                    value="{{ date('Y-m-d', strtotime($notification->date)) }}"
+                                                @if($ticket && $ticket->date)
+                                                    value="{{ date('Y-m-d', strtotime($ticket->date)) }}"
                                                 @else
                                                     value="{{ date('Y-m-d') }}"
                                                 @endif
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                         {!! Form::label('tijd (idee om een hier een klokje tijdselectie?)') !!}
-                                        <input class="form-control" type="time" name="time" value="{{ $notification->time }}" />
+                                        <input class="form-control" type="time" name="time" value="{{ $ticket->time }}" />
                                         @if($errors->has('time'))
                                             <span class="help-block">
                                                 {{ $errors->first('time') }}
