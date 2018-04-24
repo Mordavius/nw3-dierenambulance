@@ -45,8 +45,6 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $destination = new Destination([
             'postal_code' => $request->get('postal_code'),
             'address' => $request->get('address'),
@@ -73,6 +71,7 @@ class TicketController extends Controller
         ]);
 
         $ticket = new Ticket([
+            'destination_id' => $destination->id,
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'centralist' => $request->get('centralist'),
