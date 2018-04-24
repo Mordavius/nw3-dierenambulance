@@ -70,20 +70,20 @@
                                     <tbody>
                                         @foreach($tickets as $ticket)
                                             <tr>
-                                                <td>{{ $ticket->animalspecies }}</td>
+                                                <td>{{ $ticket->animal_species }}</td>
                                                 <td>{{ $ticket->city }}</td>
                                                 <td>{{ $ticket->date }}</td>
                                                 <td>{{ $ticket->time }}</td>
                                                 <td>{{ $ticket->comments }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $ticket->ticket_id],
+                                                    'route' => ['melding.destroy', $ticket->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $ticket->ticket_id) }}">
+                                                        <a href="{{ route('melding.edit', $ticket->id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $ticket->ticket_id) }}">
+                                                        <a href="{{ route('melding.show', $ticket->id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />

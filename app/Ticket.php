@@ -7,18 +7,19 @@ use Carbon\Carbon;
 
 class Ticket extends Model
 {
-    protected $primaryKey = 'ticket_id';
-    protected $fillable = ['date', 'time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger'];
+    protected $fillable = ['destination_id', 'date', 'time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger'];
 
 
     public function destination() {
-        return $this->hasMany('App\Destination');
+        return $this->hasMany('App\Destination', 'destination_id', 'id');
     }
 
     /**
      * @param $query
      * @param $search
      */
+
+    // Search function which searches on the animal species
     public function scopeSearch($query, $search)
     {
         // check on term for search function
@@ -26,24 +27,6 @@ class Ticket extends Model
             $query->where(function ($q) use ($search) {
                 $q->orWhere('animalspecies', 'LIKE', "%{$search}%");
             });
-        }
-    }
-
-    public function scopeFilter($filter)
-    {
-        switch ($filter) {
-            case "alles":
-                break;
-            case "week":
-                return dd($filter);
-                return $filter = Carbon::now()->subWeeks(1);
-                break;
-            case "month":
-                return $filter = Carbon::now()->subMonths(1);
-                break;
-            case "year":
-                return $filter = Carbon::now()->subYears(1);
-                break;
         }
     }
 }

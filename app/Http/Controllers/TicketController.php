@@ -45,13 +45,7 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        $ticket = new Ticket([
-            'date' => $request->get('date'),
-            'time' => $request->get('time'),
-            'centralist' => $request->get('centralist'),
-            'reporter_name' => $request->get('reporter_name'),
-            'telephone' => $request->get('telephone'),
-        ]);
+
 
         $destination = new Destination([
             'postal_code' => $request->get('postal_code'),
@@ -60,22 +54,35 @@ class TicketController extends Controller
             'city' => $request->get('city'),
         ]);
 
+        $destination->save();
+       // dd($destination);
+
         $animal = new Animals([
             'animal_species' => $request->get('animal_species'),
             'gender' => $request->get('gender'),
             'description' => $request->get('description'),
         ]);
 
+        //         $animal->save();
+
         $request->validate([
             'date' => 'required',
-            'time' => 'required',
-         //   'housenumber' => 'sometimes|numeric',
+          //  'time' => 'required',
+         //   'house_number' => 'sometimes|numeric',
          //   'telephone' => 'sometimes|numeric',
         ]);
 
+        $ticket = new Ticket([
+            'date' => $request->get('date'),
+            'time' => $request->get('time'),
+            'centralist' => $request->get('centralist'),
+            'reporter_name' => $request->get('reporter_name'),
+            'telephone' => $request->get('telephone'),
+        ]);
+       // $ticket->destination->save($ticket);
+      //  $ticket ->destination()->associate($destination);
         $ticket->save();
-        $destination->save();
-        $animal->save();
+
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }

@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destination extends Model
 {
-    protected $fillable = ['postal_code', 'address', 'house_number', 'city'];
-    protected $primaryKey = 'destination_id';
+    protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city'];
     //
 
     public function ticket() {
-        return $this->belongsTo('App\Ticket');
+        return $this->belongsTo('App\Ticket', 'destination_id', 'id');
     }
 }
