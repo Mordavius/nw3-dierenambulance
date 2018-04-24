@@ -51,7 +51,7 @@
                                     {{ session('message') }}
                                 </div>
                             @endif
-                            @if (! $ticket->count())
+                            @if (! $tickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
                             </div>

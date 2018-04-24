@@ -8,6 +8,6 @@ class Animals extends Model
 {
     protected $primaryKey = 'animal_id';
 
-    protected $fillable = ['animal_species', 'gender', 'comments'];
+    protected $fillable = ['animal_species', 'gender', 'description'];
     //
 }

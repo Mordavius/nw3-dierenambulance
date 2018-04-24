@@ -8,8 +8,12 @@ use Carbon\Carbon;
 class Ticket extends Model
 {
     protected $primaryKey = 'ticket_id';
-    protected $fillable = ['date', 'time', 'address', 'house_number', 'postal_code', 'city',
-        'centralist', 'reporter_name', 'telephone', 'township'];
+    protected $fillable = ['date', 'time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger'];
+
+
+    public function destination() {
+        return $this->hasMany('App\Destination');
+    }
 
     /**
      * @param $query

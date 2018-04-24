@@ -37,12 +37,12 @@
                                 ]) !!}
                                         <hr>
                                         <h2>Melder</h2>
-                                        <div class="form-group {{ $errors->has('reportername') ? 'has-error' : '' }}">
+                                        <div class="form-group {{ $errors->has('reporter_name') ? 'has-error' : '' }}">
                                             {!! Form::label('Naam van melder') !!}
-                                            {!! Form::text('reportername', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('reporter_name', null, ['class' => 'form-control']) !!}
                                             @if($errors->has('meldernaam'))
                                                 <span class="help-block">
-                                                    {{ $errors->first('reportername') }}
+                                                    {{ $errors->first('reporter_name') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -81,12 +81,12 @@
                                         </div>
                                         <hr>
                                         <h2>Locatie</h2>
-                                        <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
+                                        <div class="form-group {{ $errors->has('postal_code') ? 'has-error' : '' }}">
                                             {!! Form::label('Postcode') !!}
-                                            {!! Form::text('postalcode', false, ['class' => 'form-control', 'id' => 'postalcode']) !!}
-                                            @if($errors->has('postalcode'))
+                                            {!! Form::text('postal_code', false, ['class' => 'form-control', 'id' => 'postal_code']) !!}
+                                            @if($errors->has('postal_code'))
                                                 <span class="help-block">
-                                                    {{ $errors->first('postalcode') }}
+                                                    {{ $errors->first('postal_code') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -99,12 +99,12 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
+                                        <div class="form-group {{ $errors->has('house_number') ? 'has-error' : '' }}">
                                             {!! Form::label('Huisnummer') !!}
-                                            {!! Form::text('housenumber', null, ['class' => 'form-control', 'id' => 'housenumber']) !!}
-                                            @if($errors->has('housenumber'))
+                                            {!! Form::text('house_number', null, ['class' => 'form-control', 'id' => 'house_number']) !!}
+                                            @if($errors->has('house_number'))
                                                 <span class="help-block">
-                                                    {{ $errors->first('housenumber') }}
+                                                    {{ $errors->first('house_number') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -146,27 +146,27 @@
                                         </div>
                                         <hr>
                                         <h2>Dier</h2>
-                                        <div class="form-group {{ $errors->has('animalspecies') ? 'has-error' : '' }}">
+                                        <div class="form-group {{ $errors->has('animal_species') ? 'has-error' : '' }}">
                                             {!! Form::label('Diersoort') !!}
                                             <br />
-                                            {!! Form::radio('animalspecies', 'hond') !!}
+                                            {!! Form::radio('animal_species', 'hond') !!}
                                             {!! Form::label('Hond') !!}
 
-                                            {!! Form::radio('animalspecies', 'kat', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'kat', ['class' => 'form-control']) !!}
                                             {!! Form::label('Kat') !!}
 
-                                            {!! Form::radio('animalspecies', 'egel', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'egel', ['class' => 'form-control']) !!}
                                             {!! Form::label('Egel') !!}
 
-                                            {!! Form::radio('animalspecies', 'vogel', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'vogel', ['class' => 'form-control']) !!}
                                             {!! Form::label('Vogel') !!}
 
-                                            {!! Form::radio('animalspecies', 'anders', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'anders', ['class' => 'form-control']) !!}
                                             {!! Form::label('Anders') !!}
 
-                                            @if($errors->has('animalspecies'))
+                                            @if($errors->has('animal_species'))
                                                 <span class="help-block">
-                                                    {{ $errors->first('animalspecies') }}
+                                                    {{ $errors->first('animal_species') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -188,13 +188,13 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        <div class="form-group {{ $errors->has('comments') ? 'has-error' : '' }}">
+                                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                                             {!! Form::label('Opmerkingen') !!}
-                                            {!! Form::textarea('comments', null, ['class' => 'form-control']) !!}
+                                            {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 
-                                            @if($errors->has('comments'))
+                                            @if($errors->has('description'))
                                                 <span class="help-block">
-                                                    {{ $errors->first('comments') }}
+                                                    {{ $errors->first('description') }}
                                                 </span>
                                             @endif
                                         </div>

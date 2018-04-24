@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Ticket;
 use App\User;
 use App\Animals;
+use App\Destination;
 use Carbon\Carbon;
 
 class TicketController extends Controller
@@ -21,8 +22,8 @@ class TicketController extends Controller
     {
         $filter = Ticket::all('date');
         $users = User::all();
-        $ticket = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
-        return view('Ticket.index', compact('ticket'), compact('filter'))->withUsers($users);
+        $tickets = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
+        return view('Ticket.index', compact('tickets'), compact('filter'))->withUsers($users);
     }
 
     /**
@@ -47,20 +48,22 @@ class TicketController extends Controller
         $ticket = new Ticket([
             'date' => $request->get('date'),
             'time' => $request->get('time'),
-            'address' => $request->get('address'),
-            'house_number' => $request->get('house_number'),
-            'postal_code' => $request->get('postal_code'),
-            'city' => $request->get('city'),
-            'township' => $request->get('township'),
             'centralist' => $request->get('centralist'),
             'reporter_name' => $request->get('reporter_name'),
+            'telephone' => $request->get('telephone'),
+        ]);
+
+        $destination = new Destination([
+            'postal_code' => $request->get('postal_code'),
+            'address' => $request->get('address'),
+            'house_number' => $request->get('house_number'),
+            'city' => $request->get('city'),
         ]);
 
         $animal = new Animals([
-            'telephone' => $request->get('telephone'),
             'animal_species' => $request->get('animal_species'),
             'gender' => $request->get('gender'),
-            'comments' => $request->get('comments'),
+            'description' => $request->get('description'),
         ]);
 
         $request->validate([
@@ -71,6 +74,7 @@ class TicketController extends Controller
         ]);
 
         $ticket->save();
+        $destination->save();
         $animal->save();
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
