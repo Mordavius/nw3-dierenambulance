@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bus extends Model
 {
-    protected $primaryKey = 'bus_id';
-    protected $fillable = ['date', 'bus', 'from', 'to', 'kilometerstraveled'];
+    protected $fillable = ['type', 'buschange_id', 'milage', 'damage', 'clean', 'damage_description'];
+
+    public function busTicket()
+    {
+        return $this->belongsTo('App\Ticket');
+    }
 }

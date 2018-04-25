@@ -60,9 +60,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($user_id)
+    public function edit($id)
     {
-        $user = User::findOrFail($user_id);
+        $user = User::findOrFail($id);
         return view("profile.adminedit", compact('user'));
     }
 
@@ -73,9 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $user_id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        User::findOrFail($user_id)->update([
+        User::findOrFail($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
@@ -90,9 +90,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($user_id)
+    public function destroy($id)
     {
-        User::findOrFail($user_id)->delete();
+        User::findOrFail($id)->delete();
         return redirect("/leden")->with("message", "Gebruiker is verwijderd!");
     }
 }

@@ -16,8 +16,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $primaryKey = 'user_id';
-
     protected $fillable = [
         'name', 'email', 'password','role',
     ];
@@ -33,6 +31,6 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->where('user_id', '=', Auth::user()->user_id)->where('role', '=', '1')->exists();
+        return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
     }
 }

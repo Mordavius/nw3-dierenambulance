@@ -18,6 +18,7 @@ class CreateTicketTable extends Migration
             $table->integer('destination_id');
             $table->integer('animal_id');
             $table->integer('finance_id')->nullable();
+            $table->integer('bus_id');
             $table->date('date');
             $table->time('time');
             $table->string('address')->nullable();

@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Ticket;
 use App\User;
 use App\Animal;
+use App\Bus;
 use App\Destination;
 use Carbon\Carbon;
 
@@ -23,7 +24,7 @@ class TicketController extends Controller
         $filter = Ticket::all('date');
         $users = User::all();
         $tickets = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
-        return view('Ticket.index', compact('tickets'), compact('filter'))->withUsers($users);
+        return view('ticket.index', compact('tickets'), compact('filter'))->withUsers($users);
     }
 
     /**
@@ -65,16 +66,14 @@ class TicketController extends Controller
 
         //dd($animal);
 
-        $request->validate([
-            'date' => 'required',
-          //  'time' => 'required',
-         //   'house_number' => 'sometimes|numeric',
-         //   'telephone' => 'sometimes|numeric',
+        $bus = new Bus([
+            'milage' => $request->get('milage'),
         ]);
 
         $ticket = new Ticket([
             'animal_id' => $animal->id,
             'destination_id' => $destination->id,
+            'bus_id' => $bus->id,
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'centralist' => $request->get('centralist'),
