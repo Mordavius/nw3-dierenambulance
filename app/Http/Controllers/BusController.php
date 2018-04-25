@@ -21,7 +21,7 @@ class BusController extends Controller
     public function index()
     {
         $bus = Bus::All();
-        return view('Bus.index', compact('bus'));
+        return view('bus.index', compact('bus'));
     }
 
     /**
@@ -29,9 +29,9 @@ class BusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Bus $bus)
     {
-        //
+            return view('bus.create', compact('bus'));
     }
 
     /**
@@ -42,7 +42,14 @@ class BusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bus = new Bus([
+          'bus_type' => $request->get('bus_type'),
+          'milage' => $request->get('milage'),
+        ]);
+
+        $bus->save();
+
+        return redirect('/bus')->with('success', 'Nieuwe bus is toegevoegd');
     }
 
     /**
@@ -87,6 +94,7 @@ class BusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Bus::findOrFail($id)->delete();
+        return redirect("/bus")->with("message", "Bus is verwijderd!");
     }
 }

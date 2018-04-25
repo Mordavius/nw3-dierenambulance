@@ -23,7 +23,7 @@ class TicketController extends Controller
     {
         $filter = Ticket::all('date');
         $users = User::all();
-        $tickets = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
+        $tickets = Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
         return view('ticket.index', compact('tickets'), compact('filter'))->withUsers($users);
     }
 
@@ -66,8 +66,9 @@ class TicketController extends Controller
 
         //dd($animal);
 
+
         $bus = new Bus([
-            'milage' => $request->get('milage'),
+            'milage' => 0,
         ]);
 
         $ticket = new Ticket([

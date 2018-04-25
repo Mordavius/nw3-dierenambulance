@@ -28,14 +28,5 @@ class Ticket extends Model
      * @param $search
      */
 
-    // Search function which searches on the animal species
-    public function scopeSearch($query, $search)
-    {
-        // check on term for search function
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->orWhere('animal_species', 'LIKE', "%{$search}%");
-            });
-        }
-    }
+
 }

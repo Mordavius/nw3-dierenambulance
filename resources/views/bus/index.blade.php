@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <a href="bus/create" class="btn btn-success">
+                        <a href="/bus/create" class="btn btn-success">
                             Nieuwe bus toevoegen
                         </a>
                         <section class="content">
@@ -36,15 +36,15 @@
                                     <tbody>
                                         @foreach($bus as $bus)
                                             <tr>
-                                                <td>{{ $bus->type }}</td>
+                                                <td>{{ $bus->bus_type }}</td>
                                                 <td>{{ $bus->milage }}</td>
-                                                @if($bus->damage = 1)
+                                                @if($bus->damage == 1)
                                                     <td>Ja</td>
                                                 @else
                                                     <td>Nee</td>
                                                 @endif
                                                 <td>{{ $bus->damage_description }}</td>
-                                                @if($bus->clean = 1)
+                                                @if($bus->clean == 0)
                                                     <td>Ja</td>
                                                 @else
                                                     <td>Nee</td>
@@ -53,14 +53,6 @@
                                                     {!! Form::open(['method' => 'DELETE',
                                                     'route' => ['bus.destroy', $bus->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('bus.edit', $bus->id) }}">
-                                                            <i class="btn btn-primary">Aanpassen</i>
-                                                        </a>
-                                                        <br />
-                                                        <a href="{{ route('bus.show', $bus->id) }}">
-                                                            <i class="btn btn-primary">Bekijk</i>
-                                                        </a>
-                                                        <br />
                                                         <button type="submit" class="btn btn-danger">
                                                             <i>Verwijderen</i>
                                                         </button>
