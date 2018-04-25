@@ -12,7 +12,7 @@
           <a href="../buswissel">
             <div class="btn btn-primary">Terug naar het menu</div>
           </a>
-          </br>
+          <br />
           @if (session('status'))
             <div class="alert alert-success">
               {{ session('status') }}

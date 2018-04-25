@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<script type="text/javascript" src="{{asset('js/jquery-min.js')}}"></script>
 <div class="container">
 @section('map')
   @include('map')
@@ -10,7 +11,7 @@
         <div class="card-header">Melding maken</div>
 
         <div class="card-body">
-          <a href="../meldingen"><div class="btn btn-primary">Terug naar het menu</div></a><br /><br />
+          <a href="../meldingen"><div class="btn btn-primary">Terug naar het menu</div></a><a><div class="btn btn-primary" id="L" onclick="sendLocationRequest()">Locatie opvragen</div></a><br /><br />
           @if (session('status'))
             <div class="alert alert-success">
               {{ session('status') }}
@@ -66,7 +67,7 @@
 
                   <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
                       {!! Form::label('Geen Postcode') !!}
-                      {!! Form::checkbox('nocode', 0, null) !!}
+                      {!! Form::checkbox('nocode', 0, null, ['id' => 'nocode']) !!}
                       @if($errors->has('nocode'))
                           <span class="help-block">{{ $errors->first('nocode') }}</span>
                       @endif
@@ -200,6 +201,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+  <script type="text/javascript" src="{{asset('js/locate.js')}}"></script>
   <script src = "{!!asset('js/angular.min.js')!!}"></script>
   <script src = "{!!asset('js/table-directive.js')!!}"></script>
 @endsection
