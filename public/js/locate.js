@@ -54,8 +54,8 @@ function getAdressByCoordinates(lat,lon){
                     data.address.suburb) {
                     //console.log('complete address found');
                     //console.log(data.address);
-                    var postalcode = document.getElementById('postalcode');
-                    var housenumber = document.getElementById('housenumber');
+                    var postalcode = document.getElementById('postal_code');
+                    var housenumber = document.getElementById('house_number');
                     var address = document.getElementById('address');
                     var city = document.getElementById('city');
                     var township = document.getElementById('township');
