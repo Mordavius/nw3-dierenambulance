@@ -56,12 +56,14 @@ class TicketController extends Controller
        // dd($destination);
 
         $animal = new Animals([
-            'animal_species' => $request->get('animal_species'),
-            'gender' => $request->get('gender'),
-            'description' => $request->get('description'),
-        ]);
+        'animal_species' => $request->get('animal_species'),
+        'gender' => $request->get('gender'),
+        'description' => $request->get('description'),
+    ]);
 
-        //         $animal->save();
+        $animal->save();
+
+        dd($animal);
 
         $request->validate([
             'date' => 'required',
@@ -72,6 +74,7 @@ class TicketController extends Controller
 
         $ticket = new Ticket([
             'destination_id' => $destination->id,
+            'animal_id' => $animal->id,
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'centralist' => $request->get('centralist'),

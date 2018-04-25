@@ -14,6 +14,10 @@ class Ticket extends Model
         return $this->hasMany('App\Destination', 'destination_id', 'id');
     }
 
+    public function animal() {
+        return $this->hasOne('App\Animal', 'animal_id', 'id');
+    }
+
     /**
      * @param $query
      * @param $search

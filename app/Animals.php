@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Animals extends Model
 {
-    protected $primaryKey = 'animal_id';
+    protected $fillable = ['animal_species', 'breed', 'catch_cage', 'chip_number', 'gender', 'description'];
 
-    protected $fillable = ['animal_species', 'gender', 'description'];
-    //
+    public function animalTicket() {
+        return $this->belongsTo('App\Ticket', 'animal_id', 'id');
+    }
 }
