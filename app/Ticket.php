@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class Ticket extends Model
 {
-    protected $fillable = ['destination_id', 'animal_id', 'bus_id', 'finance_id', 'date','time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger'];
+    protected $fillable = ['destination_id', 'animal_id', 'bus_id', 'finance_id', 'date','time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger', 'finished'];
 
     public function destination()
     {

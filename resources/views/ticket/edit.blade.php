@@ -174,6 +174,10 @@
                                             <span class="help-block">{{ $errors->first('comments') }}</span>
                                         @endif
                                     </div>
+                                    <div class="form-group {{ $errors->has('finished') ? 'has-error' : ''}}">
+                                        {!! Form::label('Afgerond') !!}
+                                        {!! Form::checkbox('finished', '1') !!}
+                                    </div>
                                     <hr>
                                     {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
                                 {!! Form::close() !!}

@@ -112,7 +112,7 @@ class TicketController extends Controller
     {
         $user = User::all()->pluck('name');
         $ticket = Ticket::findOrFail($ticket_id);
-        return view("ticket.edit", compact('Ticket'), compact('user'));
+        return view("ticket.edit", compact('ticket'), compact('user'));
     }
 
     /**
@@ -144,6 +144,7 @@ class TicketController extends Controller
         $ticket->animalspecies = $request->get('animalspecies');
         $ticket->gender = $request->get('gender');
         $ticket->comments = $request->get('comments');
+        $ticket->finished = $request->get('finished');
         $ticket->save();
 
         return redirect('/melding')->with('message', 'Melding is geupdate');

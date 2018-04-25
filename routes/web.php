@@ -50,5 +50,4 @@ Route::resource('leden', 'UserController')->middleware('rolecheck');
 Route::resource('buswissel', 'BusChangeController');
 
 
-
 Route::get('/location/{id}', 'LocationController@setLocation');
