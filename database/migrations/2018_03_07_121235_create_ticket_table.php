@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTicketTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('tickets', function (Blueprint $table) {
+            $table->increments('ticket_id');
+            $table->integer('destination_id');
+            $table->integer('animal_id');
+            $table->integer('finance_id');
+            $table->date('date');
+            $table->time('time');
+            $table->string('address')->nullable();
+            $table->string('centralist');
+            $table->string('reporter_name')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('driver');
+            $table->string('passenger');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('tickets');
+    }
+}

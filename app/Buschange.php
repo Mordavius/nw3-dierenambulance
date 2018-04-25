@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Buschange extends Model
 {
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'buschange_id';
     protected $fillable = ['date', 'bus', 'from', 'to', 'kilometerstraveled'];
 
     /**
@@ -22,5 +22,4 @@ class Buschange extends Model
             });
         }
     }
-
 }

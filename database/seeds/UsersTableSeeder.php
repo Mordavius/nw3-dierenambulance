@@ -1,10 +1,8 @@
 <?php
 
-namespace database\seeds;
-
 use Illuminate\Database\Seeder;
 
-class TestUserInserter extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

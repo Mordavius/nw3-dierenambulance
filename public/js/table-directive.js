@@ -25,14 +25,12 @@ var app = angular.module("app", [])
 	}
 
 	function onMapClick(e) {
-			makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
-				if(err) { throw err; }
-				var marker = L.marker(e.latlng).addTo($scope.map);
-				//console.log(result)
-				var obj = JSON.parse(result);
-				marker.bindPopup("Hello!<br>" + obj.address.suburb).openPopup();
-
-				updateAddressInformation(obj);
+		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
+			if(err) { throw err; }
+			var marker = L.marker(e.latlng).addTo($scope.map);
+			console.log(e.latlng);
+			var obj = JSON.parse(result);
+			updateAddressInformation(obj);
 			})
 	}
 
@@ -59,8 +57,8 @@ var app = angular.module("app", [])
 	}
 
 	function updateAddressInformation(obj){
-		document.getElementById("postalcode").value = obj.address.postcode ? obj.address.postcode : "Kan postcode niet vinden";
-		document.getElementById("housenumber").value = obj.address.house_number ? obj.address.house_number : "Kan huis nummer niet vinden";
+		document.getElementById("postal_code").value = obj.address.postcode ? obj.address.postcode : "Kan postcode niet vinden";
+		document.getElementById("house_number").value = obj.address.house_number ? obj.address.house_number : "Kan huis nummer niet vinden";
 		document.getElementById("address").value = obj.address.road ? obj.address.road : "Kan straat niet vinden"
 		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
 		document.getElementById("township").value = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
@@ -68,12 +66,44 @@ var app = angular.module("app", [])
 	$scope.map.on('click', onMapClick);
 
 
-	$scope.init = function(){
-		$http.get('getuser').success(function(data){
-			$scope.users = data;
-			$scope.refresh();
-		});
+	$('#searchButton').click(searchButtonClicked);
+
+	function searchButtonClicked(){
+		var searchText = document.getElementById("searchTextBox").value;
+		makeRequest("GET", geocodeQuery(searchText, "json"), function(err, result) {
+			if(err) { throw err; }
+
+		var searchedURLJson = JSON.parse(result);
+		//console.log(searchedURL);
+		setMarkerForLocation(searchedURLJson);
+		})
 	}
+
+	function geocodeQuery(searchText, format) {
+		var searchedURL = "https://nominatim.openstreetmap.org/search/nl/" + searchText + "?format=json&addressdetails=1";
+		return searchedURL;
+	}
+
+	function setMarkerForLocation(searchedURLJson) {
+		var searchedLat = searchedURLJson[0].lat;
+		var searchedLon = searchedURLJson[0].lon;
+
+		//var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
+
+		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 15);
+	}
+
+	//
+	// $scope.init = function(){
+	// 	$scope.refresh();
+	// 	$http.get('getuser').success(function(data){
+	// 		$scope.users = data;
+	//
+	// 	});
+	// }
+
+
+
 
 	// $scope.addUser = function(){
 	// 	if(!$scope.name || !$scope.year || !$scope.month || !$scope.day || !$scope.address || !$scope.lat || !$scope.lng) {
@@ -102,7 +132,7 @@ var app = angular.module("app", [])
 	// 	}
 	// 	$scope.map.addLayer($scope.markers);
 	// }
-	$scope.init();
+	// $scope.init();
 }])
 // .directive("tableDirective", function() {
 // 	// body...

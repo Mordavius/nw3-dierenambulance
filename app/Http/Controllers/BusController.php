@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\User;
-use App\Http\Requests\UserUpdateRequest;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class BusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users      = User::orderBy('name')->paginate(5);
-        $usersCount = User::count();
-        return view("profile.index", compact('users', 'usersCount'));
+        //
     }
 
     /**
@@ -29,6 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -39,8 +34,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
-        return redirect("/administratie/leden")->with("message", "Nieuwe gebruiker is aangemaakt!");
+        //
     }
 
     /**
@@ -49,7 +43,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
         //
     }
@@ -60,10 +54,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($user_id)
+    public function edit($id)
     {
-        $user = User::findOrFail($user_id);
-        return view("profile.adminedit", compact('user'));
+        //
     }
 
     /**
@@ -73,15 +66,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $user_id)
+    public function update(Request $request, $id)
     {
-        User::findOrFail($user_id)->update([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-            'role' => $request['role'],
-        ]);
-        return redirect("../public/leden")->with("message", "Gebruiker is geupdate!");
+        //
     }
 
     /**
@@ -90,9 +77,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($user_id)
+    public function destroy($id)
     {
-        User::findOrFail($user_id)->delete();
-        return redirect("/leden")->with("message", "Gebruiker is verwijderd!");
+        //
     }
 }
