@@ -7,7 +7,8 @@ use Carbon\Carbon;
 
 class Ticket extends Model
 {
-    protected $fillable = ['destination_id', 'animal_id', 'bus_id', 'finance_id', 'date','time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger'];
+    protected $fillable = ['destination_id', 'bus_id' , 'animal_id', 'finance_id', 'date','time', 'centralist',
+    'reporter_name', 'telephone', 'driver', 'passenger'];
 
     public function destination()
     {
@@ -27,6 +28,4 @@ class Ticket extends Model
      * @param $query
      * @param $search
      */
-
-
 }

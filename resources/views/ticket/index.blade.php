@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@foreach($destinations as $destination)
+@endforeach
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -71,7 +73,8 @@
                                         @foreach($tickets as $ticket)
                                             <tr>
                                                 <td>{{ $ticket->animal_species }}</td>
-                                                <td>{{ $ticket->city }}</td>
+                                                
+                                                <td>{{ $destination->city }}</td>
                                                 <td>{{ $ticket->date }}</td>
                                                 <td>{{ $ticket->time }}</td>
                                                 <td>{{ $ticket->comments }}</td>
