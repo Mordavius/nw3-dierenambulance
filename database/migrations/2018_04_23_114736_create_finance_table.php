@@ -14,7 +14,7 @@ class CreateFinanceTable extends Migration
     public function up()
     {
         Schema::create('finances', function (Blueprint $table) {
-            $table->increments('finance_id');
+            $table->increments('id');
             $table->integer('payment_invoice');
             $table->string('payment_method_invoice');
             $table->integer('payment_gift');

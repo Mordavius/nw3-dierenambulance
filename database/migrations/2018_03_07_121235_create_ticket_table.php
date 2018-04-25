@@ -14,18 +14,18 @@ class CreateTicketTable extends Migration
     public function up()
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->increments('ticket_id');
+            $table->increments('id');
             $table->integer('destination_id');
             $table->integer('animal_id');
-            $table->integer('finance_id');
+            $table->integer('finance_id')->nullable();
             $table->date('date');
             $table->time('time');
             $table->string('address')->nullable();
             $table->string('centralist');
             $table->string('reporter_name')->nullable();
             $table->string('telephone')->nullable();
-            $table->string('driver');
-            $table->string('passenger');
+            $table->string('driver')->nullable();
+            $table->string('passenger')->nullable();
             $table->timestamps();
         });
     }

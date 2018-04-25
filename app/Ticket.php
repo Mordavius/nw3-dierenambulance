@@ -7,15 +7,16 @@ use Carbon\Carbon;
 
 class Ticket extends Model
 {
-    protected $fillable = ['destination_id', 'date', 'time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger'];
+    protected $fillable = ['destination_id','animal_id', 'date', 'time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger'];
 
-
-    public function destination() {
-        return $this->hasMany('App\Destination', 'destination_id', 'id');
+    public function destination()
+    {
+        return $this->hasMany('App\Destination');
     }
 
-    public function animal() {
-        return $this->hasOne('App\Animal', 'animal_id', 'id');
+    public function animal()
+    {
+        return $this->hasMany('App\Animal');
     }
 
     /**
@@ -29,7 +30,7 @@ class Ticket extends Model
         // check on term for search function
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->orWhere('animalspecies', 'LIKE', "%{$search}%");
+                $q->orWhere('animal_species', 'LIKE', "%{$search}%");
             });
         }
     }
