@@ -19,6 +19,10 @@ class Ticket extends Model
         return $this->hasOne('App\Animal');
     }
 
+    public function bus()
+    {
+        return $this->hasOne('App\Bus');
+    }
     /**
      * @param $query
      * @param $search

@@ -17,9 +17,9 @@ class CreateBusTable extends Migration
             $table->increments('id');
             $table->string('type');
             $table->integer('milage');
-            $table->boolean('damage');
+            $table->boolean('damage') = 0;
             $table->string('damage_description');
-            $table->boolean('clean');
+            $table->boolean('clean') = 1;
             $table->integer('buschange_id');
             $table->timestamps();
         });

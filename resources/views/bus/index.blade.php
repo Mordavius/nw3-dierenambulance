@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Gebruikersbeheer
+                        Busbeheer
                     </div>
                     <div class="card-body">
                         @if (session('status'))
@@ -13,24 +13,64 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <a href="bus/create" class="btn btn-success">
+                            Nieuwe bus toevoegen
+                        </a>
                         <section class="content">
-                            <a href="../register" class="btn btn-success">
-                                Nieuwe gebruiker toevoegen
-                            </a>
-                            <br />
-                            <br />
-                            @if (! $users->count())
-                                <div class="alert alert-danger">
-                                    <strong>Geen gebruikers gevonden</strong>
-                                </div>
-                            @else
-                                @include('profile.table')
-                            @endif
-                            <div class="pull-right">
-                                <small>
-                                    {{ $usersCount }} {{ str_plural('gebruikers', $usersCount) }}
-                                </small>
+                            @if (! $bus->count())
+                            <div class="alert alert-danger">
+                                <strong>Geen bussen gevonden</strong>
                             </div>
+                            @else
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Type bus</td>
+                                            <td>Kilometerstand</td>
+                                            <td>Schade</td>
+                                            <td>Schade beschrijving</td>
+                                            <td>Schoon</td>
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($bus as $bus)
+                                            <tr>
+                                                <td>{{ $bus->type }}</td>
+                                                <td>{{ $bus->milage }}</td>
+                                                @if($bus->damage = 1)
+                                                    <td>Ja</td>
+                                                @else
+                                                    <td>Nee</td>
+                                                @endif
+                                                <td>{{ $bus->damage_description }}</td>
+                                                @if($bus->clean = 1)
+                                                    <td>Ja</td>
+                                                @else
+                                                    <td>Nee</td>
+                                                @endif
+                                                <td>
+                                                    {!! Form::open(['method' => 'DELETE',
+                                                    'route' => ['bus.destroy', $bus->id],
+                                                    'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
+                                                        <a href="{{ route('bus.edit', $bus->id) }}">
+                                                            <i class="btn btn-primary">Aanpassen</i>
+                                                        </a>
+                                                        <br />
+                                                        <a href="{{ route('bus.show', $bus->id) }}">
+                                                            <i class="btn btn-primary">Bekijk</i>
+                                                        </a>
+                                                        <br />
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i>Verwijderen</i>
+                                                        </button>
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
                         </section>
                     </div>
                 </div>

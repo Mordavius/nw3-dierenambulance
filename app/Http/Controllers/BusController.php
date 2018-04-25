@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests;
+use App\Bus;
 
 class BusController extends Controller
 {
@@ -13,7 +20,8 @@ class BusController extends Controller
      */
     public function index()
     {
-        //
+        $bus = Bus::All();
+        return view('Bus.index', compact('bus'));
     }
 
     /**

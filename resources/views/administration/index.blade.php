@@ -27,7 +27,7 @@
                             </a>
                             <br />
                             <br />
-                            <a href="" class="btn btn-primary">
+                            <a href="bus" class="btn btn-primary">
                                 Bussen
                             </a>
                             <br />

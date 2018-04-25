@@ -41,6 +41,9 @@ Route::get('downloadExcel', 'AdministrationController@downloadExcel');
 // CRUD Notification Controllers
 Route::resource('melding', 'TicketController')->middleware('rolecheck');
 
+//CRUD Bus Controllers
+Route::resource('bus', 'BusController')->middleware('rolecheck');
+
 // CRUD Profile Controllers
 Route::resource('profiel', 'ProfileController');
 
