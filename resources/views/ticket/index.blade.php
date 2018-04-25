@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@foreach($destinations as $destination)
-@endforeach
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -61,23 +59,41 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <td>Diersoort</td>
-                                            <td>Plaats</td>
-                                            <td>Datum</td>
-                                            <td>Tijd</td>
+                                            <td>Diersoort &
+                                                <br />
+                                                Geslacht
+                                            </td>
                                             <td>Beschrijving</td>
+                                            <td>Adres</td>
+                                            <td>Datum &
+                                                <br />
+                                                Tijd
+                                            </td>
+
                                             <td>Action</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($tickets as $ticket)
-                                            <tr>
-                                                <td>{{ $ticket->animal_species }}</td>
-                                                
-                                                <td>{{ $destination->city }}</td>
-                                                <td>{{ $ticket->date }}</td>
-                                                <td>{{ $ticket->time }}</td>
-                                                <td>{{ $ticket->comments }}</td>
+                                            <tr>@foreach($animals as $animal)
+                                                @if($ticket->animal_id == $animal->id)
+                                                    <td>{{ $animal->animal_species }}
+                                                    <br />
+                                                    {{ $animal->gender}}</td>
+                                                    <td>{{$animal->description}}</td>
+                                                @endif
+                                            @endforeach
+                                                @foreach($destinations as $destination)
+                                                    @if($ticket->destination_id == $destination->id)
+                                                    <td>
+                                                        {{ $destination->address }} {{ $destination->house_number }}
+                                                        <br />
+                                                        {{ $destination->postal_code }}, {{ $destination->city }}
+                                                    </td>
+                                                    @endif
+                                                @endforeach
+                                                <td>{{ $ticket->date }}
+                                                {{ $ticket->time }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
                                                     'route' => ['melding.destroy', $ticket->id],
@@ -96,6 +112,7 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
+
                                         @endforeach
                                     </tbody>
                                 </table>

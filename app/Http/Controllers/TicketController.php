@@ -21,11 +21,13 @@ class TicketController extends Controller
 
     public function index()
     {
-        $tickets = Ticket::all();
+        $tickets = Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
         $users = User::all();
         $destinations = Destination::all();
-        $filter = Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
-        return view('ticket.index', compact('destinations'), compact('tickets'), compact('filter'))->withUsers($users);
+        $animals = Animal::all();
+        //Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
+        //dd($filter);
+        return view('ticket.index', compact('tickets', 'animals', 'destinations', 'filter'));
     }
 
     /**

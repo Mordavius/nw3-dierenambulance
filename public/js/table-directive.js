@@ -58,8 +58,8 @@ var app = angular.module("app", [])
 
 	function updateAddressInformation(obj){
 		document.getElementById("postal_code").value = obj.address.postcode ? obj.address.postcode : "Kan postcode niet vinden";
-		document.getElementById("house_number").value = obj.address.house_number ? obj.address.house_number : "Kan huis nummer niet vinden";
-		document.getElementById("address").value = obj.address.road ? obj.address.road : "Kan straat niet vinden"
+		document.getElementById("house_number").value = obj.address.house_number ? obj.address.house_number : "";
+		document.getElementById("address").value = obj.address.road ? obj.address.road : "Straatnaam onbekend"
 		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
 		document.getElementById("township").value = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
 	}
