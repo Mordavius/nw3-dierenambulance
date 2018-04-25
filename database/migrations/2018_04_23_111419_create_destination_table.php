@@ -14,12 +14,13 @@ class CreateDestinationTable extends Migration
     public function up()
     {
         Schema::create('destinations', function (Blueprint $table) {
-            $table->increments('destination_id');
-            $table->integer('bus_id');
-            $table->integer('known_address_id');
-            $table->string('postalcode');
-            $table->string('streetnumber');
-            $table->string('housenumber');
+            $table->increments('id');
+            $table->integer('bus_id')->nullable();
+            $table->integer('ticket_id');
+            $table->integer('known_address_id')->nullable();
+            $table->string('postal_code');
+            $table->string('address');
+            $table->string('house_number');
             $table->string('city');
             $table->timestamps();
         });

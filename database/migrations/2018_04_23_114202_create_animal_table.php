@@ -14,12 +14,12 @@ class CreateAnimalTable extends Migration
     public function up()
     {
         Schema::create('animals', function (Blueprint $table) {
-            $table->increments('animal_id');
+            $table->increments('id');
             $table->string('animal_species');
-            $table->string('breed');
+            $table->string('breed')->nullable();
             $table->string('gender');
-            $table->boolean('catchcage');
-            $table->string('chipnumber');
+            $table->boolean('catch_cage')->nullable();
+            $table->string('chip_number')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });

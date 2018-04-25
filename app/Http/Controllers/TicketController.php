@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Ticket;
 use App\User;
-use App\Animals;
+use App\Animal;
 use App\Destination;
 use Carbon\Carbon;
 
@@ -53,15 +53,17 @@ class TicketController extends Controller
         ]);
 
         $destination->save();
-       // dd($destination);
+        //dd($destination);
 
-        $animal = new Animals([
-            'animal_species' => $request->get('animal_species'),
-            'gender' => $request->get('gender'),
-            'description' => $request->get('description'),
+        $animal = new Animal([
+        'animal_species' => $request->get('animal_species'),
+        'gender' => $request->get('gender'),
+        'description' => $request->get('description'),
         ]);
 
-        //         $animal->save();
+        $animal->save();
+
+        //dd($animal);
 
         $request->validate([
             'date' => 'required',
@@ -71,6 +73,7 @@ class TicketController extends Controller
         ]);
 
         $ticket = new Ticket([
+            'animal_id' => $animal->id,
             'destination_id' => $destination->id,
             'date' => $request->get('date'),
             'time' => $request->get('time'),
