@@ -19,15 +19,16 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
+        $search = $request->input('search');
+        $tickets = Ticket::all();
         $users = User::all();
         $destinations = Destination::all();
-        $animals = Animal::all();
+        $animals = Animal::search($search)->orderBy('created_at', 'desc')->paginate(15);
         //Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
         //dd($filter);
-        return view('ticket.index', compact('tickets', 'animals', 'destinations', 'filter'));
+        return view('ticket.index', compact('tickets', 'animals', 'destinations', 'search'));
     }
 
     /**
