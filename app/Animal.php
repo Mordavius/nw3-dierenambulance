@@ -13,14 +13,5 @@ class Animal extends Model
         return $this->belongsTo('App\Ticket');
     }
 
-    // Search function which searches on the animal species
-    public function scopeSearch($query, $search)
-    {
-        // check on term for search function
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->orWhere('animal_species', 'LIKE', "%{$search}%");
-            });
-        }
-    }
+
 }

@@ -24,8 +24,8 @@ class TicketController extends Controller
         $search = $request->input('search');
         $tickets = Ticket::all();
         $users = User::all();
-        $destinations = Destination::all();
-        $animals = Animal::search($search)->orderBy('created_at', 'desc')->paginate(15);
+        $destinations = Destination::search($search)->orderBy('created_at', 'desc')->paginate(15);
+        $animals = Animal::all();
         //Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
         //dd($filter);
         return view('ticket.index', compact('tickets', 'animals', 'destinations', 'search'));
@@ -111,7 +111,7 @@ class TicketController extends Controller
     {
         $user = User::all()->pluck('name');
         $ticket = Ticket::findOrFail($ticket_id);
-        return view("ticket.edit", compact('Ticket'), compact('user'));
+        return view("ticket.edit", compact('ticket'), compact('user'));
     }
 
     /**

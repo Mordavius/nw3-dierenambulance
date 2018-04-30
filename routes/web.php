@@ -44,6 +44,10 @@ Route::resource('melding', 'TicketController')->middleware('rolecheck');
 //CRUD Bus Controllers
 Route::resource('bus', 'BusController')->middleware('rolecheck');
 
+//CRUD Known addresses Controllers
+Route::resource('bekende-adressen', 'KnownController')->middleware('rolecheck');
+
+
 // CRUD Profile Controllers
 Route::resource('profiel', 'ProfileController');
 
