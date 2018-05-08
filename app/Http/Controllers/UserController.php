@@ -17,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users      = User::orderBy('name')->paginate(5);
-        $usersCount = User::count();
+        $users      = User::orderBy('name')->paginate(5); // Grab all existing users and paginate by 5 results
+        $usersCount = User::count(); // Count the users
         return view("profile.index", compact('users', 'usersCount'));
     }
 
@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
+        User::create($request->all()); // Stores the created user
         return redirect("/administratie/leden")->with("message", "Nieuwe gebruiker is aangemaakt!");
     }
 
@@ -62,7 +62,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($id); // Find the correct user by id
         return view("profile.adminedit", compact('user'));
     }
 
@@ -75,10 +75,11 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, $id)
     {
+        // Update the requested data for the fields
         User::findOrFail($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'password' => Hash::make($request['password']), // Hash the password
             'role' => $request['role'],
         ]);
         return redirect("../public/leden")->with("message", "Gebruiker is geupdate!");
@@ -92,7 +93,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        User::findOrFail($id)->delete(); // Find the correct user by id and delete it
         return redirect("/leden")->with("message", "Gebruiker is verwijderd!");
     }
 }

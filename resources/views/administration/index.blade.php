@@ -32,6 +32,11 @@
                             </a>
                             <br />
                             <br />
+                            <a href="bekende-adressen" class="btn btn-primary">
+                                Bekende adressen
+                            </a>
+                            <br />
+                            <br />
                         </div>
                     </section>
                     <!-- /.content -->

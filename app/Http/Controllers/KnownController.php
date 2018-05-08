@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests;
-use App\Bus;
+use App\Known;
 
-class BusController extends Controller
+class KnownController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +14,8 @@ class BusController extends Controller
      */
     public function index()
     {
-        $bus = Bus::All(); // Grabs all the existing bus details
-        return view('bus.index', compact('bus'));
+        $known = Known::All(); // Grab all existing known addresses
+        return view('address.index', compact('known'));
     }
 
     /**
@@ -29,9 +23,9 @@ class BusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Bus $bus)
+    public function create(Known $known)
     {
-            return view('bus.create', compact('bus'));
+        return view('address.create', compact('known'));
     }
 
     /**
@@ -43,14 +37,17 @@ class BusController extends Controller
     public function store(Request $request)
     {
         // Stores the data for the requested fields
-        $bus = new Bus([
-          'bus_type' => $request->get('bus_type'),
-          'milage' => $request->get('milage'),
+        $known = new Known([
+            'location_name' => $request->get('location_name'),
+            'postal_code' => $request->get('postal_code'),
+            'address' => $request->get('address'),
+            'house_number' => $request->get('house_number'),
+            'city' => $request->get('city'),
         ]);
 
-        $bus->save(); // saves the data
+        $known->save(); // saves the data
 
-        return redirect('/bus')->with('success', 'Nieuwe bus is toegevoegd');
+        return redirect('/bekende-adressen')->with('success', 'Nieuw adres is toegevoegd');
     }
 
     /**
@@ -95,7 +92,7 @@ class BusController extends Controller
      */
     public function destroy($id)
     {
-        Bus::findOrFail($id)->delete(); // Find the correct bus and delete the bus
-        return redirect("/bus")->with("message", "Bus is verwijderd!");
+        Known::findOrFail($id)->delete(); // Find the correct address by id and delete the address
+        return redirect("/bekende-adressen")->with("message", "Bekend adres is verwijderd!");
     }
 }

@@ -22,7 +22,7 @@ class BusChangeController extends Controller
      */
     public function index()
     {
-        $buschanges = Buschange::All();
+        $buschanges = Buschange::All(); // Grabs all the existing bus change details
         return view('BusChange.index', compact('buschanges'));
     }
 
@@ -33,7 +33,7 @@ class BusChangeController extends Controller
      */
     public function create(Buschange $buschange)
     {
-        $users = User::all()->pluck('name');
+        $users = User::all()->pluck('name'); // Grabs all the users and plucks the name field from the table
         return view('BusChange.create', compact('buschange'), compact('users'));
     }
 
@@ -45,6 +45,7 @@ class BusChangeController extends Controller
      */
     public function store(Request $request)
     {
+        // Stores the data for the requested fields
         $buschange = new BusChange([
           'bus' => $request->get('bus'),
           'from' => $request->get('from'),
@@ -53,12 +54,13 @@ class BusChangeController extends Controller
           'date' => $request->get('date'),
         ]);
 
+        // Validates the requested data
         $request->validate([
           'date' => 'required',
           'kilometerstraveled' => 'required',
         ]);
 
-        $buschange->save();
+        $buschange->save(); // saves the data
 
         return redirect('/buswissel')->with('success', 'Nieuwe buswissel is aangemaakt!');
     }

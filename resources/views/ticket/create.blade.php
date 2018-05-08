@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
                                             {!! Form::label('tijd (idee om een hier een klokje tijdselectie?)') !!}
-                                            <input class="form-control" type="time" name="time" value="{{ $ticket->time }}" />
+                                            <input class="form-control" type="time" name="time" value="{{ date('h:i', strtotime($ticket->time)) }}" />
                                             @if($errors->has('time'))
                                                 <span class="help-block">
                                                     {{ $errors->first('time') }}
