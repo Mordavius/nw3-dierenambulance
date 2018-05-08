@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destination extends Model
 {
-    protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city'];
+    protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city', 'coordinates'];
     //
 
     public function destinationTicket()

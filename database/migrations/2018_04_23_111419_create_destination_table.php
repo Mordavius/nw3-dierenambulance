@@ -22,6 +22,7 @@ class CreateDestinationTable extends Migration
             $table->string('address');
             $table->string('house_number');
             $table->string('city');
+            $table->json('coordinates');
             $table->timestamps();
         });
     }

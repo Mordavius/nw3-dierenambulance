@@ -25,7 +25,7 @@
                 </form>
                 <div class="card">
                     <div class="card-header">
-                        Dashboard
+                        Alle meldingen
                     </div>
                     <div class="card-body">
                         <a href="meldingen">
@@ -34,6 +34,9 @@
                             </div>
                         </a>
                         <br />
+                        @section('map')
+                            @include('map')
+                        @endsection
                         <br />
                         @if (session('status'))
                             <div class="alert alert-success">
