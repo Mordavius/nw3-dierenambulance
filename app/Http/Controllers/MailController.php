@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
+    // Send a mail for te requested location and response with 200
     public function askLocationMail(Request $request)
     {
         $data = array('name'=>"Virat Gandhi", 'link' => $request->id);

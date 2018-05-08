@@ -9,7 +9,7 @@
                     Nieuwe buswissel
                 </div>
                 <div class="card-body">
-                    <a href="../buswissel">
+                    <a href="../bus">
                         <div class="btn btn-primary">
                             Terug naar het menu
                         </div>
@@ -20,59 +20,28 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {!! Form::model($buschange, [
+                    {!! Form::model($bus, [
                         'method' => 'POST',
-                        'route' => 'buswissel.store'])
+                        'route' => 'bus.store'])
                     !!}
-                        <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
-                            {!! Form::label('datum') !!}
-                            <input class="form-control" type="date" name="date"
-                                @if($buschange && $buschange->date)
-                                    value="{{ date('d-m-Y', strtotime($buschange->date)) }}"
-                                @else
-                                    value="{{ date('Y-m-d') }}"
-                                @endif
-                            />
-                            @if($errors->has('date'))
-                                <span class="help-block">
-                                    {{ $errors->first('date') }}
-                                </span>
-                                @endif
-                        </div>
-                        <div class="form-group{{ $errors->has('bus') ? 'has-error' : ''}}">
-                            {!! Form::label('bus') !!}
-                            {!! Form::select('bus', array('Bus' => 'Bus', 'Caddy' => 'Caddy')) !!}
+                    <div class="form-group{{ $errors->has('busname') ? 'has-error' : ''}}">
+                        {!! Form::label('Bus Naam') !!}
+                        {!! Form::text('bus_type', null, ['class' => 'form-control']) !!}
 
-                            @if($errors->has('bus'))
-                                <span class="help-block">
-                                    {{ $errors->first('bus') }}
-                                </span>
-                            @endif
-                        </div>
-                        <div class="form-group{{ $errors->has('from') ? 'has-error' : ''}}">
-                            {!! Form::label('van') !!}
-                            {!! Form::select('from',$users) !!}
+                        @if($errors->has('bus_type'))
+                          <span class="help-block">{{ $errors->first('bus_type') }}</span>
+                        @endif
+                    </div>
 
-                            @if($errors->has('from'))
-                                <span class="help-block">{{ $errors->first('from') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group{{ $errors->has('to') ? 'has-error' : ''}}">
-                            {!! Form::label('naar') !!}
-                            {!! Form::select('to', $users) !!}
+                    <div class="form-group{{ $errors->has('milage') ? 'has-error' : ''}}">
+                        {!! Form::label('Kilometerstand') !!}
+                        {!! Form::text('milage', null, ['class' => 'form-control']) !!}
 
-                            @if($errors->has('to'))
-                                <span class="help-block">{{ $errors->first('to') }}</span>
-                            @endif
-                        </div>
-                        <div class="form-group{{ $errors->has('kilometerstraveled') ? 'has-error' : ''}}">
-                            {!! Form::label('Kilometerstand') !!}
-                            {!! Form::text('kilometerstraveled', null, ['class' => 'form-control']) !!}
+                        @if($errors->has('milage'))
+                          <span class="help-block">{{ $errors->first('milage') }}</span>
+                        @endif
+                    </div>
 
-                            @if($errors->has('kilometerstraveled'))
-                              <span class="help-block">{{ $errors->first('kilometerstraveled') }}</span>
-                            @endif
-                        </div>
                         {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
                     {!! Form::close()   !!}
                 </div>

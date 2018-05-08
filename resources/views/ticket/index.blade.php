@@ -25,7 +25,7 @@
                 </form>
                 <div class="card">
                     <div class="card-header">
-                        Dashboard
+                        Alle meldingen
                     </div>
                     <div class="card-body">
                         <a href="meldingen">
@@ -34,6 +34,9 @@
                             </div>
                         </a>
                         <br />
+                        @section('map')
+                            @include('map')
+                        @endsection
                         <br />
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -103,23 +106,44 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <td>Diersoort</td>
-                                            <td>Plaats</td>
-                                            <td>Datum</td>
-                                            <td>Tijd</td>
+                                            <td>Diersoort &
+                                                <br />
+                                                Geslacht
+                                            </td>
                                             <td>Beschrijving</td>
+                                            <td>Adres</td>
+                                            <td>Datum &
+                                                <br />
+                                                Tijd
+                                            </td>
+
                                             <td>Action</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($tickets as $ticket)
                                             @if($ticket->finished == '1')
-                                            <tr>
-                                                <td>{{ $ticket->animal_species }}</td>
-                                                <td>{{ $ticket->city }}</td>
-                                                <td>{{ $ticket->date }}</td>
-                                                <td>{{ $ticket->time }}</td>
-                                                <td>{{ $ticket->comments }}</td>
+
+
+                                            <tr>@foreach($animals as $animal)
+                                                @if($ticket->animal_id == $animal->id)
+                                                    <td>{{ $animal->animal_species }}
+                                                    <br />
+                                                    {{ $animal->gender}}</td>
+                                                    <td>{{$animal->description}}</td>
+                                                @endif
+                                            @endforeach
+                                                @foreach($destinations as $destination)
+                                                    @if($ticket->destination_id == $destination->id)
+                                                    <td>
+                                                        {{ $destination->address }} {{ $destination->house_number }}
+                                                        <br />
+                                                        {{ $destination->postal_code }}, {{ $destination->city }}
+                                                    </td>
+                                                    @endif
+                                                @endforeach
+                                                <td>{{ $ticket->date }}
+                                                {{ $ticket->time }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
                                                     'route' => ['melding.destroy', $ticket->id],

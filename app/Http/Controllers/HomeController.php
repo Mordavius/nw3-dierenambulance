@@ -21,18 +21,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Show the login page
     public function index()
     {
         return view('auth/login');
     }
+    // Show the dashboard page
     public function ambulance()
     {
         return view('meldingen');
     }
+
+    // Show the register page
     public function register()
     {
         return view('auth/register');
     }
+
+    // Show the map for tickets
     public function map()
     {
         return view('map');

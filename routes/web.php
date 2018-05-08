@@ -29,7 +29,7 @@ Route::get('ambulance', 'HomeController@ambulance')->name('ambulance')->middlewa
 Route::get('/register', 'HomeController@register')->name('register')->middleware('rolecheck');
 
 Route::get('search', [
-    'uses' => 'NotificationController@index',
+    'uses' => 'TicketController@index',
     'as' => 'search',
 ]);
 
@@ -40,6 +40,13 @@ Route::get('downloadExcel', 'AdministrationController@downloadExcel');
 
 // CRUD Notification Controllers
 Route::resource('melding', 'TicketController')->middleware('rolecheck');
+
+//CRUD Bus Controllers
+Route::resource('bus', 'BusController')->middleware('rolecheck');
+
+//CRUD Known addresses Controllers
+Route::resource('bekende-adressen', 'KnownController')->middleware('rolecheck');
+
 
 // CRUD Profile Controllers
 Route::resource('profiel', 'ProfileController');

@@ -19,12 +19,16 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $filter = Ticket::all('date');
-        $users = User::all();
-        $tickets = Ticket::search(request('search'))->orderBy('date', 'desc')->paginate(15);
-        return view('ticket.index', compact('tickets'), compact('filter'))->withUsers($users);
+        $search = $request->input('search'); // Get  the input from the search field
+        $tickets = Ticket::all(); // Grabs all the existing tickets
+        // $users = User::all(); // Grabs all the existing users
+        $destinations = Destination::search($search)->orderBy('created_at', 'desc')->paginate(15); // Grabs all the existing locations, searches in the locations and paginate at 15 results
+        $animals = Animal::all(); // Grabs all te existings animals
+        //Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
+        //dd($filter);
+        return view('ticket.index', compact('tickets', 'animals', 'destinations', 'search'));
     }
 
     /**
@@ -34,7 +38,7 @@ class TicketController extends Controller
      */
     public function create(Ticket $ticket)
     {
-        $user = User::all()->pluck('name');
+        $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         return view('ticket.create', compact('ticket'), compact('user'));
     }
 
@@ -46,34 +50,33 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+        // Stores the data for the requested fields
         $destination = new Destination([
             'postal_code' => $request->get('postal_code'),
             'address' => $request->get('address'),
             'house_number' => $request->get('house_number'),
             'city' => $request->get('city'),
+            'coordinates' => $request->get('coordinates'),
         ]);
 
-        $destination->save();
+        $destination->save(); // Saves the data
         //dd($destination);
 
+        // Stores the data for the requested fields
         $animal = new Animal([
         'animal_species' => $request->get('animal_species'),
         'gender' => $request->get('gender'),
         'description' => $request->get('description'),
         ]);
 
-        $animal->save();
+        $animal->save(); // Saves the data
 
         //dd($animal);
 
-        $bus = new Bus([
-            'milage' => $request->get('milage'),
-        ]);
-
+        // Stores the data for the requested fields
         $ticket = new Ticket([
             'animal_id' => $animal->id,
             'destination_id' => $destination->id,
-            'bus_id' => $bus->id,
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'centralist' => $request->get('centralist'),
@@ -82,7 +85,7 @@ class TicketController extends Controller
         ]);
        // $ticket->destination->save($ticket);
       //  $ticket ->destination()->associate($destination);
-        $ticket->save();
+        $ticket->save(); // Saves the data
 
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
@@ -96,8 +99,8 @@ class TicketController extends Controller
      */
     public function show($ticket_id)
     {
-        $user = User::all()->pluck('name');
-        $ticket = Ticket::findOrFail($ticket_id);
+        $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
+        $ticket = Ticket::findOrFail($ticket_id); // Grabs the ticket with the correct id
       //  $tickets = Ticket::with('date')->orderBy('date', 'asc')->get();
         return view("ticket.show", compact('ticket'), compact('user'), compact('tickets'));
     }
@@ -110,8 +113,9 @@ class TicketController extends Controller
      */
     public function edit($ticket_id)
     {
-        $user = User::all()->pluck('name');
-        $ticket = Ticket::findOrFail($ticket_id);
+
+        $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
+        $ticket = Ticket::findOrFail($ticket_id); // Grabs the ticket with the correct id
         return view("ticket.edit", compact('ticket'), compact('user'));
     }
 
@@ -124,12 +128,14 @@ class TicketController extends Controller
      */
     public function update(Request $request, $ticket_id)
     {
+        // Validates the requested fields
         $this->validate($request, [
             'date' => 'required',
             'time' => 'required',
         //    'telephone' => 'sometimes|numeric',
         ]);
 
+        // Updates the data for the requested fields
         $ticket = Ticket::findOrFail($ticket_id);
         $ticket->date = $request->get('date');
         $ticket->time = $request->get('time');
@@ -145,7 +151,7 @@ class TicketController extends Controller
         $ticket->gender = $request->get('gender');
         $ticket->comments = $request->get('comments');
         $ticket->finished = $request->get('finished');
-        $ticket->save();
+        $ticket->save(); // Saves the data
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
     }
@@ -158,7 +164,7 @@ class TicketController extends Controller
      */
     public function destroy($ticket_id)
     {
-        Ticket::findOrFail($ticket_id)->delete();
+        Ticket::findOrFail($ticket_id)->delete(); // Grabs the ticket with the correct id and deletes the ticket
         return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 }

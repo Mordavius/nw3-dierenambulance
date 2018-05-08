@@ -13,13 +13,13 @@ class CreateBusTable extends Migration
      */
     public function up()
     {
-        Schema::create('bus', function (Blueprint $table) {
+        Schema::create('buses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
+            $table->string('bus_type');
             $table->integer('milage');
-            $table->boolean('damage');
+            $table->boolean('damage')->default('1');
             $table->string('damage_description');
-            $table->boolean('clean');
+            $table->boolean('clean')->default('0');
             $table->integer('buschange_id');
             $table->timestamps();
         });

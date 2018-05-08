@@ -9,6 +9,7 @@ class Ticket extends Model
 {
     protected $fillable = ['destination_id', 'animal_id', 'bus_id', 'finance_id', 'date','time', 'centralist', 'reporter_name', 'telephone', 'driver', 'passenger', 'finished'];
 
+
     public function destination()
     {
         return $this->hasMany('App\Destination');
@@ -19,19 +20,12 @@ class Ticket extends Model
         return $this->hasOne('App\Animal');
     }
 
+    public function bus()
+    {
+        return $this->hasOne('App\Bus');
+    }
     /**
      * @param $query
      * @param $search
      */
-
-    // Search function which searches on the animal species
-    public function scopeSearch($query, $search)
-    {
-        // check on term for search function
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->orWhere('animal_species', 'LIKE', "%{$search}%");
-            });
-        }
-    }
 }

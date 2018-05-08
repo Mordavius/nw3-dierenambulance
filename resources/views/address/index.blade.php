@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Busbeheer
+                        Bekende addressen beheer
                     </div>
                     <div class="card-body">
                         @if (session('status'))
@@ -13,45 +13,38 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <a href="/bus/create" class="btn btn-success">
-                            Nieuwe bus toevoegen
+                        <a href="/bekende-adressen/create" class="btn btn-success">
+                            Nieuw adres toevoegen
                         </a>
                         <section class="content">
-                            @if (! $bus->count())
+                            @if (! $known->count())
                             <div class="alert alert-danger">
-                                <strong>Geen bussen gevonden</strong>
+                                <strong>Geen bekende adressen gevonden</strong>
                             </div>
                             @else
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <td>Type bus</td>
-                                            <td>Kilometerstand</td>
-                                            <td>Schade</td>
-                                            <td>Schade beschrijving</td>
-                                            <td>Schoon</td>
+                                            <td>Locatie Naam</td>
+                                            <td>Postcode</td>
+                                            <td>Straat</td>
+                                            <td>Huisnummer</td>
+                                            <td>Stad</td>
                                             <td>Action</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($bus as $bus)
+                                        @foreach($known as $known)
                                             <tr>
-                                                <td>{{ $bus->bus_type }}</td>
-                                                <td>{{ $bus->milage }}</td>
-                                                @if($bus->damage == 1)
-                                                    <td>Ja</td>
-                                                @else
-                                                    <td>Nee</td>
-                                                @endif
-                                                <td>{{ $bus->damage_description }}</td>
-                                                @if($bus->clean == 0)
-                                                    <td>Ja</td>
-                                                @else
-                                                    <td>Nee</td>
-                                                @endif
+                                                <td>{{ $known->location_name }}</td>
+                                                <td>{{ $known->postal_code }}</td>
+                                                <td>{{ $known->address }}</td>
+                                                <td>{{ $known->house_number }}</td>
+                                                <td>{{ $known->city }}</td>
+
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['bus.destroy', $bus->id],
+                                                    'route' => ['bekende-adressen.destroy', $known->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
                                                         <button type="submit" class="btn btn-danger">
                                                             <i>Verwijderen</i>

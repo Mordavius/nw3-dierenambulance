@@ -28,15 +28,13 @@ var app = angular.module("app", [])
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
 			if(err) { throw err; }
 			var marker = L.marker(e.latlng).addTo($scope.map);
-			console.log(e.latlng);
-			var obj = JSON.parse(result);
-			updateAddressInformation(obj);
+			var resultJSON = JSON.parse(result);
+			updateAddressInformation(resultJSON, e);
 			})
 	}
 
 	function reverseGeocodeQuery(format, lat, lon, zoom) {
 			var url = "https://nominatim.openstreetmap.org/reverse?format=" + format + "&lat=" + lat + "&lon=" + lon + "&zoom=" + zoom + "&addressdetails=1";
-			console.log(url);
 			return url;
 	}
 
@@ -56,12 +54,13 @@ var app = angular.module("app", [])
 		xhr.send();
 	}
 
-	function updateAddressInformation(obj){
-		document.getElementById("postal_code").value = obj.address.postcode ? obj.address.postcode : "Kan postcode niet vinden";
-		document.getElementById("house_number").value = obj.address.house_number ? obj.address.house_number : "Kan huis nummer niet vinden";
-		document.getElementById("address").value = obj.address.road ? obj.address.road : "Kan straat niet vinden"
-		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
-		document.getElementById("township").value = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
+	function updateAddressInformation(resultJSON, onClickEvent){
+		document.getElementById("postal_code").value = resultJSON.address.postcode ? resultJSON.address.postcode : "Kan postcode niet vinden";
+		document.getElementById("house_number").value = resultJSON.address.house_number ? resultJSON.address.house_number : "Kan huis nummer niet vinden";
+		document.getElementById("address").value = resultJSON.address.road ? resultJSON.address.road : "Kan straat niet vinden"
+		document.getElementById("city").value = resultJSON.address.suburb ? resultJSON.address.suburb : "Kan stad niet vinden";
+		document.getElementById("township").value = resultJSON.address.city ? resultJSON.address.city : "Kan gemeente niet vinden";
+		document.getElementById("coordinates").value = JSON.stringify(onClickEvent.latlng);
 	}
 	$scope.map.on('click', onMapClick);
 
@@ -125,6 +124,10 @@ var app = angular.module("app", [])
                 if (data === 'no location') {
                     setTimeout(function () {getLocationRecord()}, 3000);
                 } else {
+
+
+                    document.getElementById('coordinates').value = data;
+
                     data = JSON.parse(data);
                     getAdressByCoordinates(data.lat, data.lon);
                 }
@@ -190,5 +193,5 @@ var app = angular.module("app", [])
             }
         });
     }
-
 }])
+

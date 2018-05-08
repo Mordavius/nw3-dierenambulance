@@ -27,8 +27,13 @@
                             </a>
                             <br />
                             <br />
-                            <a href="" class="btn btn-primary">
+                            <a href="bus" class="btn btn-primary">
                                 Bussen
+                            </a>
+                            <br />
+                            <br />
+                            <a href="bekende-adressen" class="btn btn-primary">
+                                Bekende adressen
                             </a>
                             <br />
                             <br />
