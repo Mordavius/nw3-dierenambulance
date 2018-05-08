@@ -22,8 +22,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-
-        $username = Auth::user()->name;
+        $username = Auth::user()->name; // Set the username for the authenticated user
       //$user_id = session()->get('user_id');
 
        //return ($username);
@@ -67,7 +66,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = User::where('name', $id)->get();
+        $user = User::where('name', $id)->get(); // Get the correct user by id
         return view('profile.profile', compact('user'));
     }
 
@@ -79,7 +78,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::where('name', $id)->get();
+        $user = User::where('name', $id)->get(); // Get the correct user by id
 
         //return "test edit" .$user;
         return view('profile.edit', compact('user'));
@@ -94,20 +93,21 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validate the requested fields
         $this->validate($request, [
           'username' => 'required',
           'email' => 'required',
         ]);
       //return $request;
-        $user = User::findOrFail($id);
-        $user->name = $request->get('username');
-        $user->email = $request->get('email');
+        $user = User::findOrFail($id); // find the correct user by id
+        $user->name = $request->get('username'); // Get the requested username
+        $user->email = $request->get('email'); // Get the requested email
       // if ($request->('password') = $user->password){
       //   $user->password = $request->('password');
       // }
 
       //$data = $this->handleRequest($request);
-        $user->save();
+        $user->save(); // saves the data
 
        //flash('Profiel is geupd')->success()
        //\Session::flash('flash_message','Office successfully added.');

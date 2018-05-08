@@ -20,7 +20,7 @@ class BusController extends Controller
      */
     public function index()
     {
-        $bus = Bus::All();
+        $bus = Bus::All(); // Grabs all the existing bus details
         return view('bus.index', compact('bus'));
     }
 
@@ -42,12 +42,13 @@ class BusController extends Controller
      */
     public function store(Request $request)
     {
+        // Stores the data for the requested fields
         $bus = new Bus([
           'bus_type' => $request->get('bus_type'),
           'milage' => $request->get('milage'),
         ]);
 
-        $bus->save();
+        $bus->save(); // saves the data
 
         return redirect('/bus')->with('success', 'Nieuwe bus is toegevoegd');
     }
@@ -94,7 +95,7 @@ class BusController extends Controller
      */
     public function destroy($id)
     {
-        Bus::findOrFail($id)->delete();
+        Bus::findOrFail($id)->delete(); // Find the correct bus and delete the bus
         return redirect("/bus")->with("message", "Bus is verwijderd!");
     }
 }

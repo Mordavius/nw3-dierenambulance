@@ -14,7 +14,7 @@ class KnownController extends Controller
      */
     public function index()
     {
-        $known = Known::All();
+        $known = Known::All(); // Grab all existing known addresses
         return view('address.index', compact('known'));
     }
 
@@ -36,6 +36,7 @@ class KnownController extends Controller
      */
     public function store(Request $request)
     {
+        // Stores the data for the requested fields
         $known = new Known([
             'location_name' => $request->get('location_name'),
             'postal_code' => $request->get('postal_code'),
@@ -44,7 +45,7 @@ class KnownController extends Controller
             'city' => $request->get('city'),
         ]);
 
-        $known->save();
+        $known->save(); // saves the data
 
         return redirect('/bekende-adressen')->with('success', 'Nieuw adres is toegevoegd');
     }
@@ -91,7 +92,7 @@ class KnownController extends Controller
      */
     public function destroy($id)
     {
-        Known::findOrFail($id)->delete();
+        Known::findOrFail($id)->delete(); // Find the correct address by id and delete the address
         return redirect("/bekende-adressen")->with("message", "Bekend adres is verwijderd!");
     }
 }
