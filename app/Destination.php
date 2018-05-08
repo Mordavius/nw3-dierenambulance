@@ -6,16 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destination extends Model
 {
-<<<<<<< HEAD
     // Set the columns for storing data in the database
-    protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city'];
-||||||| merged common ancestors
-    protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city'];
-    //
-=======
     protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city', 'coordinates'];
     //
->>>>>>> origin/dev
 
     // Set the relationship between a destination and a ticket
     public function destinationTicket()
