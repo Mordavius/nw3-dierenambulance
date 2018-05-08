@@ -27,7 +27,6 @@ class CreateTicketTable extends Migration
             $table->string('telephone')->nullable();
             $table->string('driver')->nullable();
             $table->string('passenger')->nullable();
-            $table->boolean('finished')->default('0');
             $table->timestamps();
         });
     }

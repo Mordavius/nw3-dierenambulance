@@ -25,7 +25,7 @@
                 </form>
                 <div class="card">
                     <div class="card-header">
-                        Alle meldingen
+                        Dashboard
                     </div>
                     <div class="card-body">
                         <a href="meldingen">
@@ -34,9 +34,6 @@
                             </div>
                         </a>
                         <br />
-                        @section('map')
-                            @include('map')
-                        @endsection
                         <br />
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -48,50 +45,6 @@
                                 <p>Zoekresultaten<strong>{{ $search }}</strong></p>
                             </div>
                         @endif
-                        <h4>
-                            Actieve meldingen
-                        </h4>
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <td>Diersoort</td>
-                                <td>Plaats</td>
-                                <td>Datum</td>
-                                <td>Tijd</td>
-                                <td>Beschrijving</td>
-                                <td>Action</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($tickets as $ticket)
-                                @if($ticket->finished == '0')
-                                <tr>
-                                    <td>{{ $ticket->animal_species }}</td>
-                                    <td>{{ $ticket->city }}</td>
-                                    <td>{{ $ticket->date }}</td>
-                                    <td>{{ $ticket->time }}</td>
-                                    <td>{{ $ticket->comments }}</td>
-                                    <td>
-                                        <a href="{{ route('melding.edit', $ticket->id) }}">
-                                            <i class="btn btn-primary">Aanpassen</i>
-                                        </a>
-                                        <br />
-                                        <a href="{{ route('melding.show', $ticket->id) }}">
-                                            <i class="btn btn-primary">Bekijk</i>
-                                        </a>
-                                        <br />
-                                        {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                                @endif
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <br />
-                        <br />
-                        <h4>
-                            Afgeronde meldingen
-                        </h4>
                         <div class="box-body ">
                             @if(session('message'))
                                 <div class="alert alert-info">
@@ -122,9 +75,6 @@
                                     </thead>
                                     <tbody>
                                         @foreach($tickets as $ticket)
-                                            @if($ticket->finished == '1')
-
-
                                             <tr>@foreach($animals as $animal)
                                                 @if($ticket->animal_id == $animal->id)
                                                     <td>{{ $animal->animal_species }}
@@ -162,7 +112,7 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-                                            @endif
+
                                         @endforeach
                                     </tbody>
                                 </table>
