@@ -34,12 +34,9 @@
                             </div>
                         </a>
                         <br />
-<<<<<<< HEAD
                         @section('map')
                             @include('showMarkers')
                         @endsection
-=======
->>>>>>> 15182f4c7447e578809c1552ae12c0d945574e40
                         <br />
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -51,7 +48,6 @@
                                 <p>Zoekresultaten<strong>{{ $search }}</strong></p>
                             </div>
                         @endif
-<<<<<<< HEAD
                         <h4>
                             Actieve meldingen
                         </h4>
@@ -136,8 +132,6 @@
                         <h4>
                             Afgeronde meldingen
                         </h4>
-=======
->>>>>>> 15182f4c7447e578809c1552ae12c0d945574e40
                         <div class="box-body ">
                             @if(session('message'))
                                 <div class="alert alert-info">
@@ -168,10 +162,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach($tickets as $ticket)
-<<<<<<< HEAD
                                             @if($ticket->finished == '1')
-=======
->>>>>>> 15182f4c7447e578809c1552ae12c0d945574e40
                                             <tr>@foreach($animals as $animal)
                                                 @if($ticket->animal_id == $animal->id)
                                                     <td>{{ $animal->animal_species }}

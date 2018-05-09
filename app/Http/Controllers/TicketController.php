@@ -154,11 +154,8 @@ class TicketController extends Controller
         $ticket->animalspecies = $request->get('animalspecies');
         $ticket->gender = $request->get('gender');
         $ticket->comments = $request->get('comments');
-<<<<<<< HEAD
         $ticket->finished = $request->get('finished');
 
-=======
->>>>>>> 15182f4c7447e578809c1552ae12c0d945574e40
         $ticket->save(); // Saves the data
 
         return redirect('/melding')->with('message', 'Melding is geupdate');

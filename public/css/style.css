@@ -20,13 +20,9 @@ html, body
 }
 #map
 {
-<<<<<<< HEAD
     height: 300px;
 	width: 75%;
     margin: 0 auto;
-=======
-    height: 500px;
->>>>>>> 15182f4c7447e578809c1552ae12c0d945574e40
 }
 .content
 {
