@@ -21,7 +21,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if ($_SERVER['HTTP_HOST'] != env('remote_host') ) {
+if ($_SERVER['HTTP_HOST'] === 'nasvanmark.nl' ) {
     require __DIR__ . '/../../../../applications/nw3-dierenambulance/bootstrap/autoload.php';
 } else {
     require __DIR__.'/../bootstrap/autoload.php';
@@ -38,7 +38,7 @@ if ($_SERVER['HTTP_HOST'] != env('remote_host') ) {
 |
 */
 
-if ($_SERVER['HTTP_HOST'] != env('remote_host') ) {
+if ($_SERVER['HTTP_HOST'] === 'nasvanmark.nl' ) {
     $app = require_once __DIR__.'/../../../../applications/nw3-dierenambulance/bootstrap/app.php';
 } else {
     $app = require_once __DIR__.'/../bootstrap/app.php';
