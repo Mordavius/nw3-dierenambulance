@@ -11,7 +11,7 @@
 |
 */
 
-if ($_SERVER['HTTP_HOST'] != env('remote_host') ) {
+if ($_SERVER['HTTP_HOST'] === env('remote_host') ) {
     $app = new App\GoPublic(
         realpath(__DIR__.'/../')
     );
