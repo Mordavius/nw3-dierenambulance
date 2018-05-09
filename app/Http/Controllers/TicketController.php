@@ -26,9 +26,14 @@ class TicketController extends Controller
         // $users = User::all(); // Grabs all the existing users
         $destinations = Destination::search($search)->orderBy('created_at', 'desc')->paginate(15); // Grabs all the existing locations, searches in the locations and paginate at 15 results
         $animals = Animal::all(); // Grabs all te existings animals
+        $coordinateStrings = $destinations->pluck('coordinates')->toArray(); //Grabs the coordinates and puts it into an array.
+        //Decodes the array for better formatting.
+        $coordinates = array_map(function ($coordinateString) {
+            return json_decode($coordinateString);
+        }, $coordinateStrings);
         //Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
         //dd($filter);
-        return view('ticket.index', compact('tickets', 'animals', 'destinations', 'search'));
+        return view('ticket.index', compact('tickets', 'animals', 'destinations', 'search', 'coordinates'));
     }
 
     /**
@@ -39,7 +44,8 @@ class TicketController extends Controller
     public function create(Ticket $ticket)
     {
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
-        return view('ticket.create', compact('ticket'), compact('user'));
+        $coordinates = [];
+        return view('ticket.create', compact('user', 'ticket', 'coordinates'));
     }
 
     /**
@@ -151,6 +157,7 @@ class TicketController extends Controller
         $ticket->gender = $request->get('gender');
         $ticket->comments = $request->get('comments');
         $ticket->finished = $request->get('finished');
+
         $ticket->save(); // Saves the data
 
         return redirect('/melding')->with('message', 'Melding is geupdate');

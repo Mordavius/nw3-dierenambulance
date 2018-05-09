@@ -1,12 +1,9 @@
 var app = angular.module("app", [])
 .controller("TableController", ['$scope','$http', function($scope, $http){
-	$scope.users = [];
-	$scope.months = [];
-	$scope.years = [];
-	$scope.days = [];
-	$scope.markers = new L.FeatureGroup();
+
 
     $scope.map = L.map('map').setView([53, 5.7], 10);
+	$scope.coordinates = [];
     L.tileLayer(
         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors',
@@ -14,14 +11,14 @@ var app = angular.module("app", [])
         minZoom: 1
     }).addTo($scope.map);
 
-	for (var i = 1; i < 13; i++) {
-		$scope.months.push(i);
-	}
-	for (var i = 1900; i < 2017; i++) {
-		$scope.years.push(i);
-	}
-	for (var i = 1; i < 32; i++) {
-		$scope.days.push(i);
+	var coords = $('#map').data('coordinates')
+	coords.forEach(function(coord){
+		placeMarker(coord);
+	})
+
+	function placeMarker(i){
+		var latlng = L.latLng(i.lat, i.lng);
+		var marker = L.marker(latlng).addTo($scope.map);
 	}
 
 	function onMapClick(e) {
@@ -64,6 +61,7 @@ var app = angular.module("app", [])
 	}
 	$scope.map.on('click', onMapClick);
 
+
     var locationId =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
 	$('#searchButton').click(searchButtonClicked);
@@ -98,12 +96,6 @@ var app = angular.module("app", [])
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(showPosition);
     }
 
-// var postalcode = document.getElementById('postalcode');
-// var housenumber = document.getElementById('housenumber');
-// var address = document.getElementById('address');
-// var city = document.getElementById('city');
-// var township = document.getElementById('township');
-
     function showPosition(position) {
         $.ajax({
             type: 'POST',
@@ -124,7 +116,6 @@ var app = angular.module("app", [])
                 if (data === 'no location') {
                     setTimeout(function () {getLocationRecord()}, 3000);
                 } else {
-
 
                     document.getElementById('coordinates').value = data;
 
@@ -194,4 +185,3 @@ var app = angular.module("app", [])
         });
     }
 }])
-
