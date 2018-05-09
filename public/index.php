@@ -22,9 +22,9 @@ define('LARAVEL_START', microtime(true));
 */
 
 if ($_SERVER['HTTP_HOST'] === 'nasvanmark.nl' ) {
-    require __DIR__ . '/../../../../applications/nw3-dierenambulance/bootstrap/autoload.php';
+    require __DIR__ . '/../../../../applications/nw3-dierenambulance/vendor/autoload.php';
 } else {
-    require __DIR__.'/../bootstrap/autoload.php';
+    require __DIR__.'/../vendor/autoload.php';
 }
 /*
 |--------------------------------------------------------------------------
