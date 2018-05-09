@@ -11,9 +11,15 @@
 |
 */
 
-$app = new Illuminate\Foundation\Application(
-    realpath(__DIR__.'/../')
-);
+if ($_SERVER['HTTP_HOST'] === env('remote_host') ) {
+    $app = new App\GoPublic(
+        realpath(__DIR__.'/../')
+    );
+} else {
+    $app = new Illuminate\Foundation\Application(
+        realpath(__DIR__.'/../')
+    );
+}
 
 /*
 |--------------------------------------------------------------------------
