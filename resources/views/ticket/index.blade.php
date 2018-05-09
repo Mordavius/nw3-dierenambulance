@@ -133,11 +133,6 @@
                             Afgeronde meldingen
                         </h4>
                         <div class="box-body ">
-                            @if(session('message'))
-                                <div class="alert alert-info">
-                                    {{ session('message') }}
-                                </div>
-                            @endif
                             @if (! $tickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
@@ -200,7 +195,7 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

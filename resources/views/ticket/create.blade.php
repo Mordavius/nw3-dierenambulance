@@ -22,7 +22,7 @@
                         </div>
                     </a>
                     <a>
-                        <div class="btn btn-primary" id="L" onclick="sendLocationRequest()">
+                        <div class="btn btn-primary" id="sendLocationButton">
                             Locatie opvragen
                         </div>
                     </a>
@@ -86,6 +86,7 @@
                                         </div>
                                         <hr>
                                         <h2>Locatie</h2>
+                                        {!! Form::hidden('coordinates', false, ['id' => 'coordinates']) !!}
                                         <div class="form-group {{ $errors->has('postal_code') ? 'has-error' : '' }}">
                                             {!! Form::label('Postcode') !!}
                                             {!! Form::text('postal_code', false, ['class' => 'form-control', 'id' => 'postal_code']) !!}
@@ -217,10 +218,4 @@
 @endsection
 
 @section('scripts')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
-  <script type="text/javascript" src="{{asset('js/locate.js')}}"></script>
-  <script src = "{!!asset('js/angular.min.js')!!}"></script>
-  <script src = "{!!asset('js/table-directive.js')!!}"></script>
 @endsection

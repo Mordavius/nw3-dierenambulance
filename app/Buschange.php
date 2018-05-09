@@ -15,5 +15,4 @@ class Buschange extends Model
      * @param $query
      * @param $search
      */
-
 }

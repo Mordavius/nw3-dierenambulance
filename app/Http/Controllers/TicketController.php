@@ -62,6 +62,7 @@ class TicketController extends Controller
             'address' => $request->get('address'),
             'house_number' => $request->get('house_number'),
             'city' => $request->get('city'),
+            'coordinates' => $request->get('coordinates'),
         ]);
 
         $destination->save(); // Saves the data

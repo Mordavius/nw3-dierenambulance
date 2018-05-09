@@ -1,7 +1,7 @@
 var app = angular.module("app", [])
 .controller("TableController", ['$scope','$http', function($scope, $http){
 
-
+    $scope.distance = [];
     $scope.map = L.map('map').setView([53, 5.7], 10);
 	$scope.coordinates = [];
     L.tileLayer(
@@ -11,15 +11,34 @@ var app = angular.module("app", [])
         minZoom: 1
     }).addTo($scope.map);
 
-	var coords = $('#map').data('coordinates')
-	coords.forEach(function(coord){
-		placeMarker(coord);
-	})
 
-	function placeMarker(i){
-		var latlng = L.latLng(i.lat, i.lng);
-		var marker = L.marker(latlng).addTo($scope.map);
-	}
+	// var coords = $('#map').data('coordinates')
+	// coords.forEach(function(coord){
+	// 	placeMarker(coord);
+	// })
+    //
+	// function placeMarker(i){
+	// 	var latlng = L.latLng(i.lat, i.lng);
+    //
+	// 	var marker = L.marker(latlng).addTo($scope.map);
+    //     $scope.distance.push(latlng);
+    //         console.log(latlng.distanceTo($scope.distance[0]));
+	// }
+//     // use defaults
+// var line = L.polyline(coords);
+//
+// // override defaults
+// var line = L.polyline(coords, {
+// 	distanceMarkers: { showAll: 11, offset: 1600, cssClass: 'some-other-class', iconSize: [16, 16] }
+// });
+//
+// // show/hide markers on mouseover
+// var line = L.polyline(coords, {
+// 	distanceMarkers: { lazy: true }
+// });
+// $scope.map.fitBounds(line.getBounds());
+// $scope.map.addLayer(line);
+
 
 	function onMapClick(e) {
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
@@ -27,7 +46,7 @@ var app = angular.module("app", [])
 			var marker = L.marker(e.latlng).addTo($scope.map);
 			console.log(e.latlng);
 			var obj = JSON.parse(result);
-			updateAddressInformation(obj);
+			updateAddressInformation(obj, e);
 			})
 	}
 
@@ -53,12 +72,14 @@ var app = angular.module("app", [])
 		xhr.send();
 	}
 
-	function updateAddressInformation(obj){
+	function updateAddressInformation(obj, e){
 		document.getElementById("postal_code").value = obj.address.postcode ? obj.address.postcode : "Kan postcode niet vinden";
 		document.getElementById("house_number").value = obj.address.house_number ? obj.address.house_number : "";
 		document.getElementById("address").value = obj.address.road ? obj.address.road : "Straatnaam onbekend"
 		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
 		document.getElementById("township").value = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
+        document.getElementById("coordinates").value = JSON.stringify(e.latlng);
+
 	}
 	$scope.map.on('click', onMapClick);
 
@@ -175,6 +196,7 @@ var app = angular.module("app", [])
     }
     $('#sendLocationButton').click(sendLocationRequest);
     function sendLocationRequest(){
+        console.log("test");
         $.ajax({
             type:'POST',
             url:'/api/mail',
