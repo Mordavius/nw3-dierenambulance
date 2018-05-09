@@ -25,6 +25,7 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Dierenambulance') }}
                     </a>
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -39,13 +40,8 @@
                                 <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             @else
                             <li>
-                                <a class="nav-link" href="buswissel">
-                                    Buswissel
-                                </a>
-                            </li>
-                            <li>
                                 <a class="nav-link" href="{{ route('meldingen') }}">
-                                    Meldingen
+                                    Dashboard
                                 </a>
                             </li>
                                 <li class="nav-item dropdown">

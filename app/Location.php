@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    protected $primaryKey = 'id';
+    // Set the columns for storing data in the database
     protected $fillable = ['locationHash', 'coordinates'];
 }

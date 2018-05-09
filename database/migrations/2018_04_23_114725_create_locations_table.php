@@ -18,7 +18,7 @@ class CreateLocationsTable extends Migration
                 $table->string('locationHash');
                 $table->string('coordinates');
                 $table->timestamps();
-            });
+        });
     }
 
     /**

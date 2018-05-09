@@ -16,6 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    // Set the columns for storing data in the database
     protected $fillable = [
         'name', 'email', 'password','role',
     ];
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // Check if a user has role 1 and if this exists
     public function isAdmin()
     {
         return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();

@@ -6,20 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Buschange extends Model
 {
+    // Set the id for the buschange table
     protected $primaryKey = 'buschange_id';
+    // Set the columns for storing data in the database
     protected $fillable = ['date', 'bus', 'from', 'to', 'kilometerstraveled'];
 
     /**
      * @param $query
      * @param $search
      */
-    public function scopeFilter($query, $search)
-    {
-        // check term for search function
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->orWhere('title', 'LIKE', "%{$search}%");
-            });
-        }
-    }
+
 }

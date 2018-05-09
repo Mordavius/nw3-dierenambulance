@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -13,13 +12,13 @@
                         </div>
                     @endif
 
-
                     <!-- Main content -->
                         <section class="content">
                             <div class="col-12">
                                 <a href="{{ route('melding.index') }}" class="btn btn-primary">Alle Meldingen</a><br /><br />
                                 <a href="{{ route('melding.create') }}" class="btn btn-primary">Nieuwe melding aanmaken</a><br /><br />
                                 <a href="administratie" class="btn btn-primary">Administratie</a><br /><br />
+                                <a href="buswissel" class="btn btn-primary">Buswissel</a><br /><br />
                                 <a href="{{ url('/profiel') }}" class="btn btn-primary">Bekijk profiel</a>
                             </div>
                         </section>
