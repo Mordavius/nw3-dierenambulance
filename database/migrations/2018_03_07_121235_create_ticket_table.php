@@ -18,7 +18,7 @@ class CreateTicketTable extends Migration
             $table->integer('destination_id');
             $table->integer('animal_id');
             $table->integer('finance_id')->nullable();
-            $table->integer('bus_id');
+            $table->integer('bus_id')->nullable();
             $table->date('date');
             $table->time('time');
             $table->string('address')->nullable();
@@ -27,7 +27,6 @@ class CreateTicketTable extends Migration
             $table->string('telephone')->nullable();
             $table->string('driver')->nullable();
             $table->string('passenger')->nullable();
-            $table->boolean('finished')->default('0');
             $table->timestamps();
         });
     }

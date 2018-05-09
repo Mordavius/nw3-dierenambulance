@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/mail', 'MailController@askLocationMail');
 Route::get('/location/show/{id}', 'LocationController@getLocation');
 Route::post('/location/write', 'LocationController@writeLocation');
+// Route::get('/coordinates/show/{active}', 'LocationController@markersOnCoordinates')

@@ -8,6 +8,7 @@ class TicketExport implements FromCollection
 {
     use Exportable;
 
+    // Grab all data from tickets
     public function collection()
     {
         return Ticket::all();

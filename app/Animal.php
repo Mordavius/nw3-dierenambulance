@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Animal extends Model
 {
-    // Setting the columns for storing data in the database
+    // Set the columns for storing data in the database
     protected $fillable = ['animal_species', 'breed', 'catch_cage', 'chip_number', 'gender', 'description'];
 
     // Set the relationship with a animal and a ticket

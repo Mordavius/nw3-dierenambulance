@@ -1,5 +1,4 @@
 var locationId =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-var map = L.map('map').setView([53, 5.7], 10);
 function getLocation() {
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(showPosition);
 }
@@ -67,7 +66,6 @@ function getAdressByCoordinates(lat,lon){
                         address.value = data.address.road;
                         city.value = data.address.city;
                         township.value = data.address.suburb;
-                        var marker = L.marker({lat: lat, lng: lon}).addTo(map);
                     }
                 } else {
                     console.log('wrong address found');

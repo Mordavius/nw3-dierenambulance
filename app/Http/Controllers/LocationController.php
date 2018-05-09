@@ -38,4 +38,8 @@ class LocationController extends Controller
         }
         //return response()->json(array('msg' => $location), 200);
     }
+    public function markersOnCoordinates()
+    {
+        //
+    }
 }
