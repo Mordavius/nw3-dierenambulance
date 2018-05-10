@@ -17,10 +17,17 @@ class CheckRole
 
     public function handle($request, Closure $next)
     {
-        if (! $request->user()->isAdmin()) {
-            return redirect('/meldingen');
-        }
+
 
         return $next($request);
     }
 }
+
+
+/*         if (! $request->user()->isAdmin()) {
+            return redirect('/ambulance-meldingen')->with('message', 'Alleen toegangbaar voor centralisten');
+        }
+        else {
+             redirect('/centralist-meldingen')->with('message', 'Alleen toegangbaar voor ambulance medewerkers');
+        }
+*/

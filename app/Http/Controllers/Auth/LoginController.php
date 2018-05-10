@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -21,12 +22,19 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/meldingen';
+    protected function authenticated(Request $request, $user)
+    {
+        if ( $user->isAdmin() ) {
+            return redirect('/admin');
+        }
+        if ( $user->isCentralist() ) {
+            return redirect('/centralist');
+        }
+        if ( $user->isAmbulance() ) {
+            return redirect('/ambulance');
+        }
+        return redirect('/login');
+    }
 
     /**
      * Create a new controller instance.

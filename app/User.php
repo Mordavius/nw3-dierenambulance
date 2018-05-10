@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     // Set the columns for storing data in the database
     protected $fillable = [
-        'name', 'email', 'password','role',
+        'name', 'email', 'password','role_id',
     ];
 
     /**
@@ -30,9 +30,36 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // Check if a user has role 1 and if this exists
+    // Check if a user is administrator
     public function isAdmin()
     {
-        return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+        if($this->role->name == 'Administrator') {
+            return true;
+        }
+        return false;
+        // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+    }
+
+    public function isCentralist()
+    {
+        if($this->role->name == 'Centralist') {
+            return true;
+        }
+        return false;
+        // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+    }
+
+    public function isAmbulance()
+    {
+        if($this->role->name == 'Ambulance Medewerker') {
+            return true;
+        }
+        return false;
+        // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+    }
+
+    public function role() {
+
+        return $this->belongsTo('App\Role');
     }
 }

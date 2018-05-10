@@ -40,7 +40,7 @@
                                 <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             @else
                             <li>
-                                <a class="nav-link" href="{{ route('meldingen') }}">
+                                <a class="nav-link" href="{{ url('/') }}">
                                     Dashboard
                                 </a>
                             </li>

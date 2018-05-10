@@ -70,13 +70,13 @@
                                 Rol
                             </label>
                             <div class="col-md-6">
-                                {{Form::select('role', array('1' => 'Admin', '2' => 'Centrale', '3' => 'Ambulance'))}}
+                                {{Form::select('role_id', array('1' => 'Administrator', '2' => 'Centralist', '3' => 'Ambulance Medewerker', '4' => 'Administratie Medewerker'))}}
                             </div>
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    Registreer Account
                                 </button>
                             </div>
                         </div>
