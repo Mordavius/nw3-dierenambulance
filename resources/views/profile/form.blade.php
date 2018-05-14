@@ -34,12 +34,12 @@
         </span>
     @endif
 </div>
-<div class="form-group {{ $errors->has('role') ? 'has-error' : '' }}">
-    {!! Form::label('Rol') !!}
-    {!! Form::text('role', null, ['class' => 'form-control']) !!}
-    @if($errors->has('role'))
+<div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
+    {!! Form::label('Voornamelijk actief als') !!}
+    {{Form::select('role_id', array('1' => 'Administrator', '2' => 'Centralist', '3' => 'Ambulance Medewerker', '4' => 'Administratie Medewerker'))}}
+@if($errors->has('role_id'))
         <span class="help-block">
-            {{ $errors->first('role') }}
+            {{  $errors->first('role_id') }}
         </span>
     @endif
 </div>

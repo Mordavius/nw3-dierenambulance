@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -63,7 +64,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id); // Find the correct user by id
-        return view("profile.adminedit", compact('user'));
+        return view("profile.adminedit", compact('user'), compact('role'));
     }
 
     /**
@@ -80,9 +81,10 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']), // Hash the password
-            'role' => $request['role'],
+            'role_id' => $request['role_id'],
         ]);
-        return redirect("../public/leden")->with("message", "Gebruiker is geupdate!");
+
+        return redirect("/leden")->with("message", "Gebruiker is geupdate!");
     }
 
     /**

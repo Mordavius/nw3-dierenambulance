@@ -27,6 +27,10 @@ class CreateTicketTable extends Migration
             $table->string('telephone')->nullable();
             $table->string('driver')->nullable();
             $table->string('passenger')->nullable();
+            $table->integer('invoice')->nullable();
+            $table->boolean('paymentmethodinvoice')->nullable();
+            $table->integer('gifts')->nullable();
+            $table->boolean('paymentmethodgifts')->nullable();
             $table->timestamps();
         });
     }

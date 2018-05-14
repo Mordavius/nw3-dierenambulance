@@ -16,20 +16,27 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     // Show the login page
     public function index()
     {
         return view('auth/login');
     }
-    // Show the dashboard page
+
+    // Show the admin page
+    public function admin()
+    {
+        return view('admin');
+    }
+    // Show the centralist page
+    public function centralist()
+    {
+        return view('centralist');
+    }
+
+    // Show the ambulance page
     public function ambulance()
     {
-        return view('meldingen');
+        return view('ambulance');
     }
 
     // Show the register page
@@ -42,5 +49,9 @@ class HomeController extends Controller
     public function map()
     {
         return view('map');
+    }
+
+    public function error() {
+        return view('auth.error');
     }
 }

@@ -17,9 +17,20 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/meldingen');
+        if (auth()->check()) {
+
+            $user = Auth::user();
+            if ($user->isAdmin()) {
+                return redirect('/admin');
+            }
+            if ($user->isAmbulance()) {
+                return redirect('/ambulance');
+            }
+            if ($user->isCentralist()) {
+                return redirect('/centralist');
+            }
         }
+
 
         return $next($request);
     }

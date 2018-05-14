@@ -13,7 +13,7 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
+                    <td>{{ $user->role->name }}</td>
                     <td>
                         <a href="{{ route('leden.edit', $user->id) }}" class="btn btn-xs btn-default">
                             <i class="btn btn-success">

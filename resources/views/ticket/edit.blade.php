@@ -174,6 +174,43 @@
                                             <span class="help-block">{{ $errors->first('comments') }}</span>
                                         @endif
                                     </div>
+                                    Financien
+                                    <div class="form-group {{ $errors->has('invoice') ? 'has-error' : '' }}">
+                                    {!! Form::label('Factuur') !!}
+                                    {!! Form::text('invoice', null, ['class' => 'form-control']) !!}
+                                    @if($errors->has('invoice'))
+                                        <span class="help-block">{{ $errors->first('invoice') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group {{ $errors->has('paymentmethodinvoice') ? 'has-error' : '' }}">
+                                    {!! Form::label('Betaalmethode') !!}
+                                    <br />
+                                    {!! Form::radio('paymentmethodinvoice', 'Contant', ['class' => 'form-control']) !!}
+                                    {!! Form::label('Contant') !!}
+                                    {!! Form::radio('paymentmethodinvoice', 'Pinnen', ['class' => 'form-control']) !!}
+                                    {!! Form::label('Pinnen') !!}
+                                    @if($errors->has('paymentmethodinvoice'))
+                                        <span class="help-block">{{ $errors->first('paymentmethodinvoice') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group {{ $errors->has('gifts') ? 'has-error' : '' }}">
+                                    {!! Form::label('Factuur') !!}
+                                    {!! Form::text('gifts', null, ['class' => 'form-control']) !!}
+                                    @if($errors->has('gifts'))
+                                        <span class="help-block">{{ $errors->first('gifts') }}</span>
+                                    @endif
+                                </div>
+                                <div class="form-group {{ $errors->has('paymentmethodgifts') ? 'has-error' : '' }}">
+                                    {!! Form::label('Betaalmethode') !!}
+                                    <br />
+                                    {!! Form::radio('psymentmethodgifts', 'Contant', ['class' => 'form-control']) !!}
+                                    {!! Form::label('Contant') !!}
+                                    {!! Form::radio('paymentmethodgifts', 'Pinnen', ['class' => 'form-control']) !!}
+                                    {!! Form::label('Pinnen') !!}
+                                    @if($errors->has('paymentmethodgifts'))
+                                        <span class="help-block">{{ $errors->first('paymentmethodgifts') }}</span>
+                                    @endif
+                                </div>
                                     <hr>
                                     {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
                                 {!! Form::close() !!}
