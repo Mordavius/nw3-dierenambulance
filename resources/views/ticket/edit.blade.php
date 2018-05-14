@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     Dashboard
@@ -26,7 +26,6 @@
                             </h1>
                         </section>
                         <section class="content">
-                            <div class="col-6">
                                 {!! Form::model($ticket, [
                                     'method' => 'PUT',
                                     'route' => ['melding.update', $ticket->ticket_id],
@@ -199,11 +198,9 @@
                                     @if($errors->has('gifts'))
                                         <span class="help-block">{{ $errors->first('gifts') }}</span>
                                     @endif
-                                </div>
-                                <div class="form-group {{ $errors->has('paymentmethodgifts') ? 'has-error' : '' }}">
                                     {!! Form::label('Betaalmethode') !!}
                                     <br />
-                                    {!! Form::radio('psymentmethodgifts', 'Contant', ['class' => 'form-control']) !!}
+                                    {!! Form::radio('paymentmethodgifts', 'Contant', ['class' => 'form-control']) !!}
                                     {!! Form::label('Contant') !!}
                                     {!! Form::radio('paymentmethodgifts', 'Pinnen', ['class' => 'form-control']) !!}
                                     {!! Form::label('Pinnen') !!}
@@ -214,7 +211,6 @@
                                     <hr>
                                     {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
                                 {!! Form::close() !!}
-                            </div>
                         </section>
                     </div>
                 </div>
