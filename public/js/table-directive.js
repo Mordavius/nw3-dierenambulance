@@ -1,13 +1,13 @@
 var app = angular.module("app", [])
-.controller("TableController", ['$scope','$http', function($scope, $http){
+.controller("TableController", ['$scope','$http', function($scope, $https){
 
     $scope.distance = [];
     $scope.map = L.map('map').setView([53, 5.7], 10);
 	$scope.coordinates = [];
 
     L.tileLayer(
-        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors',
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
         maxZoom: 30,
         minZoom: 1
     }).addTo($scope.map);
