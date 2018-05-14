@@ -48,19 +48,21 @@ class User extends Authenticatable
 
     public function isCentralist()
     {
-        if($this->role->name == "Centralist") {
-            return true;
-        }
-        return false;
+        return $this->role()->where('name', 'Centralist')->exists();
+      //  if($this->role->name == "Centralist") {
+     //       return true;
+    //    }
+    //    return false;
         // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
     }
 
     public function isAmbulance()
     {
-        if($this->role->name == "Ambulance Medewerker") {
-            return true;
-        }
-        return false;
+        return $this->role()->where('name', 'Ambulance Medewerker')->exists();
+     //   if($this->role->name == "Ambulance Medewerker") {
+     //       return true;
+    //    }
+    //    return false;
         // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
     }
 
