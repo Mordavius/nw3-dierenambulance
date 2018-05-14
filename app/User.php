@@ -29,10 +29,40 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
 
     public function role() {
 
         return $this->belongsTo('App\Role');
     }
+
+    // Check if a user is administrator
+    public function isAdmin()
+    {
+        return $this->role()->where('name', 'Administrator')->exists();
+      //  if($this->role->name == "Administrator") {
+       //     return true;
+    //    }
+     //   return false;
+        // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+    }
+
+    public function isCentralist()
+    {
+        if($this->role->name == "Centralist") {
+            return true;
+        }
+        return false;
+        // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+    }
+
+    public function isAmbulance()
+    {
+        if($this->role->name == "Ambulance Medewerker") {
+            return true;
+        }
+        return false;
+        // return $this->where('id', '=', Auth::user()->id)->where('role', '=', '1')->exists();
+    }
+
+
 }
