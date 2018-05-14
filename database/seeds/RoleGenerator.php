@@ -14,9 +14,10 @@ class RoleGenerator extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-        ['id' => 1, 'name' => "admin"],
-        ['id' => 2, 'name' => "centrale"],
-        ['id' => 3, 'name' => "ambulance"],
+        ['id' => 1, 'name' => "Administrator"],
+        ['id' => 2, 'name' => "centralist"],
+        ['id' => 3, 'name' => "Ambulance Medewerker"],
+            ['id' => 4, 'name' => "Administratie Medewerker"],
         ]);
     }
 }
