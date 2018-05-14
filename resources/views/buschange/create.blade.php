@@ -10,7 +10,7 @@
       <div class="card">
         <div class="card-header">Nieuwe buswissel</div>
         <div class="card-body">
-          <a href="../buswissel">
+          <a href="javascript:history.back()">
             <div class="btn btn-primary">Terug naar het menu</div>
           </a>
           <br />

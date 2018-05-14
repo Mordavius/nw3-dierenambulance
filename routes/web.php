@@ -13,7 +13,7 @@
 
 Auth::routes();
 
-Route::get('/', ['middleware' => 'guest', function() {
+Route::get('/', ['middleware' => 'guest', function () {
     return redirect('/login');
 }]);
 
@@ -38,7 +38,6 @@ Route::group(['middleware' => 'IsAmbulance'], function () {
 
 Route::group(['middleware' => 'IsCentralist'], function () {
     Route::get('centralist', 'HomeController@centralist')->name('centralist')->middleware('auth');
-
 });
 
 
@@ -58,10 +57,7 @@ Route::resource('bus', 'BusController')->middleware('auth');
 //CRUD Known addresses Controllers
 Route::resource('bekende-adressen', 'KnownController')->middleware('auth');
 
-
 // CRUD Profile Controllers
 Route::resource('profiel', 'ProfileController')->middleware('auth');
-
-
 
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');

@@ -28,7 +28,7 @@
                         Dashboard
                     </div>
                     <div class="card-body">
-                        <a href="meldingen">
+                        <a href="javascript:history.back()">
                             <div class="btn btn-primary">
                                 Terug naar het menu
                             </div>

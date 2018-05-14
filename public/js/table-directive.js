@@ -12,34 +12,6 @@ var app = angular.module("app", [])
         minZoom: 1
     }).addTo($scope.map);
 
-	var coords = $('#map').data('coordinates')
-	coords.forEach(function(coord){
-		placeMarker(coord);
-	})
-
-	function placeMarker(i){
-		var latlng = L.latLng(i.lat, i.lng);
-
-		var marker = L.marker(latlng).addTo($scope.map);
-        $scope.distance.push(latlng);
-        console.log(latlng.distanceTo($scope.distance[0]));
-	}
-    // use defaults
-var line = L.polyline(coords);
-
-// override defaults
-var line = L.polyline(coords, {
-	distanceMarkers: { showAll: 11, offset: 1600, cssClass: 'some-other-class', iconSize: [1, 1] }
-});
-
-// show/hide markers on mouseover
-var line = L.polyline(coords, {
-	distanceMarkers: { lazy: true }
-});
-$scope.map.fitBounds(line.getBounds());
-$scope.map.addLayer(line);
-
-
 	function onMapClick(e) {
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
 			if(err) { throw err; }
