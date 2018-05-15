@@ -121,7 +121,8 @@ class TicketController extends Controller
     {
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id); // Grabs the ticket with the correct id
-        return view("ticket.edit", compact('ticket'), compact('user'));
+       // $destination = Destination::findOrFail($id); // Grabs the destination with the correct id
+        return view("ticket.edit", compact('ticket'), compact('user'), compact('destination'));
     }
 
     /**
@@ -141,21 +142,40 @@ class TicketController extends Controller
         ]);
 
         // Updates the data for the requested fields
-        $ticket = Ticket::findOrFail($ticket_id);
-        $ticket->date = $request->get('date');
-        $ticket->time = $request->get('time');
-        $ticket->address = $request->get('address');
-        $ticket->housenumber = $request->get('housenumber');
-        $ticket->postalcode = $request->get('postalcode');
-        $ticket->city = $request->get('city');
-        $ticket->township = $request->get('township');
-        $ticket->centralist = $request->get('centralist');
-        $ticket->reportername = $request->get('reportername');
-        $ticket->telephone = $request->get('telephone');
-        $ticket->animalspecies = $request->get('animalspecies');
-        $ticket->gender = $request->get('gender');
-        $ticket->comments = $request->get('comments');
-        $ticket->finished = $request->get('finished');
+        $destination = new Destination([
+            'postal_code' => $request->get('postal_code'),
+            'address' => $request->get('address'),
+            'house_number' => $request->get('house_number'),
+            'city' => $request->get('city'),
+            'coordinates' => $request->get('coordinates'),
+        ]);
+
+
+        // Updates the data for the requested fields
+        $animal = new Animal([
+            'animal_species' => $request->get('animal_species'),
+            'gender' => $request->get('gender'),
+            'description' => $request->get('description'),
+        ]);
+
+        $animal->save(); // Saves the data
+
+        //dd($animal);
+
+        // Updates the data for the requested fields
+        $ticket = new Ticket([
+            'animal_id' => $animal->id,
+            'destination_id' => $destination->id,
+            'date' => $request->get('date'),
+            'time' => $request->get('time'),
+            'centralist' => $request->get('centralist'),
+            'reporter_name' => $request->get('reporter_name'),
+            'telephone' => $request->get('telephone'),
+            'invoice' => $request->get('invoice'),
+            'paymentmethodinvoice' => $request->get('paymentmethodinvoice'),
+            'gifts' => $request->get('gifts'),
+            'paymentmethodgifts' => $request->get('paymentmethodgifts'),
+        ]);
 
         $ticket->save(); // Saves the data
 
