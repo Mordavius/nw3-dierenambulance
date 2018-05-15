@@ -26,12 +26,13 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        //$file = 'crontestoutput.log';
+
         $schedule->command('crontest')
             ->everyMinute()
             ->before(function () {
                 echo "task started \n";
             })
+            ->emailOutputTo('g.w.n.h.iskondos@gmail.com')
             //->sendOutputTo($file)
             ->onOneServer()->after(function () {
                 echo "task complete";
