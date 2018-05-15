@@ -36,6 +36,7 @@ class CrontTest extends Command
     public function handle()
     {
         //return view('crontest.index');
-        echo "crontest";
+        echo "time to test cron";
     }
+
 }
