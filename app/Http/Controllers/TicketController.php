@@ -82,12 +82,14 @@ class TicketController extends Controller
         ]);
 
         $ticket->save(); // Saves the data
+
         // Stores the data for the requested fields
         $destination = new Destination([
             'postal_code' => $request->get('postal_code'),
             'address' => $request->get('address'),
             'house_number' => $request->get('house_number'),
             'city' => $request->get('city'),
+            'township' => $request->get('township'),
             'coordinates' => $request->get('coordinates'),
             'ticket_id' => $ticket->id,
         ]);
@@ -193,16 +195,16 @@ class TicketController extends Controller
      */
     public function destroy($ticket_id)
     {
-        try {
+        // try {
             $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
             //dd($animal_id);
+            Destination::where('ticket_id', $ticket_id)->delete();// Deletes destination based on ticket id
             Animal::where('id', $animal_id)->delete();// Deletes animal based on animal id
-            Destination::findOrFail($ticket_id)->delete();// Deletes destination based on ticket id
             Ticket::findOrFail($ticket_id)->delete();// Grabs the ticket with the correct id and deletes the ticket
             return redirect('/melding')->with('message', 'Melding is verwijderd');
-        } catch (\Exception $e) {
-            return view('auth.error')->with('message', 'Mag niet');
-        }
+        // } catch (\Exception $e) {
+        //     return view('auth.error')->with('message', 'Mag niet');
+        // }
         // Ticket::findOrFail($ticket_id)->delete(); // Grabs the ticket with the correct id and deletes the ticket
         // return redirect('/melding')->with('message', 'Melding is verwijderd');
     }

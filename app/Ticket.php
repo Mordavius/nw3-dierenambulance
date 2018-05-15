@@ -9,7 +9,7 @@ class Ticket extends Model
 {
     // Set the columns for storing data in the database
     protected $fillable = [ 'bus_id' , 'animal_id', 'finance_id', 'date','time', 'centralist',
-    'reporter_name', 'telephone', 'driver', 'passenger', 'invoice', 'paymentmethodinvoice', 'gifts', 'paymentmethodgifts'];
+    'reporter_name', 'telephone', 'driver', 'passenger'];
 
     // Tickets could have many destinations
     public function destination()

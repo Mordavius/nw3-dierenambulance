@@ -16,7 +16,7 @@
                     Search
                 </button>
                 <div class="card-body">
-                    <a href="javascript:history.back()">
+                    <a href="/">
                         <div class="btn btn-primary">
                             Terug naar het menu
                         </div>
