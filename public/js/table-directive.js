@@ -16,7 +16,6 @@ var app = angular.module("app", [])
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
 			if(err) { throw err; }
 			var marker = L.marker(e.latlng).addTo($scope.map);
-			console.log(e.latlng);
 			var obj = JSON.parse(result);
 			updateAddressInformation(obj, e);
 			})
@@ -24,7 +23,6 @@ var app = angular.module("app", [])
 
 	function reverseGeocodeQuery(format, lat, lon, zoom) {
 			var url = "https://nominatim.openstreetmap.org/reverse?format=" + format + "&lat=" + lat + "&lon=" + lon + "&zoom=" + zoom + "&addressdetails=1";
-			console.log(url);
 			return url;
 	}
 
@@ -168,7 +166,6 @@ var app = angular.module("app", [])
     }
     $('#sendLocationButton').click(sendLocationRequest);
     function sendLocationRequest(){
-        console.log("test");
         $.ajax({
             type:'POST',
             url:'/api/mail',

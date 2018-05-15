@@ -8,8 +8,6 @@ var app = angular.module("app", [])
     L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
-        maxZoom: 30,
-        minZoom: 1
     }).addTo($scope.map);
 
 	var coords = $('#map').data('coordinates')
@@ -22,7 +20,6 @@ var app = angular.module("app", [])
 
 		var marker = L.marker(latlng).addTo($scope.map);
         $scope.distance.push(latlng);
-        console.log(latlng.distanceTo($scope.distance[0]));
 	}
     // use defaults
 var line = L.polyline(coords);
