@@ -91,7 +91,7 @@
                                                 @endif
                                             @endforeach
                                                 @foreach($destinations as $destination)
-                                                    @if($ticket->destination_id == $destination->id)
+                                                    @if($destination->ticket_id == $ticket->id)
                                                     <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
                                                     <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
@@ -167,7 +167,7 @@
                                                 @endif
                                             @endforeach
                                                 @foreach($destinations as $destination)
-                                                    @if($ticket->destination_id == $destination->id)
+                                                    @if($destination->ticket_id == $ticket->id)
                                                     <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
                                                         <br />

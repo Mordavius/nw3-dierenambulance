@@ -28,6 +28,7 @@ class CreateTicketTable extends Migration
             $table->string('driver')->nullable();
             $table->string('passenger')->nullable();
             $table->integer('invoice')->nullable();
+            $table->tinyInteger('finished')->deault('0');
             $table->boolean('paymentmethodinvoice')->nullable();
             $table->integer('gifts')->nullable();
             $table->boolean('paymentmethodgifts')->nullable();

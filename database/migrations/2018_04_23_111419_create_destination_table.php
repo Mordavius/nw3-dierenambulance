@@ -16,11 +16,11 @@ class CreateDestinationTable extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('bus_id')->nullable();
-            $table->integer('ticket_id')->nullable();
+            $table->integer('ticket_id');
             $table->integer('known_address_id')->nullable();
             $table->string('postal_code');
             $table->string('address');
-            $table->string('house_number');
+            $table->string('house_number')->nullable();
             $table->string('city');
             $table->string('coordinates');
             $table->timestamps();
