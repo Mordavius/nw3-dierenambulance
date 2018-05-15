@@ -1,6 +1,8 @@
 <?php
 namespace App\Console\Commands;
+use App\User;
 use Illuminate\Console\Command;
+use App\Ticket;
 
 class CrontTest extends Command
 {
@@ -16,7 +18,7 @@ class CrontTest extends Command
      *
      * @var string
      */
-    protected $description = 'cron test';
+    protected $description = 'cron test written to test on mark his server';
 
     /**
      * Create a new command instance.
@@ -36,7 +38,7 @@ class CrontTest extends Command
     public function handle()
     {
         //return view('crontest.index');
-        echo "time to test cron";
+        echo User::all();
     }
 
 }
