@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\CrontTest::class,
     ];
 
     /**
@@ -26,6 +26,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $file = 'crontestoutput.log';
+        $schedule->command('crontest')
+            ->everyMinute()
+            //->sendOutputTo($file)
+            ->onOneServer();
     }
 
     /**
