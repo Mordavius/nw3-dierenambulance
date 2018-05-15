@@ -193,7 +193,17 @@ class TicketController extends Controller
      */
     public function destroy($ticket_id)
     {
-        Ticket::findOrFail($ticket_id)->delete(); // Grabs the ticket with the correct id and deletes the ticket
-        return redirect('/melding')->with('message', 'Melding is verwijderd');
+        try {
+            $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
+            //dd($animal_id);
+            Animal::where('id', $animal_id)->delete();// Deletes animal based on animal id
+            Destination::findOrFail($ticket_id)->delete();// Deletes destination based on ticket id
+            Ticket::findOrFail($ticket_id)->delete();// Grabs the ticket with the correct id and deletes the ticket
+            return redirect('/melding')->with('message', 'Melding is verwijderd');
+        } catch (\Exception $e) {
+            return view('auth.error')->with('message', 'Mag niet');
+        }
+        // Ticket::findOrFail($ticket_id)->delete(); // Grabs the ticket with the correct id and deletes the ticket
+        // return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 }
