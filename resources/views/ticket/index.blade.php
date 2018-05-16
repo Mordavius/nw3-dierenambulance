@@ -34,9 +34,6 @@
                             </div>
                         </a>
                         <br />
-                        @section('map')
-                            @include('showMarkers')
-                        @endsection
                         <br />
                         @if (session('status'))
                             <div class="alert alert-success">

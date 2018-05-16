@@ -52,62 +52,61 @@
                                     <h2>Locatie</h2>
 
                                     @foreach($destinations as $destination)
-                                                <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                                                    {!! Form::label('Adres') !!}
-                                                    {!! Form::label('address', $destination->address, ['class' => 'form-control']) !!}
-                                                    @if($errors->has('address'))
-                                                        <span class="help-block">
-                                                            {{ $errors->first('address') }}
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                                @endforeach
-
-                                    <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
-                                        {!! Form::label('Huisnummer') !!}
-                                        {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
-                                        @if($errors->has('housenumber'))
-                                            <span class="help-block">
-                                                {{ $errors->first('housenumber') }}
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
-                                        {!! Form::label('Postcode') !!}
-                                        {!! Form::text('postalcode', null, ['class' => 'form-control']) !!}
-                                        @if($errors->has('postalcode'))
-                                            <span class="help-block">
-                                                {{ $errors->first('postalcode') }}
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
-                                        {!! Form::label('Geen Postcode') !!}
-                                        {!! Form::checkbox('nocode', null, ['class' => 'form-control']) !!}
-                                        @if($errors->has('nocode'))
-                                            <span class="help-block">
-                                                {{ $errors->first('nocode') }}
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
-                                        {!! Form::label('Plaats') !!}
-                                        {!! Form::text('city', null, ['class' => 'form-control']) !!}
-                                        @if($errors->has('city'))
-                                            <span class="help-block">
-                                                {{ $errors->first('city') }}
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
-                                        {!! Form::label('Gemeente') !!}
-                                        {!! Form::text('township', null, ['class' => 'form-control']) !!}
-                                        @if($errors->has('township'))
-                                            <span class="help-block">
-                                                {{ $errors->first('township') }}
-                                            </span>
-                                        @endif
-                                    </div>
+                                        <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
+                                            {!! Form::label('Adres') !!}
+                                            {!! Form::label('address', $destination->address, ['class' => 'form-control']) !!}
+                                            @if($errors->has('address'))
+                                                <span class="help-block">
+                                                    {{ $errors->first('address') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
+                                            {!! Form::label('Huisnummer') !!}
+                                            {!! Form::label('housenumber', $destination->house_number, ['class' => 'form-control']) !!}
+                                            @if($errors->has('housenumber'))
+                                                <span class="help-block">
+                                                    {{ $errors->first('housenumber') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group {{ $errors->has('postalcode') ? 'has-error' : '' }}">
+                                            {!! Form::label('Postcode') !!}
+                                            {!! Form::label('postalcode', $destination->postal_code, ['class' => 'form-control']) !!}
+                                            @if($errors->has('postalcode'))
+                                                <span class="help-block">
+                                                    {{ $errors->first('postalcode') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
+                                            {!! Form::label('Geen Postcode') !!}
+                                            {!! Form::checkbox('nocode', null, ['class' => 'form-control']) !!}
+                                            @if($errors->has('nocode'))
+                                                <span class="help-block">
+                                                    {{ $errors->first('nocode') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
+                                            {!! Form::label('Plaats') !!}
+                                            {!! Form::label('city', $destination->city, ['class' => 'form-control']) !!}
+                                            @if($errors->has('city'))
+                                                <span class="help-block">
+                                                    {{ $errors->first('city') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group {{ $errors->has('township') ? 'has-error' : '' }}">
+                                            {!! Form::label('Gemeente') !!}
+                                            {!! Form::label('township', $destination->township, ['class' => 'form-control']) !!}
+                                            @if($errors->has('township'))
+                                                <span class="help-block">
+                                                    {{ $errors->first('township') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    @endforeach
                                     <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
                                         {!! Form::label('Centralist') !!}
                                         {!! Form::select('centralist', $users) !!}
