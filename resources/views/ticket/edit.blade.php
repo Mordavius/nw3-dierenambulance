@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -28,7 +27,7 @@
                         <section class="content">
                                 {!! Form::model($ticket, [
                                     'method' => 'PUT',
-                                    'route' => ['melding.update', $ticket->ticket_id],
+                                    'route' => ['melding.update', $ticket->id],
                                     'ticket_id' => 'post-form'
                                 ]) !!}
                                     <div class="form-group {{ $errors->has('date') ? 'has-error' : '' }}">
@@ -51,15 +50,19 @@
                                     </div>
                                     <hr>
                                     <h2>Locatie</h2>
-                                    <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                                        {!! Form::label('Adres') !!}
-                                        {!! Form::text('address', null, ['class' => 'form-control']) !!}
-                                        @if($errors->has('address'))
-                                            <span class="help-block">
-                                                {{ $errors->first('address') }}
-                                            </span>
-                                        @endif
-                                    </div>
+
+                                    @foreach($destinations as $destination)
+                                                <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
+                                                    {!! Form::label('Adres') !!}
+                                                    {!! Form::label('address', $destination->address, ['class' => 'form-control']) !!}
+                                                    @if($errors->has('address'))
+                                                        <span class="help-block">
+                                                            {{ $errors->first('address') }}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                @endforeach
+
                                     <div class="form-group {{ $errors->has('housenumber') ? 'has-error' : '' }}">
                                         {!! Form::label('Huisnummer') !!}
                                         {!! Form::text('housenumber', null, ['class' => 'form-control']) !!}
@@ -107,7 +110,7 @@
                                     </div>
                                     <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
                                         {!! Form::label('Centralist') !!}
-                                        {!! Form::select('centralist', $user) !!}
+                                        {!! Form::select('centralist', $users) !!}
                                         @if($errors->has('centralist'))
                                             <span class="help-block">
                                                 {{ $errors->first('centralist') }}

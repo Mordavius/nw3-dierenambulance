@@ -56,10 +56,6 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
-
         // Stores the data for the requested fields
         $animal = new Animal([
         'animal_species' => $request->get('animal_species'),
@@ -68,8 +64,6 @@ class TicketController extends Controller
         ]);
 
         $animal->save(); // Saves the data
-
-        //dd($animal);
 
         // Stores the data for the requested fields
         $ticket = new Ticket([
@@ -113,7 +107,7 @@ class TicketController extends Controller
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id); // Grabs the ticket with the correct id
       //  $tickets = Ticket::with('date')->orderBy('date', 'asc')->get();
-        return view("ticket.show", compact('ticket'), compact('user'), compact('tickets'));
+        return view("ticket.show", compact('ticket', 'user', 'tickets'));
     }
 
     /**
@@ -124,12 +118,15 @@ class TicketController extends Controller
      */
     public function edit($ticket_id)
     {
-        $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
-        $ticket = Ticket::findOrFail($ticket_id); // Grabs the ticket with the correct id
-       // $destination = Destination::findOrFail($id); // Grabs the destination with the correct id
-        return view("ticket.edit", compact('ticket'), compact('user'), compact('destination'));
+        $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
+        //$destination_id = Destination::where('ticket_id', $ticket_id);// Deletes destination based on ticket id
+        $destinations = Destination::where('ticket_id', $ticket_id)->get();
+        //$destinations = Destination::where();
+        $animals = Animal::where('id', $animal_id);// Deletes animal based on animal id
+        $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
+        $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
+        return view("ticket.edit", compact('destinations', 'ticket', 'users', 'animals'));
     }
-
     /**
      * Update the specified resource in storage.
      *
