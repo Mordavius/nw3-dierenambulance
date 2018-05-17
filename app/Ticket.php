@@ -15,7 +15,7 @@ class Ticket extends Model
     public function destination()
     {
         return $this->belongsTo('App\Destination', 'ticket_id', 'id');
-        return $this->hasMany('App\Destination');
+      //  return $this->hasMany('App\Destination');
     }
 
     // Tickets could only have one animal
