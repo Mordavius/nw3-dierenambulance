@@ -47,3 +47,12 @@ td
 {
     padding: 5px 0;
 }
+#map-image{
+	margin-right: 10px;
+}
+#toggle-button{
+	margin-bottom: 40px;
+	border: none;
+	padding: 0;
+	background: none;
+}

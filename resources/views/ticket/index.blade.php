@@ -1,9 +1,18 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
+<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
+    <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <button id="toggle-button">
+            <img id="map-image" src="images/map-view.png" width="20" height="30"></img>
+            <img id="list-image" src="images/list-view-active.png" width="28" height="23"></img>
+        </button>
+        <div class="col-md-12" id="target">
             <div class="text-center"></div>
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
                 {!! Form::label('Laat meldingen zien vanaf') !!}
@@ -88,9 +97,7 @@
                                                 @endif
                                             @endforeach
                                                 @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)
-                                                    <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
-                                                    <td>
+                                                    @if($destination->ticket_id == $ticket->id)                                                    <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
 
                                                         <br />
@@ -202,6 +209,24 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12" id="target2" style="display:none;">
+
+            <div ng-app="app">
+                    <div ng-controller="TableController" >
+                        <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
+                        </div>
+                      </div>
+            </div>
+        </div>
     </div>
 </div>
+
+@section('scripts')
+    <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+    @endsection
 @endsection
