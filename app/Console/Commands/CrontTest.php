@@ -38,7 +38,24 @@ class CrontTest extends Command
     public function handle()
     {
         //return view('crontest.index');
-        echo User::all();
+        $userdate = strtotime(User::all()->first()->created_at);
+        $checkdate = strtotime('-1 minute');
+
+        if ($userdate <= $checkdate){
+            echo User::all();
+        }
+        else{
+            echo "niks is kleiner dan een minuut";
+        }
+
+
+        echo "\n". strtotime(User::all()->first()->created_at);
+        //echo "\n". strtotime('now');
+        echo "\n". strtotime('-1 minute');
+
+        echo "\n". date('r', strtotime(User::all()->first()->created_at));
+        echo "\n". date('r', strtotime('now'));
+
     }
 
 }

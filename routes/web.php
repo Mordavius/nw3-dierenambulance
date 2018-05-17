@@ -26,6 +26,8 @@ Route::group(['middleware' => 'IsAdmin'], function () {
     Route::get('/register', 'HomeController@register')->name('register')->middleware('auth');
     Route::get('/administratie', 'AdministrationController@index')->name('Administratie')->middleware('auth');
     Route::get('/exporteren', 'AdministrationController@export')->name('Exporteren')->middleware('auth');
+    Route::get('/administratie/kwartaalverslagen', 'AdministrationController@quartexports')->name('Kwartaaloverzicht')->middleware('auth');
+    Route::get('/administratie/download/{filename}', 'AdministrationController@quartdownload')->middleware('auth');
     Route::get('downloadExcel', 'AdministrationController@downloadExcel')->middleware('auth');
 
     // CRUD User Controllers

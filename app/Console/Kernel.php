@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CrontTest::class,
+        Commands\QuarterlyExport::class,
     ];
 
     /**
@@ -24,8 +25,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
 
         $schedule->command('crontest')
             ->everyMinute()
@@ -34,9 +33,15 @@ class Kernel extends ConsoleKernel
             })
             ->emailOutputTo('g.w.n.h.iskondos@gmail.com')
             //->sendOutputTo($file)
-            ->onOneServer()->after(function () {
+            ->withoutOverlapping()
+            ->after(function () {
                 echo "task complete";
             });
+
+        $schedule->command('export')
+            ->everyFiveMinutes()
+            ->emailOutputTo('g.w.n.h.iskondos@gmail.com')
+            ->withoutOverlapping();
     }
 
     /**
