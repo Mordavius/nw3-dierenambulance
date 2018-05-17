@@ -17,7 +17,7 @@ class RoleGenerator extends Seeder
         ['id' => 1, 'name' => "Administrator"],
         ['id' => 2, 'name' => "centralist"],
         ['id' => 3, 'name' => "Ambulance Medewerker"],
-            ['id' => 4, 'name' => "Administratie Medewerker"],
+        ['id' => 4, 'name' => "Administratie Medewerker"],
         ]);
     }
 }
