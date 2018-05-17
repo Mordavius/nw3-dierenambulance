@@ -27,7 +27,7 @@
                                 <tr>
                                     <td>{{ $quarterlies->name }}</td>
                                     <td>{{ $quarterlies->year }}</td>
-                                    <td><a href="/administratie/download/{{ $quarterlies->name }}.xlsx">downloaden</a></td>
+                                    <td><a href="download/{{ $quarterlies->name }}.xlsx">downloaden</a></td>
                                 </tr>
                             </table>
                         </div>
