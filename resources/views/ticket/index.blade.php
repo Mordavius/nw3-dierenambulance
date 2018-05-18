@@ -62,7 +62,6 @@
                             </div>
                         @endif
                         <h4>
-                            {{ $destinations->toArray() }}
                             Actieve meldingen
                         </h4>
                         <div class="box-body ">
