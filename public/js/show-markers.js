@@ -67,9 +67,6 @@ function toggle () {
             $scope.map.invalidateSize();},
             1000);
 
-
-
-
     }
 }
 }])

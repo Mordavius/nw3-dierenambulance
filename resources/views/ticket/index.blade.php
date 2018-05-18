@@ -1,17 +1,24 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>
-    <div class="row justify-content-center">
+<div class="icon-bar">
+    <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png" width="20" height="30"></img>
-            <img id="list-image" src="images/list-view-active.png" width="28" height="23"></img>
+            <img id="map-image" src="images/map-view.png"></img>
+            <img id="list-image" src="images/list-view-active.png"></img>
         </button>
+    </div>
+    <div class="right">
+        <img id="search-icon" src="/images/search-icon.png"></img>
+        <img id="filter-icon" src="/images/filter-icon.png"></img>
+    </div>
+</div>
+<div class="container testin">
+    <div class="row justify-content-center">
+
         <div class="col-md-12" id="target">
             <div class="text-center"></div>
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
@@ -55,6 +62,7 @@
                             </div>
                         @endif
                         <h4>
+                            {{ $destinations->toArray() }}
                             Actieve meldingen
                         </h4>
                         <div class="box-body ">
@@ -218,6 +226,8 @@
                       </div>
             </div>
         </div>
+        <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>
+
     </div>
 </div>
 
