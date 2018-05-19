@@ -18,7 +18,6 @@
 </div>
 <div class="container testin">
     <div class="row justify-content-center">
-
         <div class="col-md-12" id="target">
             <div class="text-center"></div>
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
@@ -95,14 +94,16 @@
                                     <tbody>
                                         @foreach($tickets as $ticket)
                                             @if($ticket->finished == '0')
-                                            <tr>@foreach($animals as $animal)
-                                                @if($ticket->animal_id == $animal->id)
-                                                    <td>{{ $animal->animal_species }}
-                                                    <br />
-                                                    {{ $animal->gender}}</td>
-                                                    <td>{{$animal->description}}</td>
-                                                @endif
-                                            @endforeach
+                                            <tr>
+                                                @foreach($animals as $animal)
+                                                    @if($ticket->animal_id == $animal->id)
+                                                        <td>{{ $animal->animal_species }}
+                                                            <br />
+                                                            {{ $animal->gender}}
+                                                        </td>
+                                                        <td>{{$animal->description}}</td>
+                                                    @endif
+                                                @endforeach
                                                 @foreach($destinations as $destination)
                                                     @if($destination->ticket_id == $ticket->id)                                                    <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
@@ -225,7 +226,11 @@
                       </div>
             </div>
         </div>
-        <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>
+        <a href="/melding/create">
+            <button class="round">
+                <img src="../images/plus.png" class="rotate-button"/>
+            </button>
+        </a>
 
     </div>
 </div>

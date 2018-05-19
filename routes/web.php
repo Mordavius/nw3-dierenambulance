@@ -61,3 +61,7 @@ Route::resource('bekende-adressen', 'KnownController')->middleware('auth');
 Route::resource('profiel', 'ProfileController')->middleware('auth');
 
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
+
+Route::get('/cssgrid', ['middleware' => 'guest', function () {
+    return view('/cssgrid');
+}]);

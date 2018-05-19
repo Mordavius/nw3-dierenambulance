@@ -18,7 +18,12 @@ var app = angular.module("app", [])
 			var marker = L.marker(e.latlng).addTo($scope.map);
 			var obj = JSON.parse(result);
 			updateAddressInformation(obj, e);
-			})
+        })
+            map.className = "panel panel-default panel-success leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim slideOutUp animated";
+            setTimeout(function()
+            {
+                map.style.display = "none";},
+                1000);
 	}
 
 	function reverseGeocodeQuery(format, lat, lon, zoom) {

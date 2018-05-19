@@ -31,9 +31,7 @@ class TicketController extends Controller
         $coordinates = array_map(function ($coordinateString) {
             return json_decode($coordinateString);
         }, $coordinateStrings);
-        //Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
-        //dd($filter);
-        return view('ticket.index', compact('tickets', 'animals', 'destinations', 'search', 'coordinates'));
+        return view('cssgrid', compact('tickets', 'animals', 'destinations', 'search', 'coordinates'));
     }
 
     /**

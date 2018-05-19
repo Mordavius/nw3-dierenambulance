@@ -50,23 +50,23 @@ function toggle () {
         i=-1;
     }
     if(target.style.display === "none"){
-        target2.className = "col-md-12 slideOutLeft animated";
-        target.className = "col-md-12 slideInRight animated";
+        target2.className = "grid-container slideOutLeft animated";
+        target.className = "grid-container slideInRight animated";
         setTimeout(function()
         {
             target2.style.display = "none";
             target.style.display = "block";},
             1000);
     } else {
-        target.className = "col-md-12 slideOutRight animated";
-        target2.className = "col-md-12 slideInLeft animated";
+        target.className = "grid-container slideOutRight animated";
+        target2.className = "grid-container slideInLeft animated";
         setTimeout(function(){
             target.style.display = "none";
             target2.style.display = "block";
-            $scope.map.setView([53, 5.7], 10);
+            map.style.height = "400px";
+            $scope.map.setView([53.03, 5.7], 10);
             $scope.map.invalidateSize();},
             1000);
-
     }
 }
 }])

@@ -12,11 +12,19 @@
         <title>{{ config('app.name', 'Dierenambulance') }}</title>
 
         <!-- Styles -->
-        <!-- Bootstrap 4.0.0 -->
-
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/cssgrid.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
+        <!-- Scripts -->
+
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
+        @yield('scripts')
     </head>
     <body>
         <div id="app">
@@ -65,16 +73,13 @@
                     </div>
                 </div>
             </nav>
-            <div class="py-1">
+            <div>
                 @yield('map')
             </div>
             <main class="py-4">
                 @yield('content')
             </main>
         </div>
-        <!-- Scripts -->
-        <!-- Bootstrap 4.0.0 -->
-        @yield('scripts')
-        <script src="{{ asset('js/app.js') }}"></script>
     </body>
+
 </html>
