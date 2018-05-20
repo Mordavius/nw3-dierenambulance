@@ -1,0 +1,97 @@
+body{
+    background-color: #FFFFFF;
+}
+.grid_container{
+    display: grid;
+    grid-template-areas:
+    'header'
+    'main'
+    'footer';
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+}
+.icon_bar{
+    grid-area: header;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    text-align: center;
+    color: #757575;
+}
+.reporter{
+    grid-column: 1/1;
+}
+.location{
+    grid-column: 2/2;
+}
+.animal{
+    grid-column: 3/3;
+}
+.priority{
+    grid-column: 4/4;
+}
+.summary{
+    grid-column: 5/5;
+}
+.circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #757575;
+    box-sizing: border-box;
+    margin: auto;
+    padding-top: 3px;
+    font-size: 10px
+}
+.highlighted{
+    background-color: #238644;
+    color: #FFFFFF;
+}
+.test{
+    padding-top: 0px;
+}
+.main{
+    grid-area: main;
+    grid-template-rows: repeat(2, 50%)
+}
+.name{
+    grid-row: 1/1;
+    border: 0;
+}
+.phone_number{
+    grid-row: 2/2
+}
+.ticket_text_field{
+    border: 0;
+    width: 100%
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus{
+    outline-width: 0;
+}
+.line{
+    border: 1px solid #C9C9C9;
+}
+.footer{
+    grid-area: footer;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    box-shadow: 0px -1px 4px rgba(0,0,0,0.25);
+    width: 100%;
+    height: 55px;
+
+}
+#footer_button{
+    position: fixed;
+    color: #238644;
+    font-size: 14px;
+    margin: auto;
+    background-color: #FFFFFF;
+    right: 12px;
+    margin-top: 15px;
+    border: 0;
+}

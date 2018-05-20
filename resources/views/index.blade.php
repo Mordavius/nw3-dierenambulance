@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/cssgrid.css') }}">
 @extends('layouts.app')
 
 @section('content')
@@ -20,19 +20,18 @@
     </button>
 </a>
 <div class="tickets" id="target">
-    <div class="grid-container">
+    <div class="grid_container">
         <div class="grid_header">
-            <div class="open_tickets">Openstaande meldingen</div>
-            <div class="result_amount">Totaal aantal: {{$destinations->count()}}</div>
+            <div class="tickets open_tickets">Openstaande meldingen</div>
+            <div class="result_amount">Totaal aantal: {{$unfinishedtickets->count()}}</div>
         </div>
         <div class="grid_main">
-            @foreach($tickets as $ticket)
-                @if($ticket->finished == '0')
+            @foreach($unfinishedtickets as $unfinishedticket)
                     @foreach($animals as $animal)
-                        @if($ticket->animal_id == $animal->id)
-                        <div class="grid-ticket">
+                        @if($unfinishedticket->animal_id == $animal->id)
+                        <div class="grid_ticket flag-new">
                             <div class="ticket_number">
-                                #{{ $ticket->id }}
+                                #{{ $unfinishedticket->id }}
                             </div>
                             <div class="grid_animal_icon">
                                 <div class="ticket_icon">
@@ -43,7 +42,7 @@
                                 <div class="ticket_title">{{$animal->animal_species}}</div>
                                 <div class="ticket_address">
                                     @foreach($destinations as $destination)
-                                        @if($destination->ticket_id == $ticket->id)
+                                        @if($destination->ticket_id == $unfinishedticket->id)
                                             {{$destination->address}}
                                             @if($destination->house_number != '0')
                                                 {{$destination->house_number}}
@@ -55,32 +54,26 @@
                                     @endforeach
                                 </div>
                             </div>
-
                             <article class="ticket_description">
                                 {{$animal->description}}
                             </article>
-
                         </div>
-
                         @endif
                     @endforeach
-                @endif
             @endforeach
         </div>
     </div>
-    <div class="grid-container">
+    <div class="grid_container">
         <div class="grid_header">
-            <div class="open_tickets">Afgeronde meldingen</div>
-            <div class="result_amount">Totaal aantal: {{$destinations->count()}}</div>
+            <div class="tickets closed_tickets">Afgeronde meldingen</div>
         </div>
         <div class="grid_main">
-            @foreach($tickets as $ticket)
-                @if($ticket->finished == '1')
+            @foreach($finishedtickets as $finishedticket)
                     @foreach($animals as $animal)
-                        @if($ticket->animal_id == $animal->id)
-                        <div class="grid-ticket">
+                        @if($finishedticket->animal_id == $animal->id)
+                        <div class="grid_ticket">
                             <div class="ticket_number">
-                                #{{ $ticket->id }}
+                                #{{ $finishedticket->id }}
                             </div>
                             <div class="grid_animal_icon">
                                 <div class="ticket_icon">
@@ -91,7 +84,7 @@
                                 <div class="ticket_title">{{$animal->animal_species}}</div>
                                 <div class="ticket_address">
                                     @foreach($destinations as $destination)
-                                        @if($destination->ticket_id == $ticket->id)
+                                        @if($destination->ticket_id == $finishedticket->id)
                                             {{$destination->address}}
                                             @if($destination->house_number != '0')
                                                 {{$destination->house_number}}
@@ -107,17 +100,14 @@
                             <article class="ticket_description">
                                 {{$animal->description}}
                             </article>
-
                         </div>
-
                         @endif
                     @endforeach
-                @endif
             @endforeach
         </div>
     </div>
 </div>
-<div class="grid-container" id="target2" style="display: none;">
+<div class="grid_container" id="target2" style="display: none;">
     <div class="grid_header">
         test
     </div>
