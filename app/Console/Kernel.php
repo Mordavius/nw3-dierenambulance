@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\CrontTest::class,
         Commands\QuarterlyExport::class,
+        Commands\AnonymizeReporters::class,
     ];
 
     /**
@@ -25,24 +25,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
-        $schedule->command('crontest')
-            ->everyMinute()
-            ->before(function () {
-                echo "task started \n";
-            })
-            ->emailOutputTo('g.w.n.h.iskondos@gmail.com')
-            //->sendOutputTo($file)
-            ->withoutOverlapping()
-            ->after(function () {
-                echo "task complete";
-            });
-
+        //Save a quarterly export of the tickets
         $schedule->command('export')
-            ->everyFiveMinutes()
+            ->quarterly()
             ->emailOutputTo('g.w.n.h.iskondos@gmail.com')
             ->withoutOverlapping();
+
+        //Anonymize reporters older than a month
+        $schedule->command('anonymize')
+            ->daily()
+            ->withoutOverlapping();
     }
+
 
     /**
      * Register the commands for the application.

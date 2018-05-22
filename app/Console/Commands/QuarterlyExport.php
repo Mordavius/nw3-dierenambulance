@@ -1,8 +1,11 @@
 <?php
 namespace App\Console\Commands;
+use App\QuartelyTicketExport;
 use Illuminate\Console\Command;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use App\TicketExport;
 use App\Quarterfinance;
+use App\Ticket;
 use Illuminate\Support\Facades\Storage;
 
 class QuarterlyExport extends Command
@@ -19,7 +22,7 @@ class QuarterlyExport extends Command
      *
      * @var string
      */
-    protected $description = 'quartely export of the finance';
+    protected $description = 'quartely export of the tickets';
 
     /**
      * Create a new command instance.
@@ -34,31 +37,29 @@ class QuarterlyExport extends Command
     }
 
     /**
-     * Execute the console command.
+     * Saves an export of the tickets table as a file and in the database and notifies the user
      *
-     * @return mixed
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function handle()
     {
+        $quarter = date("Y-m-d h:i:s",strtotime("-3 Months"));
         $filename = 'Kwartaal-'.ceil(date("m")/3) . '-'.date('Y');
         $filelocation = 'exports/'.$filename.'.xlsx';
         //return $this->excel->download(new TicketExport, 'meldingen.xlsx');
-        if ($this->excel->store(new TicketExport, $filelocation)) {
+        if ($this->excel->store(new QuartelyTicketExport($quarter), $filelocation)) {
             $quarteerfinance = new Quarterfinance([
                 'name' => $filename,
                 'year' => date('Y'),
                 'filepath' => 'storage/'.$filelocation,
             ]);
-
             $quarteerfinance->save();
-            echo "Het nieuwste kwartaalverslag staat klaar\n Ga nu naar het kwartaaloverzicht om de nieuwste versie te downloaden";
+            echo "Het nieuwste kwartaalverslag staat klaar\nGa nu naar het kwartaaloverzicht om de nieuwste versie te downloaden";
         }
         else{
             echo "Er is wat fout gegaan tijdens het automatisch exporteren";
         }
-        //echo Storage::url($filelocation);
     }
 
 }
