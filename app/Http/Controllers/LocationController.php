@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class LocationController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
     // Show the location and set the location with id
     public function setLocation($id)
     {

@@ -62,4 +62,4 @@ Route::resource('bekende-adressen', 'KnownController')->middleware('auth');
 // CRUD Profile Controllers
 Route::resource('profiel', 'ProfileController')->middleware('auth');
 
-Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
+Route::get('/location/{id}', 'LocationController@setLocation');//->middleware('auth');

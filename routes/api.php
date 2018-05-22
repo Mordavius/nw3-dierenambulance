@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+$this->middleware('auth', ['except' => ['/mail', '/location/show/{id}', '/location/write']]);
+
 Route::post('/mail', 'MailController@askLocationMail');
 Route::get('/location/show/{id}', 'LocationController@getLocation');
 Route::post('/location/write', 'LocationController@writeLocation');
