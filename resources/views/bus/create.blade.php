@@ -9,7 +9,7 @@
                     Nieuwe buswissel
                 </div>
                 <div class="card-body">
-                    <a href="../bus">
+                    <a href="javascript:history.back()">
                         <div class="btn btn-primary">
                             Terug naar het menu
                         </div>

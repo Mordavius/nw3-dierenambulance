@@ -15,10 +15,10 @@ class CreateFinanceTable extends Migration
     {
         Schema::create('finances', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('payment_invoice');
-            $table->string('payment_method_invoice');
-            $table->integer('payment_gift');
-            $table->string('payment_method_gift');
+            $table->integer('invoice')->nullable();
+            $table->tinyInteger('payment_method_invoice')->default('0')->length('1');
+            $table->integer('gifts')->nullable();
+            $table->tinyInteger('payment_method_gifts')->default('0')->length('1');
             $table->timestamps();
         });
     }

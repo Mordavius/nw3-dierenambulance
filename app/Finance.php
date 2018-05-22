@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Finance extends Model
 {
     // Set the id for the finance table
-    protected $primaryKey = 'finance_id';
-
+    protected $fillable = ['invoice', 'payment_method_invoice', 'gifts', 'payment_method_gifts'];
 }

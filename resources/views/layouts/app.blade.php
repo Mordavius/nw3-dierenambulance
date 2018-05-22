@@ -49,7 +49,7 @@
                                         {{ Auth::user()->name }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/profiel">Profiel</a>
+                                        <a class="dropdown-item" href="../profiel">Profiel</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
@@ -65,9 +65,9 @@
                     </div>
                 </div>
             </nav>
-            <main class="py-4">
+            <div class="py-1">
                 @yield('map')
-            </main>
+            </div>
             <main class="py-4">
                 @yield('content')
             </main>

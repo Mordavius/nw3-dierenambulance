@@ -6,10 +6,10 @@ var app = angular.module("app", [])
 	$scope.coordinates = [];
 
     L.tileLayer(
-        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors',
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
         maxZoom: 30,
-        minZoom: 1
+        minZoom: 1,
     }).addTo($scope.map);
 
 	var coords = $('#map').data('coordinates')
@@ -19,10 +19,8 @@ var app = angular.module("app", [])
 
 	function placeMarker(i){
 		var latlng = L.latLng(i.lat, i.lng);
-
 		var marker = L.marker(latlng).addTo($scope.map);
         $scope.distance.push(latlng);
-        console.log(latlng.distanceTo($scope.distance[0]));
 	}
     // use defaults
 var line = L.polyline(coords);
@@ -38,4 +36,37 @@ var line = L.polyline(coords, {
 });
 $scope.map.fitBounds(line.getBounds());
 $scope.map.addLayer(line);
+
+$('#toggle-button').click(toggle);
+var img_array_map= new Array('images/map-view.png','images/map-view-active.png');
+var img_array_list= new Array('images/list-view-active.png','images/list-view.png');
+var i = 0;
+
+function toggle () {
+    i++;
+    document.getElementById("map-image").src=img_array_map[i];
+    document.getElementById("list-image").src=img_array_list[i];
+    if(i==img_array_map.length-1) {
+        i=-1;
+    }
+    if(target.style.display === "none"){
+        target2.className = "col-md-12 slideOutLeft animated";
+        target.className = "col-md-12 slideInRight animated";
+        setTimeout(function()
+        {
+            target2.style.display = "none";
+            target.style.display = "block";},
+            1000);
+    } else {
+        target.className = "col-md-12 slideOutRight animated";
+        target2.className = "col-md-12 slideInLeft animated";
+        setTimeout(function(){
+            target.style.display = "none";
+            target2.style.display = "block";
+            $scope.map.setView([53, 5.7], 10);
+            $scope.map.invalidateSize();},
+            1000);
+
+    }
+}
 }])
