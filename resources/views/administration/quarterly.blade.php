@@ -18,18 +18,17 @@
                             </tr>
                             </thead>
                             <tbody>
-            @foreach($quarterlies as $quarterlies)
+                            @foreach($quarterlies as $quarterlies)
                                 <tr>
                                     <td>{{ $quarterlies->name }}</td>
                                     <td>{{ $quarterlies->year }}</td>
                                     <td><a href="download/{{ $quarterlies->name }}.xlsx">downloaden</a></td>
                                 </tr>
                             @endforeach
-                            </table>
-                        </div>
+                        </table>
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
 @endsection
