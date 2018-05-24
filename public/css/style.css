@@ -11,6 +11,7 @@ html, body
     height: 100%;
     width: 100%;
     position: absolute;
+	font-family: Roboto;
 }
 .main-content
 {
@@ -33,13 +34,12 @@ form
 {
     display: inline-block;
     width: 100%;
-    padding: 20px 20px 0;
 }
 table
 {
     width: 100%;
 }
-input, label, td, th
+label, td, th
 {
     font-size: 18px;
 }

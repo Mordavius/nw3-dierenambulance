@@ -17,6 +17,7 @@ class CreateAnimalTable extends Migration
             $table->increments('id');
             $table->string('animal_species');
             $table->string('breed')->nullable();
+            $table->string('injury')->nullable();
             $table->string('gender');
             $table->boolean('catch_cage')->nullable();
             $table->string('chip_number')->nullable();

@@ -4,9 +4,9 @@ body{
 .grid_container{
     display: grid;
     grid-template-areas:
-    'header'
-    'main'
-    'footer';
+    "header"
+    "main"
+    "footer";
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -18,6 +18,7 @@ body{
     grid-template-columns: repeat(5, 20%);
     text-align: center;
     color: #757575;
+    background-color: #FFFFFF;
 }
 .reporter{
     grid-column: 1/1;
@@ -53,7 +54,11 @@ body{
 }
 .main{
     grid-area: main;
-    grid-template-rows: repeat(2, 50%)
+    grid-template-rows: repeat(2, 50%);
+    margin-bottom: 100px;
+}
+.reporter_info{
+    padding: 20px;
 }
 .name{
     grid-row: 1/1;
@@ -64,7 +69,8 @@ body{
 }
 .ticket_text_field{
     border: 0;
-    width: 100%
+    width: 100%;
+    font-size: 18px;
 }
 input:focus,
 select:focus,
@@ -83,7 +89,23 @@ button:focus{
     box-shadow: 0px -1px 4px rgba(0,0,0,0.25);
     width: 100%;
     height: 55px;
+    background-color: #FFFFFF;
+}
 
+.pages{
+    position: absolute;
+    visibility: hidden;
+    transition: margin-left .5s;
+    overflow: hidden;
+    margin-left: 100%;
+    width: 0%;
+    height: 100%;
+
+}
+.current_page{
+    visibility: visible;
+    width: 100%;
+    margin-left: 0%;
 }
 #footer_button{
     position: fixed;
@@ -94,4 +116,137 @@ button:focus{
     right: 12px;
     margin-top: 15px;
     border: 0;
+}
+.address_info_grid{
+    display: grid;
+    grid-template-columns:  minmax(min-content, max-content) minmax(min-content, max-content) 1fr;
+    width: 100%;
+    font-size: 14px;
+}
+.address_info{
+    border: 0px;
+}
+.township{
+    grid-column: 2/3;
+}
+.animal_cards{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-row-gap: 14px;
+    -moz-transition: height .5s;
+    -ms-transition: height .5s;
+    -o-transition: height .5s;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+    height: 442px;
+    overflow: hidden;
+}
+.animal_card{
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 21px;
+    display: grid;
+    grid-template-columns: 1fr 20% 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background: url('../images/hond-icon.png') 50% 50% no-repeat ;
+    background-size: 30px 30px;
+    height: 138px;
+    width: 138px;
+}
+.animal_grid{
+    grid-column: 2/2;
+    grid-row: 3/3;
+    text-align: center;
+}
+.animal_icon{
+    width: 30px;
+    height: 30px;
+}
+.animal_info{
+    display: grid;
+    grid-template-rows: repeat(5, 20%);
+    padding: 20px 20px 0;
+}
+
+.selectedAnimal {
+    box-shadow: 1px 1px 4px rgba(32, 32, 32, 0.25);
+    -moz-transition: height .5s;
+    -ms-transition: height .5s;
+    -o-transition: height .5s;
+    -webkit-transition: height .5s;
+    transition: height .5s;
+    height: 0;
+    overflow: hidden;
+    width: 331px;
+    margin: 20px 20px 0;
+  }
+  #selected_animal{
+      margin: 10px 0 0 65px;
+      margin-top: 10px;
+      font-size: 18px;
+  }
+.ticket_cards_grid{
+    display: grid;
+    grid-template-rows: auto;
+}
+.new_ticket{
+    grid-row: 1/1;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(2, 25px);
+    font-size: 14px;
+}
+.animal_main_info{
+    grid-column: 1/5;
+    grid-row: 1/1;
+    font-size: 18px;
+}
+.animal_title{
+    display: inline-block;
+}
+.animal_breed{
+    display: inline-block;
+    font-size: 16px;
+    color: #828282;
+}
+.destination_info{
+    grid-column: 1/5;
+    grid-row: 2/3;
+    font-size: 13px;
+    font-weight: 300;
+}
+.bus_name{
+    display: grid;
+    grid-template-areas:
+    "header"
+    "main";
+}
+.bus_name_title{
+    grid-area: header;
+    font-size: 18px;
+    font-weight: 500;
+    color: #2F80ED;
+}
+.bus_task_list{
+    grid-area: main;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+.ticket{
+    grid-column: 1/4;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    font-size: 13px;
+    border: 1px solid #E5E5E5;
+}
+.ticket_priority{
+    grid-column: 1/1;
+    grid-row: 1/3;
+    font-size: 24px;
+    color: #878787;
+    padding-left: 40%;
+}
+.ticket_address{
+    grid-column: 2/4;
 }

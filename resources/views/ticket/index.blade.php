@@ -69,7 +69,7 @@
                                     {{ session('message') }}
                                 </div>
                             @endif
-                            @if (! $tickets->count())
+                            @if (! $unfinishedtickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
                             </div>
@@ -92,11 +92,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($tickets as $ticket)
-                                            @if($ticket->finished == '0')
+                                        @foreach($unfinishedtickets as $unfinishedticket)
                                             <tr>
                                                 @foreach($animals as $animal)
-                                                    @if($ticket->animal_id == $animal->id)
+                                                    @if($unfinishedticket->animal_id == $animal->id)
                                                         <td>{{ $animal->animal_species }}
                                                             <br />
                                                             {{ $animal->gender}}
@@ -105,7 +104,7 @@
                                                     @endif
                                                 @endforeach
                                                 @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)                                                    <td>
+                                                    @if($destination->ticket_id == $unfinishedticket->id)                                                    <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
 
                                                         <br />
@@ -113,17 +112,17 @@
                                                     </td>
                                                     @endif
                                                 @endforeach
-                                                <td>{{ $ticket->date }}
-                                                {{ $ticket->time }}</td>
+                                                <td>{{ $unfinishedticket->date }}
+                                                {{ $unfinishedticket->time }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $ticket->id],
+                                                    'route' => ['melding.destroy', $unfinishedticket->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $ticket->id) }}">
+                                                        <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $ticket->id) }}">
+                                                        <a href="{{ route('melding.show', $unfinishedticket->id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />
@@ -133,7 +132,6 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -145,7 +143,7 @@
                             Afgeronde meldingen
                         </h4>
                         <div class="box-body ">
-                            @if (! $tickets->count())
+                            @if (! $finishedtickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
                             </div>
@@ -168,10 +166,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($tickets as $ticket)
-                                            @if($ticket->finished == '1')
+                                        @foreach($finishedtickets as $finishedticket)
                                             <tr>@foreach($animals as $animal)
-                                                @if($ticket->animal_id == $animal->id)
+                                                @if($finishedticket->animal_id == $animal->id)
                                                     <td>{{ $animal->animal_species }}
                                                     <br />
                                                     {{ $animal->gender}}</td>
@@ -179,7 +176,7 @@
                                                 @endif
                                             @endforeach
                                                 @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)
+                                                    @if($destination->ticket_id == $finishedticket->id)
                                                     <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
                                                         <br />
@@ -187,17 +184,17 @@
                                                     </td>
                                                     @endif
                                                 @endforeach
-                                                <td>{{ $ticket->date }}
-                                                {{ $ticket->time }}</td>
+                                                <td>{{ $finishedticket->date }}
+                                                {{ $finishedticket->time }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $ticket->id],
+                                                    'route' => ['melding.destroy', $finishedticket->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $ticket->id) }}">
+                                                        <a href="{{ route('melding.edit', $finishedticket->id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $ticket->id) }}">
+                                                        <a href="{{ route('melding.show', $finishedticket->id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />
@@ -207,7 +204,6 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

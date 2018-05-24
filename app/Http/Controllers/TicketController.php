@@ -23,13 +23,13 @@ class TicketController extends Controller
     {
         $search = $request->input('search'); // Get  the input from the search field
         // Grabs all the existing tickets and split the finished and unfinished
-        $finishedtickets = Ticket::where('finished', '1')->get();
-        $unfinishedtickets = Ticket::where('finished', '0')->get();
+        $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('date', 'desc')->get();
 
         //TODO: Check tickets for not finished tickets
         // Check destinations for coordinates based on not finished tickets
         // Send that data to map.
-        $destinations = Destination::search($search)->orderBy('created_at', 'desc')->paginate(15); // Grabs all the existing locations, searches in the locations and paginate at 15 results
+        $destinations = Destination::search($search)->orderBy('created_at', 'asc')->paginate(15); // Grabs all the existing locations, searches in the locations and paginate at 15 results
         $animals = Animal::all(); // Grabs all te existings animals
         $coordinateStrings = $destinations->pluck('coordinates')->toArray(); //Grabs the coordinates and puts it into an array.
         //Decodes the array for better formatting.
@@ -46,9 +46,22 @@ class TicketController extends Controller
      */
     public function create(Ticket $ticket)
     {
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->get();
+        $unfinishedtickets_id = Ticket::where('finished', '0')->orderBy('date', 'desc')->pluck('id');
+        $animals = Animal::all();
+        // foreach ($unfinishedtickets as $unfinishedticket) {
+        $destinations = Destination::whereIn('ticket_id', $unfinishedtickets_id)->get();            //$coordinateStrings = Destination::where('ticket_id', $unfinishedticket)->get();
+        $coordinateStrings = $destinations->pluck('coordinates')->toArray();
+        // }
+        //dd($coordinateStrings);
+        // $coordinateStrings = Destination::where('ticket_id', $unfinishedtickets)->get(); //Grabs the coordinates and puts it into an array.
+
+        //Decodes the array for better formatting.
+        $coordinates = array_map(function ($coordinateString) {
+            return json_decode($coordinateString);
+        }, $coordinateStrings);
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
-        $coordinates = [];
-        return view('ticketcreate', compact('user', 'ticket', 'coordinates'));
+        return view('ticketcreate', compact('animals', 'unfinishedtickets', 'destinations', 'coordinates', 'user', 'ticket', 'coordinates'));
     }
 
     /**
@@ -71,6 +84,10 @@ class TicketController extends Controller
         // Stores the data for the requested fields
         $ticket = new Ticket([
             'animal_id' => $animal->id,
+            'breed' => $request->get('breed'),
+            'chip_number' => $request->get('chip_number'),
+            'injury'=> $request->get('injury'),
+            'priority'=> $request->get('priority'),
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'centralist' => $request->get('centralist'),

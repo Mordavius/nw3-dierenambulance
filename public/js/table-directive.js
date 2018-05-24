@@ -3,7 +3,12 @@ var app = angular.module("app", [])
 
     $scope.distance = [];
     $scope.map = L.map('map').setView([53, 5.7], 10);
+    $scope.map2 = L.map('map2').setView([53, 5.7], 10);
 	$scope.coordinates = [];
+    var ticket_information = {"name_text_field": "", "number_text_field": "",
+    "address": "", "house_number": "", "postal_code": "", "city": "",
+    "coordinates": "", "selected_animal": "", "breed": "", "gender":""
+    , "chip_number": "", "injury": "", "description": ""};
 
     L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -12,6 +17,13 @@ var app = angular.module("app", [])
         minZoom: 1,
     }).addTo($scope.map);
 
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
+        maxZoom: 30,
+        minZoom: 1,
+    }).addTo($scope.map2);
+
 	function onMapClick(e) {
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
 			if(err) { throw err; }
@@ -19,11 +31,17 @@ var app = angular.module("app", [])
 			var obj = JSON.parse(result);
 			updateAddressInformation(obj, e);
         })
-            map.className = "panel panel-default panel-success leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim slideOutUp animated";
-            setTimeout(function()
-            {
-                map.style.display = "none";},
-                1000);
+	}
+
+    var coords = $('#map2').data('coordinates')
+	coords.forEach(function(coord){
+		placeMarker(coord);
+	})
+
+	function placeMarker(i){
+		var latlng = L.latLng(i.lat, i.lng);
+		var marker = L.marker(latlng).addTo($scope.map2);
+        // $scope.distance.push(latlng);
 	}
 
 	function reverseGeocodeQuery(format, lat, lon, zoom) {
@@ -53,8 +71,7 @@ var app = angular.module("app", [])
 		document.getElementById("address").value = obj.address.road ? obj.address.road : "Straatnaam onbekend"
 		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
 		document.getElementById("township").value = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
-        document.getElementById("coordinates").value = JSON.stringify(e.latlng);
-
+        document.getElementById('coordinates').value = JSON.stringify(e.latlng);
 	}
 	$scope.map.on('click', onMapClick);
 
@@ -104,7 +121,91 @@ var app = angular.module("app", [])
 
         });
     }
+    $('#footer_button').click(next);
+    function next() {
+        if(page1.className == "pages current_page")
+        {
+            page1.style.marginLeft = "-100%";
+            page2.style.marginLeft = "0%";
+            page2.className = "pages current_page";
+            map.style.height = "400px";
+            map.style.width = "100%";
+            ticket_information.name_text_field = name_text_field.value;
+            ticket_information.number_text_field = number_text_field.value;
+            $scope.map.invalidateSize();
 
+            setTimeout(function()
+            {
+                page1.className = "pages";
+                circle1.className = "circle circle1";
+                circle2.className = "circle circle2 highlighted";
+            },
+                1000);
+
+        }else if(page2.className == "pages current_page")
+         {
+            page2.style.marginLeft = "-100%";
+            page3.style.marginLeft = "0%";
+            page3.className = "pages current_page";
+            ticket_information.address = address.value;
+            ticket_information.house_number = house_number.value;
+            ticket_information.postal_code = postal_code.value;
+            ticket_information.city = city.value;
+            ticket_information.coordinates = coordinates.value;
+            setTimeout(function()
+            {
+                page2.className = "pages";
+                circle2.className = "circle circle2";
+                circle3.className = "circle circle3 highlighted";
+            },
+                1000);
+        }else if(page3.className == "pages current_page"){
+            page3.style.marginLeft = "-100%";
+            page4.style.marginLeft = "0%";
+            page4.className = "pages current_page";
+            map2.style.height = "400px";
+            map2.style.width = "100%";
+            $scope.map2.setView([53.03, 5.7], 10);
+            ticket_information.selected_animal = selected_animal.innerHTML;
+            ticket_information.breed = breed.value;
+            ticket_information.injury = injury.value;
+            ticket_information.gender = gender.value;
+            ticket_information.chip_number = chip_number.value;
+            ticket_information.chip_number = chip_number.value;
+            ticket_information.description = description.value;
+            $scope.map2.invalidateSize();
+            loadTicketInformation();
+            setTimeout(function()
+            {
+                page3.className = "pages";
+                circle3.className = "circle circle3";
+                circle4.className = "circle circle4 highlighted";
+
+           },
+               1000);
+       }else if(page4.className == "pages current_page"){
+          page4.style.marginLeft = "-100%";
+          page5.style.marginLeft = "0%";
+          page5.className = "pages current_page";
+          setTimeout(function()
+          {
+              page4.className = "pages";
+              circle4.className = "circle circle4";
+              circle5.className = "circle circle5 highlighted";
+          },
+              1000);
+      }
+    }
+    function loadTicketInformation(){
+        animal_title.innerHTML += ticket_information.selected_animal;
+        animal_breed.innerHTML += ticket_information.breed;
+        destination_info.innerHTML += ticket_information.address + " ";
+        if(!ticket_information.housenumber){
+            destination_info.innerHTML += ticket_information.house_number + ", ";
+        }
+        destination_info.innerHTML += ticket_information.postal_code + " ";
+        destination_info.innerHTML += ticket_information.city;
+    }
     function getLocationRecord(){
         $.ajax({
             type: 'GET',
@@ -182,3 +283,17 @@ var app = angular.module("app", [])
         });
     }
 }])
+
+function selectAnimalSpieces(animal_species){
+    var growDiv = document.getElementById('animal_cards');
+    if (growDiv.clientHeight) {
+      growDiv.style.height = 0;
+      setTimeout(function()
+      {
+          if (!selectedAnimal.clientHeight) {
+              selectedAnimal.style.height = 45;
+              selected_animal.innerHTML = animal_species;
+          }
+      },300);
+    }
+}
