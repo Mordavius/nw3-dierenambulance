@@ -76,8 +76,8 @@
                                                 @endif
                                         </div>
                                         <div class="form-group {{ $errors->has('time') ? 'has-error' : '' }}">
-                                            {!! Form::label('tijd (idee om een hier een klokje tijdselectie?)') !!}
-                                            <input class="form-control" type="time" name="time" value="{{ date('h:i', strtotime($ticket->time)) }}" />
+                                            {!! Form::label('tijd') !!}
+                                            <input class="form-control" type="time" name="time" value="{{ date('h:i', strtotime($ticket->current_time)) }}" />
                                             @if($errors->has('time'))
                                                 <span class="help-block">
                                                     {{ $errors->first('time') }}
@@ -93,15 +93,6 @@
                                             @if($errors->has('postal_code'))
                                                 <span class="help-block">
                                                     {{ $errors->first('postal_code') }}
-                                                </span>
-                                            @endif
-                                        </div>
-                                        <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
-                                            {!! Form::label('Geen Postcode') !!}
-                                            {!! Form::checkbox('nocode', 0, null) !!}
-                                            @if($errors->has('nocode'))
-                                                <span class="help-block">
-                                                    {{ $errors->first('nocode') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -140,6 +131,15 @@
                                                     {{ $errors->first('gemeente') }}
                                                 </span>
                                             @endif
+                                        </div>
+                                        <div class="form-group {{ $errors->has('nocode') ? 'has-error' : '' }}">
+                                            {!! Form::label('Geen Postcode') !!}
+                                            {!! Form::checkbox('nocode', 0, null) !!}
+                                        @if($errors->has('nocode'))
+                                        <span class="help-block">
+                                                    {{ $errors->first('nocode') }}
+                                                </span>
+                                         @endif
                                         </div>
                                         <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
                                             {!! Form::label('Centralist') !!}
