@@ -1,4 +1,81 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.logo {
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400);main {
+  padding-top: 0;
+}
+
+.admin-menu {
+  background: #fff;
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.admin-menu ul {
+  list-style-type: none;
+  padding: 15px 21px 0 21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.admin-menu ul li.menu-item {
+  display: inline-block;
+}
+
+.admin-menu ul li.menu-item .icon {
+  margin-bottom: 8px;
+}
+
+.admin-menu ul li.menu-item.active {
+  border-bottom: #288B5F solid 5px;
+}
+
+.wrapper .content {
+  padding-top: 0;
+}
+
+.wrapper .content .btn-success {
+  float: right;
+  background: #288B5F;
+  font-size: 16px;
+  padding: 5px 18px 5px 18px;
+  border-radius: 0;
+  margin-top: 0;
+  margin-right: 21px;
+}
+
+.wrapper .content .users .user {
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+  padding: 14px 13px 14px 29px;
+  background: #fff;
+}
+
+.wrapper .content .users .user a {
+  color: #000;
+}
+
+.wrapper .content .users .user h2 {
+  text-transform: capitalize;
+}
+
+.wrapper .content .users .user .subheading {
+  color: #828282;
+}
+
+.wrapper .content .users .user .delete {
+  background: transparent;
+  border: 0;
+  float: right;
+  vertical-align: middle;
+}
+
+.logo {
   max-width: 150px;
 }
 
@@ -36,7 +113,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Raleway", sans-serif;
+  --font-family-sans-serif: "Roboto", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -75,7 +152,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -3638,12 +3715,6 @@ input[type="button"].btn-block {
   border-radius: 0.25rem;
 }
 
-@media (max-width: 768px) {
-  .dropdown-menu {
-    border-style: none;
-  }
-}
-
 .dropdown-menu-right {
   right: 0;
   left: auto;
@@ -6276,7 +6347,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -6401,7 +6472,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Raleway", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -10426,3 +10497,4 @@ a.text-dark:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
