@@ -24,6 +24,7 @@
         <script type="text/javascript" src="{{asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{asset('js/ui.js') }}"></script>
         @yield('scripts')
     </head>
     <body>
@@ -31,7 +32,7 @@
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Dierenambulance') }}
+                        <img class="logo" src="{{ asset('images/dierenambulance-logo.png') }}">
                     </a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,27 +48,38 @@
                             @guest
                                 <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             @else
-                            <li>
-                                <a class="nav-link" href="{{ url('/') }}">
-                                    Dashboard
-                                </a>
-                            </li>
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ Auth::user()->name }}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="../profiel">Profiel</a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
-                                           Uitloggen
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
+                            <li {{{ (Request::is('melding') ? 'class=active' : '') }}}>
+                              <a class="nav-link" href="{{ route('melding.index') }}">
+                                Meldingen
+                              </a>
+                          </li>
+                          <li class="nav-item dropdown {{ (Request::is(['leden', 'bus', 'bekende-adressen', 'exporteren']) ? 'active' : '') }}">
+                              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administratie
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="leden"> Gebruikers </a>
+                                <a class="dropdown-item" href="bus"> Voertuigen </a>
+                                <a class="dropdown-item" href="bekende-adressen"> Bekende adressen </a>
+                                <a class="dropdown-item" href="exporteren"> Exporteren </a>
+                              </div>
+                          </li>
+                              <li class="nav-item dropdown {{ (Request::is('profiel/*') ? 'active' : '') }}">
+                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      {{ Auth::user()->name }}
+                                  </a>
+                                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="../profiel">Profiel</a>
+                                      <a class="dropdown-item" href="{{ route('logout') }}"
+                                         onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                         Uitloggen
+                                      </a>
+                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                          @csrf
+                                      </form>
+                                  </div>
+                              </li>
                             @endguest
                         </ul>
                     </div>
@@ -76,7 +88,7 @@
             <div>
                 @yield('map')
             </div>
-            <main class="py-4">
+            <main>
                 @yield('content')
             </main>
         </div>

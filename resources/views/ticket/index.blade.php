@@ -4,6 +4,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
@@ -229,6 +230,7 @@
         </a>
 
     </div>
+</div>
 </div>
 
 @section('scripts')
