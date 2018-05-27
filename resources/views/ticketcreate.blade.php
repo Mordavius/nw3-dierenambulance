@@ -1,10 +1,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/ticketcreate.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet-gesture-handling.css') }}">
 
 @extends('layouts.app')
 
@@ -53,10 +51,7 @@
     </div>
 </div>
 <div class="main">
-    {!! Form::model($ticket, [
-        'method' => 'POST',
-        'route' => 'melding.store'
-    ]) !!}
+
     <div class="pages current_page" id="page1">
         <div class="reporter_info">
             <div class="name">
@@ -74,20 +69,12 @@
     </div>
 
     <div class="pages" id="page2">
-        <div id="test" ng-app="app">
+        <div id="app" ng-app="app">
             <div ng-controller="TableController" >
                 <div id="map" class="panel panel-default panel-success">
                 </div>
             </div>
         </div>
-            <div class="address_info_grid">
-                <input type="text" class="address_info" placeholder="Straat" name="address" id="address"/>
-                <input type="text" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number"/>
-                <input type="text" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code"/>
-                <input type="text" class="address_info" placeholder="Stad" name="city" id="city"/>
-                <input type="text" class="address_info township" placeholder="Gemeente" name="township" id="township"/>
-                <input type="hidden" name="coordinates" id="coordinates"/>
-            </div>
 
     </div>
     <div class="pages" id="page3">
@@ -125,19 +112,19 @@
         </div>
         <div class="selectedAnimal" id="selectedAnimal"><p id="selected_animal"></p></div>
         <div class="animal_info" id="animal_info">
-            <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
+            <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed_field"/>
             <div class="line">
             </div>
-            <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender"/>
+            <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender_field"/>
             <div class="line">
             </div>
-            <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number"/>
+            <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number_field"/>
             <div class="line">
             </div>
-            <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury"/>
+            <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury_field"/>
             <div class="line">
             </div>
-            <input type="text" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description"/>
+            <input type="text" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description_field"/>
             <div class="line">
             </div>
         </div>
@@ -151,6 +138,9 @@
         </div>
         <div class="ticket_cards_grid">
             <div class="new_ticket">
+                <div class="new_ticket_prio">
+                    <input type="number" class="new_ticket_priority" name="priority_field" id="priority_field" placeholder="-">
+                </div>
                 <div class="animal_main_info" id="animal_main_info">
                     <div class="animal_title" id="animal_title">
                     </div>
@@ -175,18 +165,22 @@
                                 </div>
                                 @foreach($animals as $animal)
                                 @if($unfinishedticket->animal_id == $animal->id)
-                                    {{$animal->animal_species}}
-                                    {{$animal->breed}}
+                                        <div class="unfinishedtickets_animal_title">
+                                            {{$animal->animal_species}}
+                                        </div>
+                                        <div class="unfinishedtickets_animal_breed">
+                                            {{$animal->breed}}
+                                        </div>
                                 @endif
                                 @endforeach
                             <div class="ticket_address">
-                            {{$destination->address}}
-                            @if($destination->house_number != '0')
-                                {{$destination->house_number}}
-                            @endif
-                            ,
-                            {{$destination->postal_code}}
-                            {{$destination->city}}
+                                {{$destination->address}}
+                                @if($destination->house_number != '0')
+                                    {{$destination->house_number}}
+                                @endif
+                                ,
+                                {{$destination->postal_code}}
+                                {{$destination->city}}
                             </div>
                             @endif
                             @endforeach
@@ -198,24 +192,107 @@
         </div>
     </div>
     <div class="pages" id="page5">
+        {!! Form::model($ticket, [
+            'method' => 'POST',
+            'route' => 'melding.store'
+        ]) !!}
+        <div class="new_ticket_information">
+            <label class="general">Algemeen</label>
+            <br />
+            <div class="new_ticket_info">
+                <label class="general_labels centralist">Centralist:</label>
+                <input id="centralist" type="label" name="centralist" class="general_information centralist" value="{{ Auth::user()->name }}"></input>
+                <label class="general_labels date">Datum:</label>
+                <input type="label" name="date" class="general_information date" id="date" value="{{ Carbon::today()->format('Y-m-d') }}"></label>
+                <label class="general_labels time">Tijd</label>
+                <input name="time" type="label" class="general_information time" id="time" value="{{Carbon::now('Europe/Amsterdam')->toTimeString()}}" ></text>
+            </div>
+
+            <div class="address_info_new_ticket">
+            <label class="location_label">Locatie</label>
+                <input type="label" class="address_info" placeholder="Straat" name="address" id="address"/>
+                <input type="label" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number"/>
+                <input type="label" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code"/>
+                <input type="label" class="address_info" placeholder="Stad" name="city" id="city"/>
+                <input type="hidden" class="address_info township" placeholder="Gemeente" name="township" id="township"/>
+                <input type="hidden" name="coordinates" id="coordinates"/>
+            </div>
+            <div class="line">
+            </div>
+            <div class="reporter_new_ticket">
+                <label class="reporter_label">Melder</label>
+                <input type="text" id="reporter_name" class="ticket_text_field" placeholder="Naam" name="reporter_name"/>
+                <div class="line">
+                </div>
+                <input type="text" id="phone_number" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone"/>
+                <div class="line">
+                </div>
+            </div>
+            <div class="animal_new_ticket">
+                <label class="reporter_label">Dier</label>
+                <div class="animal_info_new_ticket" id="animal_info">
+                    <input class="ticket_text_field" id="animal_species" type="text" name="animal_species"/>
+                    <div class="line">
+                    </div>
+                    <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
+                    <div class="line">
+                    </div>
+                    <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender"/>
+                    <div class="line">
+                    </div>
+                    <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number"/>
+                    <div class="line">
+                    </div>
+                    <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury"/>
+                    <div class="line">
+                    </div>
+                    <textarea rows="4" wrap="soft" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description"/></textarea>
+                    <div class="line">
+                    </div>
+                </div>
+            </div>
 
 
+            <div class="priority_new_ticket">
+                <label class="priority_label">Prioriteit</label>
+                <label class="ticket_text_field" class="bus">Sprinter</label>
+                <input class="ticket_text_field" type="label" name="priority" id="priority"/>
+            </div>
+        </div>
+        <input class="footer" type="submit" name="" value="Opslaan">
+        {!! Form::close() !!}
     </div>
 </div>
 
 
-{!! Form::close() !!}
+
 
 </div>
-<div class="footer">
+<div class="footer" id="footer">
+    <div class="address_info_grid">
+        <span contenteditable="true" class="address_info" name="address" id="address_field"></span>
+        <span contenteditable="true" class="address_info" name="house_number" id="house_number_field"></span>
+        <span contenteditable="true" class="address_info" name="postal_code" id="postal_code_field"></span>
+        <br>
+        <span contenteditable="true" class="address_info" name="city_field" id="city_field"></span>
+        <span contenteditable="true" class="address_info" name="township" id="township_field"></span>
+
+        <!-- <input type="text" class="address_info" placeholder="Straat" name="address" id="address_field"/>
+        <input type="text" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number_field"/>
+        <input type="text" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code_field"/>
+        <input type="text" class="address_info" placeholder="Stad" name="city" id="city_field"/>
+        <input type="text" class="address_info township" placeholder="Gemeente" name="township" id="township_field"/> -->
+        <input type="hidden" name="coordinates" id="coordinates_field"/>
+    </div>
     <button id="footer_button">Volgende ></button>
 </div>
 @endsection
 @section('scripts')
+<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/table-directive.js') }}"></script>
-
 <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/leaflet-gesture-handling.js') }}"></script>
 
 @endsection

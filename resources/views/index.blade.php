@@ -54,9 +54,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <article class="ticket_description">
-                                {{$animal->description}}
-                            </article>
+                            <textarea wrap="soft" rows="4" readonly class="ticket_description">{{$animal->description}}</textarea>
                         </div>
                         @endif
                     @endforeach
