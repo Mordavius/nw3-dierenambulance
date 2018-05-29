@@ -8,7 +8,7 @@
     font-style: normal;
     font-weight: normal;
     line-height: normal;
-    margin-top: 30px;
+    width: 100%;
 }
 .tickets{
     font-style: normal;
@@ -29,7 +29,6 @@
     grid-area: header;
     grid-column: 1/2;
     padding-left: 20px;
-    margin-top: 20px;
 }
 .grid_main{
     grid-area: main;

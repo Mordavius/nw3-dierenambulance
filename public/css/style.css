@@ -12,6 +12,7 @@ html, body
     width: 100%;
     position: absolute;
 	font-family: 'Roboto';
+	background-color: #FFFFFF;
 }
 .main-content
 {
