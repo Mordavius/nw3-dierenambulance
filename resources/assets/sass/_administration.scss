@@ -1,0 +1,52 @@
+.wrapper
+{
+  .content
+  {
+    padding-top: 0;
+
+    .btn-success
+    {
+      float: right;
+      background: $primary-color;
+      font-size: 16px;
+      padding: 5px 18px 5px 18px;
+      border-radius: 0;
+      margin-top: 0;
+      margin-right: 21px;
+    }
+
+    .users
+    {
+      .user
+      {
+        border-top: 1px solid #E5E5E5;
+        border-bottom: 1px solid #E5E5E5;
+        padding: 14px 13px 14px 29px;
+        background: $white;
+
+        a
+        {
+          color: $black;
+        }
+
+        h2
+        {
+          // display: inline-block;
+          text-transform: capitalize;
+        }
+        .subheading
+        {
+          color: $dark-gray;
+        }
+
+        .delete
+        {
+          background: transparent;
+          border: 0;
+          float: right;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
