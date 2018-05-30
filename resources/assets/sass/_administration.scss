@@ -1,8 +1,19 @@
 .wrapper
 {
+  @include media-breakpoint-up(lg)
+  {
+    padding-top: rem-calc(57);
+    padding-left: rem-calc(150);
+    padding-right: rem-calc(150);
+    display: inline-block;
+    width: 74%;
+    vertical-align:top
+  }
+
   .content
   {
     padding-top: 0;
+    @include clearfix;
 
     .btn-success
     {
@@ -11,47 +22,66 @@
       font-size: 16px;
       padding: 5px 18px 5px 18px;
       border-radius: 0;
-      margin-top: 0;
+      margin-top: 0!important;
       margin-right: 21px;
       border: none;
+
+      @include media-breakpoint-up(lg)
+      {
+        margin-right: 0;
+      }
     }
 
-    .users
+    .list
     {
-      .user
+      border: 1px solid #E5E5E5;
+
+      .list-item
       {
-        border-top: 1px solid #E5E5E5;
-        border-bottom: 1px solid #E5E5E5;
         padding: 14px 13px 14px 29px;
         background: $white;
-        position: relative;
+        display: flex;
+
+        &:not(:last-child)
+        {
+          border-bottom: 1px solid #E5E5E5;
+        }
 
         a
         {
           color: $black;
+          text-decoration: none;
+          width: 100%;
         }
 
-        h2
+        .headings
         {
-          // display: inline-block;
-          text-transform: capitalize;
-          margin-bottom: rem-calc(9);
-        }
-        .subheading
-        {
-          color: $dark-gray;
+          width: 75%;
+          display: inline-block;
+
+          h2
+          {
+            // display: inline-block;
+            text-transform: capitalize;
+            margin-bottom: 0;
+            line-height: 1;
+          }
         }
 
         .delete
         {
-          background: transparent;
-          border: 0;
-          float: right;
-          vertical-align: middle;
-          position: absolute;
-          top: 50%;
-          right: rem-calc(10);
-          transform: translateX(-50%);
+          display: inline-block;
+          width: 23%;
+          text-align: right;
+
+          .btn-delete
+          {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            margin-top: rem-calc(14);
+            cursor: pointer;
+          }
         }
       }
     }
