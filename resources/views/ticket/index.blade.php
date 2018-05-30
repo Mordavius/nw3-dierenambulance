@@ -80,15 +80,16 @@
                                         @foreach($tickets as $ticket)
                                             @if($ticket->finished == '0')
                                             <tr>@foreach($animals as $animal)
-                                                @if($ticket->animal_id == $animal->id)
-                                                    <td>{{ $animal->animal_species }}
-                                                    <br />
-                                                    {{ $animal->gender}}</td>
-                                                    <td>{{$animal->description}}</td>
-                                                @endif
-                                            @endforeach
-                                                @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)
+                                                    @if($ticket->id == $animal->ticket_id)
+                                                        <td>{{ $animal->animal_species }}
+                                                        <br />
+                                                        {{ $animal->gender}}</td>
+                                                        <td>{{ $animal->description }}</td>
+                                                    @endif
+                                                @endforeach
+                                                @foreach($destination_array as $destination)
+                                                    @if($ticket->id == $destination->ticket_id)
+
                                                     <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
                                                     <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
@@ -96,7 +97,7 @@
                                                         <br />
                                                         {{ $destination->postal_code }}, {{ $destination->city }}
                                                     </td>
-                                                    @endif
+                                                        @endif
                                                 @endforeach
                                                 <td>{{ $ticket->date }}
                                                 {{ $ticket->time }}</td>

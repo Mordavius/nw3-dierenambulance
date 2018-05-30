@@ -19,7 +19,8 @@ class AdministrationController extends Controller
      */
     public function index()
     {
-        return view('administration.index');
+        $user = User::all(); // Get the correct user by id
+        return view('administration.index', compact('user'));
     }
 
     // Export function for showing the page

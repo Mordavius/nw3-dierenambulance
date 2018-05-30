@@ -155,7 +155,7 @@
                                         <div class="form-group {{ $errors->has('animal_species') ? 'has-error' : '' }}">
                                             {!! Form::label('Diersoort') !!}
                                             <br />
-                                            {!! Form::radio('animal_species', 'hond') !!}
+                                            {!! Form::radio('animal_species', 'hond', ['class' => 'form-control']) !!}
                                             {!! Form::label('Hond') !!}
 
                                             {!! Form::radio('animal_species', 'kat', ['class' => 'form-control']) !!}

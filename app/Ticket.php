@@ -29,6 +29,16 @@ class Ticket extends Model
     {
         return $this->hasOne('App\Bus');
     }
+
+    public function scopeSearch($query, $search)
+    {
+        // Search function for searching on destinations
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->orWhere('city', 'LIKE', "%{$search}%");
+            });
+        }
+    }
     /**
      * @param $query
      * @param $search

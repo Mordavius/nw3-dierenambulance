@@ -69,6 +69,7 @@ var app = angular.module("app", [])
 		})
 	}
 
+
 	function geocodeQuery(searchText, format) {
 		var searchedURL = "https://nominatim.openstreetmap.org/search/nl/" + searchText + "?format=json&addressdetails=1";
 		return searchedURL;
