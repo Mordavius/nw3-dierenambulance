@@ -24,7 +24,7 @@ class TicketController extends Controller
         $search = $request->input('search'); // Get  the input from the search field
         // Grabs all the existing tickets and split the finished and unfinished
         $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
-        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('date', 'desc')->get();
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('id', 'desc')->get();
 
         //TODO: Check tickets for not finished tickets
         // Check destinations for coordinates based on not finished tickets
