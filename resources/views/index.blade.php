@@ -19,8 +19,9 @@
         <img src="../images/plus.png" class="rotate-button"/>
     </button>
 </a>
-<div class="tickets" id="target">
-    <div class="grid_container">
+<div class="pages current_page" id="page1">
+<div class="tickets" >
+    <div class="grid_container current_page">
         <div class="grid_header">
             <div class="tickets open_tickets">Openstaande meldingen</div>
             <div class="result_amount">Totaal aantal: {{$unfinishedtickets->count()}}</div>
@@ -30,6 +31,8 @@
                     @foreach($animals as $animal)
                         @if($unfinishedticket->animal_id == $animal->id)
                         <div class="grid_ticket flag-new">
+                            <div class="test">
+                            </div>
                             <div class="ticket_number">
                                 #{{ $unfinishedticket->id }}
                             </div>
@@ -54,7 +57,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <textarea wrap="soft" rows="4" readonly class="ticket_description">{{$animal->description}}</textarea>
+                            <textarea wrap="soft" rows="3" readonly class="ticket_description">{{str_limit($animal->description, 75)}}</textarea>
                         </div>
                         @endif
                     @endforeach
@@ -105,15 +108,11 @@
         </div>
     </div>
 </div>
-<div class="grid_container" id="target2" style="display: none;">
-    <div class="grid_header">
-        test
-    </div>
-    <div class="grid_main">
-        <div ng-app="app">
-            <div ng-controller="TableController" >
-                <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
-                </div>
+</div>
+<div class="pages" id="page2">
+    <div ng-app="app">
+        <div ng-controller="TableController" >
+            <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
             </div>
         </div>
     </div>

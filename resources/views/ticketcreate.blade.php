@@ -51,7 +51,6 @@
     </div>
 </div>
 <div class="main">
-
     <div class="pages current_page" id="page1">
         <div class="reporter_info">
             <div class="name">
