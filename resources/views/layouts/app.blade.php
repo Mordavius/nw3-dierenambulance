@@ -57,10 +57,10 @@
                                 Administratie
                               </a>
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="leden"> Gebruikers </a>
-                                <a class="dropdown-item" href="bus"> Voertuigen </a>
-                                <a class="dropdown-item" href="bekende-adressen"> Bekende adressen </a>
-                                <a class="dropdown-item" href="exporteren"> Exporteren </a>
+                                <a class="dropdown-item" href="{{ route('leden.index') }}"> Gebruikers </a>
+                                <a class="dropdown-item" href="{{ route('bus.index') }}"> Voertuigen </a>
+                                <a class="dropdown-item" href="{{ route('bekende-adressen.index') }}"> Bekende adressen </a>
+                                <a class="dropdown-item" href="{{ route('Exporteren') }}"> Exporteren </a>
                               </div>
                           </li>
                               <li class="nav-item dropdown {{ (Request::is('profiel/*') ? 'active' : '') }}">
