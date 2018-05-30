@@ -5,36 +5,40 @@
     <div class="row justify-content-center">
         @foreach($user as $user)
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        Profiel
-                    </div>
-                    <div class="card-body">
-                        @if(session('success'))
-                            <div class="alert alert-info">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        <button onclick="location.href='{{$user->name}}/edit'" type="submit" class="btn btn-primary">
-                            Profiel aanpassen
-                        </button>
-                        <br>
-                        <br>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <td width="80">Gebruikersnaam</td>
-                                    <td width="80">E-mail</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                </tr>
-                        </table>
-                    </div>
+                <div class="profile-info">
+                    {{ $user->name }}
                 </div>
+                <div class="container">
+                  <div class="profile-wrapper">
+                    <div class="profile-icon">
+                      <img src="/images/email-icon.png">
+                    </div>
+                    <div class="profile-text">
+                      {{ $user->email }}
+                    </div>
+                  </div>
+
+                  <div class="profile-wrapper">
+                    <div class="profile-icon">
+                      <img src="/images/phone-icon.png">
+                    </div>
+                    <div class="profile-text">
+                      06 11609877
+                    </div>
+                  </div>
+
+                  <div class="profile-wrapper">
+                    <div class="profile-icon">
+                      <img src="/images/home-icon.png">
+                    </div>
+                    <div class="profile-text">
+                      Nijverheidsweg 2 </br>
+                      <p class="profile-postalcode"> 9791DA Ten Boer </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
         @endforeach
     </div>

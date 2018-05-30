@@ -79,6 +79,28 @@
   max-width: 150px;
 }
 
+.profile-wrapper {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 100%;
+  margin: 10px;
+}
+
+.profile-icon img {
+  max-height: 20px;
+}
+
+.profile-text {
+  padding-left: 15px;
+}
+
+.profile-info {
+  font-size: 24px;
+  margin: 20px 20px 0px;
+  border-bottom: 1px solid #BDBDBD;
+}
+
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -10497,3 +10519,4 @@ a.text-dark:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
