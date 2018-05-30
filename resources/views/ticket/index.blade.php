@@ -62,7 +62,7 @@
                             </div>
                         @endif
                         <h4>
-                            {{ $destinations->toArray() }}
+
                             Actieve meldingen
                         </h4>
                         <div class="box-body ">
@@ -109,35 +109,12 @@
                                                     @if($ticket->id == $destination->ticket_id)
 
                                                     <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
-                                                    <td>
-                                                @if($ticket->animal_id == $animal->id)
-                                                    <td>{{ $animal->animal_species }}
-                                                    <br />
-                                                    {{ $animal->gender}}</td>
-                                                    <td>{{$animal->description}}</td>
-                                                @endif
+                                                        <td>
+                                                            {{ $destination->address }} {{ $destination->house_number }}
+                                                            <br />
+                                                            {{ $destination->postal_code }}, {{ $destination->city }}
+                                                        </td>
                                                     @endif
-                                            @endforeach
-                                                @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)
-                                                    <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
-                                                    <td>
-                                                @if($ticket->animal_id == $animal->id)
-                                                    <td>{{ $animal->animal_species }}
-                                                    <br />
-                                                    {{ $animal->gender}}</td>
-                                                    <td>{{$animal->description}}</td>
-                                                @endif
-                                                            @endif
-                                            @endforeach
-                                                @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)                                                    <td>
-                                                        {{ $destination->address }} {{ $destination->house_number }}
-
-                                                        <br />
-                                                        {{ $destination->postal_code }}, {{ $destination->city }}
-                                                    </td>
-                                                        @endif
                                                 @endforeach
                                                 <td>{{ $ticket->date }}
                                                 {{ $ticket->time }}</td>
