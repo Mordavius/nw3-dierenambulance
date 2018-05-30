@@ -9,7 +9,7 @@ var app = angular.module("app", [])
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
         maxZoom: 30,
-        minZoom: 1
+        minZoom: 1,
     }).addTo($scope.map);
 
 	function onMapClick(e) {
@@ -166,14 +166,28 @@ var app = angular.module("app", [])
         });
     }
     $('#sendLocationButton').click(sendLocationRequest);
-    function sendLocationRequest(){
+    // function sendLocationRequest(){
+    //     $.ajax({
+    //         type:'POST',
+    //         url:'/api/mail',
+    //         data: {id: locationId},
+    //         success: function() {
+    //             alert("mail verzonden");
+    //             getLocationRecord();
+    //         }
+    //     });
+    // }
+    function sendLocationRequest() {
         $.ajax({
-            type:'POST',
-            url:'/api/mail',
+            type: 'POST',
+            url: '/api/sms',
             data: {id: locationId},
-            success: function() {
-                alert("mail verzonden");
+            success: function () {
+                alert("SMS verzonden");
                 getLocationRecord();
+            },
+            error: function () {
+                alert("Er is iets fout gegaan, als u dit bericht vaker ziet neem dan contact op met de beheerder");
             }
         });
     }

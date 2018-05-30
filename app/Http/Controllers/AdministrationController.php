@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\TicketExport;
+use App\Quarterfinance;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdministrationController extends Controller
 {
@@ -28,6 +31,20 @@ class AdministrationController extends Controller
     {
         return view('administration.export', compact('ticket'));
     }
+
+    public function quartexports(){
+        $quarterlies = Quarterfinance::all();
+        return view('administration.quarterly', compact('quarterlies'));
+    }
+
+    public function quartdownload($filename)
+    {
+        $storage = Storage::url('exports/');
+        //storage_path('exports\\');
+        $filepath = $storage . $filename;
+        return Storage::download('exports/'.$filename);
+    }
+
 
     // Download the excel in xlsx format
     public function downloadExcel()

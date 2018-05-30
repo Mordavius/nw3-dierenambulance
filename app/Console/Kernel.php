@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\QuarterlyExport::class,
+        Commands\AnonymizeReporters::class,
     ];
 
     /**
@@ -24,9 +25,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        //Save a quarterly export of the tickets
+        $schedule->command('export')
+            ->quarterly()
+            ->emailOutputTo('g.w.n.h.iskondos@gmail.com')
+            ->withoutOverlapping();
+
+        //Anonymize reporters older than a month
+        $schedule->command('anonymize')
+            ->daily()
+            ->withoutOverlapping();
     }
+
 
     /**
      * Register the commands for the application.

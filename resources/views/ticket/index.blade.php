@@ -1,9 +1,25 @@
+<link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
+<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="icon-bar">
+    <div class="left">
+        <button id="toggle-button">
+            <img id="map-image" src="images/map-view.png"></img>
+            <img id="list-image" src="images/list-view-active.png"></img>
+        </button>
+    </div>
+    <div class="right">
+        <img id="search-icon" src="/images/search-icon.png"></img>
+        <img id="filter-icon" src="/images/filter-icon.png"></img>
+    </div>
+</div>
+<div class="container testin">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+
+        <div class="col-md-12" id="target">
             <div class="text-center"></div>
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
                 {!! Form::label('Laat meldingen zien vanaf') !!}
@@ -46,6 +62,7 @@
                             </div>
                         @endif
                         <h4>
+                            {{ $destinations->toArray() }}
                             Actieve meldingen
                         </h4>
                         <div class="box-body ">
@@ -86,12 +103,35 @@
                                                         {{ $animal->gender}}</td>
                                                         <td>{{ $animal->description }}</td>
                                                     @endif
+
                                                 @endforeach
                                                 @foreach($destination_array as $destination)
                                                     @if($ticket->id == $destination->ticket_id)
 
                                                     <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
                                                     <td>
+                                                @if($ticket->animal_id == $animal->id)
+                                                    <td>{{ $animal->animal_species }}
+                                                    <br />
+                                                    {{ $animal->gender}}</td>
+                                                    <td>{{$animal->description}}</td>
+                                                @endif
+                                                    @endif
+                                            @endforeach
+                                                @foreach($destinations as $destination)
+                                                    @if($destination->ticket_id == $ticket->id)
+                                                    <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
+                                                    <td>
+                                                @if($ticket->animal_id == $animal->id)
+                                                    <td>{{ $animal->animal_species }}
+                                                    <br />
+                                                    {{ $animal->gender}}</td>
+                                                    <td>{{$animal->description}}</td>
+                                                @endif
+                                                            @endif
+                                            @endforeach
+                                                @foreach($destinations as $destination)
+                                                    @if($destination->ticket_id == $ticket->id)                                                    <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
 
                                                         <br />
@@ -203,6 +243,26 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12" id="target2" style="display:none;">
+
+            <div ng-app="app">
+                    <div ng-controller="TableController" >
+                        <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
+                        </div>
+                      </div>
+            </div>
+        </div>
+        <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>
+
     </div>
 </div>
+
+@section('scripts')
+    <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+    @endsection
 @endsection

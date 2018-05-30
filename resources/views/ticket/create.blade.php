@@ -44,7 +44,7 @@
                                         <h2>Melder</h2>
                                         <div class="form-group {{ $errors->has('reporter_name') ? 'has-error' : '' }}">
                                             {!! Form::label('Naam van melder') !!}
-                                            {!! Form::text('reporter_name', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('reporter_name', null, ['class' => 'form-control', 'autocomplete' => "reporter_name"]) !!}
                                             @if($errors->has('meldernaam'))
                                                 <span class="help-block">
                                                     {{ $errors->first('reporter_name') }}
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="form-group {{ $errors->has('telephone') ? 'has-error' : '' }}">
                                             {!! Form::label('Telefoonnummer van melder') !!}
-                                            {!! Form::text('telephone', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('telephone', null, ['class' => 'form-control', 'autocomplete' => "telephone"]) !!}
                                             @if($errors->has('telephone'))
                                                 <span class="help-block">
                                                     {{ $errors->first('telephone') }}
@@ -89,7 +89,7 @@
                                         {!! Form::hidden('coordinates', false, ['id' => 'coordinates']) !!}
                                         <div class="form-group {{ $errors->has('postal_code') ? 'has-error' : '' }}">
                                             {!! Form::label('Postcode') !!}
-                                            {!! Form::text('postal_code', false, ['class' => 'form-control', 'id' => 'postal_code']) !!}
+                                            {!! Form::text('postal_code', false, ['class' => 'form-control', 'id' => 'postal_code', 'autocomplete' => "postal-code"]) !!}
                                             @if($errors->has('postal_code'))
                                                 <span class="help-block">
                                                     {{ $errors->first('postal_code') }}
@@ -98,7 +98,7 @@
                                         </div>
                                         <div class="form-group {{ $errors->has('house_number') ? 'has-error' : '' }}">
                                             {!! Form::label('Huisnummer') !!}
-                                            {!! Form::text('house_number', null, ['class' => 'form-control', 'id' => 'house_number']) !!}
+                                            {!! Form::text('house_number', null, ['class' => 'form-control', 'id' => 'house_number', 'autocomplete' => "house_number"]) !!}
                                             @if($errors->has('house_number'))
                                                 <span class="help-block">
                                                     {{ $errors->first('house_number') }}
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                                             {!! Form::label('Straatnaam') !!}
-                                            {!! Form::text('address', null, ['class' => 'form-control', 'id'=> 'address']) !!}
+                                            {!! Form::text('address', null, ['class' => 'form-control', 'id'=> 'address', 'autocomplete' => "address"]) !!}
                                             @if($errors->has('address'))
                                                 <span class="help-block">
                                                     {{ $errors->first('address') }}
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                                             {!! Form::label('Plaats') !!}
-                                            {!! Form::text('city', null, ['class' => 'form-control', 'id' => 'city']) !!}
+                                            {!! Form::text('city', null, ['class' => 'form-control', 'id' => 'city', 'autocomplete' => "city"]) !!}
                                             @if($errors->has('city'))
                                                 <span class="help-block">
                                                     {{ $errors->first('city') }}
@@ -125,7 +125,7 @@
                                         </div>
                                         <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
                                             {!! Form::label('Gemeente') !!}
-                                            {!! Form::text('township', null, ['class' => 'form-control', 'id' => 'township']) !!}
+                                            {!! Form::text('township', null, ['class' => 'form-control', 'id' => 'township', 'autocomplete' => "township"]) !!}
                                             @if($errors->has('gemeente'))
                                                 <span class="help-block">
                                                     {{ $errors->first('gemeente') }}
@@ -142,8 +142,10 @@
                                          @endif
                                         </div>
                                         <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
+                                        <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
+                                        <div autocomplete="name" class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}" >
                                             {!! Form::label('Centralist') !!}
-                                            {!! Form::select('centralist', $user) !!}
+                                            {!! Form::select('centralist', $user, ['class' => 'form-control', 'id' => 'centralist', 'autocomplete' => "name"]) !!}
                                             @if($errors->has('centralist'))
                                                 <span class="help-block">
                                                     {{ $errors->first('centralist') }}

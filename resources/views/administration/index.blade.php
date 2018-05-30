@@ -27,6 +27,12 @@
                             </a>
                             <br />
                             <br />
+                            <a href="kwartaaloverzicht" class="btn btn-primary">
+                                Kwartaaloverzicht
+                            </a>
+                            <br />
+                            <br />
+
                             <a href="bus" class="btn btn-primary">
                                 Bussen
                             </a>

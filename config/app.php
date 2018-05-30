@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Amsterdam',
 
     /*
     |--------------------------------------------------------------------------
@@ -147,6 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Bjrnblm\Messagebird\MessagebirdServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
 
         /*
@@ -214,6 +215,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'Carbon' => 'Carbon\Carbon',
+        'Messagebird' => Bjrnblm\Messagebird\Facades\Messagebird::class,
 
     ],
 

@@ -1,0 +1,52 @@
+.round{
+    position: fixed;
+    border: 0;
+    bottom: 23px;
+    right: 24px;
+    height: 61px;
+    width: 61px;
+    border-radius: 50%;
+    background-color: #288B5F;
+    text-align: center;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.30);
+    color: white;
+    z-index: 1;
+}
+.navbar{
+    z-index: 999;
+}
+.rotate-button:hover{
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(360deg);
+}
+.rotate-button{
+    font-size: 70px;
+    -ms-transition: all .75s ease-in-out;
+    -webkit-transition: all .75s ease-in-out;
+    -0-transition: all .75s ease-in-out;
+    transition: transform .5s ease-in-out;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    background: url("../images/plus.png");
+}
+@-moz-keyframes rotate {
+		0% {transform: rotate(0deg);}
+		100% {transform: rotate(180deg);}
+	}
+
+	@-webkit-keyframes rotate {
+		0% {transform: rotate(0deg);}
+		100% {transform: rotate(180deg);}
+	}
+
+	@-o-keyframes rotate {
+		0% {transform: rotate(0deg);}
+		100% {transform: rotate(180deg);}
+	}
+
+	@keyframes rotate {
+		0% {transform: rotate(0deg);}
+		100% {transform: rotate(180deg);}
+	}

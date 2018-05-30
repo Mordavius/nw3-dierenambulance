@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "animate.css": "^3.6.1",
         "leaflet-geometryutil": "^0.8.1"
     }
 }
