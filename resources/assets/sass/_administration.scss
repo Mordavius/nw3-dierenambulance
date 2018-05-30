@@ -13,6 +13,7 @@
       border-radius: 0;
       margin-top: 0;
       margin-right: 21px;
+      border: none;
     }
 
     .users
@@ -23,6 +24,7 @@
         border-bottom: 1px solid #E5E5E5;
         padding: 14px 13px 14px 29px;
         background: $white;
+        position: relative;
 
         a
         {
@@ -33,6 +35,7 @@
         {
           // display: inline-block;
           text-transform: capitalize;
+          margin-bottom: rem-calc(9);
         }
         .subheading
         {
@@ -45,6 +48,10 @@
           border: 0;
           float: right;
           vertical-align: middle;
+          position: absolute;
+          top: 50%;
+          right: rem-calc(10);
+          transform: translateX(-50%);
         }
       }
     }

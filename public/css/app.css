@@ -47,6 +47,7 @@
   border-radius: 0;
   margin-top: 0;
   margin-right: 21px;
+  border: none;
 }
 
 .wrapper .content .users .user {
@@ -54,6 +55,7 @@
   border-bottom: 1px solid #E5E5E5;
   padding: 14px 13px 14px 29px;
   background: #fff;
+  position: relative;
 }
 
 .wrapper .content .users .user a {
@@ -62,6 +64,7 @@
 
 .wrapper .content .users .user h2 {
   text-transform: capitalize;
+  margin-bottom: 0.5625rem;
 }
 
 .wrapper .content .users .user .subheading {
@@ -73,6 +76,11 @@
   border: 0;
   float: right;
   vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  right: 0.625rem;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .logo {
@@ -10497,3 +10505,4 @@ a.text-dark:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
