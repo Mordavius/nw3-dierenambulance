@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         @foreach($user as $user)
-            <div class="col-md-12">
+            <div class="profile">
                 <div class="profile-info">
                     {{ $user->name }}
                 </div>

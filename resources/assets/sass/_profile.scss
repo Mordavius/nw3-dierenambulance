@@ -2,6 +2,7 @@
   display: inline-flex;
   width: 100%;
   margin: 10px;
+  font-size: rem-calc(19);
 }
 
 .profile-icon img {
@@ -9,7 +10,7 @@
 }
 
 .profile-text {
-  padding-left: 15px;
+  padding-left: rem-calc(15);
 }
 
 .profile-info {
@@ -18,4 +19,8 @@
     border-bottom: 1px solid #BDBDBD;
 }
 
-//PLUGIN PULLN'
+@media only screen and (min-width: 768px) {
+.profile {
+  max-width: 50%;
+}
+}
