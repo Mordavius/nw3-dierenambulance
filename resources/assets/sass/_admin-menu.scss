@@ -35,17 +35,32 @@ main
     li.menu-item
     {
       display: inline-block;
-      border-left: $white solid 5px;
+      border-bottom: $white solid 5px;
+
+      &.active
+      {
+        border-bottom: $primary-color solid 5px;
+        border-left: none;
+
+        @include media-breakpoint-up(lg)
+        {
+          border-bottom: 0;
+          margin-bottom: 0;
+          border-left: $primary-color solid 5px;
+        }
+      }
 
       @include media-breakpoint-up(lg)
       {
         padding: rem-calc(53) 0;
+        border-left: $white solid 5px;
       }
 
       a
       {
         color: $black;
         text-decoration: none;
+        padding: rem-calc(8);
       }
 
       .icon
@@ -69,19 +84,29 @@ main
           display: inline-block;
         }
       }
+    }
+  }
+}
 
-      &.active
-      {
-        border-bottom: $primary-color solid 5px;
-        border-left: none;
+.edit_page
+{
+  nav
+  {
+    display: none;
 
-        @include media-breakpoint-up(lg)
-        {
-          border-bottom: 0;
-          margin-bottom: 0;
-          border-left: $primary-color solid 5px;
-        }
-      }
+    @include media-breakpoint-up(lg)
+    {
+      display: block;
+    }
+  }
+
+  .admin-menu
+  {
+    display: none;
+
+    @include media-breakpoint-up(lg)
+    {
+      display: inline-block;
     }
   }
 }

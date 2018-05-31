@@ -25,7 +25,7 @@
         <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
         @yield('scripts')
     </head>
-    <body>
+    <body class="@yield('body_class')">
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                 <div class="container">

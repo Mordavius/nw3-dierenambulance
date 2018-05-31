@@ -1,25 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="admin-menu">
-  <ul>
-    <li class="menu-item active">
-      <a href="../administratie">
-        <img class="icon" src="{{asset('images/users.svg')}}" alt="Gebruikers"> <span>Gebruikers</span></li>
-      </a>
-    <li class="menu-item">
-      <a href="/bus">
-        <img class="icon" src="{{asset('images/car.svg')}}" alt="Voertuigen"> <span>Voertuigen</span></li>
-      </a>
-    <li class="menu-item">
-      <a href="/bekende-adressen">
-        <img class="icon" src="{{asset('images/location.svg')}}" alt="Bekende adressen"> <span>Bekende adressen</span></li>
-      </a>
-    <li class="menu-item">
-      <a href="/exporteren">
-        <img class="icon" src="{{asset('images/export.svg')}}" alt="Export"> <span>Export</span></li>
-      </a>
-  </ul>
-</div>
+@include('administration.admin_menu')
 <div class="wrapper">
     @if (session('status'))
         <div class="alert alert-success">
@@ -54,7 +35,7 @@
                       {!! Form::open(['method' => 'DELETE',
                        'route' => ['leden.destroy', $user->id],
                       'onsubmit' => 'return confirm("Klik op OK om de gebruiker te verwijderen!")']) !!}
-                        <button onclick="return false" type="submit" class="btn-delete">
+                        <button onclick="submit" type="submit" class="btn-delete">
                             <img class="icon" src="{{asset('images/delete.svg')}}" alt="Verwijderen"> </li>
                         </button>
                       {!! Form::close() !!}

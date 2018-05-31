@@ -10473,18 +10473,33 @@ main {
 
 .admin-menu ul li.menu-item {
   display: inline-block;
-  border-left: #fff solid 5px;
+  border-bottom: #fff solid 5px;
+}
+
+.admin-menu ul li.menu-item.active {
+  border-bottom: #288B5F solid 5px;
+  border-left: none;
+}
+
+@media (min-width: 992px) {
+  .admin-menu ul li.menu-item.active {
+    border-bottom: 0;
+    margin-bottom: 0;
+    border-left: #288B5F solid 5px;
+  }
 }
 
 @media (min-width: 992px) {
   .admin-menu ul li.menu-item {
     padding: 3.3125rem 0;
+    border-left: #fff solid 5px;
   }
 }
 
 .admin-menu ul li.menu-item a {
   color: #000;
   text-decoration: none;
+  padding: 0.5rem;
 }
 
 .admin-menu ul li.menu-item .icon {
@@ -10509,16 +10524,23 @@ main {
   }
 }
 
-.admin-menu ul li.menu-item.active {
-  border-bottom: #288B5F solid 5px;
-  border-left: none;
+.edit_page nav {
+  display: none;
 }
 
 @media (min-width: 992px) {
-  .admin-menu ul li.menu-item.active {
-    border-bottom: 0;
-    margin-bottom: 0;
-    border-left: #288B5F solid 5px;
+  .edit_page nav {
+    display: block;
+  }
+}
+
+.edit_page .admin-menu {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .edit_page .admin-menu {
+    display: inline-block;
   }
 }
 
@@ -10552,6 +10574,16 @@ main {
   margin-top: 0 !important;
   margin-right: 21px;
   border: none;
+}
+
+.wrapper .content .btn-success.full-width {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .wrapper .content .btn-success.full-width {
+    width: auto;
+  }
 }
 
 @media (min-width: 992px) {
@@ -10605,6 +10637,53 @@ main {
   padding: 0;
   margin-top: 0.875rem;
   cursor: pointer;
+}
+
+.edit_page .form-group input {
+  border: 0;
+  border-bottom: 1px solid #C9C9C9;
+  border-radius: 0;
+  margin-bottom: 1.875rem;
+}
+
+.edit_page .form-group .segmented-control {
+  display: table;
+  width: 100%;
+  margin: 2em 0;
+  padding: 0;
+}
+
+.edit_page .form-group .segmented-control .segmented-control__item {
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.edit_page .form-group .segmented-control .segmented-control__item input {
+  position: absolute;
+  visibility: hidden;
+}
+
+.edit_page .form-group .segmented-control .segmented-control__item .segmented-control__label {
+  display: block;
+  margin: 0 -1px -1px 0;
+  /* -1px margin removes double-thickness borders between items */
+  padding: 1em .25em;
+  border: 1px solid #C9C9C9;
+  font: 18px/1.5 sans-serif;
+  text-align: center;
+  cursor: pointer;
+}
+
+.edit_page .form-group .segmented-control .segmented-control__item .segmented-control__label:hover {
+  background: #2D9CDB;
+  color: #fff;
+}
+
+.edit_page .form-group .segmented-control .segmented-control__item .segmented-control__input:checked + .segmented-control__label {
+  background: #2D9CDB;
+  color: #fff;
 }
 
 .logo {

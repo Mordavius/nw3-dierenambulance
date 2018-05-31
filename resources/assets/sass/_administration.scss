@@ -26,6 +26,16 @@
       margin-right: 21px;
       border: none;
 
+      &.full-width
+      {
+        width: 100%;
+
+        @include media-breakpoint-up(lg)
+        {
+          width: auto;
+        }
+      }
+
       @include media-breakpoint-up(lg)
       {
         margin-right: 0;

@@ -1,65 +1,45 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        Bekende addressen beheer
+@include('administration.admin_menu')
+    <div class="wrapper">
+      @if (session('status'))
+          <div class="alert alert-success">
+              {{ session('status') }}
+          </div>
+      @endif
+      <section class="content">
+        <a href="/bekende-adressen/create" class="btn btn-success">
+            Nieuw adres toevoegen
+        </a>
+        <br>
+        <br>
+          @if (! $known->count())
+          <div class="alert alert-danger">
+              <strong>Geen bekende adressen gevonden</strong>
+          </div>
+          @else
+            <div class="list">
+              @foreach($known as $known)
+                <div class="list-item">
+                  <!-- <a href=" route('address.edit', $address->id) "> -->
+                    <div class="headings">
+                      <h2>{{ $known->location_name }}</h2>
+                      <span class="subheading">{{ $known->address }} {{$known->house_number}}, {{ $known->postal_code }} {{ $known->city}}</span>
                     </div>
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        <a href="/bekende-adressen/create" class="btn btn-success">
-                            Nieuw adres toevoegen
-                        </a>
-                        <section class="content">
-                            @if (! $known->count())
-                            <div class="alert alert-danger">
-                                <strong>Geen bekende adressen gevonden</strong>
-                            </div>
-                            @else
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <td>Locatie Naam</td>
-                                            <td>Postcode</td>
-                                            <td>Straat</td>
-                                            <td>Huisnummer</td>
-                                            <td>Stad</td>
-                                            <td>Action</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($known as $known)
-                                            <tr>
-                                                <td>{{ $known->location_name }}</td>
-                                                <td>{{ $known->postal_code }}</td>
-                                                <td>{{ $known->address }}</td>
-                                                <td>{{ $known->house_number }}</td>
-                                                <td>{{ $known->city }}</td>
-
-                                                <td>
-                                                    {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['bekende-adressen.destroy', $known->id],
-                                                    'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <i>Verwijderen</i>
-                                                        </button>
-                                                    {!! Form::close() !!}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @endif
-                        </section>
-                    </div>
+                  <!-- </a> -->
+                  <div class="delete">
+                    {!! Form::open(['method' => 'DELETE',
+                    'route' => ['bekende-adressen.destroy', $known->id],
+                    'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
+                        <button type="submit" class="btn-delete">
+                            <img class="icon" src="{{asset('images/delete.svg')}}" alt="Verwijderen"> </li>
+                        </button>
+                    {!! Form::close() !!}
+                  </div>
                 </div>
+              @endforeach
             </div>
-    </div>
+          @endif
+      </section>
 </div>
 @endsection
