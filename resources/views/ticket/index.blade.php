@@ -23,7 +23,21 @@
             <div class="text-center"></div>
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
                 {!! Form::label('Laat meldingen zien vanaf') !!}
-                {!! Form::select('filter', ["alles", "week", "month", "year"]) !!}
+                <!--{!! Form::select('filter', ["alles", "week", "month", "year"]) !!}-->
+                <select id="tf" onchange="filterTickets()">
+                    <option value="everything">
+                        Alles
+                    </option>
+                    <option value="week">
+                        week
+                    </option>
+                    <option value="month">
+                        Maand
+                    </option>
+                    <option value="year">
+                        Jaar
+                    </option>
+                </select>
                 @if($errors->has('filter'))
                     <span class="help-block">
                         {{ $errors->first('filter') }}
@@ -62,7 +76,6 @@
                             </div>
                         @endif
                         <h4>
-                            {{ $destinations->toArray() }}
                             Actieve meldingen
                         </h4>
                         <div class="box-body ">
@@ -264,5 +277,6 @@
     <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/filter.js')}}"></script>
     @endsection
 @endsection

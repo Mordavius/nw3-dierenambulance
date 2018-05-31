@@ -23,7 +23,7 @@ class CreateDestinationTable extends Migration
             $table->string('house_number')->nullable();
             $table->string('city');
             $table->string('township');
-            $table->string('coordinates');
+            $table->string('coordinates')->nullable();
             $table->timestamps();
         });
     }

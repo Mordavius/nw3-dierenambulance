@@ -15,7 +15,6 @@ class CreateTicketTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('animal_id');
             $table->integer('finance_id')->nullable();
             $table->integer('bus_id')->nullable();
             $table->date('date');

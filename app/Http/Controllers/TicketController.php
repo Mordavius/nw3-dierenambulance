@@ -24,6 +24,11 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['filterTickets']]);
+    }
+
     public function index(Request $request)
     {
         $search = Input::get('search'); // Get  the input from the search field
@@ -249,4 +254,9 @@ class TicketController extends Controller
             return response()->json($e);
         }
     }
+
+    public function filterTickets(Request $request){
+        return $request->date;
+    }
+
 }

@@ -166,29 +166,29 @@ var app = angular.module("app", [])
         });
     }
     $('#sendLocationButton').click(sendLocationRequest);
-    // function sendLocationRequest(){
-    //     $.ajax({
-    //         type:'POST',
-    //         url:'/api/mail',
-    //         data: {id: locationId},
-    //         success: function() {
-    //             alert("mail verzonden");
-    //             getLocationRecord();
-    //         }
-    //     });
-    // }
-    function sendLocationRequest() {
+    function sendLocationRequest(){
         $.ajax({
-            type: 'POST',
-            url: '/api/sms',
+            type:'POST',
+            url:'/api/mail',
             data: {id: locationId},
-            success: function () {
-                alert("SMS verzonden");
+            success: function() {
+                alert("mail verzonden");
                 getLocationRecord();
-            },
-            error: function () {
-                alert("Er is iets fout gegaan, als u dit bericht vaker ziet neem dan contact op met de beheerder");
             }
         });
     }
-}])
+    // function sendLocationRequest() {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/api/sms',
+    //         data: {id: locationId},
+    //         success: function () {
+    //             alert("SMS verzonden");
+    //             getLocationRecord();
+    //         },
+    //         error: function () {
+    //             alert("Er is iets fout gegaan, als u dit bericht vaker ziet neem dan contact op met de beheerder");
+    //         }
+    //     });
+    // }
+}]);
