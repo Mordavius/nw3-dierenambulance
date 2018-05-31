@@ -2,6 +2,8 @@
 namespace App\Console\Commands;
 use App\QuartelyTicketExport;
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use App\TicketExport;
 use App\Quarterfinance;
@@ -48,17 +50,20 @@ class QuarterlyExport extends Command
         $filename = 'Kwartaal-'.ceil(date("m")/3) . '-'.date('Y');
         $filelocation = 'exports/'.$filename.'.xlsx';
         //return $this->excel->download(new TicketExport, 'meldingen.xlsx');
-        if ($this->excel->store(new QuartelyTicketExport($quarter), $filelocation)) {
-            $quarteerfinance = new Quarterfinance([
-                'name' => $filename,
-                'year' => date('Y'),
-                'filepath' => 'storage/'.$filelocation,
-            ]);
-            $quarteerfinance->save();
-            echo "Het nieuwste kwartaalverslag staat klaar\nGa nu naar het kwartaaloverzicht om de nieuwste versie te downloaden";
+        try {
+            if ($this->excel->store(new TicketExport(date(now()), $quarter), $filelocation)) {
+                $quarteerfinance = new Quarterfinance([
+                    'name' => $filename,
+                    'year' => date('Y'),
+                    'filepath' => 'storage/' . $filelocation,
+                ]);
+                $quarteerfinance->save();
+                echo "Het nieuwste kwartaalverslag staat klaar\nGa nu naar het kwartaaloverzicht om de nieuwste versie te downloaden";
+            }
         }
-        else{
-            echo "Er is wat fout gegaan tijdens het automatisch exporteren";
+        catch (QueryException $e) {
+            echo "Er is wat fout gegaan tijdens het automatisch exporteren, probeer dit handmatig";
+            Log::channel('sentry')->critical("Critical error during quarterly export: " . $e);
         }
     }
 

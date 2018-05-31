@@ -16,13 +16,15 @@
                     @endif
                 <!-- Main content -->
                     <section class="content">
+                        {{Form::open(array('url' => 'downloadExcel'))}}
+                        <input type="date" name="startdate" id="startdate"/>
+                        <input type="date" name="enddate" id="enddate"/>
                         <div class="col-6">
-                            <a href="{{ url('downloadExcel') }}">
                                 <button class="btn btn-success btn-lg">
                                     Exporteren naar Excel
                                 </button>
-                            </a>
                         </div>
+                        {{ Form::close() }}
                     </section>
                 </div>
             </div>
