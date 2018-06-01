@@ -24,7 +24,7 @@
                                     <strong>Geen gebruikers gevonden</strong>
                                 </div>
                             @else
-                                @include('profile.table')
+                                @include('administration.table')
                             @endif
                             <div class="pull-right">
                                 <small>

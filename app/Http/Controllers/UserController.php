@@ -41,7 +41,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         User::create($request->all()); // Stores the created user
-        return redirect("/administratie/leden")->with("message", "Nieuwe gebruiker is aangemaakt!");
+        return redirect("/administratie")->with("message", "Nieuwe gebruiker is aangemaakt!");
     }
 
     /**
@@ -84,7 +84,7 @@ class UserController extends Controller
             'role_id' => $request['role_id'],
         ]);
 
-        return redirect("/leden")->with("message", "Gebruiker is geupdate!");
+        return redirect("/administratie")->with("message", "Gebruiker is geupdate!");
     }
 
     /**
