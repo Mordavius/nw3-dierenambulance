@@ -79,8 +79,8 @@ var app = angular.module("app", [])
 	}
 
 	function updateAddressInformation(obj, e){
-        address_field.innerHTML = obj.address.road  ? obj.address.road + " " : "Straatnaam onbekend"
-        house_number_field.innerHTML = obj.address.house_number ? obj.address.house_number + ", " : "";
+        address_field.innerHTML = obj.address.road  ? obj.address.road + " " : "Straatnaam onbekend";
+        house_number_field.innerHTML = obj.address.house_number ? obj.address.house_number + " ": " ";
         postal_code_field.innerHTML = obj.address.postcode ? obj.address.postcode + " " : "Kan postcode niet vinden";
 		city_field.innerHTML = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
 		township_field.innerHTML = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
@@ -115,7 +115,7 @@ var app = angular.module("app", [])
 
 		//var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
 
-		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 15);
+		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 12);
 	}
 
 
@@ -141,7 +141,7 @@ var app = angular.module("app", [])
         {
             page1.style.marginLeft = "-100%";
             page2.style.marginLeft = "0%";
-            page2.style.height = "100%"
+            page2.style.height = "84%"
             page2.className = "pages current_page";
             map.style.height = "100%";
             map.style.width = "100%";
@@ -176,7 +176,7 @@ var app = angular.module("app", [])
             page4.style.marginLeft = "0%";
             page4.style.marginBottom = "55px";
             page4.className = "pages current_page";
-            map2.style.height = "300px";
+            map2.style.height = "600px";
             map2.style.width = "100%";
             ticket_information.selected_animal = selected_animal.innerHTML;
             ticket_information.breed = breed_field.value;
@@ -315,7 +315,9 @@ function selectAnimalSpieces(animal_species){
       setTimeout(function()
       {
           if (!selectedAnimal.clientHeight) {
+              growDiv.style.display = "none";
               selectedAnimal.style.height = 45;
+
               selected_animal.innerHTML = animal_species;
           }
       },300);
