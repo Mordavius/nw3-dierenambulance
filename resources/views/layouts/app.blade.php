@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -26,7 +25,7 @@
         <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
         @yield('scripts')
     </head>
-    <body>
+    <body class="@yield('body_class')">
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                 <div class="container">
@@ -57,10 +56,10 @@
                                 Administratie
                               </a>
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="leden"> Gebruikers </a>
-                                <a class="dropdown-item" href="bus"> Voertuigen </a>
-                                <a class="dropdown-item" href="bekende-adressen"> Bekende adressen </a>
-                                <a class="dropdown-item" href="exporteren"> Exporteren </a>
+                                <a class="dropdown-item" href="{{ route('leden.index') }}"> Gebruikers </a>
+                                <a class="dropdown-item" href="{{ route('bus.index') }}"> Voertuigen </a>
+                                <a class="dropdown-item" href="{{ route('bekende-adressen.index') }}"> Bekende adressen </a>
+                                <a class="dropdown-item" href="{{ route('Exporteren') }}"> Exporteren </a>
                               </div>
                           </li>
                               <li class="nav-item dropdown {{ (Request::is('profiel/*') ? 'active' : '') }}">
