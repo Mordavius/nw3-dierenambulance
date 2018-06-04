@@ -56,7 +56,7 @@
                                 Administratie
                               </a>
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('leden.index') }}"> Gebruikers </a>
+                                <a class="dropdown-item" href="{{ route('Administratie') }}"> Gebruikers </a>
                                 <a class="dropdown-item" href="{{ route('bus.index') }}"> Voertuigen </a>
                                 <a class="dropdown-item" href="{{ route('bekende-adressen.index') }}"> Bekende adressen </a>
                                 <a class="dropdown-item" href="{{ route('Exporteren') }}"> Exporteren </a>
