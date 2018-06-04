@@ -51,7 +51,7 @@
                                 Meldingen
                               </a>
                           </li>
-                          <li class="nav-item dropdown {{ (Request::is(['leden', 'bus', 'bekende-adressen', 'exporteren']) ? 'active' : '') }}">
+                          <li class="nav-item dropdown {{ (Request::is(['administratie', 'bus', 'bekende-adressen', 'exporteren']) ? 'active' : '') }}">
                               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Administratie
                               </a>
