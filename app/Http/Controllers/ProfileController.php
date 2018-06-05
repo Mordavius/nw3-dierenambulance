@@ -112,7 +112,7 @@ class ProfileController extends Controller
 
        //flash('Profiel is geupd')->success()
        //\Session::flash('flash_message','Office successfully added.');
-        return redirect(/administratie)->with('success', 'Gebruiker is geupdate');
+        return redirect('/administratie')->with('success', 'Gebruiker is geupdate');
 
       // return "test";
     }
