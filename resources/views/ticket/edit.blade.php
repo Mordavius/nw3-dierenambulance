@@ -275,6 +275,7 @@
                                             <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
 
 
+
                                         </div>
                                     </div>
                                 </div>
@@ -329,11 +330,11 @@
                                             <input type="hidden" id="task_id" name="task_id" value="0">
                                             <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
 
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </section>
                     </div>
                 </div>
@@ -342,12 +343,6 @@
     </div>
 </div>
 
-<meta name="_token" content="{!! csrf_token() !!}" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="{{asset('js/angular.min.js')}}"></script>
-
-<script src="{{asset('js/ajax-destinations.js')}}"></script>
-<script src="{{asset('js/table-directive.js')}}"></script>
 
 @endsection
 

@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/cssgrid.css') }}">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @extends('layouts.app')
 
 @section('content')
@@ -28,11 +30,24 @@
         </div>
         <div class="grid_main">
 
-            <div class="panel-body">
-                <div class="form-group">
-                    <input type="text" class="form-controller" id="search" name="search">
-                </div>
-            </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input type="text" class="form-controller" id="search" name="search">
+                            </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>Plaats</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+
 
             @foreach($unfinishedtickets as $unfinishedticket)
                     @foreach($animals as $animal)
@@ -127,13 +142,6 @@
     </div>
 </div>
 
-
-@section('scripts')
-<script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
-
 <script type="text/javascript">
     $('#search').on('keyup',function(){
         $value=$(this).val();
@@ -152,6 +160,13 @@
 <script type="text/javascript">
     $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 </script>
+
+
+@section('scripts')
+<script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
 
 
 @endsection

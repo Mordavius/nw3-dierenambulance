@@ -7,9 +7,12 @@ use App\Http\Requests;
 use App\Ticket;
 use App\User;
 use App\Animal;
-use App\Bus;
 use App\Destination;
+use App\Finance;
+use App\Known;
 use Carbon\Carbon;
+use DB;
+use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
 {
@@ -46,6 +49,76 @@ class TicketController extends Controller
             return json_decode($coordinateString);
         }, $coordinateStrings);
         return view('index', compact('animals', 'destination_array', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
+    }
+
+    public function createAjax(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'postal_code' => 'required',
+            'house_number' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'township' => 'required',
+            'milage' => 'required|numeric',
+            'verhicle' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+            $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
+            return response()->json($destination);
+        }
+    }
+
+    public function createAjaxFinance(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'payment_invoice' => 'required',
+            'payment_gifts' => 'required_if:payment_invoice|confirmed',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+            $finance = Finance::create($request->all());
+            return response()->json($finance);
+        }
+    }
+
+    public function knownusers($id){
+        $knownusers = Known::where('id', $id)->get();
+        return response()->json($knownusers);
+    }
+
+    public function search(Request $request, Ticket $ticket_id)
+    {
+        if($request->ajax())
+        {
+            $output="";
+            $search=DB::table('destinations')->where('city','LIKE','%'.$request->search."%")->get();
+
+            if($search)
+            {
+                foreach ($search as $key => $city) {
+
+                    $output.='<tr>'.
+                        // '<td>'.$animals[0]->animal_species.' <br />'.$animals[0]->gender.'</td>'.
+                        //  '<td>'.$animals[0]->description.'</td>'.
+                        '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
+                        //  '<td>'.$tickets[0]->date.' '.$tickets[0]->time.'</td>'.
+                        '<td><a href="/melding/'. $ticket_id .'/edit"><i class="btn btn-primary">Aanpassen</i></a></td>'.
+                        '</tr>';
+
+                }
+                return Response($output);
+            }
+        }
     }
 
     /**
@@ -150,11 +223,14 @@ class TicketController extends Controller
         $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
         //$destination_id = Destination::where('ticket_id', $ticket_id);// Deletes destination based on ticket id
         $destinations = Destination::where('ticket_id', $ticket_id)->get();
+        $loaddestination = Destination::where('ticket_id', $ticket_id)->get();
+        $loadfinances = Finance::where('ticket_id', $ticket_id)->get();
         //$destinations = Destination::where();
+        $known = Known::all();
         $animals = Animal::where('id', $animal_id);// Deletes animal based on animal id
         $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
-        return view("ticket.edit", compact('destinations', 'ticket', 'users', 'animals'));
+        return view("ticket.edit", compact('destinations', 'ticket', 'users', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
     }
     /**
      * Update the specified resource in storage.
