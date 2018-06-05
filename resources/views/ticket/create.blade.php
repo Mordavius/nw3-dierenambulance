@@ -13,7 +13,7 @@
                 </div>
                 <input id="searchTextBox" type="text"/>
                 <button id="searchButton">
-                    Search
+                    Ga
                 </button>
                 <div class="card-body">
                     <a href="/">
