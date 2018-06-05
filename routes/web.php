@@ -68,22 +68,8 @@ Route::resource('profiel', 'ProfileController')->middleware('auth');
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
 
 
-Route::get('/dikkezoekfunctie','SearchController@index');
-Route::get('/search','TicketController@search');
-
-
-
-//Route::get('/test', 'TestController@index');
-
-/*
-Route::post('test', ['middleware'=>'no_csrf'], function() {
-    if(Request::ajax()) {
-        return Response::json(Request::all());
-    }
-});
-
-*/
-
+Route::get('/dikkezoekfunctie', 'SearchController@index');
+Route::get('/search', 'TicketController@search');
 
 Route::get('/destination', 'TestController@index')->middleware('auth');
 

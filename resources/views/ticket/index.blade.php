@@ -8,6 +8,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
@@ -40,7 +41,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="col-md-12" id="target">
             <div class="text-center"></div>
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
@@ -79,7 +80,7 @@
                                     {{ session('message') }}
                                 </div>
                             @endif
-                            @if (! $tickets->count())
+                            @if (! $unfinishedtickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
                             </div>
@@ -125,17 +126,17 @@
                                                         </td>
                                                     @endif
                                                 @endforeach
-                                                <td>{{ $ticket->date }}
-                                                {{ $ticket->time }}</td>
+                                                <td>{{ $unfinishedticket->date }}
+                                                {{ $unfinishedticket->time }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $ticket->id],
+                                                    'route' => ['melding.destroy', $unfinishedticket->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $ticket->id) }}">
+                                                        <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $ticket->id) }}">
+                                                        <a href="{{ route('melding.show', $unfinishedticket->id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />
@@ -145,7 +146,6 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -180,10 +180,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($tickets as $ticket)
-                                            @if($ticket->finished == '1')
+                                        @foreach($finishedtickets as $finishedticket)
                                             <tr>@foreach($animals as $animal)
-                                                @if($ticket->animal_id == $animal->id)
+                                                @if($finishedticket->animal_id == $animal->id)
                                                     <td>{{ $animal->animal_species }}
                                                     <br />
                                                     {{ $animal->gender}}</td>
@@ -191,7 +190,7 @@
                                                 @endif
                                             @endforeach
                                                 @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)
+                                                    @if($destination->ticket_id == $finishedticket->id)
                                                     <td>
                                                         {{ $destination->address }} {{ $destination->house_number }}
                                                         <br />
@@ -199,17 +198,17 @@
                                                     </td>
                                                     @endif
                                                 @endforeach
-                                                <td>{{ $ticket->date }}
-                                                {{ $ticket->time }}</td>
+                                                <td>{{ $finishedticket->date }}
+                                                {{ $finishedticket->time }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $ticket->id],
+                                                    'route' => ['melding.destroy', $finishedticket->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $ticket->id) }}">
+                                                        <a href="{{ route('melding.edit', $finishedticket->id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $ticket->id) }}">
+                                                        <a href="{{ route('melding.show', $finishedticket->id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />
@@ -219,7 +218,6 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -238,9 +236,14 @@
                       </div>
             </div>
         </div>
-        <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>
+        <a href="/melding/create">
+            <button class="round">
+                <img src="../images/plus.png" class="rotate-button"/>
+            </button>
+        </a>
 
     </div>
+</div>
 </div>
 
 

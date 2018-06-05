@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Ticket extends Model
 {
     // Set the columns for storing data in the database
-    protected $fillable = [ 'bus_id' , 'animal_id', 'finance_id', 'date','time', 'centralist',
+    protected $fillable = [ 'priority', 'bus_id' , 'animal_id', 'finance_id', 'date','time', 'centralist',
     'reporter_name', 'telephone', 'driver', 'passenger'];
 
     // Tickets could have many destinations

@@ -2,8 +2,26 @@ var app = angular.module("app", [])
 .controller("TableController", ['$scope','$http', function($scope, $https){
 
     $scope.distance = [];
-    $scope.map = L.map('map').setView([53, 5.7], 10);
+    $scope.map = L.map("map", {
+    center: [53, 5.7],
+    zoom: 10,
+});
+    // $scope.map = L.map('map').setView([53, 5.7], 10);
+    $scope.map2 = L.map("map2", {
+    center: [53, 5.7],
+    zoom: 10,
+    gestureHandling: true,
+    gestureHandlingText: {
+        touch: "Gebruik twee vingers om door de map te scrollen",
+        scroll: "Gebruik ctrl + scroll om in te zoomen",
+        scrollMac: "Gebruik \u2318 + scroll om in te zoomen"
+    }
+});
 	$scope.coordinates = [];
+    var ticket_information = {"name": "", "number": "",
+    "address": "", "house_number": "", "postal_code": "", "city": "",
+    "coordinates": "", "selected_animal": "", "breed": "", "gender":""
+    , "chip_number": "", "injury": "", "description": "", "priority":""};
 
     L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -12,13 +30,31 @@ var app = angular.module("app", [])
         minZoom: 1,
     }).addTo($scope.map);
 
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
+        maxZoom: 30,
+        minZoom: 1,
+    }).addTo($scope.map2);
+
 	function onMapClick(e) {
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
 			if(err) { throw err; }
 			var marker = L.marker(e.latlng).addTo($scope.map);
 			var obj = JSON.parse(result);
 			updateAddressInformation(obj, e);
-			})
+        })
+	}
+
+    var coords = $('#map2').data('coordinates')
+	coords.forEach(function(coord){
+		placeMarker(coord);
+	})
+
+	function placeMarker(i){
+		var latlng = L.latLng(i.lat, i.lng);
+		var marker = L.marker(latlng).addTo($scope.map2);
+        // $scope.distance.push(latlng);
 	}
 
 	function reverseGeocodeQuery(format, lat, lon, zoom) {
@@ -43,13 +79,12 @@ var app = angular.module("app", [])
 	}
 
 	function updateAddressInformation(obj, e){
-		document.getElementById("postal_code").value = obj.address.postcode ? obj.address.postcode : "Kan postcode niet vinden";
-		document.getElementById("house_number").value = obj.address.house_number ? obj.address.house_number : "";
-		document.getElementById("address").value = obj.address.road ? obj.address.road : "Straatnaam onbekend"
-		document.getElementById("city").value = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
-		document.getElementById("township").value = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
-        document.getElementById("coordinates").value = JSON.stringify(e.latlng);
-
+        address_field.innerHTML = obj.address.road  ? obj.address.road + " " : "Straatnaam onbekend";
+        house_number_field.innerHTML = obj.address.house_number ? obj.address.house_number + " ": " ";
+        postal_code_field.innerHTML = obj.address.postcode ? obj.address.postcode + " " : "Kan postcode niet vinden";
+		city_field.innerHTML = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
+		township_field.innerHTML = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
+        coordinates_field.value = JSON.stringify(e.latlng);
 	}
 	$scope.map.on('click', onMapClick);
 
@@ -81,7 +116,7 @@ var app = angular.module("app", [])
 
 		//var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
 
-		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 15);
+		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 12);
 	}
 
 
@@ -100,7 +135,102 @@ var app = angular.module("app", [])
 
         });
     }
+    $('#footer_button').click(next);
+    function next() {
+        var highlighted = document.getElementsByClassName("highlighted")[0];
+        if(page1.className == "pages current_page")
+        {
+            page1.style.marginLeft = "-100%";
+            page2.style.marginLeft = "0%";
+            page2.style.height = "84%"
+            page2.className = "pages current_page";
+            map.style.height = "100%";
+            map.style.width = "100%";
+            ticket_information.name = name_text_field.value;
+            ticket_information.number = number_text_field.value;
+            $scope.map.invalidateSize();
+            page1.className = "pages";
+            circle1.className = "circle circle1";
+            circle2.className = "circle circle2 highlighted";
 
+        }else if(page2.className == "pages current_page")
+         {
+            page2.style.marginLeft = "-100%";
+            page3.style.marginLeft = "0%";
+            page3.className = "pages current_page";
+            ticket_information.address = address_field.innerHTML;
+            ticket_information.house_number = house_number_field.innerHTML;
+            ticket_information.postal_code = postal_code_field.innerHTML;
+            ticket_information.city = city_field.innerHTML;
+            ticket_information.coordinates = coordinates_field.value;
+            address_field.innerHTML = "";
+            house_number_field.innerHTML ="";
+            postal_code_field.innerHTML = "";
+            city_field.innerHTML = "";
+            township_field.innerHTML = "";
+            page2.className = "pages";
+            circle2.className = "circle circle2";
+            circle3.className = "circle circle3 highlighted";
+        }else if(page3.className == "pages current_page")
+        {
+            page3.style.marginLeft = "-100%";
+            page4.style.marginLeft = "0%";
+            page4.style.marginBottom = "55px";
+            page4.className = "pages current_page";
+            map2.style.height = "600px";
+            map2.style.width = "100%";
+            ticket_information.selected_animal = selected_animal.innerHTML;
+            ticket_information.breed = breed_field.value;
+            ticket_information.injury = injury_field.value;
+            ticket_information.gender = gender_field.value;
+            ticket_information.chip_number = chip_number_field.value;
+            ticket_information.description = description_field.value;
+            $scope.map2.invalidateSize();
+            loadTicketInformation();
+            page3.className = "pages";
+            circle3.className = "circle circle3";
+            circle4.className = "circle circle4 highlighted";
+       }else if(page4.className == "pages current_page")
+       {
+          footer.style.display = "none";
+          ticket_information.priority = priority_field.value;
+          page4.style.marginLeft = "-100%";
+          page5.style.marginLeft = "0%";
+          page5.className = "pages current_page";
+          page4.className = "pages";
+          circle4.className = "circle circle4";
+          circle5.className = "circle circle5 highlighted";
+          loadTicketInformation();
+          console.log(ticket_information);
+      }
+    }
+    function loadTicketInformation(){
+        animal_title.innerHTML += ticket_information.selected_animal;
+        animal_breed.innerHTML += ticket_information.breed;
+        destination_info.innerHTML += ticket_information.address;
+        if(!ticket_information.housenumber){
+            destination_info.innerHTML += ticket_information.house_number;
+        }
+        destination_info.innerHTML += ticket_information.postal_code;
+        destination_info.innerHTML += ticket_information.city;
+        coordinates.value = ticket_information.coordinates;
+        reporter_name.value = ticket_information.name;
+        phone_number.value = ticket_information.number;
+
+        address.value = ticket_information.address;
+        house_number.value = ticket_information.house_number;
+        postal_code.value = ticket_information.postal_code;
+        city.value = ticket_information.city;
+        township.value = ticket_information.township;
+
+        animal_species.value = ticket_information.selected_animal;
+        breed.value = ticket_information.breed;
+        gender.value = ticket_information.gender;
+        chip_number.value = ticket_information.chip_number;
+        injury.value = ticket_information.injury;
+        description.value = ticket_information.description;
+        priority.value = ticket_information.priority;
+    }
     function getLocationRecord(){
         $.ajax({
             type: 'GET',
@@ -192,3 +322,19 @@ var app = angular.module("app", [])
         });
     }
 }])
+
+function selectAnimalSpieces(animal_species){
+    var growDiv = document.getElementById('animal_cards');
+    if (growDiv.clientHeight) {
+      growDiv.style.height = 0;
+      setTimeout(function()
+      {
+          if (!selectedAnimal.clientHeight) {
+              growDiv.style.display = "none";
+              selectedAnimal.style.height = 45;
+
+              selected_animal.innerHTML = animal_species;
+          }
+      },300);
+    }
+}

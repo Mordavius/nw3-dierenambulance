@@ -11,6 +11,7 @@ html, body
     height: 100%;
     width: 100%;
     position: absolute;
+	font-family: 'Roboto';
 }
 .main-content
 {
@@ -21,7 +22,7 @@ html, body
 #map
 {
     height: 300px;
-	width: 75%;
+	width: 100%;
     margin: 0 auto;
 }
 .content
@@ -33,13 +34,12 @@ form
 {
     display: inline-block;
     width: 100%;
-    padding: 20px 20px 0;
 }
 table
 {
     width: 100%;
 }
-input, label, td, th
+label, td, th
 {
     font-size: 18px;
 }
@@ -65,13 +65,11 @@ td
 
 }
 .icon-bar{
-	position: absolute;
 	width: 100%;
 	height: 44px;
 	left: 0px;
 	top: 66px;
-	margin-top: -10px;
-	padding: 10 5 5 5;
+	padding: 10px 5px 5px 5px;
 	background: #FFFFFF;
 	box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
 }

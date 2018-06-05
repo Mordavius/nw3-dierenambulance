@@ -1,0 +1,132 @@
+.grid_container{
+    display: grid;
+    grid-template-areas:
+    'header'
+    'main'
+    'footer';
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    width: 100%;
+}
+input:focus,
+select:focus,
+textarea:focus,
+textarea,
+button:focus{
+    outline-width: 0;
+    border: 0;
+}
+.grid_header{
+    grid-area: header;
+    grid-column: 1/2;
+    padding-left: 20px;
+}
+.grid_main{
+    grid-area: main;
+    background-color: #FFFFFF;
+}
+.tickets{
+    font-style: normal;
+    font-weight: 300 !important;
+    line-height: normal;
+    font-size: 24px;
+}
+.pages{
+    position: absolute;
+    visibility: hidden;
+    transition: margin-left .3s;
+    overflow: hidden;
+    margin-left: 100%;
+    width: 0%;
+}
+.current_page{
+    width: 100%;
+    margin-left: 0%;
+    visibility: visible;
+}
+.current_page2{
+    overflow: hidden;
+    margin-right: 0%;
+}
+.result_amount{
+    font-weight: normal;
+    font-size: 14px;
+}
+.grid_ticket{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid #E5E5E5;
+}
+.test{
+    grid-column: 1/6;
+    grid-row: 1/1;
+    height: 20px;
+}
+.ticket_number{
+    text-align: center;
+    grid-column: 5/5;
+    grid-row: 2/2;
+    font-size: 12px;
+    padding-top: 4px;
+    background-color: #219653;
+    color: white;
+    border-radius: 6px;
+    height: 21px;
+    width: 57px;
+    margin-left: 15px;
+}
+.grid_animal_icon{
+    grid-column: 1/1;
+    grid-row: 2/4;
+}
+.ticket_icon{
+    width: 48px;
+    height: 48px;
+    background-color: #E0E0E0;
+    padding-top: 9px;
+    padding-left: 7px;
+    margin-left: 21px;
+}
+#animal_icon{
+    width: 34px;
+    height: 30px;
+}
+.ticket_main_info{
+    grid-column: 2/5;
+    grid-row: 2/3;
+}
+.ticket_title{
+    font-size: 24px;
+}
+.ticket_address{
+    grid-column: 2/5;
+    grid-row: 3/4;
+    font-size: 14px;
+    font-style: italic;
+}
+.ticket_description{
+    grid-column: 2/5;
+    grid-row: 3/3;
+    margin: 10px 0 10px 0;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 21px;
+    overflow: hidden;
+
+}
+.flag-new::before{
+    content: "Nieuw";
+    background-color: #219653;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+    color: #FFFFFF;
+    min-width: 57px;
+    height: 21px;
+    left: 7px;
+    font-size: 14px;
+    margin-top: 75px;
+    padding-top: 2px;
+
+}
