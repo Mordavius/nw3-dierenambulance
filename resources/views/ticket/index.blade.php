@@ -1,54 +1,5 @@
-<!DOCTYPE html>
 
-<html>
-
-<head>
-
-    <meta name="_token" content="{{ csrf_token() }}">
-    <title>Live Search</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-</head>
-<body>
-
-<div class="container">
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3>Test search </h3>
-                <br /><br /><br />
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <input type="text" class="form-controller" id="search" name="search">
-                    <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $('#search').on('keyup',function(){
-        $value=$(this).val();
-        $.ajax({
-            type : 'get',
-            url : '{{URL::to('search')}}',
-            data:{'search':$value},
-            success:function(data){
-                $('.zoekresultaten').html(data);
-            }
-        });
-    })
-
-</script>
-
-<script type="text/javascript">
-    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-</script>
-
-</body>
-</html>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
@@ -72,6 +23,23 @@
 
 <div class="container testin">
     <div class="row justify-content-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Test search </h3>
+                        <br /><br /><br />
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <input type="text" class="form-controller" id="search" name="search">
+                            <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col-md-12" id="target">
             <div class="text-center"></div>
