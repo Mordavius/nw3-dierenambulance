@@ -26,6 +26,15 @@ class TicketController extends Controller
         $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
         $unfinishedtickets = Ticket::where('finished', '0')->orderBy('id', 'desc')->get();
 
+        $tickets_id = Ticket::all()->pluck("id");
+        $destination_array = [];
+
+        foreach($tickets_id as $ticket_id)
+        {
+            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first()
+            );
+        }
+
         //TODO: Check tickets for not finished tickets
         // Check destinations for coordinates based on not finished tickets
         // Send that data to map.
@@ -36,7 +45,7 @@ class TicketController extends Controller
         $coordinates = array_map(function ($coordinateString) {
             return json_decode($coordinateString);
         }, $coordinateStrings);
-        return view('index', compact('animals', 'destinations', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
+        return view('index', compact('animals', 'destination_array', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
     }
 
     /**

@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-12" id="target">
             <div class="text-center"></div>
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
@@ -95,7 +95,7 @@
                                             </td>
                                             <td>Beschrijving</td>
                                             <td>Adres</td>
-                                            <td>Datum &
+                                             <td>Datum &
                                                 <br />
                                                 Tijd
                                             </td>
@@ -146,6 +146,7 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
+
                                         @endforeach
                                     </tbody>
                                 </table>

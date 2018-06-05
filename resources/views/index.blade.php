@@ -5,13 +5,13 @@
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png"></img>
-            <img id="list-image" src="images/list-view-active.png"></img>
+            <img id="map-image" src="images/map-view.png">
+            <img id="list-image" src="images/list-view-active.png">
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png"></img>
-        <img id="filter-icon" src="/images/filter-icon.png"></img>
+        <img id="search-icon" src="/images/search-icon.png">
+        <img id="filter-icon" src="/images/filter-icon.png">
     </div>
 </div>
 <a href="/melding/create">
@@ -27,6 +27,13 @@
             <div class="result_amount">Totaal aantal: {{$unfinishedtickets->count()}}</div>
         </div>
         <div class="grid_main">
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" class="form-controller" id="search" name="search">
+                </div>
+            </div>
+
             @foreach($unfinishedtickets as $unfinishedticket)
                     @foreach($animals as $animal)
                         @if($unfinishedticket->animal_id == $animal->id)
@@ -44,7 +51,7 @@
                             <div class="ticket_main_info">
                                 <div class="ticket_title">{{$animal->animal_species}}</div>
                                 <div class="ticket_address">
-                                    @foreach($destinations as $destination)
+                                    @foreach($destination_array as $destination)
                                         @if($destination->ticket_id == $unfinishedticket->id)
                                             {{$destination->address}}
                                             @if($destination->house_number != '0')
@@ -84,7 +91,7 @@
                             <div class="ticket_main_info">
                                 <div class="ticket_title">{{$animal->animal_species}}</div>
                                 <div class="ticket_address">
-                                    @foreach($destinations as $destination)
+                                    @foreach($destination_array as $destination)
                                         @if($destination->ticket_id == $finishedticket->id)
                                             {{$destination->address}}
                                             @if($destination->house_number != '0')
@@ -124,5 +131,26 @@
 <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+            }
+        });
+    })
+
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+
+
 @endsection
 @endsection
