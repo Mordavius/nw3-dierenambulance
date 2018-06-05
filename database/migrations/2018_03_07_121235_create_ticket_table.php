@@ -26,6 +26,7 @@ class CreateTicketTable extends Migration
             $table->string('driver')->nullable();
             $table->string('passenger')->nullable();
             $table->tinyInteger('finished')->default('0')->length('1');
+            $table->integer('priority');
             $table->timestamps();
         });
     }
