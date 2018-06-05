@@ -1,0 +1,95 @@
+/*! Stylesheet for dierenambulance */
+
+.col-6 {margin-left: auto; margin-right: auto;}
+
+.btn:not(:disabled):not(.disabled) {
+	margin-top: 10px;
+}
+
+html, body
+{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+	font-family: 'Roboto';
+}
+.main-content
+{
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}
+#map
+{
+    height: 300px;
+	width: 100%;
+    margin: 0 auto;
+}
+.content
+{
+    width: 100%;
+    padding-top: 30px;
+}
+form
+{
+    display: inline-block;
+    width: 100%;
+}
+table
+{
+    width: 100%;
+}
+label, td, th
+{
+    font-size: 18px;
+}
+td
+{
+    padding: 5px 0;
+}
+#map-image{
+	margin-right: 10px;
+	height: 24px;
+	width: 16px;
+
+}
+#list-image{
+	height: 18px;
+	width: 22px;
+}
+#toggle-button{
+	margin-bottom: 40px;
+	border: none;
+	padding: 0;
+	background: none;
+
+}
+.icon-bar{
+	width: 100%;
+	height: 44px;
+	left: 0px;
+	top: 66px;
+	padding: 10px 5px 5px 5px;
+	background: #FFFFFF;
+	box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
+}
+.testin{
+	margin-top: 30px;
+}
+.left{
+	float: left;
+	padding-left: 20px;
+}
+.right{
+	float: right;
+	padding-right: 20px;
+}
+#search-icon{
+	height: 30px;
+	width: 30px;
+	right: 40px;
+}
+#filter-icon{
+	height: 23px;
+	width: 23px;
+}
