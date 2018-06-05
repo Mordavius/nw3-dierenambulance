@@ -19,6 +19,7 @@
             </div>
         @else
         <div class="list">
+
           @if($currentUser= auth()->user())
               @foreach($users as $user)
               <div class="list-item">

@@ -33,15 +33,15 @@
 <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
   <ul class="segmented-control">
     <li class="segmented-control__item">
-      {!! Form::radio('option', 'Ambulance', true) !!}
+      <input type="radio" id="option-ambulance" value="3" name="role_id">
       <label class="segmented-control__label" for="option-ambulance" value="Ambulance">Ambulance</label>
     </li>
     <li class="segmented-control__item">
-      {!! Form::radio('option', 'Centralist', true) !!}
+      <input type="radio" id="option-centralist" value="2" name="role_id">
       <label class="segmented-control__label" for="option-centralist" value="Centralist">Centralist</label>
     </li>
     <li class="segmented-control__item">
-      {!! Form::radio('option', 'Beheerder', true) !!}
+      <input type="radio" id="option-beheerder" value="1" name="role_id">
       <label class="segmented-control__label" for="option-beheerder" value="Beheerder">Beheerder</label>
     </li>
   </ul>

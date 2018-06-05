@@ -8,6 +8,8 @@ use App\User;
 use App\Role;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -76,11 +78,17 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, $id)
     {
+        $user = User::findOrFail($id);
+        $new_password = $request->get('password');
+        // dd($new_password);
+        if (Hash::check($new_password, Auth::user()->password)) {
+            return redirect("/leden/{$id}/edit")->with("message", "Het ingevoerde wachtwoord is al eens gebruikt.");
+        }
         // Update the requested data for the fields
         User::findOrFail($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => Hash::make($request['password']), // Hash the password
+            'password' => Hash::make($new_password), // Hash the password
             'role_id' => $request['role_id'],
         ]);
 

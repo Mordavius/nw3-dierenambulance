@@ -101,6 +101,8 @@ class ProfileController extends Controller
         $user = User::findOrFail($id); // find the correct user by id
         $user->name = $request->get('username'); // Get the requested username
         $user->email = $request->get('email'); // Get the requested email
+        $user->role_id = $request->get('role_id');
+        
       // if ($request->('password') = $user->password){
       //   $user->password = $request->('password');
       // }
