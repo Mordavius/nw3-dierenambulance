@@ -37,7 +37,8 @@
             @foreach($unfinishedtickets as $unfinishedticket)
                     @foreach($animals as $animal)
                         @if($unfinishedticket->animal_id == $animal->id)
-                        <div class="grid_ticket flag-new">
+                        <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
+                            <div class="grid_ticket flag-new">
                             <div class="test">
                             </div>
                             <div class="ticket_number">
@@ -66,6 +67,7 @@
                             </div>
                             <textarea wrap="soft" rows="3" readonly class="ticket_description">{{str_limit($animal->description, 75)}}</textarea>
                         </div>
+                    </a>
                         @endif
                     @endforeach
             @endforeach
