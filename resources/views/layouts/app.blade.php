@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
 
         <!-- Scripts -->
-        <script type="text/javascript" src="{{asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
         @yield('scripts')
     </head>

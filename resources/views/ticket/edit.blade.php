@@ -272,7 +272,7 @@
                                             <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Sluit</span></button>
                                             <button type="button" class="btn btn-primary" id="btn-save" name="btn-save" value="add">Opslaan</button>
                                             <input type="hidden" id="task_id" name="task_id" value="0">
-                                            <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
+
 
 
                                         </div>
@@ -327,13 +327,12 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" id="btn-save-payment" name="btn-save-payment" value="add">Opslaan</button>
                                             <input type="hidden" id="task_id" name="task_id" value="0">
-                                            <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
+
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </section>
                     </div>
                 </div>
