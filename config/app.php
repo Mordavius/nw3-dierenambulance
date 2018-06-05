@@ -147,7 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Bjrnblm\Messagebird\MessagebirdServiceProvider::class,
+       // Bjrnblm\Messagebird\MessagebirdServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
 
         /*

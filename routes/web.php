@@ -44,7 +44,7 @@ Route::group(['middleware' => 'IsCentralist'], function () {
 });
 
 
-Route::get('search', ['uses' => 'TicketController@index', 'as' => 'search',]);
+//Route::get('search', ['uses' => 'TicketController@index', 'as' => 'search',]);
 
 // Bus Changes Controllers
 Route::resource('buswissel', 'BusChangeController')->middleware('auth');
@@ -67,6 +67,9 @@ Route::resource('profiel', 'ProfileController')->middleware('auth');
 
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
 
+
+Route::get('/dikkezoekfunctie','SearchController@index');
+Route::get('/search','TicketController@search');
 
 
 

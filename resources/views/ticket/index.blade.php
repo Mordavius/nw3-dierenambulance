@@ -1,21 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta name="_token" content="{{ csrf_token() }}">
+    <title>Live Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Test search </h3>
+                <br /><br /><br />
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" class="form-controller" id="search" name="search">
+                    <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('.zoekresultaten').html(data);
+            }
+        });
+    })
+
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+
+</body>
+</html>
+
+
 <link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @extends('layouts.app')
 
 @section('content')
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png"></img>
-            <img id="list-image" src="images/list-view-active.png"></img>
+            <img id="map-image" src="images/map-view.png">
+            <img id="list-image" src="images/list-view-active.png">
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png"></img>
-        <img id="filter-icon" src="/images/filter-icon.png"></img>
+        <img id="search-icon" src="/images/search-icon.png">
+        <img id="filter-icon" src="/images/filter-icon.png">
     </div>
 </div>
+
 <div class="container testin">
     <div class="row justify-content-center">
 
@@ -29,16 +83,10 @@
                         {{ $errors->first('filter') }}
                     </span>
                 @endif
-                <form action="{{ route('search') }}">
+
                     <div class="form-inline">
-                        <input type="search" class="form-control mr-sm-2" value="{{ request('search') }}" name="search" placeholder="Zoeken" aria-label="Search" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                                Zoeken
-                            </button>
-                        </span>
+
                     </div>
-                </form>
                 <div class="card">
                     <div class="card-header">
                         Dashboard
@@ -56,15 +104,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        @if ($search = request(''))
-                            <div class="alert alert-info">
-                                <p>Zoekresultaten<strong>{{ $search }}</strong></p>
-                            </div>
-                        @endif
-                        <h4>
-
-                            Actieve meldingen
-                        </h4>
+                        <h4>Actieve meldingen</h4>
                         <div class="box-body ">
                             @if(session('message'))
                                 <div class="alert alert-info">
@@ -76,6 +116,7 @@
                                 <strong>Geen meldingen gevonden</strong>
                             </div>
                             @else
+
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -93,7 +134,7 @@
                                             <td>Action</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="zoekresultaten">
                                         @foreach($tickets as $ticket)
                                             @if($ticket->finished == '0')
                                             <tr>@foreach($animals as $animal)
@@ -147,7 +188,7 @@
                         <h4>
                             Afgeronde meldingen
                         </h4>
-                        <div class="box-body ">
+                        <div class="box-body">
                             @if (! $tickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
@@ -234,6 +275,7 @@
     </div>
 </div>
 
+
 @section('scripts')
     <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
@@ -241,5 +283,25 @@
     <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
-    @endsection
+
+    <script type="text/javascript">
+        $('#search').on('keyup',function(){
+            $value=$(this).val();
+            $.ajax({
+                type : 'get',
+                url : '{{URL::to('search')}}',
+                data:{'search':$value},
+                success:function(data){
+                    $('tbody').html(data);
+                }
+            });
+        })
+
+    </script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    </script>
+
+@endsection
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Known;
+use App\Http\Requests\KnownAddressRequest;
 
 class KnownController extends Controller
 {
@@ -34,7 +35,7 @@ class KnownController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KnownAddressRequest $request)
     {
         // Stores the data for the requested fields
         $known = new Known([
@@ -43,6 +44,7 @@ class KnownController extends Controller
             'address' => $request->get('address'),
             'house_number' => $request->get('house_number'),
             'city' => $request->get('city'),
+            'township' => $request->get('township'),
         ]);
 
         $known->save(); // saves the data

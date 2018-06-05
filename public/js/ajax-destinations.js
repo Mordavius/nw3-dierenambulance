@@ -16,6 +16,7 @@ $(document).ready(function() {
                 document.getElementById("house_number").value = data[0].house_number;
                 document.getElementById("address").value = data[0].address;
                 document.getElementById("city").value = data[0].city;
+                document.getElementById("township").value = data[0].township;
                 }
         });
     });
@@ -24,6 +25,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+
     $('a[data-confirm]').click(function(ev) {
         var href = $(this).attr('href');
         if (!$('#dataConfirmModal').length) {
@@ -131,6 +133,7 @@ $(document).ready(function() {
         var type = "POST"; //for creating new resource
         var task_id = $('#task_id').val();
         var my_url = url;
+        var formMessages = $('#messages');
 
         console.log(formData);
 
@@ -142,6 +145,20 @@ $(document).ready(function() {
         dataType: 'json',
         success: function (data) {
         console.log(data);
+
+            jQuery.each(data.success, function(key, data){
+            //formMessages.removeClass('alert-danger');
+    		jQuery('.alert-success').show();
+    		jQuery('.alert-success').append('<p>Bestemming is toegevoegd.</p>');
+            console.log(data);
+            });
+
+            jQuery.each(data.errors, function(key, data){
+    		jQuery('.alert-danger').show();
+    		jQuery('.alert-danger').append('<p>'+data+'</p>');
+            });
+
+        // Make sure that the formMessages div has the 'success' class.
 
         var destination = '<tr id="destination' + data.id + '"><td>' + data.id + '</td><td>' + data.postal_code + '</td><td>'+ data.address +' '+ data.house_number + '</td>'
                 + '<td>' + data.city + '</td><td>' + data.township + '</td><td>' + data.verhicle + '</td><td>' + data.milage + '</td>';
@@ -156,7 +173,7 @@ $(document).ready(function() {
 
         $('#destination').trigger("reset");
 
-        $('#myModal').modal('hide')
+        // $('#myModal').modal('hide')
         },
         error: function (data) {
         console.log('Error:', data);
@@ -197,7 +214,7 @@ $(document).ready(function() {
 
         //delete task and remove it from list
 
-        $('.delete-task').click(function(){
+        $('.delete-task-payment').click(function(){
 
         var task_id = $(this).val();
 
@@ -253,6 +270,7 @@ $(document).ready(function() {
         var type = "POST"; //for creating new resource
         var task_id = $('#task_id').val();
         var my_url = url;
+        var append = (append === undefined ? false : true);
 
         console.log(formData);
 
@@ -265,9 +283,15 @@ $(document).ready(function() {
         success: function (data) {
         console.log(data);
 
-        var finances = '<tr id="finances' + data.id + '"><td>' + data.id + '</td><td>' + data.payment_invoice + '</td><td>'+ data.payment_gifts + '</td>'
-                + '<td>' + data.payment_method + '</td>';
-                finances += '<button class="btn btn-danger btn-xs btn-delete delete-task" value="' + data.id + '">Delete</button></td></tr>';
+
+            jQuery.each(data.errors, function(key, data){
+    		jQuery('.alert-danger').show();
+    		jQuery('.alert-danger').append('<p>'+data+'</p>');
+            });
+
+
+        var finances = '<tr id="finances' + data.id + '"><td>' + data.payment_invoice + '</td><td>'+ data.payment_gifts + '</td>'
+                + '<td>' + data.payment_method + '</td><td><button class="btn btn-danger btn-xs btn-delete delete-task-payment" value="' + data.id + '">Verwijder</button></td></tr>';
 
         if (state == "add"){ //if user added a new record
         $('#finance-list').append(finances);
@@ -275,10 +299,12 @@ $(document).ready(function() {
 
         $("#finances" + task_id).replaceWith( finances );
         }
-
         $('#finances').trigger("reset");
-
+        },
+        complete: function(data) {
+        if(data.status == 'success') {
         $('#myModal-payment').modal('hide')
+        }
         },
         error: function (data) {
         console.log('Error:', data);
@@ -286,3 +312,5 @@ $(document).ready(function() {
         });
         });
         });
+
+

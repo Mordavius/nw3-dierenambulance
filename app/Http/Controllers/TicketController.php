@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+//use App\Http\Requests;
 use App\Http\Requests\TicketUpdateRequest;
+use App\Http\Requests\TicketStoreRequest;
+//use App\Http\Requests\TicketFinanceRequest;
 use App\Ticket;
 use App\User;
 use App\Animal;
@@ -12,9 +14,10 @@ use App\Bus;
 use App\Known;
 use App\Destination;
 use App\Finance;
-use Carbon\Carbon;
+//use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
-use Response;
+use Illuminate\Support\Facades\Validator;
+use DB;
 
 class TicketController extends Controller
 {
@@ -24,7 +27,7 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
+    public function index()
     {
         $search = Input::get('search'); // Get  the input from the search field
         $tickets = Ticket::all(); // Grabs all the existing tickets
@@ -54,7 +57,32 @@ class TicketController extends Controller
         }, $coordinateStrings);
         //Animal::search(request('search'))->orderBy('created_at', 'desc')->paginate(15);
         //dd($filter);
-        return view('ticket.index', compact('tickets','animals', 'destinations', 'search', 'coordinates', 'destination_array'));
+        return view('ticket.index', compact('tickets','animals', 'destinations', 'search', 'coordinates', 'destination_array', 'ticket_id' ));
+    }
+
+    public function search(Request $request, Ticket $ticket_id)
+    {
+        if($request->ajax())
+        {
+            $output="";
+            $search=DB::table('destinations')->where('city','LIKE','%'.$request->search."%")->get();
+
+            if($search)
+            {
+                foreach ($search as $key => $city) {
+
+                    $output.='<tr>'.
+                       // '<td>'.$animals[0]->animal_species.' <br />'.$animals[0]->gender.'</td>'.
+                      //  '<td>'.$animals[0]->description.'</td>'.
+                        '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
+                      //  '<td>'.$tickets[0]->date.' '.$tickets[0]->time.'</td>'.
+                        '<td><a href="/melding/'. $ticket_id .'/edit"><i class="btn btn-primary">Aanpassen</i></a></td>'.
+                        '</tr>';
+
+                }
+                return Response($output);
+            }
+        }
     }
 
     /**
@@ -71,15 +99,43 @@ class TicketController extends Controller
 
     public function createAjax(Request $request)
     {
-        $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
-        return response()->json($destination);
+
+        $validator = Validator::make($request->all(), [
+            'postal_code' => 'required',
+            'house_number' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'township' => 'required',
+            'milage' => 'required|numeric',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+            $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
+            return response()->json($destination);
+        }
     }
 
     public function createAjaxFinance(Request $request)
     {
-        $finance = Finance::create($request->all());
-        return response()->json($finance);
+        $validator = Validator::make($request->all(), [
+            'payment_invoice' => 'required',
+            'payment_gifts' => 'required_if:payment_invoice|confirmed',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+            $finance = Finance::create($request->all());
+            return response()->json($finance);
+        }
     }
+
     public function knownusers($id){
         $knownusers = Known::where('id', $id)->get();
         return response()->json($knownusers);
@@ -91,8 +147,12 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TicketStoreRequest $request)
     {
+        $this->validate($request, [
+            'date' => 'required',
+            'time' => 'required'
+        ]);
 
         // if (Input::get('btn-add')) {
 
@@ -160,7 +220,6 @@ class TicketController extends Controller
      */
     public function edit($ticket_id)
     {
-
             //$knowns = Destination::lists('location_name', 'id');
             //$animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
             //$destination_id = Destination::where('ticket_id', $ticket_id);// Deletes destination based on ticket id

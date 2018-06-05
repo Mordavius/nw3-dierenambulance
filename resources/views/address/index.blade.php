@@ -30,6 +30,7 @@
                                             <td>Straat</td>
                                             <td>Huisnummer</td>
                                             <td>Stad</td>
+                                            <td>Gemeente</td>
                                             <td>Action</td>
                                         </tr>
                                     </thead>
@@ -41,6 +42,7 @@
                                                 <td>{{ $known->address }}</td>
                                                 <td>{{ $known->house_number }}</td>
                                                 <td>{{ $known->city }}</td>
+                                                <td>{{ $known->township }}</td>
 
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',

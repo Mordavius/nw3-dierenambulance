@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Destination extends Model
 {
     // Set the columns for storing data in the database
-    protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city', 'township', 'coordinates', 'verhicle', 'milage'];
+    protected $fillable = ['ticket_id', 'postal_code', 'address', 'house_number', 'city', 'township', 'coordinates', 'bus_type' ];
     //
 
     // Set the relationship between a destination and a ticket

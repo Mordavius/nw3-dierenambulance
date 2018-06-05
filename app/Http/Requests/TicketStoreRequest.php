@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class TicketStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,9 +19,8 @@ class UserUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Geen geldige naam ingevoerd.',
-            'email.required'  => 'Geen geldige e-mailadres ingevoerd.',
-            'password' => 'Geen geldige wachtwoord ingevoerd.',
+            'date.required' => 'Geen geldige datum ingevoerd.',
+            'time.required'  => 'Geen geldige tijd ingevoerd.',
         ];
     }
 
@@ -33,9 +32,8 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => 'required',
-            'email'    => 'email|required|unique:users,email,' . $this->route("leden"),
-            'password' => 'required_with:password_confirmation|confirmed'
+            'date'     => 'required',
+            'time'    => 'required'
         ];
     }
 }
