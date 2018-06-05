@@ -7,12 +7,12 @@ use App\Http\Requests;
 use App\Ticket;
 use App\User;
 use App\Animal;
-use App\Bus;
 use App\Destination;
 use App\Finance;
 use App\Known;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
 {
@@ -49,6 +49,51 @@ class TicketController extends Controller
             return json_decode($coordinateString);
         }, $coordinateStrings);
         return view('index', compact('animals', 'destination_array', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
+    }
+
+    public function createAjax(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'postal_code' => 'required',
+            'house_number' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'township' => 'required',
+            'milage' => 'required|numeric',
+            'verhicle' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+            $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
+            return response()->json($destination);
+        }
+    }
+
+    public function createAjaxFinance(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'payment_invoice' => 'required',
+            'payment_gifts' => 'required_if:payment_invoice|confirmed',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+            $finance = Finance::create($request->all());
+            return response()->json($finance);
+        }
+    }
+
+    public function knownusers($id){
+        $knownusers = Known::where('id', $id)->get();
+        return response()->json($knownusers);
     }
 
     public function search(Request $request, Ticket $ticket_id)
@@ -185,7 +230,7 @@ class TicketController extends Controller
         $animals = Animal::where('id', $animal_id);// Deletes animal based on animal id
         $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
-        return view("ticket.edit", compact('destinations', 'ticket', 'users', 'animals', 'loadfinances', 'loaddestination', 'known'));
+        return view("ticket.edit", compact('destinations', 'ticket', 'users', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
     }
     /**
      * Update the specified resource in storage.
