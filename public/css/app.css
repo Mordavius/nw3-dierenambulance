@@ -10565,6 +10565,10 @@ main {
   clear: both;
 }
 
+.wrapper .content h2 {
+  margin-bottom: 2.375rem;
+}
+
 .wrapper .content .btn-success {
   float: right;
   background: #288B5F;
@@ -10646,6 +10650,12 @@ main {
   margin-bottom: 1.875rem;
 }
 
+.edit_page .form-group input:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-bottom: 1px solid #000;
+}
+
 .edit_page .form-group .segmented-control {
   display: table;
   width: 100%;
@@ -10684,6 +10694,16 @@ main {
 .edit_page .form-group .segmented-control .segmented-control__item .segmented-control__input:checked + .segmented-control__label {
   background: #2D9CDB;
   color: #fff;
+}
+
+.edit_page .box-footer::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.edit_page .box-footer .btn-success {
+  float: right;
 }
 
 .logo {
@@ -10784,3 +10804,4 @@ main {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+

@@ -8,6 +8,7 @@
         </div>
     @endif
     <section class="content">
+      <h1>Toevoegen, bewerken en verwijderen van gebruikers</h1>
         <a href="../register" class="btn btn-success">
             Gebruiker toevoegen
         </a>

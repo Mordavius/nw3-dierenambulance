@@ -33,30 +33,27 @@
 <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
   <ul class="segmented-control">
     <li class="segmented-control__item">
-      <input type="radio" id="option-ambulance" value="3" name="role_id">
+      <input class="segmented-control__input" type="radio" id="option-ambulance" value="3" name="role_id">
       <label class="segmented-control__label" for="option-ambulance" value="Ambulance">Ambulance</label>
     </li>
     <li class="segmented-control__item">
-      <input type="radio" id="option-centralist" value="2" name="role_id">
+      <input class="segmented-control__input" type="radio" id="option-centralist" value="2" name="role_id">
       <label class="segmented-control__label" for="option-centralist" value="Centralist">Centralist</label>
     </li>
     <li class="segmented-control__item">
-      <input type="radio" id="option-beheerder" value="1" name="role_id">
+      <input class="segmented-control__input" type="radio" id="option-beheerder" value="1" name="role_id">
       <label class="segmented-control__label" for="option-beheerder" value="Beheerder">Beheerder</label>
     </li>
   </ul>
   @if($errors->has('role_id'))
-          <span class="help-block">
-              {{  $errors->first('role_id') }}
-          </span>
-      @endif
+      <span class="help-block">
+          {{  $errors->first('role_id') }}
+      </span>
+  @endif
   </div>
 </div>
 <div class="box-footer">
-    <button type="submit" class="btn btn-succes">
+    <button type="submit" class="btn btn-success">
         {{ $user->exists ? 'Bijwerken' : 'Save' }}
     </button>
-    <a href="../" class="btn btn-default">
-        Cancel
-    </a>
 </div>

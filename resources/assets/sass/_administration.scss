@@ -15,6 +15,11 @@
     padding-top: 0;
     @include clearfix;
 
+    h2
+    {
+      margin-bottom: rem-calc(38);
+    }
+
     .btn-success
     {
       float: right;
