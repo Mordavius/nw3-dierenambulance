@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/cssgrid.css') }}">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @extends('layouts.app')
 
 @section('content')
@@ -28,13 +30,6 @@
         </div>
         <div class="grid_main">
 
-                <meta name="_token" content="{{ csrf_token() }}">
-                <title>Live Search</title>
-                <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-
-                        </div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <input type="text" class="form-controller" id="search" name="search">
