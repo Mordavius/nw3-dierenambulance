@@ -143,7 +143,7 @@ class TicketController extends Controller
             return json_decode($coordinateString);
         }, $coordinateStrings);
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
-        return view('ticket.create', compact('animals', 'unfinishedtickets', 'destinations', 'coordinates', 'user', 'ticket', 'coordinates'));
+        return view('ticketcreate', compact('animals', 'unfinishedtickets', 'destinations', 'coordinates', 'user', 'ticket', 'coordinates'));
     }
 
     /**

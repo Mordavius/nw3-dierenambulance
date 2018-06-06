@@ -370,7 +370,7 @@ button:focus{
 .priority_label{
     grid-column: 1/3;
 }
-@media (min-width: 1200px) {
+@media (min-width: 600px) {
     .current_page{
         width: 100%;
     }
