@@ -16,7 +16,7 @@
         <img id="filter-icon" src="/images/filter-icon.png">
     </div>
 </div>
-<a href="/melding/create">
+    <a href="/melding/create">
     <button class="round">
         <img src="../images/plus.png" class="rotate-button"/>
     </button>

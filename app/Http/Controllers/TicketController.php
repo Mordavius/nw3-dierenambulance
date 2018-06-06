@@ -77,8 +77,8 @@ class TicketController extends Controller
     public function createAjaxFinance(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'payment_invoice' => 'required',
-            'payment_gifts' => 'required_if:payment_invoice|confirmed',
+            'payment_invoice' => 'required_without:payment_gifts',
+            'payment_gifts' => 'required_without:payment_invoice',
         ]);
 
         if ($validator->fails())
