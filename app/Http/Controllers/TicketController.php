@@ -77,8 +77,8 @@ class TicketController extends Controller
     public function createAjaxFinance(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'payment_invoice' => 'required',
-            'payment_gifts' => 'required_if:payment_invoice|confirmed',
+            'payment_invoice' => 'required_without:payment_gifts',
+            'payment_gifts' => 'required_without:payment_invoice',
         ]);
 
         if ($validator->fails())
@@ -309,5 +309,25 @@ class TicketController extends Controller
         // }
         // Ticket::findOrFail($ticket_id)->delete(); // Grabs the ticket with the correct id and deletes the ticket
         // return redirect('/melding')->with('message', 'Melding is verwijderd');
+    }
+
+    public function destroyAjax($task_id) {
+        try {
+            $task = Destination::destroy($task_id);
+            return response()->json($task);
+        }
+        catch (\Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    public function destroyAjaxPayment($task_id) {
+        try {
+            $task = Finance::destroy($task_id);
+            return response()->json($task);
+        }
+        catch (\Exception $e) {
+            return response()->json($e);
+        }
     }
 }
