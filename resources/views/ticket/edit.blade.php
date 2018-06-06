@@ -184,6 +184,12 @@
                                         </div>
                                         <div class="modal-body" id="messages">
 
+                                            @if (session('status'))
+                                                <div class="alert alert-success">
+                                                    {{ session('status') }}
+                                                </div>
+                                            @endif
+
                                             <div class="alert-danger" style="display:none"></div>
 
                                             <div class="form-group {{ $errors->has('known') ? 'has-error' : '' }}">

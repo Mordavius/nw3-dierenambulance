@@ -79,11 +79,11 @@ $(document).ready(function() {
 
                 if(confirm("Bestemming verwijderen?")) {
 
-                                $.ajaxSetup({
-                                                headers: {
-                                                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                                }
-                                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                    });
 
                 $.ajax({
 
@@ -91,8 +91,8 @@ $(document).ready(function() {
                 url: url + '/' + task_id,
                 success: function (data) {
                 console.log(data);
-
-                $("#destination" + task_id).remove();
+                    location.reload();
+                    $("#destination" + task_id).remove();
                 },
                 error: function (data) {
                 console.log('Error:', data);
@@ -117,14 +117,14 @@ $(document).ready(function() {
                 e.preventDefault();
 
                 var formData = {
-                                ticket_id: $('#ticket_id').val(),
-                                postal_code: $('#postal_code').val(),
-                                address: $('#address').val(),
-                                house_number: $('#house_number').val(),
-                                city: $('#city').val(),
-                                township: $('#township').val(),
-                                verhicle: $('#verhicle').val(),
-                                milage: $('#milage').val(),
+                    ticket_id: $('#ticket_id').val(),
+                    postal_code: $('#postal_code').val(),
+                    address: $('#address').val(),
+                    house_number: $('#house_number').val(),
+                    city: $('#city').val(),
+                    township: $('#township').val(),
+                    verhicle: $('#verhicle').val(),
+                    milage: $('#milage').val(),
                 }
 
                 //used to determine the http verb to use [add=POST], [update=PUT]
@@ -146,29 +146,22 @@ $(document).ready(function() {
                 success: function (data) {
                 console.log(data);
 
-                        jQuery.each(data.success, function(key, data){
-                        //formMessages.removeClass('alert-danger');
-        		jQuery('.alert-success').show();
-        		jQuery('.alert-success').append('<p>Bestemming is toegevoegd.</p>');
-                        console.log(data);
+                $empty = $('#myModal').find("input").filter(function() {
+                        return this.value === "";
+                    });
+
+                if($empty.length) {
+                    jQuery.each(data.errors, function(key, data){
+        		    jQuery('.alert-danger').show();
+        		    jQuery('.alert-danger').append('<p>'+data+'</p>');
                         });
-
-                        jQuery.each(data.errors, function(key, data){
-        		jQuery('.alert-danger').show();
-        		jQuery('.alert-danger').append('<p>'+data+'</p>');
-                        });
-
-                // Make sure that the formMessages div has the 'success' class.
-
-                var destination = '<tr id="destination' + data.id + '"><td>' + data.id + '</td><td>' + data.postal_code + '</td><td>'+ data.address +' '+ data.house_number + '</td>'
-                                + '<td>' + data.city + '</td><td>' + data.township + '</td><td>' + data.verhicle + '</td><td>' + data.milage + '</td>';
-                                destination += '<button class="btn btn-danger btn-xs btn-delete delete-task" value="' + data.id + '">Delete</button></td></tr>';
+                }
 
                 if (state == "add"){ //if user added a new record
-                $('#tasks-list').append(destination);
+                    location.reload();
+                    $('#tasks-list').append(destination);
                 }else{ //if user updated an existing record
-
-                $("#destination" + task_id).replaceWith( destination );
+                    $("#destination" + task_id).replaceWith( destination );
                 }
 
                 $('#destination').trigger("reset");
@@ -220,53 +213,50 @@ $(document).ready(function() {
 
                 if(confirm("Betaling verwijderen?")) {
 
-                                $.ajaxSetup({
-                                                headers: {
-                                                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                                }
-                                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                });
 
                 $.ajax({
-
-                type: "DELETE",
-                url: url + '/' + task_id,
-                success: function (data) {
-                console.log(data);
-
-                $("#finances" + task_id).remove();
+                    type: "DELETE",
+                    url: url + '/' + task_id,
+                    success: function (data) {
+                    console.log(data);
+                        location.reload();
+                        $("#finances" + task_id).remove();
                 },
-                error: function (data) {
-                console.log('Error:', data);
+                    error: function (data) {
+                    console.log('Error:', data);
                 }
                 });
                 }
                 else
                 {
-                        return false;
+                    return false;
                 }
                 });
 
-
                 //create new task / update existing task
                 $("#btn-save-payment").click(function (e) {
-                $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                }
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
                 })
 
                 e.preventDefault();
 
                 var formData = {
-                                ticket_id: $('#ticket_id').val(),
-                                payment_invoice: $('#payment_invoice').val(),
-                                payment_gifts: $('#payment_gifts').val(),
-                                payment_method: $('#payment_method').val(),
+                    ticket_id: $('#ticket_id').val(),
+                    payment_invoice: $('#payment_invoice').val(),
+                    payment_gifts: $('#payment_gifts').val(),
+                    payment_method: $('#payment_method').val(),
                 }
 
                 //used to determine the http verb to use [add=POST], [update=PUT]
                 var state = $('#btn-save-payment').val();
-
                 var type = "POST"; //for creating new resource
                 var task_id = $('#task_id').val();
                 var my_url = url;
@@ -275,39 +265,40 @@ $(document).ready(function() {
                 console.log(formData);
 
                 $.ajax({
+                    type: type,
+                    url: my_url,
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+                    console.log(data);
 
-                type: type,
-                url: my_url,
-                data: formData,
-                dataType: 'json',
-                success: function (data) {
-                console.log(data);
+                $empty = $('#myModal').find("input").filter(function() {
+                        return this.value === "";
+                    });
 
-
-                        jQuery.each(data.errors, function(key, data){
-        		jQuery('.alert-danger').show();
-        		jQuery('.alert-danger').append('<p>'+data+'</p>');
+                if($empty.length) {
+                    jQuery.each(data.errors, function(key, data){
+        		    jQuery('.alert-danger').show();
+        		    jQuery('.alert-danger').append('<p>'+data+'</p>');
                         });
-
-
-                var finances = '<tr id="finances' + data.id + '"><td>' + data.payment_invoice + '</td><td>'+ data.payment_gifts + '</td>'
-                                + '<td>' + data.payment_method + '</td><td><button class="btn btn-danger btn-xs btn-delete delete-task-payment" value="' + data.id + '">Verwijder</button></td></tr>';
+                }
 
                 if (state == "add"){ //if user added a new record
-                $('#finance-list').append(finances);
-                }else{ //if user updated an existing record
+                    $('#finance-list').append(finances);
+                    location.reload();
+                }else { //if user updated an existing record
 
-                $("#finances" + task_id).replaceWith( finances );
+                    $("#finances" + task_id).replaceWith( finances );
                 }
-                $('#finances').trigger("reset");
+                    $('#finances').trigger("reset");
                 },
                 complete: function(data) {
-                if(data.status == 'success') {
-                $('#myModal-payment').modal('hide')
+                    if(data.status == 'success') {
+                    $('#myModal-payment').modal('hide')
                 }
                 },
-                error: function (data) {
-                console.log('Error:', data);
+                    error: function (data) {
+                    console.log('Error:', data);
                 }
                 });
                 });
