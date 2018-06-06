@@ -113,6 +113,16 @@ button:focus{
     height: 55px;
     background-color: #FFFFFF;
 }
+.footer_button_submit{
+    position: fixed;
+    z-index: 999;
+    bottom: 16;
+    right: 10;
+    background-color: #FFFFFF;
+    border: 0;
+    color: #238644;
+    font-size: 14px;
+}
 
 .pages{
     position: absolute;
@@ -127,15 +137,22 @@ button:focus{
     margin-left: 0%;
     visibility: visible;
 }
-#footer_button{
+.footer_button{
     position: fixed;
     color: #238644;
     font-size: 14px;
     margin: auto;
     background-color: #FFFFFF;
+    border: 0;
+}
+#footer_button_forward{
     right: 12px;
     margin-top: 15px;
-    border: 0;
+}
+#footer_button_back{
+    left: 12px;
+    margin-top: 15px;
+    visibility: hidden;
 }
 .searchStuff{
     width: 100%;
@@ -162,8 +179,7 @@ button:focus{
 .address_info_grid{
     font-size: 14px;
     text-align: center;
-    width: 75%;
-    float: left;
+    width: 90%;
     display: inline-block;
     margin: 0 auto;
 }

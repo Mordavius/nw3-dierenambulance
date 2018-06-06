@@ -134,11 +134,13 @@ var app = angular.module("app", [])
 
         });
     }
-    $('#footer_button').click(next);
+    $('#footer_button_forward').click(next);
+    $('#footer_button_back').click(back);
+
     function next() {
-        var highlighted = document.getElementsByClassName("highlighted")[0];
         if(page1.className == "pages current_page")
         {
+            footer_button_back.style.visibility = "visible";
             page1.style.marginLeft = "-100%";
             page2.style.marginLeft = "0%";
             page2.style.height = "84%"
@@ -149,8 +151,8 @@ var app = angular.module("app", [])
             ticket_information.number = number_text_field.value;
             $scope.map.invalidateSize();
             page1.className = "pages";
-            circle1.className = "circle circle1";
-            circle2.className = "circle circle2 highlighted";
+            circle1.className = "circle";
+            circle2.className = "circle highlighted";
 
         }else if(page2.className == "pages current_page")
          {
@@ -168,8 +170,8 @@ var app = angular.module("app", [])
             city_field.innerHTML = "";
             township_field.innerHTML = "";
             page2.className = "pages";
-            circle2.className = "circle circle2";
-            circle3.className = "circle circle3 highlighted";
+            circle2.className = "circle";
+            circle3.className = "circle highlighted";
         }else if(page3.className == "pages current_page")
         {
             page3.style.marginLeft = "-100%";
@@ -187,21 +189,56 @@ var app = angular.module("app", [])
             $scope.map2.invalidateSize();
             loadTicketInformation();
             page3.className = "pages";
-            circle3.className = "circle circle3";
-            circle4.className = "circle circle4 highlighted";
+            circle3.className = "circle";
+            circle4.className = "circle highlighted";
        }else if(page4.className == "pages current_page")
        {
-          footer.style.display = "none";
+          footer_button_forward.style.visibility = "hidden";
           ticket_information.priority = priority_field.value;
           page4.style.marginLeft = "-100%";
           page5.style.marginLeft = "0%";
           page5.className = "pages current_page";
           page4.className = "pages";
-          circle4.className = "circle circle4";
-          circle5.className = "circle circle5 highlighted";
+          circle4.className = "circle";
+          circle5.className = "circle highlighted";
           loadTicketInformation();
           console.log(ticket_information);
       }
+    }
+
+    function back() {
+        if(page2.className == "pages current_page")
+         {
+            footer_button_back.style.visibility = "hidden";
+            page2.style.marginLeft = "-100%";
+            page1.style.marginLeft = "0%";
+            page1.className = "pages current_page";
+            page2.className = "pages";
+            circle2.className = "circle";
+            circle1.className = "circle highlighted";
+        }else if(page3.className == "pages current_page"){
+            page3.style.marginLeft = "-100%";
+            page2.style.marginLeft = "0%";
+            page2.className = "pages current_page";
+            page3.className = "pages";
+            circle3.className = "circle";
+            circle2.className = "circle highlighted";
+       }else if(page4.className == "pages current_page"){
+           page4.style.marginLeft = "-100%";
+           page3.style.marginLeft = "0%";
+           page3.className = "pages current_page";
+           page4.className = "pages";
+           circle4.className = "circle";
+           circle3.className = "circle highlighted";
+      }else if(page5.className == "pages current_page"){
+          footer_button_forward.style.visibility = "visible";
+          page5.style.marginLeft = "-100%";
+          page4.style.marginLeft = "0%";
+          page4.className = "pages current_page";
+          page5.className = "pages";
+          circle5.className = "circle";
+          circle4.className = "circle highlighted";
+     }
     }
     function loadTicketInformation(){
         animal_title.innerHTML += ticket_information.selected_animal;
