@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TicketExport;
 use App\Quarterfinance;
 use Illuminate\Support\Facades\Storage;
+use App\User;
 
 
 class AdministrationController extends Controller

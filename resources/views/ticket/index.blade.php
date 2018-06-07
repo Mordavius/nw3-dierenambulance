@@ -24,18 +24,34 @@
             <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
                 {!! Form::label('Laat meldingen zien vanaf') !!}
                 <!--{!! Form::select('filter', ["alles", "week", "month", "year"]) !!}-->
-                <select id="tf" onchange="filterTickets()">
+                    <select id="times">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+
+                    <select id="tf" onclick="filterTickets()">
+                        <option>Filter</option>
                     <option value="everything">
                         Alles
                     </option>
                     <option value="week">
-                        week
+                        Weken
                     </option>
                     <option value="month">
-                        Maand
+                        Maanden
                     </option>
                     <option value="year">
-                        Jaar
+                        Jaren
                     </option>
                 </select>
                 @if($errors->has('filter'))
@@ -180,7 +196,7 @@
                         </div>
                         <br />
                         <br />
-                        <h4>
+                        <h4 id="finishedtext">
                             Afgeronde meldingen
                         </h4>
                         <div class="box-body ">
@@ -206,48 +222,7 @@
                                             <td>Action</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach($tickets as $ticket)
-                                            @if($ticket->finished == '1')
-                                            <tr>@foreach($animals as $animal)
-                                                @if($ticket->animal_id == $animal->id)
-                                                    <td>{{ $animal->animal_species }}
-                                                    <br />
-                                                    {{ $animal->gender}}</td>
-                                                    <td>{{$animal->description}}</td>
-                                                @endif
-                                            @endforeach
-                                                @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)
-                                                    <td>
-                                                        {{ $destination->address }} {{ $destination->house_number }}
-                                                        <br />
-                                                        {{ $destination->postal_code }}, {{ $destination->city }}
-                                                    </td>
-                                                    @endif
-                                                @endforeach
-                                                <td>{{ $ticket->date }}
-                                                {{ $ticket->time }}</td>
-                                                <td>
-                                                    {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $ticket->id],
-                                                    'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $ticket->id) }}">
-                                                            <i class="btn btn-primary">Aanpassen</i>
-                                                        </a>
-                                                        <br />
-                                                        <a href="{{ route('melding.show', $ticket->id) }}">
-                                                            <i class="btn btn-primary">Bekijk</i>
-                                                        </a>
-                                                        <br />
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <i>Verwijderen</i>
-                                                        </button>
-                                                    {!! Form::close() !!}
-                                                </td>
-                                            </tr>
-                                            @endif
-                                        @endforeach
+                                    <tbody id="finished">
                                     </tbody>
                                 </table>
                             @endif
@@ -259,10 +234,10 @@
         <div class="col-md-12" id="target2" style="display:none;">
 
             <div ng-app="app">
-                    <div ng-controller="TableController" >
-                        <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
-                        </div>
-                      </div>
+                <div ng-controller="TableController" >
+                    <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
+                    </div>
+                </div>
             </div>
         </div>
         <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>

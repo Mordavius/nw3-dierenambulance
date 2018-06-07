@@ -207,8 +207,6 @@ class TicketController extends Controller
 
         $animal->save(); // Saves the data
         $ticket->save(); // Saves the data
-
-
             return redirect('/melding')->with('message', 'Melding is geupdate');
         }
 
@@ -235,6 +233,23 @@ class TicketController extends Controller
             // return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 
+    public function destroyTicketAjax($ticket_id)
+    {
+        // try {
+        // $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
+        //dd($animal_id);
+        Destination::where('ticket_id', $ticket_id)->delete();// Deletes destination based on ticket id
+        //Animal::where('id', $animal_id)->delete();// Deletes animal based on animal id
+        Ticket::findOrFail($ticket_id)->delete();// Grabs the ticket with the correct id and deletes the ticket
+        //return redirect('/melding')->with('message', 'Melding is verwijderd');
+        return response()->json('Ticket verwijdert', 200);
+        // } catch (\Exception $e) {
+        //     return view('auth.error')->with('message', 'Mag niet');
+        // }
+        // Ticket::findOrFail($ticket_id)->delete(); // Grabs the ticket with the correct id and deletes the ticket
+        // return redirect('/melding')->with('message', 'Melding is verwijderd');
+    }
+
     public function destroyAjax($task_id) {
         try {
             $task = Destination::destroy($task_id);
@@ -256,7 +271,44 @@ class TicketController extends Controller
     }
 
     public function filterTickets(Request $request){
-        return $request->date;
+        $amount = $request->amount;
+        switch ($request->date){
+            case 'week':
+                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Weeks"));
+                break;
+            case 'month':
+                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Months"));
+                break;
+            case 'year':
+                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Years"));
+                break;
+            default:
+                $date = date("Y-m-d h:i:s",strtotime("-1000 Years"));
+        }
+        $ticket = Ticket::query()->whereBetween('date', [$date, date(now())]);
+        $tickets_id = $ticket->pluck('id');
+
+        $destination_array = [];
+        $animals = [];
+
+        foreach($tickets_id as $ticket_id)
+        {
+            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
+            array_push($animals, Animal::where('ticket_id', $ticket_id)->first());
+        }
+
+        $destination_array;
+        $animals;
+        //$animals = Animal::all();
+
+        return response()->json(['tickets' =>  $ticket->get(), 'destinations'=>$destination_array, 'animals'=>$animals], 200);
+
+        // Grabs all te existing animals
+//        $coordinateStrings = $destinations->pluck('coordinates')->toArray(); //Grabs the coordinates and puts it into an array.
+//        //Decodes the array for better formatting.
+//        $coordinates = array_map(function ($coordinateString) {
+//            return json_decode($coordinateString);
+//        }, $coordinateStrings);
     }
 
 }

@@ -30,6 +30,7 @@ class QuartelyTicketExport implements FromQuery, WithHeadings
     // Grab all data from tickets between now and 3 months ago
     public function query()
     {
-        return Ticket::query()->select(['date','address','gifts'])->whereBetween('date', [$this->quarter, date(now())]);
+        return Ticket::all();
+        //return Ticket::query()->select(['date','address','gifts'])->whereBetween('date', [$this->quarter, date(now())]);
     }
 }

@@ -22,6 +22,6 @@ $this->middleware('auth', ['except' => ['/mail', '/location/show/{id}', '/locati
 Route::post('/mail', 'LocationController@askLocationMail');
 Route::post('/sms', 'LocationController@askLocationSMS');
 Route::get('/location/show/{id}', 'LocationController@getLocation');
-Route::get('/ticketfilter/{date}', 'TicketController@filterTickets');
+Route::get('/ticketfilter/{amount}/{date}', 'TicketController@filterTickets');
 Route::post('/location/write', 'LocationController@writeLocation');
 // Route::get('/coordinates/show/{active}', 'LocationController@markersOnCoordinates')

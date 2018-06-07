@@ -89,7 +89,7 @@ Route::post('/finances/{ticket_id?}', 'TicketController@createAjaxFinance')->mid
 
 Route::delete('/destination/{task_id?}', 'TicketController@destroyAjax')->middleware('auth');
 Route::delete('/finances/{task_id?}', 'TicketController@destroyAjaxPayment')->middleware('auth');
-
+Route::delete('/tickets/{ticket_id?}', 'TicketController@destroyTicketAjax')->middleware('auth');
 
 Route::get('/knownusers/{id}', 'TicketController@knownusers')->middleware('auth');
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
