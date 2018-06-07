@@ -60,14 +60,10 @@
             <div class="reporter_info">
                 <div class="name">
                     <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
-                    <div class="line">
-                    </div>
                 </div>
                 <br />
                 <div class="phone_number">
                     <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">
-                    <div class="line">
-                    </div>
                 </div>
             </div>
         </div>

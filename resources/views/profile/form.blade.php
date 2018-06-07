@@ -1,5 +1,5 @@
 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('name', null, ['placeholder' => 'Naam']) !!}
     @if($errors->has('name'))
         <span class="help-block">
             {{ $errors->first('name') }}
@@ -7,7 +7,7 @@
     @endif
 </div>
 <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-    {!! Form::text('email', null, ['class' => 'form-control']) !!}
+    {!! Form::text('email', null, ['placeholder' => 'E-mail']) !!}
     @if($errors->has('email'))
         <span class="help-block">
             {{ $errors->first('email') }}
@@ -15,7 +15,7 @@
     @endif
 </div>
 <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-    {!! Form::password('password', ['class' => 'form-control']) !!}
+    {!! Form::password('password', [ 'placeholder' => 'Wachtwoord']) !!}
     @if($errors->has('password'))
         <span class="help-block">
             {{ $errors->first('password') }}
@@ -23,7 +23,7 @@
     @endif
 </div>
 <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-    {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+    {!! Form::password('password_confirmation', ['placeholder' => 'Wachtwoord bevestigen']) !!}
     @if($errors->has('password_confirmation'))
         <span class="help-block">
             {{ $errors->first('password_confirmation') }}
