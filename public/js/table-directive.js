@@ -47,8 +47,12 @@ var app = angular.module("app", [])
 	}
 
     var coords = $('#map2').data('coordinates')
+
 	coords.forEach(function(coord){
-		placeMarker(coord);
+
+        if (coord != null) {
+            placeMarker(coord);
+        }
 	})
 
 	function placeMarker(i){

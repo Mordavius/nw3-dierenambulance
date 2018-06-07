@@ -252,12 +252,16 @@
                                             </div>
 
                                             <div class="form-group {{ $errors->has('verhicle') ? 'has-error' : '' }}">
-                                                {!! Form::label('Voertuig') !!}
-                                                {!! Form::select('Voertuig', array('bus' => 'Bus', 'caddy' => 'Caddy'), 'default', array('id' => 'verhicle')); !!}
+                                                {!! Form::label('Voertuig') !!} <br />
+                                                <select name="verhicle" id="verhicle">
+                                                    @foreach($bus as $buses)
+                                                        <option value="{{$buses}}">{{$buses}}</option>
+                                                    @endforeach
+                                                </select>
                                                 @if($errors->has('verhicle'))
                                                     <span class="help-block">
-                                                    {{ $errors->first('verhicle') }}
-                                                </span>
+                                                        {{ $errors->first('verhicle') }}
+                                                    </span>
                                                 @endif
                                             </div>
 

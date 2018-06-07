@@ -186,7 +186,7 @@
                     <div class="bus_name_title">
                          Bus
                     </div>
-
+                    <br />
                     <div class="bus_task_list">
                         @foreach($destinations as $destination)
                             <div class="ticket">
@@ -292,7 +292,19 @@
 
                 <div class="priority_new_ticket">
                     <label class="priority_label">Prioriteit</label>
-                    <label class="ticket_text_field" class="bus">Sprinter</label>
+                    <div class="form-group {{ $errors->has('verhicle') ? 'has-error' : '' }}">
+                        {!! Form::label('Selecteer het voertuig voor de melding') !!} <br />
+                        <select name="verhicle" id="verhicle">
+                            @foreach($bus as $buses)
+                                <option value="{{$buses}}">{{$buses}}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('verhicle'))
+                            <span class="help-block">
+                                {{ $errors->first('verhicle') }}
+                            </span>
+                        @endif
+                    </div>
                     <input class="ticket_text_field" type="label" name="priority" id="priority"/>
                 </div>
             </div>

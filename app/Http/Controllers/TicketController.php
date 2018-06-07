@@ -10,8 +10,9 @@ use App\Animal;
 use App\Destination;
 use App\Finance;
 use App\Known;
-use Carbon\Carbon;
+use App\Bus;
 use DB;
+use App\Http\Requests\TicketStoreRequest;
 use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
@@ -53,7 +54,6 @@ class TicketController extends Controller
 
     public function createAjax(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'postal_code' => 'required',
             'house_number' => 'required',
@@ -61,7 +61,6 @@ class TicketController extends Controller
             'city' => 'required',
             'township' => 'required',
             'milage' => 'required|numeric',
-            'verhicle' => 'required',
         ]);
 
         if ($validator->fails())
@@ -128,6 +127,7 @@ class TicketController extends Controller
      */
     public function create(Ticket $ticket)
     {
+        $bus = Bus::all('bus_type')->pluck("bus_type");
         $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->get();
         $unfinishedtickets_id = Ticket::where('finished', '0')->orderBy('date', 'desc')->pluck('id');
         $animals = Animal::all();
@@ -143,7 +143,7 @@ class TicketController extends Controller
             return json_decode($coordinateString);
         }, $coordinateStrings);
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
-        return view('ticketcreate', compact('animals', 'unfinishedtickets', 'destinations', 'coordinates', 'user', 'ticket', 'coordinates'));
+        return view('ticketcreate', compact('animals','bus', 'unfinishedtickets', 'destinations', 'coordinates', 'user', 'ticket', 'coordinates'));
     }
 
     /**
@@ -152,7 +152,7 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TicketStoreRequest $request)
     {
         // Stores the data for the requested fields
         $animal = new Animal([
@@ -188,12 +188,12 @@ class TicketController extends Controller
             'township' => $request->get('township'),
             'coordinates' => $request->get('coordinates'),
             'ticket_id' => $ticket->id,
+            'verhicle' => $request->get('verhicle'),
         ]);
        // $ticket->destination->save($ticket);
       //  $ticket ->destination()->associate($destination);
 
         $destination->save();// Saves the data
-
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }
@@ -220,6 +220,7 @@ class TicketController extends Controller
      */
     public function edit($ticket_id)
     {
+        $bus = Bus::all('bus_type')->pluck("bus_type");
         $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
         //$destination_id = Destination::where('ticket_id', $ticket_id);// Deletes destination based on ticket id
         $destinations = Destination::where('ticket_id', $ticket_id)->get();
@@ -230,7 +231,7 @@ class TicketController extends Controller
         $animals = Animal::where('id', $animal_id);// Deletes animal based on animal id
         $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
-        return view("ticket.edit", compact('destinations', 'ticket', 'users', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
+        return view("ticket.edit", compact('destinations', 'bus', 'ticket', 'users', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
     }
     /**
      * Update the specified resource in storage.
