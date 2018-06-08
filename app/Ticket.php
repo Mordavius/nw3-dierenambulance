@@ -9,7 +9,7 @@ class Ticket extends Model
 {
     // Set the columns for storing data in the database
     protected $fillable = [ 'priority', 'bus_id' , 'animal_id', 'finance_id', 'date','time', 'centralist',
-    'reporter_name', 'telephone', 'driver', 'passenger'];
+    'reporter_name', 'telephone', 'driver', 'passenger', 'milage'];
 
     // Tickets could have many destinations
     public function destination()
@@ -30,15 +30,6 @@ class Ticket extends Model
         return $this->hasOne('App\Bus');
     }
 
-    public function scopeSearch($query, $search)
-    {
-        // Search function for searching on destinations
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->orWhere('city', 'LIKE', "%{$search}%");
-            });
-        }
-    }
     /**
      * @param $query
      * @param $search

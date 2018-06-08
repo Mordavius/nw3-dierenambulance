@@ -142,7 +142,6 @@
                                          @endif
                                         </div>
                                         <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
-                                        <div class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}">
                                         <div autocomplete="name" class="form-group {{ $errors->has('centralist') ? 'has-error' : '' }}" >
                                             {!! Form::label('Centralist') !!}
                                             {!! Form::select('centralist', $user, ['class' => 'form-control', 'id' => 'centralist', 'autocomplete' => "name"]) !!}

@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\BusChange;
 use App\User;
-use App\Profile;
+use App\Bus;
+use App\Http\Controllers\Input;
 
 class BusChangeController extends Controller
 {
@@ -50,17 +51,21 @@ class BusChangeController extends Controller
           'bus' => $request->get('bus'),
           'from' => $request->get('from'),
           'to' => $request->get('to'),
-          'kilometerstraveled' => $request->get('kilometerstraveled'),
+          'milage' => $request->get('milage'),
           'date' => $request->get('date'),
         ]);
 
         // Validates the requested data
         $request->validate([
-          'date' => 'required',
-          'kilometerstraveled' => 'required',
+          'milage' => 'required',
         ]);
 
         $buschange->save(); // saves the data
+
+        $bus = $request->get('bus');
+        $milage = BusChange::get(['milage'])->last()->toArray();
+
+        Bus::where('bus_type', $bus)->update($milage);
 
         return redirect('/buswissel')->with('success', 'Nieuwe buswissel is aangemaakt!');
     }

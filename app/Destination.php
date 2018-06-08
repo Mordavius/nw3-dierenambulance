@@ -15,15 +15,4 @@ class Destination extends Model
     {
         return $this->belongsTo('App\Ticket', 'destination_id', 'id');
     }
-
-    // Search function which searches on the animal species
-    public function scopeSearch($query, $search)
-    {
-         // Search function for searching on destinations
-        if ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->orWhere('city', 'LIKE', "%{$search}%");
-            });
-        }
-    }
 }

@@ -20,6 +20,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
                     {!! Form::model($buschange, [
                         'method' => 'POST',
                         'route' => 'buswissel.store'])
@@ -49,32 +50,51 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="form-group{{ $errors->has('from') ? 'has-error' : ''}}">
-                            {!! Form::label('van') !!}
-                            {!! Form::select('from',$users) !!}
 
+                        <div class="form-group {{ $errors->has('from') ? 'has-error' : '' }}">
+                            {!! Form::label('Van') !!} <br />
+                            <select name="from" id="from">
+                                @foreach($users as $user)
+                                    <option value="{{$user}}">{{$user}}</option>
+                                @endforeach
+                            </select>
                             @if($errors->has('from'))
-                                <span class="help-block">{{ $errors->first('from') }}</span>
+                                <span class="help-block">
+                                    {{ $errors->first('from') }}
+                                </span>
                             @endif
                         </div>
-                        <div class="form-group{{ $errors->has('to') ? 'has-error' : ''}}">
-                            {!! Form::label('naar') !!}
-                            {!! Form::select('to', $users) !!}
 
+                        <div class="form-group {{ $errors->has('to') ? 'has-error' : '' }}">
+                            {!! Form::label('Naar') !!} <br />
+                            <select name="to" id="to">
+                                @foreach($users as $user)
+                                    <option value="{{$user}}">{{$user}}</option>
+                                @endforeach
+                            </select>
                             @if($errors->has('to'))
-                                <span class="help-block">{{ $errors->first('to') }}</span>
+                                <span class="help-block">
+                                        {{ $errors->first('to') }}
+                                    </span>
                             @endif
                         </div>
-                        <div class="form-group{{ $errors->has('kilometerstraveled') ? 'has-error' : ''}}">
-                            {!! Form::label('Kilometerstand') !!}
-                            {!! Form::text('kilometerstraveled', null, ['class' => 'form-control']) !!}
 
-                            @if($errors->has('kilometerstraveled'))
-                              <span class="help-block">{{ $errors->first('kilometerstraveled') }}</span>
+                        <div class="form-group{{ $errors->has('milage') ? 'has-error' : ''}}">
+                            {!! Form::label('Kilometerstand') !!}
+                            {!! Form::text('milage', null, ['class' => 'form-control']) !!}
+
+                            @if($errors->has('milage'))
+                              <span class="help-block">{{ $errors->first('milage') }}</span>
                             @endif
                         </div>
+
+
+
                         {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
                     {!! Form::close()   !!}
+
+
+
                 </div>
             </div>
         </div>

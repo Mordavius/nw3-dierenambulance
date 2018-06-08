@@ -16,7 +16,6 @@ class CreateTicketTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('animal_id');
-            $table->integer('finance_id')->nullable();
             $table->integer('bus_id')->nullable();
             $table->date('date');
             $table->time('time');
@@ -28,6 +27,7 @@ class CreateTicketTable extends Migration
             $table->tinyInteger('finished')->default('0')->length('1');
             $table->integer('priority');
             $table->timestamps();
+            // finance tables
         });
     }
 
