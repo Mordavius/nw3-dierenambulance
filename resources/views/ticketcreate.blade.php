@@ -60,14 +60,10 @@
             <div class="reporter_info">
                 <div class="name">
                     <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
-                    <div class="line">
-                    </div>
                 </div>
                 <br />
                 <div class="phone_number">
                     <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">
-                    <div class="line">
-                    </div>
                 </div>
             </div>
         </div>
@@ -296,12 +292,13 @@
                     <input class="ticket_text_field" type="label" name="priority" id="priority"/>
                 </div>
             </div>
-            <input class="footer" type="submit" name="" value="Opslaan">
+            <input class="footer_button_submit" type="submit" name="" value="Opslaan">
             {!! Form::close() !!}
         </div>
     </div>
 </div>
 <div class="footer" id="footer">
+    <button id="footer_button_back" class="footer_button">< Terug</button>
     <div class="address_info_grid">
         <span contenteditable="true" class="address_info" name="address" id="address_field"></span>
         <span contenteditable="true" class="address_info" name="house_number" id="house_number_field"></span>
@@ -317,7 +314,7 @@
         <input type="text" class="address_info township" placeholder="Gemeente" name="township" id="township_field"/> -->
         <input type="hidden" name="coordinates" id="coordinates_field"/>
     </div>
-    <button id="footer_button">Volgende ></button>
+    <button id="footer_button_forward" class="footer_button">Volgende ></button>
 </div>
 @endsection
 @section('scripts')

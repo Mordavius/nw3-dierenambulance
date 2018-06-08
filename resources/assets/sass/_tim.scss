@@ -1,6 +1,10 @@
 @import "functions";
 @import "mixins";
 @import "settings";
-@import "admin-menu";
+@import "/components/admin-menu";
 @import "administration";
 @import "edit-page";
+@import "/components/edit-menu";
+@import "/components/forms";
+@import "export";
+@import "index";
