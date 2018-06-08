@@ -10732,8 +10732,9 @@ main {
   font-size: 24px;
 }
 
-input,
-textarea {
+input:not([type="checkbox"]),
+textarea,
+select {
   border: 0;
   border-bottom: 1px solid #C9C9C9;
   border-radius: 0;
@@ -10744,15 +10745,22 @@ textarea {
   padding-left: 0.25rem;
 }
 
-input:focus,
-textarea:focus {
+input:not([type="checkbox"]):focus,
+textarea:focus,
+select:focus {
   outline: none;
   border-bottom: 1px solid #000;
 }
 
-input::-webkit-inner-spin-button,
-textarea::-webkit-inner-spin-button {
+input:not([type="checkbox"])::-webkit-inner-spin-button,
+textarea::-webkit-inner-spin-button,
+select::-webkit-inner-spin-button {
   display: none;
+}
+
+input[type="checkbox"] {
+  border: 1px solid #C9C9C9;
+  background-color: #fff;
 }
 
 .segmented-control {
@@ -10802,8 +10810,18 @@ textarea::-webkit-inner-spin-button {
   color: #fff;
 }
 
+.export label {
+  margin-left: 0.875rem;
+}
+
 .ticket_page .ticket-wrapper {
-  padding: 1.375rem 11rem;
+  padding: 1.375rem 0;
+}
+
+@media (min-width: 992px) {
+  .ticket_page .ticket-wrapper {
+    padding: 1.375rem 11rem;
+  }
 }
 
 .logo {

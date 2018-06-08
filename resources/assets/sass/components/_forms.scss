@@ -1,4 +1,6 @@
-input, textarea
+input:not([type="checkbox"]),
+textarea,
+select
 {
   border: 0;
   border-bottom: 1px solid #C9C9C9;
@@ -19,6 +21,11 @@ input, textarea
   {
     display: none;
   }
+}
+input[type="checkbox"]
+{
+  border: 1px solid #C9C9C9;
+  background-color: $white;
 }
 
 .segmented-control
