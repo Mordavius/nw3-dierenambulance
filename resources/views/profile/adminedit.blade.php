@@ -2,10 +2,11 @@
 
 @section('content')
 @include('administration.admin_menu')
+@include('administration.edit_menu')
 @section('body_class', 'edit_page')
 <div class="wrapper">
   <section class="content">
-    <h2>Gebruiker bewerken</h2>
+    <h1>Gebruiker bewerken</h1>
         @if (session('message'))
             <div class="alert alert-danger">
                 {{ session('message') }}

@@ -2,13 +2,14 @@
 
 @section('content')
 @include('administration.admin_menu')
+@include('administration.edit_menu')
 @section('body_class', 'edit_page')
 <div class="wrapper">
   <form class="content" method="POST" action="{{ route('register') }}">
     <h1>Nieuwe gebruiker</h1>
       @csrf
       <div class="form-group">
-        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+        <input placeholder="Naam" id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
         @if ($errors->has('name'))
             <span class="invalid-feedback">
                 <strong>
@@ -18,7 +19,7 @@
         @endif
       </div>
       <div class="form-group">
-        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+        <input placeholder="E-mail" id="email" type="email" name="email" value="{{ old('email') }}" required>
         @if ($errors->has('email'))
             <span class="invalid-feedback">
                 <strong>
@@ -28,7 +29,7 @@
         @endif
       </div>
       <div class="form-group">
-        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+        <input placeholder="Wachtwoord" id="password" type="password" name="password" required>
         @if ($errors->has('password'))
             <span class="invalid-feedback">
                 <strong>
@@ -38,7 +39,7 @@
         @endif
       </div>
       <div class="form-group">
-          <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+          <input placeholder="Wachtwoord bevestigen" id="password-confirm" type="password" name="password_confirmation" required>
       </div>
 
       <div class="form-group">

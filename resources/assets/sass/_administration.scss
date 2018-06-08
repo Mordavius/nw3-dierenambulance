@@ -15,9 +15,15 @@
     padding-top: 0;
     @include clearfix;
 
-    h2
+    h1
     {
       margin-bottom: rem-calc(38);
+      display: none;
+
+      @include media-breakpoint-up(lg)
+      {
+        display: block;
+      }
     }
 
     .btn-success
@@ -31,6 +37,11 @@
       margin-right: 21px;
       border: none;
 
+      @include media-breakpoint-up(lg)
+      {
+        margin-right: none;
+      }
+
       &.full-width
       {
         width: 100%;
@@ -39,11 +50,6 @@
         {
           width: auto;
         }
-      }
-
-      @include media-breakpoint-up(lg)
-      {
-        margin-right: 0;
       }
     }
 

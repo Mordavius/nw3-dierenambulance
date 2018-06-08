@@ -1,0 +1,12 @@
+.ticket_page
+{
+  .ticket-wrapper
+  {
+    padding: rem-calc(22) 0;
+
+    @include media-breakpoint-up(lg)
+    {
+      padding: rem-calc(22) rem-calc(176);
+    }
+  }
+}
