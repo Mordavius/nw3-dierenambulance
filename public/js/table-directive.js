@@ -1,5 +1,7 @@
 var app = angular.module("app", [])
 .controller("TableController", ['$scope','$http', function($scope, $https){
+    var markers = [];
+    var marker;
 
     $scope.distance = [];
     $scope.map = L.map("map", {
@@ -23,6 +25,7 @@ var app = angular.module("app", [])
     "coordinates": "", "selected_animal": "", "breed": "", "gender":""
     , "chip_number": "", "injury": "", "description": "", "priority":""};
 
+
     L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
@@ -37,18 +40,26 @@ var app = angular.module("app", [])
         minZoom: 1,
     }).addTo($scope.map2);
 
-	function onMapClick(e) {
+    function onMapClick(e) {
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
 			if(err) { throw err; }
-			var marker = L.marker(e.latlng).addTo($scope.map);
+			marker = L.marker(e.latlng).addTo($scope.map);
+            markers += marker;
 			var obj = JSON.parse(result);
 			updateAddressInformation(obj, e);
         })
+        if(marker){
+        $scope.map.removeLayer(marker);
+    }
 	}
 
     var coords = $('#map2').data('coordinates')
+
 	coords.forEach(function(coord){
-		placeMarker(coord);
+
+        if (coord != null) {
+            placeMarker(coord);
+        }
 	})
 
 	function placeMarker(i){
@@ -95,7 +106,7 @@ var app = angular.module("app", [])
 
 	function searchButtonClicked(){
 		var searchText = document.getElementById("searchTextBox").value;
-		makeRequest("GET", geocodeQuery(searchText, "json"), function(err, result) {
+		makeRequest("GET", geocodeQuery(searchText), function(err, result) {
 			if(err) { throw err; }
 
 		var searchedURLJson = JSON.parse(result);
@@ -104,7 +115,7 @@ var app = angular.module("app", [])
 		})
 	}
 
-	function geocodeQuery(searchText, format) {
+	function geocodeQuery(searchText) {
 		var searchedURL = "https://nominatim.openstreetmap.org/search/nl/" + searchText + "?format=json&addressdetails=1";
 		return searchedURL;
 	}
@@ -136,6 +147,7 @@ var app = angular.module("app", [])
     }
     $('#footer_button_forward').click(next);
     $('#footer_button_back').click(back);
+
 
     function next() {
         if(page1.className == "pages current_page")
@@ -267,6 +279,21 @@ var app = angular.module("app", [])
         description.value = ticket_information.description;
         priority.value = ticket_information.priority;
     }
+    $('#footer_button_submit').click(submit);
+
+    function submit(){
+        var postcode = postal_code.value.replace(/\s/g, '');
+        makeRequest("GET", geocodeQuery(postcode), function(err, result) {
+			if(err) { throw err; };
+
+        var obj = JSON.parse(result);
+        var latLngSubmit = {"lat": obj[0].lat, "lng": obj[0].lon};
+	    coordinates.value = JSON.stringify(latLngSubmit);
+        document.forms["submit_form"].submit();
+
+    });
+}
+
     function getLocationRecord(){
         $.ajax({
             type: 'GET',

@@ -231,7 +231,8 @@
             </div>
             {!! Form::model($ticket, [
                 'method' => 'POST',
-                'route' => 'melding.store'
+                'route' => 'melding.store',
+                'id' => 'submit_form'
             ]) !!}
             <div class="new_ticket_information">
                 <label class="general">Algemeen</label>
@@ -288,21 +289,19 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="priority_new_ticket">
                     <label class="priority_label">Prioriteit</label>
                     <label class="ticket_text_field" class="bus">Sprinter</label>
                     <input class="ticket_text_field" type="label" name="priority" id="priority"/>
                 </div>
             </div>
-            <input class="footer_button_submit" type="submit" name="" value="Opslaan">
+            <input class="footer_button_submit" type="button" id="footer_button_submit" name="" value="Opslaan">
             {!! Form::close() !!}
         </div>
     </div>
 </div>
 <div class="footer" id="footer">
-    <button id="footer_button_back" class="footer_button">< Terug</button>
+    <button id="footer_button_back" class="footer_button">< Vorige</button>
     <div class="address_info_grid">
         <span contenteditable="true" class="address_info" name="address" id="address_field"></span>
         <span contenteditable="true" class="address_info" name="house_number" id="house_number_field"></span>
