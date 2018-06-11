@@ -10824,6 +10824,325 @@ input[type="checkbox"] {
   }
 }
 
+.round {
+  position: fixed;
+  border: 0;
+  bottom: 23px;
+  right: 24px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #288B5F;
+  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.navbar {
+  z-index: 999;
+}
+
+.rotate-button:hover {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(360deg);
+}
+
+.rotate-button {
+  -webkit-transition: all .75s ease-in-out;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  height: 30px;
+  width: 30px;
+  border: 0;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+
+.grid_container {
+  display: grid;
+  grid-template-areas: 'header' 'main' 'footer';
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  width: 100%;
+}
+
+.grid_header {
+  grid-area: header;
+  grid-column: 1/2;
+  padding-left: 20px;
+}
+
+.grid_main {
+  grid-area: main;
+  background-color: #FFFFFF;
+}
+
+.grid_main a,
+.grid_main a:hover {
+  color: black;
+}
+
+.tickets {
+  font-style: normal;
+  font-weight: 300 !important;
+  line-height: normal;
+  font-size: 24px;
+}
+
+.pages {
+  position: absolute;
+  visibility: hidden;
+  -webkit-transition: margin-left .3s;
+  transition: margin-left .3s;
+  overflow: hidden;
+  margin-left: 100%;
+  width: 0%;
+}
+
+.current_page {
+  width: 100%;
+  margin-left: 0%;
+  visibility: visible;
+}
+
+.current_page2 {
+  overflow: hidden;
+  margin-right: 0%;
+}
+
+.result_amount {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.grid_ticket {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid #E5E5E5;
+}
+
+.test {
+  grid-column: 1/6;
+  grid-row: 1/1;
+  height: 20px;
+}
+
+.ticket_number {
+  text-align: center;
+  grid-column: 5/5;
+  grid-row: 2/2;
+  font-size: 12px;
+  padding-top: 4px;
+  background-color: #219653;
+  color: white;
+  border-radius: 6px;
+  height: 21px;
+  width: 57px;
+  margin-left: 15px;
+}
+
+.grid_animal_icon {
+  grid-column: 1/1;
+  grid-row: 2/4;
+}
+
+.ticket_icon {
+  width: 48px;
+  height: 48px;
+  background-color: #E0E0E0;
+  padding-top: 9px;
+  padding-left: 7px;
+  margin-left: 21px;
+}
+
+#animal_icon {
+  width: 34px;
+  height: 30px;
+}
+
+.ticket_main_info {
+  grid-column: 2/5;
+  grid-row: 2/3;
+}
+
+.ticket_title {
+  font-size: 24px;
+}
+
+.ticket_address {
+  grid-column: 2/5;
+  grid-row: 3/4;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.ticket_description {
+  grid-column: 2/5;
+  grid-row: 3/3;
+  margin: 10px 0 10px 0;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 21px;
+  overflow: hidden;
+}
+
+.flag-new::before {
+  content: "Nieuw";
+  background-color: #219653;
+  position: absolute;
+  text-align: center;
+  display: inline-block;
+  color: #FFFFFF;
+  min-width: 57px;
+  height: 21px;
+  left: 7px;
+  font-size: 14px;
+  margin-top: 75px;
+  padding-top: 2px;
+}
+
+.ticketcreate .grid_container {
+  padding-top: 0.9375rem;
+  margin-top: 0;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .grid_container {
+    padding-top: 2.3125rem;
+    padding-left: 316.5px;
+    padding-right: 316.5px;
+    max-width: none;
+  }
+}
+
+.ticketcreate .grid_container .icon_bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding-top: 0;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .grid_container .icon_bar {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.ticketcreate .grid_container .icon_bar .icon_bar_item {
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.ticketcreate .grid_container .icon_bar .icon_bar_item.animal {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.ticketcreate .grid_container .icon_bar .circle {
+  margin-bottom: 6px;
+}
+
+.ticketcreate .grid_container .icon_bar .circle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ticketcreate .grid_container .icon_bar .divider {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  border-bottom: 1px solid black;
+  margin: 0.125rem;
+  width: 100%;
+  margin-top: 0.875rem;
+}
+
+.ticketcreate .main {
+  margin-top: 2.25rem;
+}
+
+.ticketcreate .main .page .reporter_info input[type="checkbox"] {
+  margin-right: 16px;
+}
+
+.ticketcreate .main .page .reporter_info .boodschap {
+  color: #828282;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+  margin-top: 2.8125rem;
+}
+
+.ticketcreate .main .page .animal_page .animal_card {
+  background: none;
+  position: relative;
+}
+
+.ticketcreate .main .page .animal_page .animal_card img {
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.ticketcreate .main .page .animal_page .animal_card .animal_grid {
+  grid-column: 1/4;
+  grid-row: 4/4;
+  margin-bottom: 12px;
+}
+
+.ticketcreate .main .page .animal_page .animal_card .selectedAnimal {
+  width: auto;
+}
+
+.ticketcreate .main .page .animal_page .animal_card .animal_info textarea.description:focus {
+  height: 500px;
+  -webkit-transition: height 0.25s ease-in;
+  transition: height 0.25s ease-in;
+}
+
 .logo {
   max-width: 150px;
 }
