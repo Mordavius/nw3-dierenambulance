@@ -11,6 +11,7 @@ use App\Destination;
 use App\Finance;
 use App\Known;
 use App\Bus;
+use App\Owner;
 use DB;
 use App\Http\Requests\TicketStoreRequest;
 use Illuminate\Support\Facades\Validator;
@@ -98,9 +99,30 @@ class TicketController extends Controller
         }
     }
 
+    public function createAjaxOwner(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+                $owner = Owner::create($request->all());
+                return response()->json($owner);
+            }
+    }
+
     public function knownusers($id){
         $knownusers = Known::where('id', $id)->get();
         return response()->json($knownusers);
+    }
+
+    public function animalowner($id){
+        $animalowner = Ticket::where('id', $id)->get();
+        return response()->json($animalowner);
     }
 
     public function search(Request $request, Ticket $ticket_id)
@@ -242,12 +264,14 @@ class TicketController extends Controller
         $destinations = Destination::where('ticket_id', $ticket_id)->get();
         $loaddestination = Destination::where('ticket_id', $ticket_id)->get();
         $loadfinances = Finance::where('ticket_id', $ticket_id)->get();
+        $loadowners = Owner::where('ticket_id', $ticket_id)->get();
         //$destinations = Destination::where();
+        $animalowner = Ticket::all();
         $known = Known::all();
-        $animals = Animal::where('id', $animal_id);// Deletes animal based on animal id
+        $animals = Animal::where('id', $animal_id);// Grabs animal based on animal id
         $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
-        return view("ticket.edit", compact('destinations', 'bus', 'ticket', 'users', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
+        return view("ticket.edit", compact('destinations', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
     }
     /**
      * Update the specified resource in storage.
@@ -287,19 +311,12 @@ class TicketController extends Controller
         //dd($animal);
 
         // Updates the data for the requested fields
-        $ticket = new Ticket([
-            'animal_id' => $animal->id,
-            'destination_id' => $destination->id,
-            'date' => $request->get('date'),
-            'time' => $request->get('time'),
-            'centralist' => $request->get('centralist'),
-            'reporter_name' => $request->get('reporter_name'),
-            'telephone' => $request->get('telephone'),
-            'invoice' => $request->get('invoice'),
-            'paymentmethodinvoice' => $request->get('paymentmethodinvoice'),
-            'gifts' => $request->get('gifts'),
-            'paymentmethodgifts' => $request->get('paymentmethodgifts'),
-        ]);
+        $ticket = Ticket::findOrFail($ticket_id);
+        $ticket->date = Input::get('date');
+        $ticket->time = Input::get('time');
+        $ticket->centralist = Input::get('centralist');
+        $ticket->reporter_name = Input::get('reporter_name');
+        $ticket->telephone = Input::get('telephone');
 
         $ticket->save(); // Saves the data
 
@@ -341,6 +358,16 @@ class TicketController extends Controller
     public function destroyAjaxPayment($task_id) {
         try {
             $task = Finance::destroy($task_id);
+            return response()->json($task);
+        }
+        catch (\Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+    public function destroyAjaxOwner($task_id) {
+        try {
+            $task = Owner::destroy($task_id);
             return response()->json($task);
         }
         catch (\Exception $e) {

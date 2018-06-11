@@ -1,4 +1,26 @@
+function animalOwner() {
+    var string2;
+        $('#animalowner').change(function(){
+                string2 = document.getElementById("ticket_id").value;
+                $.ajaxSetup({
+                    headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        }
+                });
+                $.ajax({
+                        type:"GET",
+                        url: "/animalowner/" + string2,
+                        success: function (data) {
+                                console.log(data);
+                                document.getElementById("name").value = data[0].reporter_name;
+                                document.getElementById("telephone_number").value = data[0].telephone;
+                                }
+                });
+        });
+}
+
 $(document).ready(function() {
+
         var string;
         $('#knownAddress').change(function(){
                 string = $('#knownAddress').val()
@@ -19,22 +41,6 @@ $(document).ready(function() {
                                 document.getElementById("township").value = data[0].township;
                                 }
                 });
-        });
-});
-
-
-
-$(document).ready(function() {
-
-        $('a[data-confirm]').click(function(ev) {
-                var href = $(this).attr('href');
-                if (!$('#dataConfirmModal').length) {
-                        $('body').append('<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">?</button><h3 id="dataConfirmLabel">Please Confirm</h3></div><div class="modal-body"></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button><a class="btn btn-primary" id="dataConfirmOK">OK</a></div></div>');
-                }
-                $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
-                $('#dataConfirmOK').attr('href', href);
-                $('#dataConfirmModal').modal({show:true});
-                return false;
         });
 });
 
@@ -284,7 +290,6 @@ $(document).ready(function() {
                 }
 
                 if (state == "add"){ //if user added a new record
-                    $('#finance-list').append(finances);
                     location.reload();
                 }else { //if user updated an existing record
 
@@ -303,5 +308,146 @@ $(document).ready(function() {
                 });
                 });
                 });
+
+
+
+        $(document).ready(function(){
+
+                var url = "/owners";
+
+                //display modal form for task editing
+                $('.open-modal-owner').click(function(){
+                var task_id = $(this).val();
+
+                $.get(url + '/' + task_id, function (data) {
+                //success data
+                console.log(data);
+                $('#task_id').val(data.owner_id);
+                $('#ticket_id').val(data.ticket_id);
+                $('#name').val(data.name);
+                $('#telephone_number').val(data.telephone_number);
+                $('#owner_postal_code').val(data.owner_postal_code);
+                $('#owner_address').val(data.owner_address);
+                $('#owner_house_number').val(data.owner_house_number);
+                $('#owner_city').val(data.owner_city);
+                $('#owner_township').val(data.owner_township);
+                $('#btn-save-owner').val("update");
+
+                $('#myModal-owner').modal('show');
+                })
+                });
+
+                //display modal form for creating new task
+                $('#btn-add-owner').click(function(){
+                $('#btn-save-owner').val("add");
+                $('#owner').trigger("reset");
+                $('#myModal-owner').modal('show');
+                });
+
+                //delete task and remove it from list
+
+                $('.delete-task-owner').click(function(){
+
+                var task_id = $(this).val();
+
+                if(confirm("Eigenaar verwijderen?")) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                });
+
+                $.ajax({
+                    type: "DELETE",
+                    url: url + '/' + task_id,
+                    success: function (data) {
+                    console.log(data);
+                        location.reload();
+                        $("#owner" + task_id).remove();
+                },
+                    error: function (data) {
+                    console.log('Error:', data);
+                }
+                });
+                }
+                else
+                {
+                    return false;
+                }
+                });
+
+                //create new task / update existing task
+                $("#btn-save-owner").click(function (e) {
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                })
+
+                e.preventDefault();
+
+                var formData = {
+                    ticket_id: $('#ticket_id').val(),
+                    name: $('#name').val(),
+                    telephone_number: $('#telephone_number').val(),
+                    owner_postal_code: $('#owner_postal_code').val(),
+                    owner_address: $('#owner_address').val(),
+                    owner_house_number: $('#owner_house_number').val(),
+                    owner_city: $('#owner_city').val(),
+                    owner_township: $('#owner_township').val(),
+                }
+
+                //used to determine the http verb to use [add=POST], [update=PUT]
+                var state = $('#btn-save-owner').val();
+                var type = "POST"; //for creating new resource
+                var task_id = $('#task_id').val();
+                var my_url = url;
+                var append = (append === undefined ? false : true);
+
+                console.log(formData);
+
+                $.ajax({
+                    type: type,
+                    url: my_url,
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+                    console.log(data);
+
+                $empty = $('#myModal').find("input").filter(function() {
+                        return this.value === "";
+                    });
+
+                if($empty.length) {
+                    jQuery.each(data.errors, function(key, data){
+        		    jQuery('.alert-danger').show();
+        		    jQuery('.alert-danger').append('<p>'+data+'</p>');
+                        });
+                }
+
+                if (state == "add"){ //if user added a new record
+                   // $('#owner-list').append(owner);
+                    location.reload();
+                }else { //if user updated an existing record
+
+                    $("#owner" + task_id).replaceWith( owner );
+                }
+                    $('#owner').trigger("reset");
+                },
+                complete: function(data) {
+                    if(data.status == 'success') {
+                    $('#myModal-owner').modal('hide')
+                }
+                },
+                    error: function (data) {
+                    console.log('Error:', data);
+                }
+                });
+                });
+                });
+
+
+
 
 
