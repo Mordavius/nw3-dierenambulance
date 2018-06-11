@@ -18,6 +18,10 @@
     grid-area: main;
     background-color: #FFFFFF;
 }
+.grid_main a,
+.grid_main a:hover{
+    color: black;
+}
 .tickets{
     font-style: normal;
     font-weight: 300 !important;
