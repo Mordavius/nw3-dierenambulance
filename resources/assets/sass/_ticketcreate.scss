@@ -1,0 +1,129 @@
+.ticketcreate
+{
+  .grid_container
+  {
+    padding-top: rem-calc(15);
+    margin-top: 0;
+
+    @include media-breakpoint-up(lg)
+    {
+      padding-top: rem-calc(37);
+      padding-left: 316.5px;
+      padding-right: 316.5px;
+      max-width: none;
+    }
+
+    .icon_bar
+    {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: center;
+      align-items: flex-start;
+      padding-top: 0;
+      padding-left: rem-calc(12);
+      padding-right: rem-calc(12);
+
+      @include media-breakpoint-up(lg)
+      {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .icon_bar_item
+      {
+        flex-basis: 0;
+        flex: 1;
+
+        &.animal
+        {
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+      }
+
+      .circle
+      {
+        margin-bottom: 6px;
+
+        a
+        {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+
+      .divider
+      {
+        flex-shrink: 1;
+        border-bottom: 1px solid black;
+        margin: rem-calc(2);
+        width: 100%;
+        margin-top: rem-calc(14);
+      }
+    }
+  }
+
+  .main
+  {
+    margin-top: rem-calc(36);
+    .page
+    {
+      .reporter_info
+      {
+        input[type="checkbox"]
+        {
+          margin-right: 16px;
+        }
+
+        .boodschap
+        {
+          color: $dark-gray;
+          font-size: rem-calc(14);
+          margin-bottom: 0;
+          margin-top: rem-calc(45);
+        }
+      }
+
+      .animal_page
+      {
+
+        .animal_card
+        {
+          background: none;
+          position: relative;
+
+          img
+          {
+            height: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+
+          .animal_grid
+          {
+            grid-column: 1/4;
+            grid-row: 4/4;
+            margin-bottom: 12px;
+          }
+
+          .selectedAnimal
+          {
+            width: auto;
+          }
+
+          .animal_info
+          {
+            textarea.description:focus
+            {
+              height: 500px;
+              transition: height 0.25s ease-in;
+            }
+          }
+        }
+      }
+    }
+  }
+}

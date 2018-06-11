@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="{{ asset('css/cssgrid.css') }}">
 @extends('layouts.app')
 @section('body_class', 'ticket_page')
 @section('content')

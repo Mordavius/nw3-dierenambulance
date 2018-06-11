@@ -1,53 +1,55 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/ticketcreate.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet-gesture-handling.css') }}">
 
 @extends('layouts.app')
-
+@section('body_class', 'ticketcreate')
 @section('content')
 
 <div class="grid_container">
     <div class="icon_bar">
-        <div class="reporter">
+        <div class="icon_bar_item reporter">
             <div class="circle highlighted" id="circle1">
-                    <p class="test">1</p>
+              <a href="#page1" class="circle_letter">
+                  1
+              </a>
             </div>
-            Melder
+            <span>Melder</span>
 
         </div>
-        <div class="location">
+        <span class="divider"></span>
+        <div class="icon_bar_item location">
             <div class="circle" id="circle2">
-                <div class="circle_letter">
-                    2
-                </div>
+              <a href="#page2" class="circle_letter">
+                  2
+              </a>
             </div>
-            <p>Locatie</p>
+            <span>Locatie</span>
         </div>
-        <div class="animal">
+        <span class="divider"></span>
+        <div class="icon_bar_item animal">
             <div class="circle" id="circle3">
-                <div class="circle_letter">
+                <a href="#page3" class="circle_letter">
                     3
-                </div>
+                </a>
             </div>
-            <p>Dier</p>
+            <span>Dier</span>
         </div>
-        <div class="priority">
+        <span class="divider"></span>
+        <div class="icon_bar_item priority">
             <div class="circle" id="circle4">
-                <div class="circle_letter">
+                <a href="#page4" class="circle_letter">
                     4
-                </div>
+                </a>
             </div>
-            <p>Prioriteit</p>
+            <span>Prioriteit</span>
         </div>
-        <div class="summary">
+        <span class="divider"></span>
+        <div class="icon_bar_item summary">
             <div class="circle" id="circle5">
-                <div class="circle_letter">
+                <a href="#page5" class="circle_letter">
                     5
-                </div>
+                </a>
             </div>
-            <p>Overzicht</p>
+            <span>Overzicht</span>
         </div>
     </div>
 </div>
@@ -61,10 +63,12 @@
                 <div class="name">
                     <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
                 </div>
-                <br />
                 <div class="phone_number">
                     <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">
                 </div>
+                <label for="eigenaar"><input type="checkbox" name="eigenaar" value="eigenaar">Melder is eigenaar</label>
+                <span></span>
+                <p class="boodschap">Vergeet niet te melden dat de gegevens van de melder worden opgeslagen</p>
             </div>
         </div>
     </div>
@@ -100,53 +104,49 @@
             <div class="animal_page">
                 <div class="animal_cards" id="animal_cards">
                     <div class="animal_card" onclick="selectAnimalSpieces('Hond');">
+                        <img src="{{asset('images/hond.svg')}}" alt="">
                         <div class="animal_grid">
-                            <p>Hond</p>
+                            <span>Hond</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Kat');">
+                      <img src="{{asset('images/kat.svg')}}" alt="">
                         <div class="animal_grid">
-                            <p>Kat</p>
+                            <span>Kat</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Vogel');">
+                      <img src="{{asset('images/vogel.svg')}}" alt="">
                         <div class="animal_grid">
-                            <p>Vogel</p>
+                            <span>Vogel</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Egel');">
+                      <img src="{{asset('images/egel.svg')}}" alt="">
                         <div class="animal_grid">
-                            <p>Egel</p>
+                            <span>Egel</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Konijn');">
+                      <img src="{{asset('images/konijn.svg')}}" alt="">
                         <div class="animal_grid">
-                            <p>Konijn</p>
+                            <span>Konijn</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Anders');">
+                      <img src="{{asset('images/dino.svg')}}" alt="">
                         <div class="animal_grid">
-                            <p>Anders</p>
+                            <span>Anders</span>
                         </div>
                     </div>
                 </div>
                 <div class="selectedAnimal" id="selectedAnimal"><p id="selected_animal"></p></div>
                 <div class="animal_info" id="animal_info">
                     <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed_field"/>
-                    <div class="line">
-                    </div>
                     <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender_field"/>
-                    <div class="line">
-                    </div>
                     <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number_field"/>
-                    <div class="line">
-                    </div>
                     <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury_field"/>
-                    <div class="line">
-                    </div>
-                    <input type="text" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description_field"/>
-                    <div class="line">
-                    </div>
+                    <textarea class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description_field"/></textarea>
                 </div>
             </div>
         </div>
@@ -318,11 +318,8 @@
 </div>
 @endsection
 @section('scripts')
-<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/table-directive.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet-gesture-handling.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/table-directive.js') }}"></script>
 
 @endsection

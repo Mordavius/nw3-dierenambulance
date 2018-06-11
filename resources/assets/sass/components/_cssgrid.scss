@@ -9,14 +9,6 @@
     line-height: normal;
     width: 100%;
 }
-input:focus,
-select:focus,
-textarea:focus,
-textarea,
-button:focus{
-    outline-width: 0;
-    border: 0;
-}
 .grid_header{
     grid-area: header;
     grid-column: 1/2;
