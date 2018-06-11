@@ -40,10 +40,14 @@
                                 </span>
                                 @endif
                         </div>
-                        <div class="form-group{{ $errors->has('bus') ? 'has-error' : ''}}">
-                            {!! Form::label('bus') !!}
-                            {!! Form::select('bus', array('Bus' => 'Bus', 'Caddy' => 'Caddy')) !!}
 
+                        <div class="form-group {{ $errors->has('bus') ? 'has-error' : '' }}">
+                            {!! Form::label('Voertuig') !!} <br />
+                            <select name="bus" id="bus">
+                                @foreach($bus as $buses)
+                                    <option value="{{$buses}}">{{$buses}}</option>
+                                @endforeach
+                            </select>
                             @if($errors->has('bus'))
                                 <span class="help-block">
                                     {{ $errors->first('bus') }}

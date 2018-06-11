@@ -34,8 +34,9 @@ class BusChangeController extends Controller
      */
     public function create(Buschange $buschange)
     {
+        $bus = Bus::all('bus_type')->pluck("bus_type");
         $users = User::all()->pluck('name'); // Grabs all the users and plucks the name field from the table
-        return view('BusChange.create', compact('buschange'), compact('users'));
+        return view('BusChange.create', compact('buschange', 'users', 'bus'));
     }
 
     /**
