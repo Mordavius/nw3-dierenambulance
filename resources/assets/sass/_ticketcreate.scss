@@ -1,9 +1,14 @@
 .ticketcreate
 {
+  .new_ticket_container{
+      width: 100%;
+  }
+
   .grid_container
   {
     padding-top: rem-calc(15);
     margin-top: 0;
+    font-size: 14px;
 
     @include media-breakpoint-up(lg)
     {
@@ -23,6 +28,9 @@
       padding-top: 0;
       padding-left: rem-calc(12);
       padding-right: rem-calc(12);
+      text-align: center;
+      color: #757575;
+      background-color: #FFFFFF;
 
       @include media-breakpoint-up(lg)
       {
@@ -40,11 +48,42 @@
           margin-right: 10px;
           margin-left: 10px;
         }
+
+        .previous
+        {
+          color: $primary-color;
+        }
       }
 
       .circle
       {
         margin-bottom: 6px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1px solid #757575;
+        box-sizing: border-box;
+        margin: auto auto 2px auto;
+        padding-top: 4px;
+        font-size: 14px;
+        transition: background-color .5s;
+
+        &.highlighted
+        {
+          background-color: $primary-color;
+          color: #FFFFFF;
+          border-color: $primary-color;
+        }
+
+        &.previous
+        {
+          border-color: $primary-color;
+
+          a
+          {
+            color: $primary-color;
+          }
+        }
 
         a
         {
@@ -60,6 +99,11 @@
         margin: rem-calc(2);
         width: 100%;
         margin-top: rem-calc(14);
+
+        &.previous
+        {
+          border-color: $primary-color;
+        }
       }
     }
   }
@@ -67,63 +111,640 @@
   .main
   {
     margin-top: rem-calc(36);
-    .page
-    {
-      .reporter_info
-      {
-        input[type="checkbox"]
-        {
-          margin-right: 16px;
-        }
+    grid-area: main;
+    margin-bottom: 100px;
 
-        .boodschap
+    .pages
+    {
+      position: absolute;
+      visibility: hidden;
+      transition: margin-left .3s;
+      overflow: hidden;
+      margin-left: 100%;
+      width: 0%;
+
+      #map
+      {
+        height: 500px!important;
+
+        @include media-breakpoint-up(lg)
         {
-          color: $dark-gray;
-          font-size: rem-calc(14);
-          margin-bottom: 0;
-          margin-top: rem-calc(45);
+          grid-column: 1/2;
         }
       }
 
-      .animal_page
+      &.current_page
       {
+        width: 100%;
+        margin-left: 0%;
+        visibility: visible;
 
-        .animal_card
+
+        @include media-breakpoint-up(lg)
         {
-          background: none;
-          position: relative;
+          width: 100%;
+        }
+      }
 
-          img
+      .page
+      {
+        position: relative;
+
+        @include media-breakpoint-up(lg)
+        {
+          max-width: 60%;
+          margin: 0 auto;
+        }
+
+        .footer_button_submit
+        {
+          position: fixed;
+          z-index: 999;
+          bottom: -20px;
+          right: 10px;
+          background-color: #FFFFFF;
+          border: 0;
+          color: #238644;
+          font-size: 14px;
+          width: auto;
+          // background: url('../images/save.svg') 146% center no-repeat;
+        }
+
+        .title_page
+        {
+          visibility: hidden;
+          display: none;
+
+          @include media-breakpoint-up(lg)
           {
-            height: 30px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            display: block;
+            visibility: visible;
+          }
+        }
+
+        .reporter_info
+        {
+          padding: 20px;
+          margin-bottom: 50px;
+          display: grid;
+          grid-template-columns: auto auto;
+
+          @include media-breakpoint-up(lg)
+          {
+            padding: 0px;
+            grid-template-columns: 50% 50%;
+            grid-column-gap: 10px;
           }
 
-          .animal_grid
+          input[type="checkbox"]
           {
-            grid-column: 1/4;
-            grid-row: 4/4;
-            margin-bottom: 12px;
+            margin-right: 16px;
           }
 
-          .selectedAnimal
+          .name
           {
-            width: auto;
+            grid-row: 1/1;
+            grid-column: 1/3;
+            border: 0;
+
+            @include media-breakpoint-up(lg)
+            {
+              grid-row: 1/1;
+              grid-column: 1/1;
+            }
+          }
+
+          .phone_number
+          {
+            grid-row: 2/2;
+            grid-column: 1/3;
+
+            @include media-breakpoint-up(lg)
+            {
+              grid-row: 1/1;
+              grid-column: 2/3;
+            }
+          }
+
+          .boodschap
+          {
+            color: $dark-gray;
+            font-size: rem-calc(14);
+            margin-bottom: 0;
+            margin-top: rem-calc(45);
+          }
+        }
+
+        .searchStuff
+        {
+          width: 100%;
+
+          #searchTextBox
+          {
+              width: 52%;
+              height: 41px;
+              border: 1px solid #ECECEC;
+              float: left;
+              background-image: url('../images/search.svg');
+              background-repeat: no-repeat;
+              background-position: 95% center;
+              background-size: 18px 18px;
+              margin-bottom: 0;
+              font-size: 14px;
+
+              @include media-breakpoint-up(lg)
+              {
+                margin-right: 12px;
+                margin-bottom: rem-calc(30);
+              }
+          }
+
+          #knownAddress
+          {
+              width: 37%;
+              /* float: left; */
+              height: 41px;
+              border: 1px solid #ECECEC;
+              border-radius: 0px;
+              margin-bottom: 0;
+              font-size: 14px;
+
+              @include media-breakpoint-up(lg)
+              {
+                margin-right: 12px;
+                margin-bottom: rem-calc(30);
+              }
+          }
+
+          #searchButton
+          {
+              width: 11%;
+              height: 41px;
+              float: right;
+              border: 1px solid #ECECEC;
+              color: $secondary-color;
+              background: $white;
+              font-size: 14px;
+
+              @include media-breakpoint-up(lg)
+              {
+                width: 8%;
+              }
+          }
+        }
+
+        .animal_page
+        {
+
+          @include media-breakpoint-up(lg)
+          {
+            display: grid;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+          }
+
+          .animal_cards
+          {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-row-gap: 14px;
+            -moz-transition: height .5s;
+            -ms-transition: height .5s;
+            -o-transition: height .5s;
+            -webkit-transition: height .5s;
+            transition: height .5s;
+            height: 442px;
+            overflow: hidden;
+
+            @include media-breakpoint-up(lg)
+            {
+              grid-column: 1/4;
+              grid-template-columns: repeat(3, 1fr);
+              grid-template-rows: repeat(3, 1fr);
+            }
+
+            .animal_card
+            {
+              position: relative;
+              box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+              margin-left: 21px;
+              display: grid;
+              grid-template-columns: 1fr 20% 1fr;
+              grid-template-rows: 1fr 1fr 1fr;
+              height: 138px;
+              width: 138px;
+
+              img
+              {
+                height: 30px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+              }
+
+              .animal_grid
+              {
+                grid-column: 1/4;
+                grid-row: 4/4;
+                margin-bottom: 12px;
+                text-align: center;
+              }
+
+              .selectedAnimal
+              {
+                width: auto;
+              }
+            }
           }
 
           .animal_info
           {
+            grid-template-rows: repeat(5, 20%);
+            padding: 0 21px 0 21px;
+
+            @include media-breakpoint-up(lg)
+            {
+              grid-column: 4/6;
+              padding: 0 0 0 21px;
+            }
+
+            textarea.description
+            {
+              transition: height 1s ease-in;
+            }
+
             textarea.description:focus
             {
-              height: 500px;
-              transition: height 0.25s ease-in;
+              height: 150px;
+              transition: height 1s ease-in;
+            }
+          }
+
+          .selectedAnimal
+          {
+            box-shadow: 1px 1px 4px rgba(32, 32, 32, 0.25);
+            -moz-transition: height .5s;
+            -ms-transition: height .5s;
+            -o-transition: height .5s;
+            -webkit-transition: height .5s;
+            transition: height .5s;
+            height: 0;
+            overflow: hidden;
+            width: 331px;
+            margin: 20px 20px 0;
+
+            @include media-breakpoint-up(lg)
+            {
+              grid-row: 1/2;
+              grid-column: 1/3;
+            }
+
+            img
+            {
+              display: inline-block;
+              height: 30px;
+              margin-left: 16px;
+            }
+          }
+
+          #selected_animal{
+              margin: 10px 0 0 16px;
+              margin-top: 10px;
+              font-size: 18px;
+              display: inline-block;
+          }
+        }
+
+        .new_ticket_information
+        {
+          padding: 0 20px 0 20px;
+
+          @include media-breakpoint-up(lg)
+          {
+            display: grid;
+          }
+
+          .left_info
+          {
+            @include media-breakpoint-up(lg)
+            {
+              grid-column: 1/4;
+              margin-right: 73px;
+            }
+          }
+
+          .right_info
+          {
+
+            @include media-breakpoint-up(lg)
+            {
+              grid-column: 4/8;
+            }
+          }
+
+          @include media-breakpoint-up(lg)
+          {
+            padding: 0;
+          }
+
+          #map3
+          {
+            display: none;
+
+            @include media-breakpoint-up(lg)
+            {
+              display: block;
+              height: 300px;
+              width: 415px;
+              margin-bottom: 10px;
+            }
+          }
+
+          label
+          {
+            color: $gray;
+          }
+
+          .general
+          {
+            font-size: 18px;
+            color: #828282;
+          }
+
+          .new_ticket_info
+          {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: repeat(3, 20px);
+            padding-bottom: 25px;
+
+            .general_labels
+            {
+              grid-column: 1/1;
+              font-size: 14px;
+              height: auto;
+              color: $black;
+            }
+
+            .general_information
+            {
+              grid-column: 2/2;
+              font-size: 14px;
+              height: 14px;
+            }
+
+            .centralist{
+                grid-row: 1/1;
+            }
+            .date{
+                grid-row: 2/2;
+            }
+            .time{
+                grid-row: 3/3;
+            }
+          }
+
+          .address_info_new_ticket
+          {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+
+            .location_label
+            {
+              grid-column: 1/3;
+            }
+          }
+
+          .reporter_new_ticket
+          {
+            display: grid;
+            padding-top: 30px;
+          }
+
+          .animal_new_ticket
+          {
+            padding-top: 30px;
+          }
+          .priority_new_ticket
+          {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            padding-bottom: 40px;
+
+            .priority_label
+            {
+              grid-column: 1/3;
+            }
+          }
+        }
+      }
+
+      .map_grid
+      {
+
+        #map2
+        {
+          height: 320px!important;
+
+          @include media-breakpoint-up(lg)
+          {
+            height: 600px!important;
+          }
+        }
+
+        @include media-breakpoint-up(lg)
+        {
+          display: grid;
+          grid-template-columns: 60% 40%;
+        }
+
+        .ticket_cards_grid
+        {
+          display: grid;
+          grid-template-rows: auto;
+
+          @include media-breakpoint-up(lg)
+          {
+            grid-column: 2/3;
+            grid-template-rows: 10% 10% 1fr;
+          }
+
+          .new_ticket
+          {
+            grid-row: 1/1;
+            display: grid;
+            grid-template-columns: 10% repeat(3, 1fr);
+            grid-template-rows: repeat(2, 21px);
+            border-bottom: 1px solid #ED940F;
+            border-top: 1px solid #ED940F;
+
+            .new_ticket_prio
+            {
+              grid-column: 1/2;
+              grid-row: 1/3;
+              display: block;
+              margin: 0 auto;
+
+              .new_ticket_priority
+              {
+                width: 100%;
+                // height: 50px;
+                display: block;
+                margin: 0 35%;
+                font-size: 24px;
+                color: #878787;
+                border: 0;
+              }
+            }
+
+            .animal_main_info
+            {
+              grid-column: 2/5;
+              grid-row: 1/1;
+              font-size: 18px;
+
+              .animal_title
+              {
+                display: inline-block;
+              }
+
+              .animal_breed
+              {
+                display: inline-block;
+                font-size: 16px;
+                color: #828282;
+              }
+            }
+
+            .destination_info
+            {
+              grid-column: 2/5;
+              grid-row: 2/3;
+              font-size: 13px;
+              font-weight: 300;
+            }
+          }
+
+          .bus_name
+          {
+            display: grid;
+            grid-template-areas:
+            "header"
+            "main";
+            padding-top: 15px;
+
+            .bus_name_title
+            {
+              grid-area: header;
+              font-size: 18px;
+              font-weight: 500;
+              color: #2F80ED;
+              margin-left: 21px;
+
+
+              @include media-breakpoint-up(lg)
+              {
+                font-size: rem-calc(24);
+              }
+            }
+
+            .bus_task_list
+            {
+              grid-area: main;
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+
+              .ticket
+              {
+                grid-column: 1/4;
+                display: grid;
+                grid-template-columns: 10% 90%;
+                font-size: 13px;
+                border: 1px solid #E5E5E5;
+                padding-top: 7px;
+                padding-bottom: 7px;
+
+                .ticket_priority
+                {
+                  grid-column: 1/1;
+                  grid-row: 1/3;
+                  font-size: 24px;
+                  color: #878787;
+                  padding-left: 35%;
+                  font-weight: 300;
+                }
+
+                .ticket_address
+                {
+                  grid-column: 2/4;
+                  grid-row: 2/4;
+                  font-weight: 300;
+                  font-size: 13px;
+                }
+
+                .unfinishedtickets_animal_title
+                {
+                  font-size: 18px;
+                }
+
+                .unfinishedtickets_animal_breed
+                {
+                  font-weight: 300;
+                  font-size: 16px;
+                  color: #828282;
+                }
+              }
             }
           }
         }
       }
     }
+
+
+  }
+
+  .footer{
+      grid-area: footer;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      box-shadow: 0px -1px 4px rgba(0,0,0,0.25);
+      width: 100%;
+      height: 55px;
+      background-color: #FFFFFF;
+
+      .address_info_grid
+      {
+        font-size: 14px;
+        text-align: center;
+        width: 90%;
+        display: inline-block;
+        margin: 0 auto;
+      }
+
+      .footer_button{
+          position: fixed;
+          color: #238644;
+          font-size: 14px;
+          margin: auto;
+          background-color: #FFFFFF;
+          border: 0;
+
+          @include media-breakpoint-up(lg)
+          {
+            right: 15%;
+          }
+      }
+
+      #footer_button_forward{
+          right: 12px;
+          margin-top: 15px;
+      }
+      #footer_button_back{
+          left: 12px;
+          margin-top: 15px;
+          visibility: hidden;
+      }
   }
 }
