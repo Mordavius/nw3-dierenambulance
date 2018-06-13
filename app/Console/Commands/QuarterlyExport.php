@@ -55,7 +55,7 @@ class QuarterlyExport extends Command
                 'filepath' => 'storage/'.$filelocation,
             ]);
             $quarteerfinance->save();
-            echo "Het nieuwste kwartaalverslag staat klaar\nGa nu naar het kwartaaloverzicht om de nieuwste versie te downloaden";
+            echo "Het nieuwste kwartaalverslag staat klaar\nGa nu naar het kwartaaloverzicht om de nieuwste versie te downloaden\n".$quarter;
         }
         else{
             echo "Er is wat fout gegaan tijdens het automatisch exporteren";

@@ -7,7 +7,6 @@ use App\Quarterfinance;
 use Illuminate\Support\Facades\Storage;
 use App\User;
 
-
 class AdministrationController extends Controller
 {
     // Setup construct for the Excel library
@@ -23,8 +22,9 @@ class AdministrationController extends Controller
      */
     public function index()
     {
-        $user = User::all(); // Get the correct user by id
-        return view('administration.index', compact('user'));
+            $users      = User::orderBy('name')->paginate(5); // Grab all existing users and paginate by 5 results
+            $usersCount = User::count(); // Count the users
+            return view("administration.index", compact('users', 'usersCount'));
     }
 
     // Export function for showing the page

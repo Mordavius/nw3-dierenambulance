@@ -15,9 +15,9 @@ class CreateAnimalTable extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ticket_id')->default(0);
             $table->string('animal_species');
             $table->string('breed')->nullable();
+            $table->string('injury')->nullable();
             $table->string('gender');
             $table->boolean('catch_cage')->nullable();
             $table->string('chip_number')->nullable();

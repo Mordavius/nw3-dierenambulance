@@ -13,7 +13,7 @@
                 </div>
                 <input id="searchTextBox" type="text"/>
                 <button id="searchButton">
-                    Search
+                    Ga
                 </button>
                 <div class="card-body">
                     <a href="/">
@@ -160,16 +160,16 @@
                                             {!! Form::radio('animal_species', 'hond', ['class' => 'form-control']) !!}
                                             {!! Form::label('Hond') !!}
 
-                                            {!! Form::radio('animal_species', 'kat', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'Kat', ['class' => 'form-control']) !!}
                                             {!! Form::label('Kat') !!}
 
-                                            {!! Form::radio('animal_species', 'egel', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'Egel', ['class' => 'form-control']) !!}
                                             {!! Form::label('Egel') !!}
 
-                                            {!! Form::radio('animal_species', 'vogel', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'Vogel', ['class' => 'form-control']) !!}
                                             {!! Form::label('Vogel') !!}
 
-                                            {!! Form::radio('animal_species', 'anders', ['class' => 'form-control']) !!}
+                                            {!! Form::radio('animal_species', 'Anders', ['class' => 'form-control']) !!}
                                             {!! Form::label('Anders') !!}
 
                                             @if($errors->has('animal_species'))
@@ -196,7 +196,7 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
+                                        <div style="display: none;" class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                                             {!! Form::label('Opmerkingen') !!}
                                             {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 

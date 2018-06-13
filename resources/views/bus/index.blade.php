@@ -1,72 +1,45 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        Busbeheer
+@include('administration.admin_menu')
+    <div class="wrapper">
+      @if (session('status'))
+          <div class="alert alert-success">
+              {{ session('status') }}
+          </div>
+      @endif
+      <section class="content">
+        <a href="/bus/create" class="btn btn-success">
+            Bus toevoegen
+        </a>
+        <br />
+        <br />
+          @if (! $bus->count())
+          <div class="alert alert-danger">
+              <strong>Geen bussen gevonden</strong>
+          </div>
+          @else
+            <div class="list">
+              @foreach($bus as $bus)
+                <div class="list-item">
+                  <a href="#"> <!-- link naar bus -->
+                    <div class="headings">
+                      <h2>{{ $bus->bus_type }}</h2>
+                      <span class="subheading">Kilometerstand: {{ $bus->milage }}</span>
                     </div>
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        <a href="/bus/create" class="btn btn-success">
-                            Nieuwe bus toevoegen
-                        </a>
-                        <section class="content">
-                            @if (! $bus->count())
-                            <div class="alert alert-danger">
-                                <strong>Geen bussen gevonden</strong>
-                            </div>
-                            @else
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <td>Type bus</td>
-                                            <td>Kilometerstand</td>
-                                            <td>Schade</td>
-                                            <td>Schade beschrijving</td>
-                                            <td>Schoon</td>
-                                            <td>Action</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($bus as $bus)
-                                            <tr>
-                                                <td>{{ $bus->bus_type }}</td>
-                                                <td>{{ $bus->milage }}</td>
-                                                @if($bus->damage == 1)
-                                                    <td>Ja</td>
-                                                @else
-                                                    <td>Nee</td>
-                                                @endif
-                                                <td>{{ $bus->damage_description }}</td>
-                                                @if($bus->clean == 0)
-                                                    <td>Ja</td>
-                                                @else
-                                                    <td>Nee</td>
-                                                @endif
-                                                <td>
-                                                    {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['bus.destroy', $bus->id],
-                                                    'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <button type="submit" class="btn btn-danger">
-                                                            <i>Verwijderen</i>
-                                                        </button>
-                                                    {!! Form::close() !!}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @endif
-                        </section>
-                    </div>
+                  </a>
+                  <div class="delete">
+                    {!! Form::open(['method' => 'DELETE',
+                    'route' => ['bus.destroy', $bus->id],
+                    'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
+                        <button type="submit" class="btn-delete">
+                            <img class="icon" src="{{asset('images/delete.svg')}}" alt="Verwijderen"> </li>
+                        </button>
+                    {!! Form::close() !!}
+                  </div>
                 </div>
+              @endforeach
             </div>
-    </div>
+          @endif
+      </section>
 </div>
 @endsection

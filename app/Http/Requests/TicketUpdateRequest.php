@@ -16,6 +16,14 @@ class TicketUpdateRequest extends FormRequest
         return true;
     }
 
+    public function messages()
+    {
+        return [
+            'date.required' => 'Geen geldige datum ingevoerd.',
+            'time.required'  => 'Geen geldige tijd ingevoerd.',
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +33,6 @@ class TicketUpdateRequest extends FormRequest
     {
         return [
             'date'     => 'required',
-            'time'    => 'required'
+            'time'    => 'required',
         ];
     }
-}

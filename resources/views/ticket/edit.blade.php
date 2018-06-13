@@ -60,7 +60,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-<br /><br />
+                            <br /><br />
                                 <!-- Table-to-load-the-destinations Part -->
                                 <table class="table">
                                     <thead>
@@ -78,7 +78,7 @@
                                             <td>{{$loadfinance->payment_gifts}}</td>
                                             <td>{{$loadfinance->payment_method}}</td>
                                             <td>
-                                                <button id="delete" name="delete" data-toggle="delete" class="btn btn-danger btn-xs btn-delete delete-task" value="{{$loadfinance->id}}">Verwijder</button>
+                                                <button id="delete" name="delete" data-toggle="delete" class="btn btn-danger btn-xs btn-delete delete-task-payment" value="{{$loadfinance->id}}">Verwijder</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -182,7 +182,16 @@
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="myModalLabel">Bestemming toevoegen</h4>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body" id="messages">
+
+                                            @if (session('status'))
+                                                <div class="alert alert-success">
+                                                    {{ session('status') }}
+                                                </div>
+                                            @endif
+
+                                            <div class="alert-danger" style="display:none"></div>
+
                                             <div class="form-group {{ $errors->has('known') ? 'has-error' : '' }}">
                                                 <label>Bekende adressen</label>
                                                 <select name="users" id="knownAddress">
@@ -243,12 +252,16 @@
                                             </div>
 
                                             <div class="form-group {{ $errors->has('verhicle') ? 'has-error' : '' }}">
-                                                {!! Form::label('Voertuig') !!}
-                                                {!! Form::select('Voertuig', array('bus' => 'Bus', 'caddy' => 'Caddy'), 'default', array('id' => 'verhicle')); !!}
+                                                {!! Form::label('Voertuig') !!} <br />
+                                                <select name="verhicle" id="verhicle">
+                                                    @foreach($bus as $buses)
+                                                        <option value="{{$buses}}">{{$buses}}</option>
+                                                    @endforeach
+                                                </select>
                                                 @if($errors->has('verhicle'))
                                                     <span class="help-block">
-                                                    {{ $errors->first('verhicle') }}
-                                                </span>
+                                                        {{ $errors->first('verhicle') }}
+                                                    </span>
                                                 @endif
                                             </div>
 
@@ -262,11 +275,15 @@
                                                 @endif
                                             </div>
 
+                                            <div class="alert-success" style="display:none"></div>
+
                                         </div>
                                         <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Sluit</span></button>
                                             <button type="button" class="btn btn-primary" id="btn-save" name="btn-save" value="add">Opslaan</button>
                                             <input type="hidden" id="task_id" name="task_id" value="0">
                                             <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
+
 
 
                                         </div>
@@ -282,6 +299,8 @@
                                             <h4 class="modal-title" id="myModalLabel">Betaling toevoegen</h4>
                                         </div>
                                         <div class="modal-body">
+
+                                            <div class="alert alert-danger" style="display:none"></div>
 
                                             Financien
                                             <div class="form-group {{ $errors->has('payment_invoice') ? 'has-error' : '' }}">
@@ -306,7 +325,7 @@
 
                                             <div class="form-group {{ $errors->has('payment_method') ? 'has-error' : '' }}">
                                                 {!! Form::label('Betaalmethode') !!}
-                                                {!! Form::select('Betaalmethode', array('pinnen' => 'Gepint', 'contant' => 'Contant'), 'default', array('id' => 'payment_method')); !!}
+                                                {!! Form::select('Betaalmethode', array('Gepint' => 'Gepint', 'Contant' => 'Contant'), 'default', array('id' => 'payment_method')); !!}
                                                 @if($errors->has('payment_method'))
                                                     <span class="help-block">
                                                 {{ $errors->first('payment_method') }}
@@ -321,11 +340,11 @@
                                             <input type="hidden" id="task_id" name="task_id" value="0">
                                             <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
 
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </section>
                     </div>
                 </div>
@@ -337,9 +356,9 @@
 <meta name="_token" content="{!! csrf_token() !!}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="{{asset('js/angular.min.js')}}"></script>
-
 <script src="{{asset('js/ajax-destinations.js')}}"></script>
 <script src="{{asset('js/table-directive.js')}}"></script>
+
 
 @endsection
 

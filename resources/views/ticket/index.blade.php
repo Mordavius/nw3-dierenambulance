@@ -1,23 +1,46 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
 <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png"></img>
-            <img id="list-image" src="images/list-view-active.png"></img>
+            <img id="map-image" src="images/map-view.png">
+            <img id="list-image" src="images/list-view-active.png">
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png"></img>
-        <img id="filter-icon" src="/images/filter-icon.png"></img>
+        <img id="search-icon" src="/images/search-icon.png">
+        <img id="filter-icon" src="/images/filter-icon.png">
     </div>
 </div>
+
 <div class="container testin">
     <div class="row justify-content-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Test search </h3>
+                        <br /><br /><br />
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <input type="text" class="form-controller" id="search" name="search">
+                            <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col-md-12" id="target">
             <div class="text-center"></div>
@@ -59,16 +82,10 @@
                         {{ $errors->first('filter') }}
                     </span>
                 @endif
-                <form action="{{ route('search') }}">
+
                     <div class="form-inline">
-                        <input type="search" class="form-control mr-sm-2" value="{{ request('search') }}" name="search" placeholder="Zoeken" aria-label="Search" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                                Zoeken
-                            </button>
-                        </span>
+
                     </div>
-                </form>
                 <div class="card">
                     <div class="card-header">
                         Dashboard
@@ -100,11 +117,12 @@
                                     {{ session('message') }}
                                 </div>
                             @endif
-                            @if (! $tickets->count())
+                            @if (! $unfinishedtickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
                             </div>
                             @else
+
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -114,7 +132,7 @@
                                             </td>
                                             <td>Beschrijving</td>
                                             <td>Adres</td>
-                                            <td>Datum &
+                                             <td>Datum &
                                                 <br />
                                                 Tijd
                                             </td>
@@ -122,7 +140,7 @@
                                             <td>Action</td>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="zoekresultaten">
                                         @foreach($tickets as $ticket)
                                             @if($ticket->finished == '0')
                                             <tr>@foreach($animals as $animal)
@@ -138,47 +156,24 @@
                                                     @if($ticket->id == $destination->ticket_id)
 
                                                     <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
-                                                    <td>
-                                                @if($ticket->animal_id == $animal->id)
-                                                    <td>{{ $animal->animal_species }}
-                                                    <br />
-                                                    {{ $animal->gender}}</td>
-                                                    <td>{{$animal->description}}</td>
-                                                @endif
+                                                        <td>
+                                                            {{ $destination->address }} {{ $destination->house_number }}
+                                                            <br />
+                                                            {{ $destination->postal_code }}, {{ $destination->city }}
+                                                        </td>
                                                     @endif
-                                            @endforeach
-                                                @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)
-                                                    <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
-                                                    <td>
-                                                @if($ticket->animal_id == $animal->id)
-                                                    <td>{{ $animal->animal_species }}
-                                                    <br />
-                                                    {{ $animal->gender}}</td>
-                                                    <td>{{$animal->description}}</td>
-                                                @endif
-                                                            @endif
-                                            @endforeach
-                                                @foreach($destinations as $destination)
-                                                    @if($destination->ticket_id == $ticket->id)                                                    <td>
-                                                        {{ $destination->address }} {{ $destination->house_number }}
-
-                                                        <br />
-                                                        {{ $destination->postal_code }}, {{ $destination->city }}
-                                                    </td>
-                                                        @endif
                                                 @endforeach
-                                                <td>{{ $ticket->date }}
-                                                {{ $ticket->time }}</td>
+                                                <td>{{ $unfinishedticket->date }}
+                                                {{ $unfinishedticket->time }}</td>
                                                 <td>
                                                     {!! Form::open(['method' => 'DELETE',
-                                                    'route' => ['melding.destroy', $ticket->id],
+                                                    'route' => ['melding.destroy', $unfinishedticket->id],
                                                     'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
-                                                        <a href="{{ route('melding.edit', $ticket->id) }}">
+                                                        <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
                                                             <i class="btn btn-primary">Aanpassen</i>
                                                         </a>
                                                         <br />
-                                                        <a href="{{ route('melding.show', $ticket->id) }}">
+                                                        <a href="{{ route('melding.show', $unfinishedticket->id) }}">
                                                             <i class="btn btn-primary">Bekijk</i>
                                                         </a>
                                                         <br />
@@ -188,7 +183,6 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -199,7 +193,7 @@
                         <h4 id="finishedtext">
                             Afgeronde meldingen
                         </h4>
-                        <div class="box-body ">
+                        <div class="box-body">
                             @if (! $tickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
@@ -223,6 +217,46 @@
                                         </tr>
                                     </thead>
                                     <tbody id="finished">
+                                    <tbody>
+                                        @foreach($finishedtickets as $finishedticket)
+                                            <tr>@foreach($animals as $animal)
+                                                @if($finishedticket->animal_id == $animal->id)
+                                                    <td>{{ $animal->animal_species }}
+                                                    <br />
+                                                    {{ $animal->gender}}</td>
+                                                    <td>{{$animal->description}}</td>
+                                                @endif
+                                            @endforeach
+                                                @foreach($destinations as $destination)
+                                                    @if($destination->ticket_id == $finishedticket->id)
+                                                    <td>
+                                                        {{ $destination->address }} {{ $destination->house_number }}
+                                                        <br />
+                                                        {{ $destination->postal_code }}, {{ $destination->city }}
+                                                    </td>
+                                                    @endif
+                                                @endforeach
+                                                <td>{{ $finishedticket->date }}
+                                                {{ $finishedticket->time }}</td>
+                                                <td>
+                                                    {!! Form::open(['method' => 'DELETE',
+                                                    'route' => ['melding.destroy', $finishedticket->id],
+                                                    'onsubmit' => 'return confirm("Klik op OK om de melding te verwijderen!")']) !!}
+                                                        <a href="{{ route('melding.edit', $finishedticket->id) }}">
+                                                            <i class="btn btn-primary">Aanpassen</i>
+                                                        </a>
+                                                        <br />
+                                                        <a href="{{ route('melding.show', $finishedticket->id) }}">
+                                                            <i class="btn btn-primary">Bekijk</i>
+                                                        </a>
+                                                        <br />
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i>Verwijderen</i>
+                                                        </button>
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             @endif
@@ -240,10 +274,16 @@
                 </div>
             </div>
         </div>
-        <a href="/melding/create"><button class="round"><img src="../images/plus.png" class="rotate-button"></img></button></a>
+        <a href="/melding/create">
+            <button class="round">
+                <img src="../images/plus.png" class="rotate-button"/>
+            </button>
+        </a>
 
     </div>
 </div>
+</div>
+
 
 @section('scripts')
     <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
@@ -254,4 +294,25 @@
     <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/filter.js')}}"></script>
     @endsection
+
+
+    <script type="text/javascript">
+        $('#search').on('keyup',function(){
+            $value=$(this).val();
+            $.ajax({
+                type : 'get',
+                url : '{{URL::to('search')}}',
+                data:{'search':$value},
+                success:function(data){
+                    $('tbody').html(data);
+                }
+            });
+        })
+
+    </script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    </script>
+
 @endsection
