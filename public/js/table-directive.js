@@ -150,8 +150,19 @@ var app = angular.module("app", [])
 
 
     function next() {
+
         if(page1.className == "pages current_page")
         {
+            jQuery("p.alert").remove();
+            if (name_text_field.value == ""){
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Naam is niet ingevuld!</p>');
+                return false;
+            }if(number_text_field.value == ""){
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Telefoonnummer is niet ingevuld!</p>');
+            }else{
             footer_button_back.style.visibility = "visible";
             page1.style.marginLeft = "-100%";
             page2.style.marginLeft = "0%";
@@ -165,7 +176,7 @@ var app = angular.module("app", [])
             page1.className = "pages";
             circle1.className = "circle";
             circle2.className = "circle highlighted";
-
+        }
         }else if(page2.className == "pages current_page")
          {
             page2.style.marginLeft = "-100%";

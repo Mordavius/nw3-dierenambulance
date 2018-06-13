@@ -59,6 +59,7 @@
             <div class="title_page">
                 <h1>Melder</h1>
             </div>
+            <div class="alert-danger name" style="display:none"></div>
             <div class="reporter_info">
                 <div class="name">
                     <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
