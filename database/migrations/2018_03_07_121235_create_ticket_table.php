@@ -28,6 +28,7 @@ class CreateTicketTable extends Migration
             $table->tinyInteger('finished')->default('0')->length('1');
             $table->integer('priority');
             $table->timestamps();
+            // finance tables
         });
     }
 

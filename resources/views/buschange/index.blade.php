@@ -36,6 +36,7 @@
                                     </tr>
                                 </thead>
 
+
                               <tbody>
                                 @foreach($buschanges as $buschange)
                                   <tr>
@@ -43,7 +44,7 @@
                                     <td>{{$buschange->date}}</td>
                                     <td>{{$buschange->from}}</td>
                                     <td>{{$buschange->to}}</td>
-                                    <td>{{$buschange->kilometerstraveled}}</td>
+                                    <td>{{$buschange->milage}}</td>
                                   </tr>
                                 @endforeach
                               </tbody>

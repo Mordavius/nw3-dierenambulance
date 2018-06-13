@@ -30,24 +30,19 @@
         </div>
         <div class="grid_main">
 
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <input type="text" class="form-controller" id="search" name="search">
-                            </div>
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-
-                                    <th>Plaats</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-
-
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" class="form-controller" id="search" name="search">
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
 
             @foreach($unfinishedtickets as $unfinishedticket)
                     @foreach($animals as $animal)

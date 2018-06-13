@@ -85,7 +85,38 @@
                                     </tbody>
                                 </table>
 
-                                {!! Form::submit('Voeg een betaling toe', ['class' => 'btn-primary', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
+                            {!! Form::submit('Voeg een betaling toe', ['class' => 'btn-primary', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
+
+                                <!-- Table-to-load-the-destinations Part -->
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Naam</th>
+                                        <th>Telefoonnmmer</th>
+                                        <th>Adres</th>
+                                        <th>Plaats</th>
+                                        <th>Postcode</th>
+                                        <th>Gemeente</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="owner-list" name="owner-list">
+                                    @foreach ($loadowners as $loadowner)
+                                        <tr id="task">
+                                            <td>{{$loadowner->name}}</td>
+                                            <td>{{$loadowner->telephone_number}}</td>
+                                            <td>{{$loadowner->owner_address}} {{ $loadowner->owner_house_number }}</td>
+                                            <td>{{$loadowner->owner_city}}</td>
+                                            <td>{{$loadowner->owner_postal_code}}</td>
+                                            <td>{{$loadowner->owner_township}}</td>
+                                            <td>
+                                                <button id="delete" name="delete" data-toggle="delete" class="btn btn-danger btn-xs btn-delete delete-task-owner" value="{{$loadowner->id}}">Verwijder</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                                {!! Form::submit('Voeg een eigenaar toe', ['class' => 'btn-primary', 'value' => 'btn-add-owner', 'id' => 'btn-add-owner', 'name' => 'btn-add-owner']) !!}
 
                             {!! Form::model($ticket, [
                                 'method' => 'PUT',
@@ -345,6 +376,107 @@
                                     </div>
                                 </div>
                             </div>
+
+                                <!-- Modal (Pop up when detail destinations button clicked) -->
+                                <div class="modal fade" id="myModal-owner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel">Eigenaar toevoegen</h4>
+                                            </div>
+                                            <div class="modal-body" id="messages">
+
+                                                @if (session('status'))
+                                                    <div class="alert alert-success">
+                                                        {{ session('status') }}
+                                                    </div>
+                                                @endif
+
+                                                <div class="alert-danger" style="display:none"></div>
+
+                                                {!! Form::label('owner-animal', 'Melder is ook eigenaar van het dier') !!}
+                                                <input type="checkbox" id="animalowner"  onclick="animalOwner()">
+
+                                                <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                                                    {!! Form::label('Naam') !!}
+                                                    {!! Form::text('name',  false , ['class' => 'form-control', 'id' => 'name']) !!}
+                                                    @if($errors->has('name'))
+                                                        <span class="help-block">
+                                                {{ $errors->first('name') }}
+                                                </span>
+                                                    @endif
+                                                </div>
+
+                                                <div class="form-group {{ $errors->has('telephone_number') ? 'has-error' : '' }}">
+                                                        {!! Form::label('Telefoonnummer') !!}
+                                                        {!! Form::text('telephone_number',  false , ['class' => 'form-control', 'id' => 'telephone_number']) !!}
+                                                        @if($errors->has('telephone_number'))
+                                                            <span class="help-block">
+                                                    {{ $errors->first('telephone_number') }}
+                                                    </span>
+                                                        @endif
+                                                </div>
+
+                                                <div class="form-group {{ $errors->has('owner_postal_code') ? 'has-error' : '' }}">
+                                                    {!! Form::label('Postcode') !!}
+                                                    {!! Form::text('owner_postal_code',  false , ['class' => 'form-control', 'id' => 'owner_postal_code']) !!}
+                                                    @if($errors->has('owner_postal_code'))
+                                                        <span class="help-block">
+                                                    {{ $errors->first('owner_postal_code') }}
+                                                </span>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group {{ $errors->has('owner_house_number') ? 'has-error' : '' }}">
+                                                    {!! Form::label('Huisnummer') !!}
+                                                    {!! Form::text('owner_house_number', null, ['class' => 'form-control', 'id' => 'owner_house_number', 'value' => '']) !!}
+                                                    @if($errors->has('owner_house_number'))
+                                                        <span class="help-block">
+                                                    {{ $errors->first('owner_house_number') }}
+                                                </span>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group {{ $errors->has('owner_address') ? 'has-error' : '' }}">
+                                                    {!! Form::label('Straatnaam') !!}
+                                                    {!! Form::text('owner_address', null, ['class' => 'form-control', 'id'=> 'owner_address', 'value' => '']) !!}
+                                                    @if($errors->has('owner_address'))
+                                                        <span class="help-block">
+                                                    {{ $errors->first('owner_address') }}
+                                                </span>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group {{ $errors->has('owner_city') ? 'has-error' : '' }}">
+                                                    {!! Form::label('Plaats') !!}
+                                                    {!! Form::text('owner_city', null, ['class' => 'form-control', 'id' => 'owner_city', 'value' => '']) !!}
+                                                    @if($errors->has('owner_city'))
+                                                        <span class="help-block">
+                                                    {{ $errors->first('owner_city') }}
+                                                </span>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group {{ $errors->has('owner_township') ? 'has-error' : '' }}">
+                                                    {!! Form::label('Gemeente') !!}
+                                                    {!! Form::text('owner_township', null, ['class' => 'form-control', 'id' => 'owner_township', 'value' => '']) !!}
+                                                    @if($errors->has('owner_township'))
+                                                        <span class="help-block">
+                                                    {{ $errors->first('owner_township') }}
+                                                </span>
+                                                    @endif
+                                                </div>
+
+                                                <div class="alert-success" style="display:none"></div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Sluit</span></button>
+                                                <button type="button" class="btn btn-primary" id="btn-save-owner" name="btn-save-owner" value="add">Opslaan</button>
+                                                <input type="hidden" id="task_id" name="task_id" value="0">
+                                                <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </section>
                     </div>
                 </div>

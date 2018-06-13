@@ -75,10 +75,15 @@ Route::get('/destination', 'TestController@index')->middleware('auth');
 
 Route::post('/destination/{ticket_id?}', 'TicketController@createAjax')->middleware('auth');
 Route::post('/finances/{ticket_id?}', 'TicketController@createAjaxFinance')->middleware('auth');
+Route::post('/owners/{ticket_id?}', 'TicketController@createAjaxOwner')->middleware('auth');
 
 Route::delete('/destination/{task_id?}', 'TicketController@destroyAjax')->middleware('auth');
 Route::delete('/finances/{task_id?}', 'TicketController@destroyAjaxPayment')->middleware('auth');
+
 Route::delete('/tickets/{ticket_id?}', 'TicketController@destroyTicketAjax')->middleware('auth');
+
+Route::delete('/owners/{task_id?}', 'TicketController@destroyAjaxOwner')->middleware('auth');
 
 Route::get('/knownusers/{id}', 'TicketController@knownusers')->middleware('auth');
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
+Route::get('/animalowner/{id}', 'TicketController@animalowner')->middleware('auth');
