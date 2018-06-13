@@ -232,11 +232,15 @@
                 {!! Form::model($ticket, [
                     'method' => 'POST',
                     'route' => 'melding.store',
-                    'id' => 'submit_form'
+                    'id' => 'submit_form',
+                    'onsubmit' => 'return validateForm()'
                 ]) !!}
                 <div class="new_ticket_information">
                     <label class="general">Algemeen</label>
+
+                    <div class="alert-danger danger" style="display:none"></div>
                     <br />
+
                     <div class="new_ticket_info">
                         <label class="general_labels centralist">Centralist:</label>
                         <input id="centralist" type="label" name="centralist" class="general_information centralist" value="{{ Auth::user()->name }}"></input>
@@ -248,6 +252,7 @@
 
                     <div class="address_info_new_ticket">
                         <label class="location_label">Locatie</label>
+                        <div class="alert-danger postal_code" style="display:none"></div>
                         <input type="label" class="address_info" placeholder="Straat" name="address" id="address"/>
                         <input type="label" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number"/>
                         <input type="label" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code"/>
@@ -260,11 +265,10 @@
                     <div class="reporter_new_ticket">
                         <label class="reporter_label">Melder</label>
                         <input type="text" id="reporter_name" class="ticket_text_field" placeholder="Naam" name="reporter_name"/>
-                        <div class="line">
-                        </div>
+                        <div class="line"><div class="alert-danger name" style="display:none"></div></div>
+
                         <input type="text" id="phone_number" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone"/>
-                        <div class="line">
-                        </div>
+                        <div class="line"><div class="alert-danger telephone" style="display:none"></div></div>
                     </div>
                     <div class="animal_new_ticket">
                         <label class="reporter_label">Dier</label>
@@ -312,7 +316,7 @@
                         <input class="ticket_text_field" type="label" name="priority" id="priority"/>
                     </div>
                 </div>
-                <input class="footer_button_submit" type="button" id="footer_button_submit" name="" value="Opslaan">
+                <input class="footer_button_submit" type="button" id="footer_button_submit" name="save-data" value="Opslaan" >
                 {!! Form::close() !!}
             </div>
         </div>
@@ -337,6 +341,7 @@
         <button id="footer_button_forward" class="footer_button">Volgende ></button>
     </div>
 @endsection
+
 @section('scripts')
     <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
@@ -344,5 +349,4 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/leaflet-gesture-handling.js') }}"></script>
-
 @endsection

@@ -274,7 +274,7 @@ var app = angular.module("app", [])
         }
         $('#footer_button_submit').click(submit);
 
-        function submit(){
+        function submit() {
             var postcode = postal_code.value.replace(/\s/g, '');
             makeRequest("GET", geocodeQuery(postcode), function(err, result) {
                 if(err) { throw err; };
@@ -282,9 +282,32 @@ var app = angular.module("app", [])
                 var obj = JSON.parse(result);
                 var latLngSubmit = {"lat": obj[0].lat, "lng": obj[0].lon};
                 coordinates.value = JSON.stringify(latLngSubmit);
-                document.forms["submit_form"].submit();
+
 
             });
+
+            var x = document.forms["submit_form"]["postal_code"].value;
+            if (x == "") {
+                jQuery('.alert-danger.postal_code').show();
+                jQuery('.alert-danger.postal_code').append('<p>Postcode is niet ingevuld!</p>');
+                return false;
+            }
+
+            var x = document.forms["submit_form"]["reporter_name"].value;
+            if (x == "") {
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p>Naam is niet ingevuld!</p>');
+                return false;
+            }
+
+            var x = document.forms["submit_form"]["telephone"].value;
+            if (x == "") {
+                jQuery('.alert-danger.telephone').show();
+                jQuery('.alert-danger.telephone').append('<p>Telefoonnummer is niet ingevuld!</p>');
+                return false;
+            }
+
+            document.forms["submit_form"].submit();
         }
 
         function getLocationRecord(){

@@ -72,7 +72,6 @@ class TicketController extends Controller
         else {
             $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
 
-           // $bus = Bus::where('bus_type',$request->verhicle)->first();
             $bus = Input::get('verhicle');
             $milage = Destination::get(['milage'])->last()->toArray();
 
@@ -125,27 +124,32 @@ class TicketController extends Controller
         return response()->json($animalowner);
     }
 
-    public function search(Request $request, Ticket $ticket_id)
+    public function search(Request $request)
     {
         if($request->ajax())
         {
             $output="";
-            $search=DB::table('destinations')->where('city','LIKE','%'.$request->search."%")->get();
+            $search=Destination::where('city','LIKE','%'.$request->search."%")->get();
+
 
             if($search)
             {
                 foreach ($search as $key => $city) {
-
                     $output.='<tr>'.
                         // '<td>'.$animals[0]->animal_species.' <br />'.$animals[0]->gender.'</td>'.
                         //  '<td>'.$animals[0]->description.'</td>'.
                         '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
                         //  '<td>'.$tickets[0]->date.' '.$tickets[0]->time.'</td>'.
-                        '<td><a href="/melding/'. $ticket_id .'/edit"><i class="btn btn-primary">Aanpassen</i></a></td>'.
+                        '<td><a href="/melding/' . $city->ticket_id . '/edit"><i class="btn btn-primary">Aanpassen</i></a></td>' .
                         '</tr>';
 
                 }
-                return Response($output);
+                if(Input::get('search') == "") {
+                    return "";
+                }
+                else {
+                    return Response($output);
+                }
             }
         }
     }
@@ -271,7 +275,9 @@ class TicketController extends Controller
         $animals = Animal::where('id', $animal_id);// Grabs animal based on animal id
         $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
-        return view("ticket.edit", compact('destinations', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
+        $animal = Animal::where('id', $animal_id)->pluck('animal_species');
+        //dd($animal);
+        return view("ticket.edit", compact('destinations', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id', 'animal'));
     }
     /**
      * Update the specified resource in storage.
@@ -289,25 +295,6 @@ class TicketController extends Controller
         //    'telephone' => 'sometimes|numeric',
         ]);
 
-        // Updates the data for the requested fields
-        $destination = new Destination([
-            'postal_code' => $request->get('postal_code'),
-            'address' => $request->get('address'),
-            'house_number' => $request->get('house_number'),
-            'city' => $request->get('city'),
-            'coordinates' => $request->get('coordinates'),
-        ]);
-
-
-        // Updates the data for the requested fields
-        $animal = new Animal([
-            'animal_species' => $request->get('animal_species'),
-            'gender' => $request->get('gender'),
-            'description' => $request->get('description'),
-        ]);
-
-        $animal->save(); // Saves the data
-
         //dd($animal);
 
         // Updates the data for the requested fields
@@ -317,8 +304,15 @@ class TicketController extends Controller
         $ticket->centralist = Input::get('centralist');
         $ticket->reporter_name = Input::get('reporter_name');
         $ticket->telephone = Input::get('telephone');
-
         $ticket->save(); // Saves the data
+
+        // Updates the data for the requested fields
+        $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');
+        $animal = Animal::findOrFail($animal_id);
+        $animal->animal_species = Input::get('animal_species');
+        $animal->gender = Input::get('gender');
+        $animal->description = Input::get('description');
+        //$animal->save(); // Saves the data
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
     }

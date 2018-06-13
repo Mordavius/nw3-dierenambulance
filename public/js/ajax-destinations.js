@@ -164,7 +164,6 @@ $(document).ready(function() {
                 }
 
                 if (state == "add"){ //if user added a new record
-                    location.reload();
                     $('#tasks-list').append(destination);
                 }else{ //if user updated an existing record
                     $("#destination" + task_id).replaceWith( destination );
@@ -173,6 +172,12 @@ $(document).ready(function() {
                 $('#destination').trigger("reset");
 
                 // $('#myModal').modal('hide')
+                },
+                complete: function(data) {
+                    if(data.status == 'success') {
+                    location.reload();
+                    $('#myModal-payment').modal('hide')
+                }
                 },
                 error: function (data) {
                 console.log('Error:', data);
@@ -290,7 +295,7 @@ $(document).ready(function() {
                 }
 
                 if (state == "add"){ //if user added a new record
-                    location.reload();
+                    //
                 }else { //if user updated an existing record
 
                     $("#finances" + task_id).replaceWith( finances );
@@ -299,6 +304,7 @@ $(document).ready(function() {
                 },
                 complete: function(data) {
                     if(data.status == 'success') {
+                    location.reload();
                     $('#myModal-payment').modal('hide')
                 }
                 },
@@ -427,8 +433,7 @@ $(document).ready(function() {
                 }
 
                 if (state == "add"){ //if user added a new record
-                   // $('#owner-list').append(owner);
-                    location.reload();
+                    //$('#owner-list').append(owner);
                 }else { //if user updated an existing record
 
                     $("#owner" + task_id).replaceWith( owner );
@@ -437,8 +442,9 @@ $(document).ready(function() {
                 },
                 complete: function(data) {
                     if(data.status == 'success') {
-                    $('#myModal-owner').modal('hide')
-                }
+                        location.reload();
+                        $('#myModal-owner').modal('hide')
+                    }
                 },
                     error: function (data) {
                     console.log('Error:', data);
