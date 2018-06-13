@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\FileNotFoundException;
 use Illuminate\Http\Request;
+use App\User;
+
 
 class AdministrationController extends Controller
 {
@@ -25,7 +27,9 @@ class AdministrationController extends Controller
      */
     public function index()
     {
-        return view('administration.index');
+            $users      = User::orderBy('name')->paginate(5); // Grab all existing users and paginate by 5 results
+            $usersCount = User::count(); // Count the users
+            return view("administration.index", compact('users', 'usersCount'));
     }
 
     // Export function for showing the page

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -28,7 +29,22 @@
                     </section>
                 </div>
             </div>
+=======
+@include('administration.admin_menu')
+<div class="wrapper">
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+>>>>>>> dev
         </div>
-    </div>
+    @endif
+<!-- Main content -->
+    <section class="content">
+            <a href="{{ url('downloadExcel') }}">
+                <button class="btn btn-success full-width">
+                    Exporteren naar Excel
+                </button>
+            </a>
+    </section>
 </div>
 @endsection

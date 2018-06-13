@@ -2,7 +2,10 @@ var app = angular.module("app", [])
 .controller("TableController", ['$scope','$http', function($scope, $http){
 
     $scope.distance = [];
-    $scope.map = L.map('map').setView([53, 5.7], 10);
+    $scope.map = L.map("map", {
+    center: [53, 5.7],
+    zoom: 10,
+    });
 	$scope.coordinates = [];
 
     L.tileLayer(
@@ -22,20 +25,6 @@ var app = angular.module("app", [])
 		var marker = L.marker(latlng).addTo($scope.map);
         $scope.distance.push(latlng);
 	}
-    // use defaults
-var line = L.polyline(coords);
-
-// override defaults
-var line = L.polyline(coords, {
-	distanceMarkers: { showAll: 11, offset: 1600, cssClass: 'some-other-class', iconSize: [1, 1] }
-});
-
-// show/hide markers on mouseover
-var line = L.polyline(coords, {
-	distanceMarkers: { lazy: true }
-});
-$scope.map.fitBounds(line.getBounds());
-$scope.map.addLayer(line);
 
 $('#toggle-button').click(toggle);
 var img_array_map= new Array('images/map-view.png','images/map-view-active.png');
@@ -49,24 +38,19 @@ function toggle () {
     if(i==img_array_map.length-1) {
         i=-1;
     }
-    if(target.style.display === "none"){
-        target2.className = "col-md-12 slideOutLeft animated";
-        target.className = "col-md-12 slideInRight animated";
-        setTimeout(function()
-        {
-            target2.style.display = "none";
-            target.style.display = "block";},
-            1000);
-    } else {
-        target.className = "col-md-12 slideOutRight animated";
-        target2.className = "col-md-12 slideInLeft animated";
+    if(page1.className == "pages current_page"){
+        page1.className = "pages";
+        page2.className = "pages current_page";
+        map.style.height = "400px";
+        $scope.map.setView([53.1, 5.6], 10)
+        $scope.map.invalidateSize();
         setTimeout(function(){
-            target.style.display = "none";
-            target2.style.display = "block";
-            $scope.map.setView([53, 5.7], 10);
-            $scope.map.invalidateSize();},
-            1000);
 
+        }, 300);
+
+    } else if (page2.className == "pages current_page") {
+        page2.className = "pages";
+        page1.className = "pages current_page";
     }
 }
 }])

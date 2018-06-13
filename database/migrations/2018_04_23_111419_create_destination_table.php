@@ -17,13 +17,14 @@ class CreateDestinationTable extends Migration
             $table->increments('id');
             $table->integer('bus_id')->nullable();
             $table->integer('ticket_id');
+            $table->string('verhicle')->nullable();
             $table->integer('known_address_id')->nullable();
             $table->string('postal_code');
             $table->string('address');
             $table->string('house_number')->nullable();
             $table->string('city');
             $table->string('township');
-            $table->string('coordinates');
+            $table->string('coordinates')->nullable();
             $table->timestamps();
         });
     }

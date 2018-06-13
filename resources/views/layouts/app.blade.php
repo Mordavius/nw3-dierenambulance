@@ -5,25 +5,29 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Dierenambulance') }}</title>
 
         <!-- Styles -->
-        <!-- Bootstrap 4.0.0 -->
 
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
+
+        <!-- Scripts -->
+        @yield('scripts')
     </head>
-    <body>
+    <body class="@yield('body_class')">
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Dierenambulance') }}
+                        <img class="logo" src="{{ asset('images/dierenambulance-logo.png') }}">
                     </a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,42 +43,52 @@
                             @guest
                                 <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             @else
-                            <li>
-                                <a class="nav-link" href="{{ url('/') }}">
-                                    Dashboard
-                                </a>
-                            </li>
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ Auth::user()->name }}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="../profiel">Profiel</a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
-                                           Uitloggen
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
+                            <li {{{ (Request::is('melding') ? 'class=active' : '') }}}>
+                              <a class="nav-link" href="{{ route('melding.index') }}">
+                                Meldingen
+                              </a>
+                          </li>
+                          <li class="nav-item dropdown {{ (Request::is(['administratie', 'bus', 'bekende-adressen', 'exporteren']) ? 'active' : '') }}">
+                              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administratie
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('Administratie') }}"> Gebruikers </a>
+                                <a class="dropdown-item" href="{{ route('bus.index') }}"> Voertuigen </a>
+                                <a class="dropdown-item" href="{{ route('bekende-adressen.index') }}"> Bekende adressen </a>
+                                <a class="dropdown-item" href="{{ route('Exporteren') }}"> Exporteren </a>
+                              </div>
+                          </li>
+                              <li class="nav-item dropdown {{ (Request::is('profiel/*') ? 'active' : '') }}">
+                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      {{ Auth::user()->name }}
+                                  </a>
+                                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="../profiel">Profiel</a>
+                                      <a class="dropdown-item" href="{{ route('logout') }}"
+                                         onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                         Uitloggen
+                                      </a>
+                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                          @csrf
+                                      </form>
+                                  </div>
+                              </li>
                             @endguest
                         </ul>
                     </div>
                 </div>
             </nav>
-            <div class="py-1">
+            <div>
                 @yield('map')
             </div>
-            <main class="py-4">
+            <main>
                 @yield('content')
             </main>
         </div>
-        <!-- Scripts -->
-        <!-- Bootstrap 4.0.0 -->
         @yield('scripts')
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
+
 </html>

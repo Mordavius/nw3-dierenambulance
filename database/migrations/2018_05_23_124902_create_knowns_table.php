@@ -20,6 +20,7 @@ class CreateKnownsTable extends Migration
                         $table->string('address');
                         $table->string('house_number');
                         $table->string('city');
+                        $table->string('township');
                         $table->timestamps();
                     });
             }
