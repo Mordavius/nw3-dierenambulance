@@ -66,7 +66,6 @@ class TicketController extends Controller
             'house_number' => 'required',
             'address' => 'required',
             'city' => 'required',
-            'township' => 'required',
             'milage' => 'required|numeric',
         ]);
 
@@ -106,7 +105,12 @@ class TicketController extends Controller
     public function createAjaxOwner(Request $request)
     {
         $validator = Validator::make($request->all(), [
-
+            'name' => 'required',
+            'telephone_number' => 'required|numeric',
+            'owner_postal_code' => 'required',
+            'owner_house_number' => 'required',
+            'owner_address' => 'required',
+            'owner_city' => 'required',
         ]);
 
         if ($validator->fails())

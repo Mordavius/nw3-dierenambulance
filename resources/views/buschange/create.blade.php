@@ -49,7 +49,7 @@
                                 @endforeach
                             </select>
                             @if($errors->has('bus'))
-                                <span class="help-block">
+                                <span class="alert alert-danger">
                                     {{ $errors->first('bus') }}
                                 </span>
                             @endif
