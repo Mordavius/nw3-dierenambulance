@@ -65,3 +65,6 @@ Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth
 Route::get('/cssgrid', ['middleware' => 'guest', function () {
     return view('/cssgrid');
 }]);
+
+Route::get('/passwords/reset/{id}/{token}', 'PasswordResetController@index');
+Route::post('/passwords/reset/{id}/{token}', 'PasswordResetController@update');
