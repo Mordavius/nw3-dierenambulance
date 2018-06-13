@@ -49,7 +49,6 @@ class QuarterlyExport extends Command
         $quarter = date("Y-m-d h:i:s",strtotime("-3 Months"));
         $filename = 'Kwartaal-'.ceil(date("m")/3) . '-'.date('Y');
         $filelocation = 'exports/'.$filename.'.xlsx';
-        //return $this->excel->download(new TicketExport, 'meldingen.xlsx');
         try {
             if ($this->excel->store(new TicketExport(date(now()), $quarter), $filelocation)) {
                 $quarteerfinance = new Quarterfinance([

@@ -1,50 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    Exporteren naar excel
-                </div>
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                <!-- Main content -->
-                    <section class="content">
-                        {{Form::open(array('url' => 'downloadExcel'))}}
-                        <input type="date" name="startdate" id="startdate"/>
-                        <input type="date" name="enddate" id="enddate"/>
-                        <div class="col-6">
-                                <button class="btn btn-success btn-lg">
-                                    Exporteren naar Excel
-                                </button>
-                        </div>
-                        {{ Form::close() }}
-                    </section>
-                </div>
-            </div>
-=======
-@include('administration.admin_menu')
+    @include('administration.admin_menu')
+@section('body_class', 'export')
+<a href="/melding/create">
+    <button class="round">
+        <img src="../images/plus.png" class="rotate-button"/>
+    </button>
+</a>
 <div class="wrapper">
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
->>>>>>> dev
         </div>
-    @endif
+@endif
 <!-- Main content -->
     <section class="content">
-            <a href="{{ url('downloadExcel') }}">
-                <button class="btn btn-success full-width">
-                    Exporteren naar Excel
-                </button>
-            </a>
+        {{Form::open(array('url' => 'downloadExcel'))}}
+        <input type="date" name="startdate" id="startdate"/>
+        <input type="date" name="enddate" id="enddate"/>
+        <select placeholder="Dier" id="animal" type="text" name="animal">
+            <option value="">Hoi</option>
+            <option value="">Hoi</option>
+            <option value="">Hoi</option>
+        </select>
+        <select placeholder="Gemeente" id="township" type="text" name="township">
+            <option value="">Hoi</option>
+            <option value="">Hoi</option>
+            <option value="">Hoi</option>
+        </select>
+        <input type="checkbox" id="financien" name="Met financiën" value="Met financiën"><label for="financien">Met financiën</label>
+        <button class="btn btn-success full-width">
+            Exporteren naar Excel
+        </button>
+        {{ Form::close() }}
     </section>
 </div>
 @endsection
