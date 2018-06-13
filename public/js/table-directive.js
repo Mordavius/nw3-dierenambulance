@@ -19,6 +19,18 @@ var app = angular.module("app", [])
         scrollMac: "Gebruik \u2318 + scroll om in te zoomen"
     }
 });
+
+    $scope.map3 = L.map("map3", {
+    center: [53, 5.7],
+    zoom: 10,
+    gestureHandling: true,
+    gestureHandlingText: {
+        touch: "Gebruik twee vingers om door de map te scrollen",
+        scroll: "Gebruik ctrl + scroll om in te zoomen",
+        scrollMac: "Gebruik \u2318 + scroll om in te zoomen"
+    }
+});
+
 	$scope.coordinates = [];
     var ticket_information = {"name": "", "number": "",
     "address": "", "house_number": "", "postal_code": "", "city": "",
@@ -39,6 +51,13 @@ var app = angular.module("app", [])
         maxZoom: 30,
         minZoom: 1,
     }).addTo($scope.map2);
+
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
+        maxZoom: 30,
+        minZoom: 1,
+    }).addTo($scope.map3);
 
     function onMapClick(e) {
 		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
@@ -174,7 +193,9 @@ var app = angular.module("app", [])
             ticket_information.number = number_text_field.value;
             $scope.map.invalidateSize();
             page1.className = "pages";
-            circle1.className = "circle";
+            circle1.className = "circle previous";
+            span1.className = "span previous";
+            divider1.className = "divider previous";
             circle2.className = "circle highlighted";
         }
         }else if(page2.className == "pages current_page")
@@ -193,7 +214,9 @@ var app = angular.module("app", [])
             city_field.innerHTML = "";
             township_field.innerHTML = "";
             page2.className = "pages";
-            circle2.className = "circle";
+            circle2.className = "circle previous";
+            span2.className = "span previous";
+            divider2.className = "divider previous";
             circle3.className = "circle highlighted";
         }else if(page3.className == "pages current_page")
         {
@@ -212,7 +235,9 @@ var app = angular.module("app", [])
             $scope.map2.invalidateSize();
             loadTicketInformation();
             page3.className = "pages";
-            circle3.className = "circle";
+            circle3.className = "circle previous";
+            span3.className = "span previous";
+            divider3.className = "divider previous";
             circle4.className = "circle highlighted";
        }else if(page4.className == "pages current_page")
        {
@@ -222,7 +247,9 @@ var app = angular.module("app", [])
           page5.style.marginLeft = "0%";
           page5.className = "pages current_page";
           page4.className = "pages";
-          circle4.className = "circle";
+          circle4.className = "circle previous";
+          span4.className = "span previous";
+          divider4.className = "divider previous";
           circle5.className = "circle highlighted";
           loadTicketInformation();
           console.log(ticket_information);
@@ -238,6 +265,8 @@ var app = angular.module("app", [])
             page1.className = "pages current_page";
             page2.className = "pages";
             circle2.className = "circle";
+            divider1.className = "divider";
+            span1.className = "span";
             circle1.className = "circle highlighted";
         }else if(page3.className == "pages current_page"){
             page3.style.marginLeft = "-100%";
@@ -245,6 +274,8 @@ var app = angular.module("app", [])
             page2.className = "pages current_page";
             page3.className = "pages";
             circle3.className = "circle";
+            span2.className = "span";
+            divider2.className = "divider";
             circle2.className = "circle highlighted";
        }else if(page4.className == "pages current_page"){
            page4.style.marginLeft = "-100%";
@@ -252,6 +283,8 @@ var app = angular.module("app", [])
            page3.className = "pages current_page";
            page4.className = "pages";
            circle4.className = "circle";
+           span3.className = "span";
+           divider3.className = "divider";
            circle3.className = "circle highlighted";
       }else if(page5.className == "pages current_page"){
           footer_button_forward.style.visibility = "visible";
@@ -260,6 +293,8 @@ var app = angular.module("app", [])
           page4.className = "pages current_page";
           page5.className = "pages";
           circle5.className = "circle";
+          span4.className = "span";
+          divider4.className = "divider";
           circle4.className = "circle highlighted";
      }
     }
@@ -383,7 +418,7 @@ var app = angular.module("app", [])
     }
 }])
 
-function selectAnimalSpieces(animal_species){
+function selectAnimalSpieces(animal_species, image_animal){
     var growDiv = document.getElementById('animal_cards');
     if (growDiv.clientHeight) {
       growDiv.style.height = 0;
@@ -391,7 +426,9 @@ function selectAnimalSpieces(animal_species){
       {
           if (!selectedAnimal.clientHeight) {
               growDiv.style.display = "none";
-              selectedAnimal.style.height = 45;
+              selectedAnimal.style.height = "45px";
+              image.src =  "/" + image_animal;
+              console.log(image.src);
 
               selected_animal.innerHTML = animal_species;
           }
