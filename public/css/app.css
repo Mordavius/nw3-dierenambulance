@@ -1,4 +1,188 @@
+<<<<<<< current
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);/*!
+=======
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400);main {
+  padding-top: 0;
+}
+
+.admin-menu {
+  background: #fff;
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.admin-menu ul {
+  list-style-type: none;
+  padding: 15px 21px 0 21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.admin-menu ul li.menu-item {
+  display: inline-block;
+}
+
+.admin-menu ul li.menu-item .icon {
+  margin-bottom: 8px;
+}
+
+.admin-menu ul li.menu-item.active {
+  border-bottom: #288B5F solid 5px;
+}
+
+.wrapper .content {
+  padding-top: 0;
+}
+.show{
+  transition: height .5s;
+}
+.wrapper .content .btn-success {
+  float: right;
+  background: #288B5F;
+  font-size: 16px;
+  padding: 5px 18px 5px 18px;
+  border-radius: 0;
+  margin-top: 0;
+  margin-right: 21px;
+  border: none;
+}
+
+.wrapper .content .users .user {
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+  padding: 14px 13px 14px 29px;
+  background: #fff;
+  position: relative;
+}
+
+.wrapper .content .users .user a {
+  color: #000;
+}
+
+.wrapper .content .users .user h2 {
+  text-transform: capitalize;
+  margin-bottom: 0.5625rem;
+}
+
+.wrapper .content .users .user .subheading {
+  color: #828282;
+}
+
+.wrapper .content .users .user .delete {
+  background: transparent;
+  border: 0;
+  float: right;
+  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  right: 0.625rem;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.logo {
+  max-width: 150px;
+}
+
+.profile-wrapper {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 100%;
+  margin: 10px;
+  font-size: 1.1875rem;
+}
+
+.profile-icon img {
+  max-height: 20px;
+}
+
+.profile-text {
+  padding-left: 0.9375rem;
+}
+
+.profile-info {
+  font-size: 24px;
+  margin: 20px 20px 0px;
+  border-bottom: 1px solid #BDBDBD;
+}
+
+@media only screen and (min-width: 768px) {
+  .profile {
+    max-width: 50%;
+  }
+}
+
+@-webkit-keyframes leaflet-gestures-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes leaflet-gestures-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.leaflet-container:after {
+  -webkit-animation: leaflet-gestures-fadein 0.8s backwards;
+          animation: leaflet-gestures-fadein 0.8s backwards;
+  color: #fff;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 22px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.leaflet-gesture-handling-touch-warning:after,
+.leaflet-gesture-handling-scroll-warning:after {
+  -webkit-animation: leaflet-gestures-fadein 0.8s forwards;
+          animation: leaflet-gestures-fadein 0.8s forwards;
+}
+
+.leaflet-gesture-handling-touch-warning:after {
+  content: attr(data-gesture-handling-touch-content);
+}
+
+.leaflet-gesture-handling-scroll-warning:after {
+  content: attr(data-gesture-handling-scroll-content);
+}
+
+/*!
+>>>>>>> before discard
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -4643,6 +4827,7 @@ input[type="button"].btn-block {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 100%;
 }
 
 .navbar-toggler {
@@ -10732,6 +10917,11 @@ main {
   font-size: 24px;
 }
 
+.edit-menu button {
+  background: none;
+  border: none;
+}
+
 input:not([type="checkbox"]),
 textarea,
 select {
@@ -10857,6 +11047,129 @@ input[type="checkbox"] {
   }
 }
 
+.edit-header {
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+}
+
+.edit-menu h6 {
+  color: #828282;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+h1.header {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 0.625rem;
+}
+
+.edit-ticket-algemeen,
+.edit-ticket-melder,
+.edit-ticket-locatie,
+.edit-ticket-dier,
+.edit-ticket-eigenaar,
+.edit-ticket-financien {
+  margin-bottom: 1.25rem;
+}
+
+.content h2 {
+  color: #828282;
+  margin: 0rem;
+}
+
+td {
+  padding: 0px !important;
+}
+
+.locatie-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.btn-delete-location {
+  background: none;
+  border: none;
+}
+
+.btn-add-location,
+.btn-add-payment {
+  color: #fff !important;
+  background-color: #288B5F;
+  width: 50% !important;
+  border: none;
+  margin-bottom: 1.875rem;
+  padding: 0.3125rem !important;
+}
+
+.btn-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 0.625rem;
+}
+
+.edit-ticket-financien h6 {
+  font-size: 1.125rem !important;
+  font-weight: bold;
+  margin: 0 0 0 0;
+}
+
+.edit-ticket-financien span:first-child {
+  padding: 0.9375rem 1.25rem;
+  width: 100%;
+}
+
+.factuur-card,
+.gift-card {
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0.625rem 0 0.625rem 0;
+}
+
+.factuur-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.locatie-wrap table {
+  width: 100%;
+}
+
+.factuur-card img,
+.gift-card img {
+  padding: 0.9375rem 1.25rem;
+  float: right;
+}
+
+.delete-task-payment {
+  background: none;
+  border: none;
+}
+
+button {
+  padding: 0px !important;
+}
+
+img.icon {
+  padding: 0px 0px 0px 10px;
+}
+
+span.italic {
+  font-style: italic;
+}
+
 @-webkit-keyframes leaflet-gestures-fadein {
   0% {
     opacity: 0;
@@ -10922,4 +11235,3 @@ input[type="checkbox"] {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
