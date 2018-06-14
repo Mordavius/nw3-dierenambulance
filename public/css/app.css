@@ -11802,6 +11802,7 @@ td {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 0.8125rem;
 }
 
 .btn-delete-location {
@@ -11878,8 +11879,19 @@ img.icon {
   padding: 0px 0px 0px 10px;
 }
 
-span.italic {
+.italic {
   font-style: italic;
+}
+
+.grey {
+  background-color: #F2F2F2;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 10px 15px 10px 15px;
+}
+
+.edit_ticket nav {
+  display: none;
 }
 
 @-webkit-keyframes leaflet-gestures-fadein {

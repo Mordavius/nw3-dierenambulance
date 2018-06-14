@@ -31,6 +31,7 @@ td {
 .locatie-wrap {
   display: flex;
   align-items: center;
+  margin-bottom: rem-calc(13);
 }
 
 .btn-delete-location {
@@ -97,6 +98,17 @@ img.icon {
   padding: 0px 0px 0px 10px;
 }
 
-span.italic {
+.italic {
   font-style: italic;
+}
+
+.grey {
+  background-color: $light-gray;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 10px 15px 10px 15px;
+}
+
+.edit_ticket nav {
+  display: none;
 }
