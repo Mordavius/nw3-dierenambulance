@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@section('body_class', 'edit_ticket')
 
 <div class="edit-menu">
   <a href="{{ url()->previous() }}"><img src="{{asset('images/close.svg')}}" alt=""></a>
@@ -60,44 +61,63 @@
                               <!-- Table-to-load-the-destinations Part -->
 
                               <!-- Check if it is the first destination(Geen bg-color en prullenbak) else(bg-grey en prullenbak) -->
-                              <div class="locatie-wrap">
-                                @foreach ($loaddestination as $loaddestinations)
-                                <table>
-                                            <tr>
-                                              <td>{{$loaddestinations->address}} {{$loaddestinations->house_number}}</td>
-                                            </tr>
-                                            <tr>
-                                              <td>{{$loaddestinations->postal_code}}</td>
-                                            </tr>
-                                            <tr>
-                                              <td>{{$loaddestinations->city}}</td>
-                                            </tr>
-                                            <tr>
-                                              <td>{{$loaddestinations->township}}</td>
-                                            </tr>
-                                            <tr>
-                                              <td>{{$loaddestinations->verhicle}}</td>
-                                            </tr>
-                                            <tr>
-                                              <td>{{$loaddestinations->milage}}</td>
-                                            </tr>
 
-                                  </table>
-                                  @endforeach
-                                  <button id="delete" name="delete" data-toggle="delete" class="btn-delete-location" value="{{$loaddestinations->id}}">
-                                      <img src="https://nw3-dierenambulance.test/images/delete.svg" alt="Verwijderen" class="icon">
-                                  </button>
-                                </div>
+
+                              @foreach ($loaddestination as $loaddestinations)
+                                  @if ($loop->first)
+                                    <div class="locatie-wrap">
+                                      <table>
+                                          <tr>
+                                            <td>{{$loaddestinations->address}} {{$loaddestinations->house_number}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>{{$loaddestinations->postal_code}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>{{$loaddestinations->city}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td class="italic">{{$loaddestinations->milage}}</td>
+                                          </tr>
+                                      </table>
+                                    </div>
+                                  @endif
+                                  @if ($loop->index)
+                                    <div class="locatie-wrap grey">
+                                      <!-- Check welke bestemming het is en dat cijfer invullen Bestemming X -->
+                                      <table>
+                                          <tr>
+                                            <td>{{$loaddestinations->address}} {{$loaddestinations->house_number}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>{{$loaddestinations->postal_code}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>{{$loaddestinations->city}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td class="italic">{{$loaddestinations->milage}}</td>
+                                          </tr>
+                                        </table>
+
+                                        <button id="delete" name="delete" data-toggle="delete" class="btn-delete-location" value="{{$loaddestinations->id}}">
+                                            <img src="https://nw3-dierenambulance.test/images/delete.svg" alt="Verwijderen" class="icon">
+                                        </button>
+
+                                    </div>
+                                  @endif
+                                @endforeach
+
                                 <div class="btn-center">
                                   {!! Form::button('Extra locatie', ['class' => 'btn-add-location', 'value' => 'btn-add', 'id' => 'btn-add', 'name' => 'btn-add']) !!}
                                 </div>
                           </div>
                           <div class="edit-ticket-dier">
                             <h2>Dier</h2>@foreach($animals as $animal)
-                            <input type="text" value="{{$animal->animal_species}}">
-                            <input type="text" value="{{$animal->breed}}">
-                            <input type="text" value="{{$animal->gender}}">
-                            <input type="text" value="{{$animal->injury}}">
+                            <input type="text" name="animal_species" value="{{$animal->animal_species}}">
+                            <input type="text" name="breed" value="{{$animal->breed}}">
+                            <input type="text" name="gender" value="{{$animal->gender}}">
+                            <input type="text" name="injury" value="{{$animal->injury}}">
                             <textarea>{{$animal->description}}</textarea>
                             @endforeach
                           </div>
