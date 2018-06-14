@@ -18,11 +18,19 @@
                             </tr>
                             </thead>
                             <tbody>
+
+                            @if(!empty($errors->first()))
+                                <div class="row col-lg-12">
+                                    <div class="alert alert-danger">
+                                        <span>{{ $errors->first() }}</span>
+                                    </div>
+                                </div>
+                            @endif
                             @foreach($quarterlies as $quarterlies)
                                 <tr>
                                     <td>{{ $quarterlies->name }}</td>
                                     <td>{{ $quarterlies->year }}</td>
-                                    <td><a href="download/{{ $quarterlies->name }}.xlsx">downloaden</a></td>
+                                    <td><a href="administratie/download/{{ $quarterlies->name }}.xlsx">downloaden</a></td>
                                 </tr>
                             @endforeach
                         </table>

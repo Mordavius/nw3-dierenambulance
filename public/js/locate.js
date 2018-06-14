@@ -80,13 +80,23 @@ function getAdressByCoordinates(lat,lon){
         }
     });
 }
+// function sendLocationRequest(){
+//     $.ajax({
+//         type:'POST',
+//         url:'/api/mail',
+//         data: {id: locationId},
+//         success: function() {
+//             alert("mail verzonden");
+//             getLocationRecord();
+//         }
+//     });
 function sendLocationRequest(){
     $.ajax({
         type:'POST',
-        url:'/api/mail',
+        url:'/api/sms',
         data: {id: locationId},
         success: function() {
-            alert("mail verzonden");
+            alert("sms verzonden");
             getLocationRecord();
         }
     });

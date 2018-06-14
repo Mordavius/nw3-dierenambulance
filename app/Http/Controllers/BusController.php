@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
+use App\Http\Requests\BusChangeRequest;
 use App\Bus;
 
 class BusController extends Controller
@@ -29,7 +30,7 @@ class BusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Bus $bus)
+    public function create(Request $bus)
     {
             return view('bus.create', compact('bus'));
     }
@@ -40,7 +41,7 @@ class BusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BusChangeRequest $request)
     {
         // Stores the data for the requested fields
         $bus = new Bus([

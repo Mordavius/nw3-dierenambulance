@@ -62,15 +62,14 @@
                     <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
                 </div>
                 <div class="phone_number">
-                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">
+                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">    
+                  </div>
                 </div>
                 <label for="eigenaar"><input type="checkbox" name="eigenaar" value="eigenaar">Melder is eigenaar</label>
                 <span></span>
                 <p class="boodschap">Vergeet niet te melden dat de gegevens van de melder worden opgeslagen</p>
             </div>
         </div>
-    </div>
-
     <div class="pages" id="page2">
         <div class="page">
             <div class="title_page">
@@ -86,10 +85,10 @@
                     Ga
                 </button>
             </div>
-        </div>
-        <div id="app" ng-app="app">
-            <div ng-controller="TableController" >
-                <div id="map" class="panel panel-default panel-success">
+            <div id="app" ng-app="app">
+                <div ng-controller="TableController" >
+                    <div id="map" class="panel panel-default panel-success">
+                    </div>
                 </div>
             </div>
         </div>
@@ -290,20 +289,19 @@
         <br>
         <span contenteditable="true" class="address_info" name="city_field" id="city_field"></span>
         <span contenteditable="true" class="address_info" name="township" id="township_field"></span>
-
-        <!-- <input type="text" class="address_info" placeholder="Straat" name="address" id="address_field"/>
-        <input type="text" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number_field"/>
-        <input type="text" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code_field"/>
-        <input type="text" class="address_info" placeholder="Stad" name="city" id="city_field"/>
-        <input type="text" class="address_info township" placeholder="Gemeente" name="township" id="township_field"/> -->
-        <input type="hidden" name="coordinates" id="coordinates_field"/>
-    </div>
-    <button id="footer_button_forward" class="footer_button">Volgende ></button>
+            <!-- <input type="text" class="address_info" placeholder="Straat" name="address" id="address_field"/>
+            <input type="text" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number_field"/>
+            <input type="text" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code_field"/>
+            <input type="text" class="address_info" placeholder="Stad" name="city" id="city_field"/>
+            <input type="text" class="address_info township" placeholder="Gemeente" name="township" id="township_field"/> -->
+            <input type="hidden" name="coordinates" id="coordinates_field"/>
+        </div>
+        <button id="footer_button_forward" class="footer_button">Volgende ></button>
 </div>
+
 @endsection
 @section('scripts')
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet-gesture-handling.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/table-directive.js') }}"></script>
-
 @endsection

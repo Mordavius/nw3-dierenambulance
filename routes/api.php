@@ -17,7 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/mail', 'MailController@askLocationMail');
+$this->middleware('auth', ['except' => ['/mail', '/location/show/{id}', '/location/write', '/sms', '/ticketfilter/{date}']]);
+
+Route::post('/mail', 'LocationController@askLocationMail');
+Route::post('/sms', 'LocationController@askLocationSMS');
 Route::get('/location/show/{id}', 'LocationController@getLocation');
+Route::get('/ticketfilter/{amount}/{date}', 'TicketController@filterTickets');
 Route::post('/location/write', 'LocationController@writeLocation');
 // Route::get('/coordinates/show/{active}', 'LocationController@markersOnCoordinates')

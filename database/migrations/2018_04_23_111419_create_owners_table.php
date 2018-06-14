@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDestinationTable extends Migration
+class CreateOwnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateDestinationTable extends Migration
      */
     public function up()
     {
-        Schema::create('destinations', function (Blueprint $table) {
+        Schema::create('owners', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('bus_id')->nullable();
             $table->integer('ticket_id');
-            $table->string('verhicle')->nullable();
-            $table->integer('known_address_id')->nullable();
+            $table->string('name');
+            $table->string('telephone_number');
             $table->string('postal_code');
             $table->string('address');
-            $table->string('house_number')->nullable();
-            $table->string('city');
-            $table->string('township');
-            $table->string('coordinates')->nullable();
+            $table->string('owner_house_number')->nullable();
+            $table->string('owner_city');
+            $table->string('owner_township');
             $table->timestamps();
         });
     }
@@ -36,6 +34,6 @@ class CreateDestinationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('destination');
+        Schema::dropIfExists('owners');
     }
 }

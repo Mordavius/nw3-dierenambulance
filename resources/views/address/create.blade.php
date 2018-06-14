@@ -29,7 +29,7 @@
                         {!! Form::text('location_name', null, ['class' => 'form-control']) !!}
 
                         @if($errors->has('location_name'))
-                          <span class="help-block">{{ $errors->first('location_name') }}</span>
+                            <br /><span class="alert alert-danger">{{ $errors->first('location_name') }}</span><br /><br />
                         @endif
                     </div>
 
@@ -38,27 +38,25 @@
                         {!! Form::text('postal_code', null, ['class' => 'form-control']) !!}
 
                         @if($errors->has('postal_code'))
-                          <span class="help-block">{{ $errors->first('postal_code') }}</span>
+                            <br /><span class="alert alert-danger">{{ $errors->first('postal_code') }}</span><br /><br />
                         @endif
                     </div>
-
 
                     <div class="form-group{{ $errors->has('address') ? 'has-error' : ''}}">
                         {!! Form::label('Straat') !!}
                         {!! Form::text('address', null, ['class' => 'form-control']) !!}
 
                         @if($errors->has('address'))
-                            <span class="help-block">{{ $errors->first('address') }}</span>
+                            <br /><span class="alert alert-danger">{{ $errors->first('address') }}</span><br /><br />
                         @endif
                     </div>
-
 
                     <div class="form-group{{ $errors->has('house_number') ? 'has-error' : ''}}">
                         {!! Form::label('Huisnummer') !!}
                         {!! Form::text('house_number', null, ['class' => 'form-control']) !!}
 
                         @if($errors->has('house_number'))
-                            <span class="help-block">{{ $errors->first('house_number') }}</span>
+                            <br /><span class="alert alert-danger">{{ $errors->first('house_number') }}</span><br /><br />
                         @endif
                     </div>
 
@@ -67,9 +65,18 @@
                         {!! Form::text('city', null, ['class' => 'form-control']) !!}
 
                         @if($errors->has('city'))
-                            <span class="help-block">{{ $errors->first('city') }}</span>
+                            <br /><span class="alert alert-danger">{{ $errors->first('city') }}</span><br /><br />
                         @endif
                     </div>
+
+                    <div class="form-group{{ $errors->has('township') ? 'has-error' : ''}}">
+                        {!! Form::label('Gemeente') !!}
+                        {!! Form::text('township', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    @if($errors->has('township'))
+                        <br /><span class="alert alert-danger">{{ $errors->first('township') }}</span><br /><br />
+                    @endif
 
                         {!! Form::submit('Opslaan', ['class' => 'btn btn-primary']) !!}
                     {!! Form::close()   !!}

@@ -19,6 +19,7 @@ class TicketStoreRequest extends FormRequest
     public function messages()
     {
         return [
+            'reporter_name' => 'Geen geldige datum ingevoerd.',
             'date.required' => 'Geen geldige datum ingevoerd.',
             'time.required'  => 'Geen geldige tijd ingevoerd.',
         ];
@@ -32,6 +33,7 @@ class TicketStoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'reporter_name' => 'required',
             'date'     => 'required',
             'time'    => 'required'
         ];

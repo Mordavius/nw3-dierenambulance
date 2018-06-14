@@ -11,9 +11,11 @@ use App\Destination;
 use App\Finance;
 use App\Known;
 use App\Bus;
+use App\Owner;
 use DB;
 use App\Http\Requests\TicketStoreRequest;
-//use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class TicketController extends Controller
 {
@@ -22,6 +24,11 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['filterTickets']]);
+    }
 
     public function index(Request $request)
     {
@@ -42,7 +49,7 @@ class TicketController extends Controller
         //TODO: Check tickets for not finished tickets
         // Check destinations for coordinates based on not finished tickets
         // Send that data to map.
-        $destinations = Destination::search($search)->orderBy('created_at', 'asc')->paginate(15); // Grabs all the existing locations, searches in the locations and paginate at 15 results
+        $destinations = Destination::orderBy('created_at', 'asc')->paginate(15); // Grabs all the existing locations, searches in the locations and paginate at 15 results
         $animals = Animal::all(); // Grabs all te existings animals
         $coordinateStrings = $destinations->pluck('coordinates')->toArray(); //Grabs the coordinates and puts it into an array.
         //Decodes the array for better formatting.
@@ -69,6 +76,12 @@ class TicketController extends Controller
         }
         else {
             $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
+
+            $bus = Input::get('verhicle');
+            $milage = Destination::get(['milage'])->last()->toArray();
+
+            Bus::where('bus_type', $bus)->update($milage);
+
             return response()->json($destination);
         }
     }
@@ -90,32 +103,63 @@ class TicketController extends Controller
         }
     }
 
+    public function createAjaxOwner(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'telephone_number' => 'required|numeric',
+            'owner_postal_code' => 'required',
+            'owner_house_number' => 'required',
+            'owner_address' => 'required',
+            'owner_city' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        else {
+                $owner = Owner::create($request->all());
+                return response()->json($owner);
+            }
+    }
+
     public function knownusers($id){
         $knownusers = Known::where('id', $id)->get();
         return response()->json($knownusers);
     }
 
-    public function search(Request $request, Ticket $ticket_id)
+    public function animalowner($id){
+        $animalowner = Ticket::where('id', $id)->get();
+        return response()->json($animalowner);
+    }
+
+    public function search(Request $request)
     {
         if($request->ajax())
         {
             $output="";
-            $search=DB::table('destinations')->where('city','LIKE','%'.$request->search."%")->get();
+            $search=Destination::where('city','LIKE','%'.$request->search."%")->get();
+
 
             if($search)
             {
                 foreach ($search as $key => $city) {
-
                     $output.='<tr>'.
                         // '<td>'.$animals[0]->animal_species.' <br />'.$animals[0]->gender.'</td>'.
                         //  '<td>'.$animals[0]->description.'</td>'.
                         '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
                         //  '<td>'.$tickets[0]->date.' '.$tickets[0]->time.'</td>'.
-                        '<td><a href="/melding/'. $ticket_id .'/edit"><i class="btn btn-primary">Aanpassen</i></a></td>'.
+                        '<td><a href="/melding/' . $city->ticket_id . '/edit"><i class="btn btn-primary">Aanpassen</i></a></td>' .
                         '</tr>';
 
                 }
-                return Response($output);
+                if(Input::get('search') == "") {
+                    return "";
+                }
+                else {
+                    return Response($output);
+                }
             }
         }
     }
@@ -128,12 +172,9 @@ class TicketController extends Controller
 
     public function create(Ticket $ticket)
     {
-
         $milage = Bus::all('milage')->pluck('milage')->first();
-
         $bus = Bus::all('bus_type')->pluck("bus_type");
         $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->get();
-        $firstUnfinishedTicket = $unfinishedtickets[0];
         $unfinishedtickets_id = Ticket::where('finished', '0')->orderBy('date', 'desc')->pluck('id');
         $animals = Animal::all();
         // foreach ($unfinishedtickets as $unfinishedticket) {
@@ -169,7 +210,7 @@ class TicketController extends Controller
 
         $animal->save(); // Saves the data
 
-        $bus = Bus::where('bus_type',$request->verhicle)->first();
+        $bus = Bus::where('bus_type', $request->verhicle)->first();
         //dd($bus);
 
         // Stores the data for the requested fields
@@ -184,7 +225,7 @@ class TicketController extends Controller
             'centralist' => $request->get('centralist'),
             'reporter_name' => $request->get('reporter_name'),
             'telephone' => $request->get('telephone'),
-            'bus_id' => $bus->id,
+            // 'bus_id' => $bus->id,
         ]);
 
         $ticket->save(); // Saves the data
@@ -199,7 +240,7 @@ class TicketController extends Controller
             'coordinates' => $request->get('coordinates'),
             'ticket_id' => $ticket->id,
             'verhicle' => $request->get('verhicle'),
-            'milage' => $request->get('milage'),
+            // 'milage' => $request->get('milage'),
         ]);
         // $ticket->destination->save($ticket);
         //  $ticket ->destination()->associate($destination);
@@ -237,13 +278,17 @@ class TicketController extends Controller
         //$destination_id = Destination::where('ticket_id', $ticket_id);// Deletes destination based on ticket id
         $destinations = Destination::where('ticket_id', $ticket_id)->get();
         $loaddestination = Destination::where('ticket_id', $ticket_id)->get();
-        $loadfinances = Finance::where('ticket_id', $ticket_id)->get();
+        $loadowners = Owner::where('ticket_id', $ticket_id)->get();
         //$destinations = Destination::where();
+        $animalowner = Ticket::all();
         $known = Known::all();
-        $animals = Animal::where('id', $animal_id)->get();// Deletes animal based on animal id
+        $animals = Animal::where('id', $animal_id)->get();// Grabs animal based on animal id
+
         $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
-        return view("ticket.edit", compact('destinations', 'animals', 'bus', 'ticket', 'users', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id'));
+        $animal = Animal::where('id', $animal_id)->pluck('animal_species');
+        //dd($animal);
+        return view("ticket.edit", compact('destinations', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id', 'animal'));
     }
     /**
      * Update the specified resource in storage.
@@ -263,34 +308,26 @@ class TicketController extends Controller
             'coordinates' => $request->get('coordinates'),
         ]);
 
-
-        // Updates the data for the requested fields
-        $animal = new Animal([
-            'animal_species' => $request->get('animal_species'),
-            'gender' => $request->get('gender'),
-            'description' => $request->get('description'),
-        ]);
-
-        $animal->save(); // Saves the data
-
         //dd($animal);
 
         // Updates the data for the requested fields
-        $ticket = new Ticket([
-            'animal_id' => $animal->id,
-            'destination_id' => $destination->id,
-            'date' => $request->get('date'),
-            'time' => $request->get('time'),
-            'centralist' => $request->get('centralist'),
-            'reporter_name' => $request->get('reporter_name'),
-            'telephone' => $request->get('telephone'),
-            'invoice' => $request->get('invoice'),
-            'paymentmethodinvoice' => $request->get('paymentmethodinvoice'),
-            'gifts' => $request->get('gifts'),
-            'paymentmethodgifts' => $request->get('paymentmethodgifts'),
-        ]);
-
+        $ticket = Ticket::findOrFail($ticket_id);
+        $ticket->date = Input::get('date');
+        $ticket->time = Input::get('time');
+        $ticket->centralist = Input::get('centralist');
+        $ticket->reporter_name = Input::get('reporter_name');
+        $ticket->telephone = Input::get('telephone');
         $ticket->save(); // Saves the data
+
+        // Updates the data for the requested fields
+        $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');
+        ($animal = Animal::findOrFail($animal_id));
+
+        Animal::whereIn('id', $animal)->update([
+            'animal_species' => Input::get('animal_species'),
+            'gender' => Input::get('gender'),
+            'description' => Input::get('comments'),
+        ]);
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
     }
@@ -317,6 +354,23 @@ class TicketController extends Controller
         // return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 
+    public function destroyTicketAjax($ticket_id)
+    {
+        // try {
+        // $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
+        //dd($animal_id);
+        Destination::where('ticket_id', $ticket_id)->delete();// Deletes destination based on ticket id
+        //Animal::where('id', $animal_id)->delete();// Deletes animal based on animal id
+        Ticket::findOrFail($ticket_id)->delete();// Grabs the ticket with the correct id and deletes the ticket
+        //return redirect('/melding')->with('message', 'Melding is verwijderd');
+        return response()->json('Ticket verwijdert', 200);
+        // } catch (\Exception $e) {
+        //     return view('auth.error')->with('message', 'Mag niet');
+        // }
+        // Ticket::findOrFail($ticket_id)->delete(); // Grabs the ticket with the correct id and deletes the ticket
+        // return redirect('/melding')->with('message', 'Melding is verwijderd');
+    }
+
     public function destroyAjax($task_id) {
         try {
             $task = Destination::destroy($task_id);
@@ -330,6 +384,58 @@ class TicketController extends Controller
     public function destroyAjaxPayment($task_id) {
         try {
             $task = Finance::destroy($task_id);
+            return response()->json($task);
+        }
+        catch (\Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+
+    public function filterTickets(Request $request){
+        $amount = $request->amount;
+        switch ($request->date){
+            case 'week':
+                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Weeks"));
+                break;
+            case 'month':
+                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Months"));
+                break;
+            case 'year':
+                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Years"));
+                break;
+            default:
+                $date = date("Y-m-d h:i:s",strtotime("-1000 Years"));
+        }
+        $ticket = Ticket::query()->whereBetween('date', [$date, date(now())]);
+        $tickets_id = $ticket->pluck('id');
+
+        $destination_array = [];
+        $animals = [];
+
+        foreach($tickets_id as $ticket_id)
+        {
+            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
+            array_push($animals, Animal::where('id', $ticket_id)->first());
+        }
+        $destination_array;
+        $animals;
+        //$animals = Animal::all();
+
+        return response()->json(['tickets' =>  $ticket->get(), 'destinations'=>$destination_array, 'animals'=>$animals], 200);
+
+        // Grabs all te existing animals
+//        $coordinateStrings = $destinations->pluck('coordinates')->toArray(); //Grabs the coordinates and puts it into an array.
+//        //Decodes the array for better formatting.
+//        $coordinates = array_map(function ($coordinateString) {
+//            return json_decode($coordinateString);
+//        }, $coordinateStrings);
+    }
+
+
+    public function destroyAjaxOwner($task_id) {
+        try {
+            $task = Owner::destroy($task_id);
             return response()->json($task);
         }
         catch (\Exception $e) {

@@ -79,91 +79,90 @@ var app = angular.module("app", [])
         if (coord != null) {
             placeMarker(coord);
         }
+        function placeMarker(i){
+            var latlng = L.latLng(i.lat, i.lng);
+            var marker = L.marker(latlng).addTo($scope.map2);
+            // $scope.distance.push(latlng);
+        }
 	})
 
-	function placeMarker(i){
-		var latlng = L.latLng(i.lat, i.lng);
-		var marker = L.marker(latlng).addTo($scope.map2);
-        // $scope.distance.push(latlng);
-	}
+        function reverseGeocodeQuery(format, lat, lon, zoom) {
+            var url = "https://nominatim.openstreetmap.org/reverse?format=" + format + "&lat=" + lat + "&lon=" + lon + "&zoom=" + zoom + "&addressdetails=1";
+            return url;
+        }
 
-	function reverseGeocodeQuery(format, lat, lon, zoom) {
-			var url = "https://nominatim.openstreetmap.org/reverse?format=" + format + "&lat=" + lat + "&lon=" + lon + "&zoom=" + zoom + "&addressdetails=1";
-			return url;
-	}
+        function makeRequest (method, url, done) {
+            var xhr = new XMLHttpRequest();
 
-	function makeRequest (method, url, done) {
-		var xhr = new XMLHttpRequest();
+            xhr.open(method, url);
 
-		xhr.open(method, url);
-
-		xhr.onload = function() {
-			done(null, xhr.response);
-		}
-
-		xhr.onerror = function() {
-			done(xhr.response);
-		}
-
-		xhr.send();
-	}
-
-	function updateAddressInformation(obj, e){
-        address_field.innerHTML = obj.address.road  ? obj.address.road + " " : "Straatnaam onbekend";
-        house_number_field.innerHTML = obj.address.house_number ? obj.address.house_number + " ": " ";
-        postal_code_field.innerHTML = obj.address.postcode ? obj.address.postcode + " " : "Kan postcode niet vinden";
-		city_field.innerHTML = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
-		township_field.innerHTML = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
-        coordinates_field.value = JSON.stringify(e.latlng);
-	}
-	$scope.map.on('click', onMapClick);
-
-
-    var locationId =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-
-	$('#searchButton').click(searchButtonClicked);
-
-	function searchButtonClicked(){
-		var searchText = document.getElementById("searchTextBox").value;
-		makeRequest("GET", geocodeQuery(searchText), function(err, result) {
-			if(err) { throw err; }
-
-		var searchedURLJson = JSON.parse(result);
-		//console.log(searchedURL);
-		setMarkerForLocation(searchedURLJson);
-		})
-	}
-
-	function geocodeQuery(searchText) {
-		var searchedURL = "https://nominatim.openstreetmap.org/search/nl/" + searchText + "?format=json&addressdetails=1";
-		return searchedURL;
-	}
-
-	function setMarkerForLocation(searchedURLJson) {
-		var searchedLat = searchedURLJson[0].lat;
-		var searchedLon = searchedURLJson[0].lon;
-
-		//var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
-
-		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 12);
-	}
-
-
-    function getLocation() {
-        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(showPosition);
-    }
-
-    function showPosition(position) {
-        $.ajax({
-            type: 'POST',
-            url: '/api/location/write',
-            data: {lat: position.coords.latitude, lon: position.coords.longitude, id: id},
-            success: function () {
-                alert("succes");
+            xhr.onload = function() {
+                done(null, xhr.response);
             }
 
-        });
-    }
+            xhr.onerror = function() {
+                done(xhr.response);
+            }
+
+            xhr.send();
+        }
+
+        function updateAddressInformation(obj, e){
+            address_field.innerHTML = obj.address.road  ? obj.address.road + " " : "Straatnaam onbekend";
+            house_number_field.innerHTML = obj.address.house_number ? obj.address.house_number + " ": " ";
+            postal_code_field.innerHTML = obj.address.postcode ? obj.address.postcode + " " : "Kan postcode niet vinden";
+            city_field.innerHTML = obj.address.suburb ? obj.address.suburb : "Kan stad niet vinden";
+            township_field.innerHTML = obj.address.city ? obj.address.city : "Kan gemeente niet vinden";
+            coordinates_field.value = JSON.stringify(e.latlng);
+        }
+        $scope.map.on('click', onMapClick);
+
+
+        var locationId =  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+        $('#searchButton').click(searchButtonClicked);
+
+        function searchButtonClicked(){
+            var searchText = document.getElementById("searchTextBox").value;
+            makeRequest("GET", geocodeQuery(searchText), function(err, result) {
+                if(err) { throw err; }
+
+                var searchedURLJson = JSON.parse(result);
+                //console.log(searchedURL);
+                setMarkerForLocation(searchedURLJson);
+            })
+        }
+
+        function geocodeQuery(searchText) {
+            var searchedURL = "https://nominatim.openstreetmap.org/search/nl/" + searchText + "?format=json&addressdetails=1";
+            return searchedURL;
+        }
+
+        function setMarkerForLocation(searchedURLJson) {
+            var searchedLat = searchedURLJson[0].lat;
+            var searchedLon = searchedURLJson[0].lon;
+
+            //var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
+
+            $scope.map.setView(new L.LatLng(searchedLat, searchedLon), 12);
+        }
+
+
+        function getLocation() {
+            if (navigator.geolocation) navigator.geolocation.getCurrentPosition(showPosition);
+        }
+
+        function showPosition(position) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/location/write',
+                data: {lat: position.coords.latitude, lon: position.coords.longitude, id: id},
+                success: function () {
+                    alert("succes");
+                }
+
+            });
+        }
     $('#footer_button_forward').click(next);
     $('#footer_button_back').click(back);
 
@@ -297,7 +296,7 @@ var app = angular.module("app", [])
           divider4.className = "divider";
           circle4.className = "circle highlighted";
      }
-    }
+}
     function loadTicketInformation(){
         animal_title.innerHTML += ticket_information.selected_animal;
         animal_breed.innerHTML += ticket_information.breed;
@@ -325,8 +324,8 @@ var app = angular.module("app", [])
         description.value = ticket_information.description;
         priority.value = ticket_information.priority;
     }
-    $('#footer_button_submit').click(submit);
 
+    $('#footer_button_submit').click(submit);
     function submit(){
         var postcode = postal_code.value.replace(/\s/g, '');
         makeRequest("GET", geocodeQuery(postcode), function(err, result) {
@@ -358,48 +357,48 @@ var app = angular.module("app", [])
         });
     }
 
-    /**
-     * get address by lat lon (from openstreetmap)
-     * @param lat
-     * @param lon
-     */
-    function getAdressByCoordinates(lat,lon){
-        $.ajax({
-            type: 'GET',
-            url: 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon + '&zoom=18&addressdetails=1',
-            success: function (data) {
-                if(data.address && data.display_name) {
-                    if (data.address.house_number &&
-                        data.address.road &&
-                        data.address.city &&
-                        data.address.postcode &&
-                        data.address.suburb) {
-                        //console.log('complete address found');
-                        //console.log(data.address);
-                        var postalcode = document.getElementById('postal_code');
-                        var housenumber = document.getElementById('house_number');
-                        var address = document.getElementById('address');
-                        var city = document.getElementById('city');
-                        var township = document.getElementById('township');
-                        var nocode = document.getElementById('nocode'); // TODO: deze nog even standaard op false zetten als het allemaal gelukt is
-                        if (postalcode, housenumber, address, city, township) {
-                            postalcode.value = data.address.postcode;
-                            housenumber.value = data.address.house_number;
-                            address.value = data.address.road;
-                            city.value = data.address.city;
-                            township.value = data.address.suburb;
-                             L.marker({lat: lat, lng: lon}).addTo($scope.map);
-                            $scope.map.setView(new L.LatLng(lat, lon), 13);
+        /**
+         * get address by lat lon (from openstreetmap)
+         * @param lat
+         * @param lon
+         */
+        function getAdressByCoordinates(lat,lon){
+            $.ajax({
+                type: 'GET',
+                url: 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon + '&zoom=18&addressdetails=1',
+                success: function (data) {
+                    if(data.address && data.display_name) {
+                        if (data.address.house_number &&
+                            data.address.road &&
+                            data.address.city &&
+                            data.address.postcode &&
+                            data.address.suburb) {
+                            //console.log('complete address found');
+                            //console.log(data.address);
+                            var postalcode = document.getElementById('postal_code');
+                            var housenumber = document.getElementById('house_number');
+                            var address = document.getElementById('address');
+                            var city = document.getElementById('city');
+                            var township = document.getElementById('township');
+                            var nocode = document.getElementById('nocode'); // TODO: deze nog even standaard op false zetten als het allemaal gelukt is
+                            if (postalcode, housenumber, address, city, township) {
+                                postalcode.value = data.address.postcode;
+                                housenumber.value = data.address.house_number;
+                                address.value = data.address.road;
+                                city.value = data.address.city;
+                                township.value = data.address.suburb;
+                                L.marker({lat: lat, lng: lon}).addTo($scope.map);
+                                $scope.map.setView(new L.LatLng(lat, lon), 13);
+                            }
+                        } else {
+                            console.log('wrong address found');
+                            alert('Foutief adres gevonden: ' + data.display_name);
+                            // TODO: Opmerking van Mark: We weten hier vrij exact een locatie maar kunnen daar (qua) adres niks mee, kunnen we daar niet alsnog wat mee? ;-)
                         }
                     } else {
-                        console.log('wrong address found');
-                        alert('Foutief adres gevonden: ' + data.display_name);
-                        // TODO: Opmerking van Mark: We weten hier vrij exact een locatie maar kunnen daar (qua) adres niks mee, kunnen we daar niet alsnog wat mee? ;-)
+                        console.log('no address found');
+                        // TODO: DIT IS NIET GETEST, GAAT OPENSTREETMAP NIET OP ZIJN GAT ALS ER GEEN ADRES IS? OF IETS RAARS MEEGESTUURD WORDT
                     }
-                } else {
-                    console.log('no address found');
-                    // TODO: DIT IS NIET GETEST, GAAT OPENSTREETMAP NIET OP ZIJN GAT ALS ER GEEN ADRES IS? OF IETS RAARS MEEGESTUURD WORDT
-                }
 
             }
         });
@@ -416,7 +415,22 @@ var app = angular.module("app", [])
             }
         });
     }
-}])
+
+    // function sendLocationRequest() {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/api/sms',
+    //         data: {id: locationId},
+    //         success: function () {
+    //             alert("SMS verzonden");
+    //             getLocationRecord();
+    //         },
+    //         error: function () {
+    //             alert("Er is iets fout gegaan, als u dit bericht vaker ziet neem dan contact op met de beheerder");
+    //         }
+    //     });
+    // }
+}]);
 
 function selectAnimalSpieces(animal_species, image_animal){
     var growDiv = document.getElementById('animal_cards');

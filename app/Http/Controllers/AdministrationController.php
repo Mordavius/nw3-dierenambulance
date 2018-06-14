@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\TicketExport;
+use App\Quarterfinance;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\FileNotFoundException;
+use Illuminate\Http\Request;
 use App\User;
+
 
 class AdministrationController extends Controller
 {
@@ -31,9 +38,29 @@ class AdministrationController extends Controller
         return view('administration.export', compact('ticket'));
     }
 
-    // Download the excel in xlsx format
-    public function downloadExcel()
+    public function quartexports(){
+        $quarterlies = Quarterfinance::all();
+        return view('administration.quarterly', compact('quarterlies'));
+    }
+
+    public function quartdownload($filename)
     {
-        return $this->excel->download(new TicketExport, 'meldingen.xlsx');
+        $storage = Storage::url('exports/');
+        //storage_path('exports\\');
+        $filepath = $storage . $filename;
+        try {
+            return Storage::download('exports/' . $filename);
+        }
+        catch (FileNotFoundException $e) {
+            Log::channel('sentry')->error($e);
+            return Redirect::back()->withErrors(['Het door u opgevraagde bestand bestaat niet, neem contact op met de webmaster of probeer dit handmatig']);
+        }
+    }
+
+
+    // Download the excel in xlsx format
+    public function downloadExcel(Request $request)
+    {
+        return $this->excel->download(new TicketExport($request->startdate, $request->enddate), 'meldingen.xlsx');
     }
 }

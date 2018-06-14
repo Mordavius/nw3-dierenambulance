@@ -16,6 +16,15 @@ class UserUpdateRequest extends FormRequest
         return true;
     }
 
+    public function messages()
+    {
+        return [
+            'name.required' => 'Geen geldige naam ingevoerd.',
+            'email.required'  => 'Geen geldige e-mailadres ingevoerd.',
+            'password' => 'Geen geldige wachtwoord ingevoerd.',
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
