@@ -12,6 +12,12 @@
   {
     padding: rem-calc(40) rem-calc(178);
     @include clearfix;
+    display: none;
+
+    @include media-breakpoint-up(lg)
+    {
+      display: block;
+    }
 
     .left, .right
     {
@@ -37,6 +43,7 @@
       {
         display: inline-block;
         width: auto;
+        margin-bottom: 0;
       }
     }
   }

@@ -10856,12 +10856,19 @@ input[type="checkbox"] {
 
 .ticket_centralist .head {
   padding: 2.5rem 11.125rem;
+  display: none;
 }
 
 .ticket_centralist .head::after {
   display: block;
   content: "";
   clear: both;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .head {
+    display: block;
+  }
 }
 
 .ticket_centralist .head .left,
@@ -10883,6 +10890,7 @@ input[type="checkbox"] {
 .ticket_centralist .head .filters input {
   display: inline-block;
   width: auto;
+  margin-bottom: 0;
 }
 
 .ticket_centralist .ticket-wrapper {
@@ -11900,6 +11908,10 @@ input[type="checkbox"] {
   }
 }
 
+.navbar-toggler {
+  border: 0;
+}
+
 .profile-wrapper {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -11975,7 +11987,8 @@ td {
   margin-bottom: 0.8125rem;
 }
 
-.btn-delete-location {
+.btn-delete-location,
+.close-model {
   background: none;
   border: none;
 }
@@ -12057,11 +12070,44 @@ img.icon {
   background-color: #F2F2F2;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  padding: 10px 15px 10px 15px;
+  padding: 0.625rem 0.9375rem;
+  margin-bottom: 0px;
+  border-bottom: 1px solid #B8B8B8;
 }
 
 .edit_ticket nav {
   display: none;
+}
+
+select .selected {
+  color: #888;
+}
+
+.close-model {
+  padding: 1rem;
+}
+
+.modal-header {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.model-center {
+  margin: 0 auto;
+}
+
+.model-center button {
+  padding: 5px 10px !important;
+  background-color: #288B5F;
+  border-color: #288B5F;
+}
+
+@media (min-width: 575px) {
+  .grey {
+    width: 100%;
+    margin-left: 0px;
+  }
 }
 
 @-webkit-keyframes leaflet-gestures-fadein {

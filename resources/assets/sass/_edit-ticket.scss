@@ -34,7 +34,7 @@ td {
   margin-bottom: rem-calc(13);
 }
 
-.btn-delete-location {
+.btn-delete-location, .close-model {
   background: none;
   border: none;
 }
@@ -106,9 +106,40 @@ img.icon {
   background-color: $light-gray;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  padding: 10px 15px 10px 15px;
+  padding: rem-calc(10) rem-calc(15);
+  margin-bottom: 0px;
+  border-bottom: 1px solid $gray;
 }
 
 .edit_ticket nav {
   display: none;
+}
+
+select .selected {
+  color: #888;
+}
+
+.close-model {
+  padding: 1rem;
+}
+
+.modal-header {
+  align-items: center;
+}
+
+.model-center {
+  margin: 0 auto;
+}
+
+.model-center button {
+  padding: 5px 10px !important;
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
+
+@media (min-width: 575px) {
+  .grey {
+    width: 100%;
+    margin-left: 0px;
+  }
 }
