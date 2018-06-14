@@ -3,8 +3,6 @@ var amountoftimes;
 //var finishedtickets = document.getElementById('ticfin');
 //var tfr =document.createElement('strong');
 
-
-
 function deleteTicket(ticketid) {
     $.ajaxSetup({
         headers: {

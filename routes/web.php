@@ -51,7 +51,7 @@ Route::resource('buswissel', 'BusChangeController')->middleware('auth');
 // Route::get('pdfview',array('as'=>'pdfview','uses'=>'AdministrationController@pdfview'));
 
 // CRUD Notification Controllers
-Route::resource('melding', 'TicketController')->middleware('auth', function() {});
+Route::resource('melding', 'TicketController')->middleware('auth');
 
 //CRUD Bus Controllers
 Route::resource('bus', 'BusController')->middleware('auth');
@@ -63,6 +63,13 @@ Route::resource('bekende-adressen', 'KnownController')->middleware('auth');
 Route::resource('profiel', 'ProfileController')->middleware('auth');
 
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
+
+Route::get('/cssgrid', ['middleware' => 'guest', function () {
+    return view('/cssgrid');
+}]);
+
+Route::get('/passwords/reset/{id}/{token}', 'PasswordResetController@index');
+Route::post('/passwords/reset/{id}/{token}', 'PasswordResetController@update');
 
 Route::get('/search', 'TicketController@search');
 

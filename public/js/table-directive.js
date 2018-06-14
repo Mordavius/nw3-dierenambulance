@@ -1,65 +1,90 @@
 var app = angular.module("app", [])
-    .controller("TableController", ['$scope','$http', function($scope, $https){
+.controller("TableController", ['$scope','$http', function($scope, $https){
+    var markers = [];
+    var marker;
 
-        $scope.distance = [];
-        $scope.map = L.map("map", {
-            center: [53, 5.7],
-            zoom: 10,
-        });
-        // $scope.map = L.map('map').setView([53, 5.7], 10);
-        $scope.map2 = L.map("map2", {
-            center: [53, 5.7],
-            zoom: 10,
-            gestureHandling: true,
-            gestureHandlingText: {
-                touch: "Gebruik twee vingers om door de map te scrollen",
-                scroll: "Gebruik ctrl + scroll om in te zoomen",
-                scrollMac: "Gebruik \u2318 + scroll om in te zoomen"
-            }
-        });
-        $scope.coordinates = [];
-        var ticket_information = {"name": "", "number": "",
-            "address": "", "house_number": "", "postal_code": "", "city": "",
-            "coordinates": "", "selected_animal": "", "breed": "", "gender":""
-            , "chip_number": "", "injury": "", "description": "", "priority":""};
+    $scope.distance = [];
+    $scope.map = L.map("map", {
+    center: [53, 5.7],
+    zoom: 10,
+});
+    // $scope.map = L.map('map').setView([53, 5.7], 10);
+    $scope.map2 = L.map("map2", {
+    center: [53, 5.7],
+    zoom: 10,
+    gestureHandling: true,
+    gestureHandlingText: {
+        touch: "Gebruik twee vingers om door de map te scrollen",
+        scroll: "Gebruik ctrl + scroll om in te zoomen",
+        scrollMac: "Gebruik \u2318 + scroll om in te zoomen"
+    }
+});
 
-        L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
-                maxZoom: 30,
-                minZoom: 1,
-            }).addTo($scope.map);
+    $scope.map3 = L.map("map3", {
+    center: [53, 5.7],
+    zoom: 10,
+    gestureHandling: true,
+    gestureHandlingText: {
+        touch: "Gebruik twee vingers om door de map te scrollen",
+        scroll: "Gebruik ctrl + scroll om in te zoomen",
+        scrollMac: "Gebruik \u2318 + scroll om in te zoomen"
+    }
+});
 
-        L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
-                maxZoom: 30,
-                minZoom: 1,
-            }).addTo($scope.map2);
+	$scope.coordinates = [];
+    var ticket_information = {"name": "", "number": "",
+    "address": "", "house_number": "", "postal_code": "", "city": "",
+    "coordinates": "", "selected_animal": "", "breed": "", "gender":""
+    , "chip_number": "", "injury": "", "description": "", "priority":""};
 
-        function onMapClick(e) {
-            makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
-                if(err) { throw err; }
-                var marker = L.marker(e.latlng).addTo($scope.map);
-                var obj = JSON.parse(result);
-                updateAddressInformation(obj, e);
-            })
-        }
 
-        var coords = $('#map2').data('coordinates')
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
+        maxZoom: 30,
+        minZoom: 1,
+    }).addTo($scope.map);
 
-        coords.forEach(function(coord){
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
+        maxZoom: 30,
+        minZoom: 1,
+    }).addTo($scope.map2);
 
-            if (coord != null) {
-                placeMarker(coord);
-            }
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
+        maxZoom: 30,
+        minZoom: 1,
+    }).addTo($scope.map3);
+
+    function onMapClick(e) {
+		makeRequest("GET", reverseGeocodeQuery("json", e.latlng.lat, e.latlng.lng, 18), function(err, result) {
+			if(err) { throw err; }
+			marker = L.marker(e.latlng).addTo($scope.map);
+            markers += marker;
+			var obj = JSON.parse(result);
+			updateAddressInformation(obj, e);
         })
+        if(marker){
+        $scope.map.removeLayer(marker);
+    }
+	}
 
+    var coords = $('#map2').data('coordinates')
+
+	coords.forEach(function(coord){
+
+        if (coord != null) {
+            placeMarker(coord);
+        }
         function placeMarker(i){
             var latlng = L.latLng(i.lat, i.lng);
             var marker = L.marker(latlng).addTo($scope.map2);
             // $scope.distance.push(latlng);
         }
+	})
 
         function reverseGeocodeQuery(format, lat, lon, zoom) {
             var url = "https://nominatim.openstreetmap.org/reverse?format=" + format + "&lat=" + lat + "&lon=" + lon + "&zoom=" + zoom + "&addressdetails=1";
@@ -138,173 +163,199 @@ var app = angular.module("app", [])
 
             });
         }
-        $('#footer_button_forward').click(next);
-        $('#footer_button_back').click(back);
+    $('#footer_button_forward').click(next);
+    $('#footer_button_back').click(back);
 
 
-        function next() {
-            if(page1.className == "pages current_page") {
-                    footer_button_back.style.visibility = "visible";
-                    page1.style.marginLeft = "-100%";
-                    page2.style.marginLeft = "0%";
-                    page2.style.height = "84%"
-                    page2.className = "pages current_page";
-                    map.style.height = "100%";
-                    map.style.width = "100%";
-                    ticket_information.name = name_text_field.value;
-                    ticket_information.number = number_text_field.value;
-                    $scope.map.invalidateSize();
-                    page1.className = "pages";
-                    circle1.className = "circle";
-                    circle2.className = "circle highlighted";
+    function next() {
 
-            }else if(page2.className == "pages current_page")
-            {
-                page2.style.marginLeft = "-100%";
-                page3.style.marginLeft = "0%";
-                page3.className = "pages current_page";
-                ticket_information.address = address_field.innerHTML;
-                ticket_information.house_number = house_number_field.innerHTML;
-                ticket_information.postal_code = postal_code_field.innerHTML;
-                ticket_information.city = city_field.innerHTML;
-                ticket_information.coordinates = coordinates_field.value;
-                address_field.innerHTML = "";
-                house_number_field.innerHTML ="";
-                postal_code_field.innerHTML = "";
-                city_field.innerHTML = "";
-                township_field.innerHTML = "";
-                page2.className = "pages";
-                circle2.className = "circle";
-                circle3.className = "circle highlighted";
-            }else if(page3.className == "pages current_page")
-            {
-                page3.style.marginLeft = "-100%";
-                page4.style.marginLeft = "0%";
-                page4.style.marginBottom = "55px";
-                page4.className = "pages current_page";
-                map2.style.height = "600px";
-                map2.style.width = "100%";
-                ticket_information.selected_animal = selected_animal.innerHTML;
-                ticket_information.breed = breed_field.value;
-                ticket_information.injury = injury_field.value;
-                ticket_information.gender = gender_field.value;
-                ticket_information.chip_number = chip_number_field.value;
-                ticket_information.description = description_field.value;
-                $scope.map2.invalidateSize();
-                loadTicketInformation();
-                page3.className = "pages";
-                circle3.className = "circle";
-                circle4.className = "circle highlighted";
-            }else if(page4.className == "pages current_page")
-            {
-                footer_button_forward.style.visibility = "hidden";
-                ticket_information.priority = priority_field.value;
-                page4.style.marginLeft = "-100%";
-                page5.style.marginLeft = "0%";
-                page5.className = "pages current_page";
-                page4.className = "pages";
-                circle4.className = "circle";
-                circle5.className = "circle highlighted";
-                loadTicketInformation();
-                console.log(ticket_information);
-            }
+        if(page1.className == "pages current_page")
+        {
+            jQuery("p.alert").remove();
+            if (name_text_field.value == ""){
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Naam is niet ingevuld!</p>');
+                return false;
+            }if(number_text_field.value == ""){
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Telefoonnummer is niet ingevuld!</p>');
+            }else{
+            footer_button_back.style.visibility = "visible";
+            page1.style.marginLeft = "-100%";
+            page2.style.marginLeft = "0%";
+            page2.style.height = "84%"
+            page2.className = "pages current_page";
+            map.style.height = "100%";
+            map.style.width = "100%";
+            ticket_information.name = name_text_field.value;
+            ticket_information.number = number_text_field.value;
+            $scope.map.invalidateSize();
+            page1.className = "pages";
+            circle1.className = "circle previous";
+            span1.className = "span previous";
+            divider1.className = "divider previous";
+            circle2.className = "circle highlighted";
         }
+        }else if(page2.className == "pages current_page")
+         {
+            page2.style.marginLeft = "-100%";
+            page3.style.marginLeft = "0%";
+            page3.className = "pages current_page";
+            ticket_information.address = address_field.innerHTML;
+            ticket_information.house_number = house_number_field.innerHTML;
+            ticket_information.postal_code = postal_code_field.innerHTML;
+            ticket_information.city = city_field.innerHTML;
+            ticket_information.coordinates = coordinates_field.value;
+            address_field.innerHTML = "";
+            house_number_field.innerHTML ="";
+            postal_code_field.innerHTML = "";
+            city_field.innerHTML = "";
+            township_field.innerHTML = "";
+            page2.className = "pages";
+            circle2.className = "circle previous";
+            span2.className = "span previous";
+            divider2.className = "divider previous";
+            circle3.className = "circle highlighted";
+        }else if(page3.className == "pages current_page")
+        {
+            page3.style.marginLeft = "-100%";
+            page4.style.marginLeft = "0%";
+            page4.style.marginBottom = "55px";
+            page4.className = "pages current_page";
+            map2.style.height = "600px";
+            map2.style.width = "100%";
+            ticket_information.selected_animal = selected_animal.innerHTML;
+            ticket_information.breed = breed_field.value;
+            ticket_information.injury = injury_field.value;
+            ticket_information.gender = gender_field.value;
+            ticket_information.chip_number = chip_number_field.value;
+            ticket_information.description = description_field.value;
+            $scope.map2.invalidateSize();
+            loadTicketInformation();
+            page3.className = "pages";
+            circle3.className = "circle previous";
+            span3.className = "span previous";
+            divider3.className = "divider previous";
+            circle4.className = "circle highlighted";
+       }else if(page4.className == "pages current_page")
+       {
+          footer_button_forward.style.visibility = "hidden";
+          ticket_information.priority = priority_field.value;
+          page4.style.marginLeft = "-100%";
+          page5.style.marginLeft = "0%";
+          page5.className = "pages current_page";
+          page4.className = "pages";
+          circle4.className = "circle previous";
+          span4.className = "span previous";
+          divider4.className = "divider previous";
+          circle5.className = "circle highlighted";
+          loadTicketInformation();
+          console.log(ticket_information);
+      }
+    }
 
-        function back() {
-            if(page2.className == "pages current_page")
-            {
-                footer_button_back.style.visibility = "hidden";
-                page2.style.marginLeft = "-100%";
-                page1.style.marginLeft = "0%";
-                page1.className = "pages current_page";
-                page2.className = "pages";
-                circle2.className = "circle";
-                circle1.className = "circle highlighted";
-            }else if(page3.className == "pages current_page"){
-                page3.style.marginLeft = "-100%";
-                page2.style.marginLeft = "0%";
-                page2.className = "pages current_page";
-                page3.className = "pages";
-                circle3.className = "circle";
-                circle2.className = "circle highlighted";
-            }else if(page4.className == "pages current_page"){
-                page4.style.marginLeft = "-100%";
-                page3.style.marginLeft = "0%";
-                page3.className = "pages current_page";
-                page4.className = "pages";
-                circle4.className = "circle";
-                circle3.className = "circle highlighted";
-            }else if(page5.className == "pages current_page"){
-                footer_button_forward.style.visibility = "visible";
-                page5.style.marginLeft = "-100%";
-                page4.style.marginLeft = "0%";
-                page4.className = "pages current_page";
-                page5.className = "pages";
-                circle5.className = "circle";
-                circle4.className = "circle highlighted";
-            }
+    function back() {
+        if(page2.className == "pages current_page")
+         {
+            footer_button_back.style.visibility = "hidden";
+            page2.style.marginLeft = "-100%";
+            page1.style.marginLeft = "0%";
+            page1.className = "pages current_page";
+            page2.className = "pages";
+            circle2.className = "circle";
+            divider1.className = "divider";
+            span1.className = "span";
+            circle1.className = "circle highlighted";
+        }else if(page3.className == "pages current_page"){
+            page3.style.marginLeft = "-100%";
+            page2.style.marginLeft = "0%";
+            page2.className = "pages current_page";
+            page3.className = "pages";
+            circle3.className = "circle";
+            span2.className = "span";
+            divider2.className = "divider";
+            circle2.className = "circle highlighted";
+       }else if(page4.className == "pages current_page"){
+           page4.style.marginLeft = "-100%";
+           page3.style.marginLeft = "0%";
+           page3.className = "pages current_page";
+           page4.className = "pages";
+           circle4.className = "circle";
+           span3.className = "span";
+           divider3.className = "divider";
+           circle3.className = "circle highlighted";
+      }else if(page5.className == "pages current_page"){
+          footer_button_forward.style.visibility = "visible";
+          page5.style.marginLeft = "-100%";
+          page4.style.marginLeft = "0%";
+          page4.className = "pages current_page";
+          page5.className = "pages";
+          circle5.className = "circle";
+          span4.className = "span";
+          divider4.className = "divider";
+          circle4.className = "circle highlighted";
+     }
+}
+    function loadTicketInformation(){
+        animal_title.innerHTML += ticket_information.selected_animal;
+        animal_breed.innerHTML += ticket_information.breed;
+        destination_info.innerHTML += ticket_information.address;
+        if(!ticket_information.housenumber){
+            destination_info.innerHTML += ticket_information.house_number;
         }
-        function loadTicketInformation(){
-            animal_title.innerHTML += ticket_information.selected_animal;
-            animal_breed.innerHTML += ticket_information.breed;
-            destination_info.innerHTML += ticket_information.address;
-            if(!ticket_information.housenumber){
-                destination_info.innerHTML += ticket_information.house_number;
-            }
-            destination_info.innerHTML += ticket_information.postal_code;
-            destination_info.innerHTML += ticket_information.city;
-            coordinates.value = ticket_information.coordinates;
-            reporter_name.value = ticket_information.name;
-            phone_number.value = ticket_information.number;
+        destination_info.innerHTML += ticket_information.postal_code;
+        destination_info.innerHTML += ticket_information.city;
+        coordinates.value = ticket_information.coordinates;
+        reporter_name.value = ticket_information.name;
+        phone_number.value = ticket_information.number;
 
-            address.value = ticket_information.address;
-            house_number.value = ticket_information.house_number;
-            postal_code.value = ticket_information.postal_code;
-            city.value = ticket_information.city;
-            township.value = ticket_information.township;
+        address.value = ticket_information.address;
+        house_number.value = ticket_information.house_number;
+        postal_code.value = ticket_information.postal_code;
+        city.value = ticket_information.city;
+        township.value = ticket_information.township;
 
-            animal_species.value = ticket_information.selected_animal;
-            breed.value = ticket_information.breed;
-            gender.value = ticket_information.gender;
-            chip_number.value = ticket_information.chip_number;
-            injury.value = ticket_information.injury;
-            description.value = ticket_information.description;
-            priority.value = ticket_information.priority;
-        }
-        $('#footer_button_submit').click(submit);
+        animal_species.value = ticket_information.selected_animal;
+        breed.value = ticket_information.breed;
+        gender.value = ticket_information.gender;
+        chip_number.value = ticket_information.chip_number;
+        injury.value = ticket_information.injury;
+        description.value = ticket_information.description;
+        priority.value = ticket_information.priority;
+    }
 
-        function submit() {
-            var postcode = postal_code.value.replace(/\s/g, '');
-            makeRequest("GET", geocodeQuery(postcode), function(err, result) {
-                if(err) { throw err; };
+    $('#footer_button_submit').click(submit);
+    function submit(){
+        var postcode = postal_code.value.replace(/\s/g, '');
+        makeRequest("GET", geocodeQuery(postcode), function(err, result) {
+			if(err) { throw err; };
 
-                var obj = JSON.parse(result);
-                var latLngSubmit = {"lat": obj[0].lat, "lng": obj[0].lon};
-                coordinates.value = JSON.stringify(latLngSubmit);
+        var obj = JSON.parse(result);
+        var latLngSubmit = {"lat": obj[0].lat, "lng": obj[0].lon};
+	    coordinates.value = JSON.stringify(latLngSubmit);
+        document.forms["submit_form"].submit();
 
+    });
+}
 
-            });
+    function getLocationRecord(){
+        $.ajax({
+            type: 'GET',
+            url: '/api/location/show/'+ locationId,
+            success: function (data) {
+                if (data === 'no location') {
+                    setTimeout(function () {getLocationRecord()}, 3000);
+                } else {
 
-            document.forms["submit_form"].submit();
-        }
+                    document.getElementById('coordinates').value = data;
 
-        function getLocationRecord(){
-            $.ajax({
-                type: 'GET',
-                url: '/api/location/show/'+ locationId,
-                success: function (data) {
-                    if (data === 'no location') {
-                        setTimeout(function () {getLocationRecord()}, 3000);
-                    } else {
-
-                        document.getElementById('coordinates').value = data;
-
-                        data = JSON.parse(data);
-                        getAdressByCoordinates(data.lat, data.lon);
-                    }
+                    data = JSON.parse(data);
+                    getAdressByCoordinates(data.lat, data.lon);
                 }
-            });
-        }
+            }
+        });
+    }
 
         /**
          * get address by lat lon (from openstreetmap)
@@ -381,18 +432,20 @@ var app = angular.module("app", [])
     // }
 }]);
 
-function selectAnimalSpieces(animal_species){
+function selectAnimalSpieces(animal_species, image_animal){
     var growDiv = document.getElementById('animal_cards');
     if (growDiv.clientHeight) {
-        growDiv.style.height = 0;
-        setTimeout(function()
-        {
-            if (!selectedAnimal.clientHeight) {
-                growDiv.style.display = "none";
-                selectedAnimal.style.height = 45;
+      growDiv.style.height = 0;
+      setTimeout(function()
+      {
+          if (!selectedAnimal.clientHeight) {
+              growDiv.style.display = "none";
+              selectedAnimal.style.height = "45px";
+              image.src =  "/" + image_animal;
+              console.log(image.src);
 
-                selected_animal.innerHTML = animal_species;
-            }
-        },300);
+              selected_animal.innerHTML = animal_species;
+          }
+      },300);
     }
 }

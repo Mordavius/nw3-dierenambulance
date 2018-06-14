@@ -1,13 +1,41 @@
-//Headings
+h1, h2, h3, h4
+{
+  margin-bottom: 0;
+}//Headings
 //Mobile
 h1
 {
   font-size: rem-calc(24);
+
+  @include media-breakpoint-up(lg)
+  {
+    font-size: 36px;
+  }
 }
 
 h2
 {
   font-size: rem-calc(20);
+
+  @include media-breakpoint-up(lg)
+  {
+    font-size: 28px;
+  }
+}
+
+h3
+{
+  font-size: rem-calc(20);
+
+  @include media-breakpoint-up(lg)
+  {
+    font-size: 24px;
+  }
+}
+
+html
+{
+  font-size: rem-calc(18);
 }
 
 .subheading

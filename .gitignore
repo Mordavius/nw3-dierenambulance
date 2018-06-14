@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 .env
 resources/views/mail.blade.php
+package-lock.json

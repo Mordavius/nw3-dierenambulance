@@ -1,0 +1,145 @@
+.edit-header {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+}
+
+.edit-menu h6 {
+  color: $dark-gray;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+h1.header {
+  padding-top: rem-calc(10);
+  padding-bottom: rem-calc(10);
+  padding-left: rem-calc(10);
+}
+
+.edit-ticket-algemeen, .edit-ticket-melder, .edit-ticket-locatie, .edit-ticket-dier, .edit-ticket-eigenaar, .edit-ticket-financien {
+  margin-bottom: rem-calc(20);
+}
+
+.content h2 {
+  color: #828282;
+  margin: rem-calc(0);
+}
+
+td {
+  padding: 0px !important;
+}
+
+.locatie-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: rem-calc(13);
+}
+
+.btn-delete-location, .close-model {
+  background: none;
+  border: none;
+}
+
+.btn-add-location, .btn-add-payment {
+  color: $white !important;
+  background-color: $primary-color;
+  width: 50% !important;
+  border: none;
+  margin-bottom: rem-calc(30);
+  padding: rem-calc(5) !important;
+}
+
+.btn-center {
+  display: flex;
+  justify-content: center;
+  margin-top: rem-calc(10);
+}
+
+.edit-ticket-financien h6 {
+  font-size: rem-calc(18) !important;
+  font-weight: bold;
+  margin: 0 0 0 0;
+}
+
+.edit-ticket-financien span:first-child {
+  padding: rem-calc(15) rem-calc(20);
+  width: 100%;
+}
+
+.factuur-card, .gift-card  {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  margin: rem-calc(10) 0 rem-calc(10) 0;
+}
+
+.factuur-wrap {
+  margin-bottom: rem-calc(20);
+}
+
+.locatie-wrap table {
+  width: 100%;
+}
+
+.factuur-card img, .gift-card img {
+  padding: rem-calc(15) rem-calc(20);
+  float: right;
+}
+
+.delete-task-payment {
+  background: none;
+  border: none;
+}
+
+button {
+  padding: 0px !important;
+}
+
+img.icon {
+  padding: 0px 0px 0px 10px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.grey {
+  background-color: $light-gray;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: rem-calc(10) rem-calc(15);
+  margin-bottom: 0px;
+  border-bottom: 1px solid $gray;
+}
+
+.edit_ticket nav {
+  display: none;
+}
+
+select .selected {
+  color: #888;
+}
+
+.close-model {
+  padding: 1rem;
+}
+
+.modal-header {
+  align-items: center;
+}
+
+.model-center {
+  margin: 0 auto;
+}
+
+.model-center button {
+  padding: 5px 10px !important;
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
+
+@media (min-width: 575px) {
+  .grey {
+    width: 100%;
+    margin-left: 0px;
+  }
+}

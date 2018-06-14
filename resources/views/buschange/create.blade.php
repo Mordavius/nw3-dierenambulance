@@ -40,7 +40,6 @@
                                 </span>
                                 @endif
                         </div>
-
                         <div class="form-group {{ $errors->has('bus') ? 'has-error' : '' }}">
                             {!! Form::label('Voertuig') !!} <br />
                             <select name="bus" id="bus">
