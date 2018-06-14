@@ -49,6 +49,7 @@ class TicketController extends Controller
         $coordinates = array_map(function ($coordinateString) {
             return json_decode($coordinateString);
         }, $coordinateStrings);
+<<<<<<< HEAD
         return view('ticket.index', compact('animals', 'destinations', 'destination_array', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
     }
 
@@ -118,6 +119,9 @@ class TicketController extends Controller
                 return Response($output);
             }
         }
+=======
+        return view('ticket.centralist', compact('animals', 'destinations', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
+>>>>>>> 0dde516711e57e175374327dad9ebf92fa59384a
     }
 
     /**

@@ -10411,12 +10411,41 @@ a.text-dark:focus {
   }
 }
 
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 0;
+}
+
 h1 {
   font-size: 1.5rem;
 }
 
+@media (min-width: 992px) {
+  h1 {
+    font-size: 36px;
+  }
+}
+
 h2 {
   font-size: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  h2 {
+    font-size: 28px;
+  }
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  h3 {
+    font-size: 24px;
+  }
 }
 
 html {
@@ -10819,13 +10848,141 @@ input[type="checkbox"] {
   margin-left: 0.875rem;
 }
 
-.ticket_page .ticket-wrapper {
+@media (min-width: 992px) {
+  .ticket_centralist .icon-bar {
+    display: none;
+  }
+}
+
+.ticket_centralist .head {
+  padding: 2.5rem 11.125rem;
+}
+
+.ticket_centralist .head::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.ticket_centralist .head .left,
+.ticket_centralist .head .right {
+  padding: 0;
+}
+
+.ticket_centralist .head #toggle-button {
+  margin-bottom: 0;
+}
+
+.ticket_centralist .head .search_field {
+  width: 350px;
+  margin-left: 38px;
+  margin-bottom: 0;
+  border: 1px solid #B8B8B8;
+}
+
+.ticket_centralist .head .filters input {
+  display: inline-block;
+  width: auto;
+}
+
+.ticket_centralist .ticket-wrapper {
   padding: 1.375rem 0;
+  background: #F4F4F4;
 }
 
 @media (min-width: 992px) {
-  .ticket_page .ticket-wrapper {
+  .ticket_centralist .ticket-wrapper {
     padding: 1.375rem 11rem;
+  }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container {
+  margin-bottom: 107px;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_header {
+  padding-left: 0;
+  margin-bottom: 25px;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main {
+  background: #F4F4F4;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main a {
+    margin-right: 20px;
+  }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
+  background: #fff;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
+    width: 350px;
+    margin-bottom: 20px;
+  }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket.new {
+  border-left: solid 7px #2D9CDB;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_number {
+  margin-left: 0;
+  margin-right: 21px;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon {
+    height: 78px;
+    width: 78px;
+    padding: 0;
+    position: relative;
+  }
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon img#animal_icon {
+    height: 60%;
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info {
+    margin-left: 17px;
+  }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span {
+  font-size: 14px;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span br {
+  display: block;
+  margin: -10px 0;
+  content: "";
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
+    grid-column: 1/6;
+    margin-left: 21px;
+    margin-right: 21px;
+    height: 175px;
   }
 }
 
@@ -11730,6 +11887,19 @@ input[type="checkbox"] {
   max-width: 150px;
 }
 
+.navbar-laravel {
+  background-color: #fff;
+  -webkit-box-shadow: 0;
+          box-shadow: 0;
+}
+
+@media (min-width: 992px) {
+  .navbar-laravel {
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+}
+
 .profile-wrapper {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -11952,11 +12122,5 @@ img.icon {
 
 .leaflet-gesture-handling-scroll-warning:after {
   content: attr(data-gesture-handling-scroll-content);
-}
-
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 

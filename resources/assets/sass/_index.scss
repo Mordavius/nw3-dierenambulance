@@ -1,12 +1,164 @@
-.ticket_page
+.ticket_centralist
 {
+  .icon-bar
+  {
+    @include media-breakpoint-up(lg)
+    {
+      display: none;
+    }
+  }
+
+  .head
+  {
+    padding: rem-calc(40) rem-calc(178);
+    @include clearfix;
+
+    .left, .right
+    {
+      padding: 0;
+    }
+
+    #toggle-button
+    {
+      margin-bottom: 0;
+    }
+
+    .search_field
+    {
+      width: 350px;
+      margin-left: 38px;
+      margin-bottom: 0;
+      border: 1px solid $gray;
+    }
+
+    .filters
+    {
+      input
+      {
+        display: inline-block;
+        width: auto;
+      }
+    }
+  }
+
   .ticket-wrapper
   {
     padding: rem-calc(22) 0;
+    background: $background;
 
     @include media-breakpoint-up(lg)
     {
       padding: rem-calc(22) rem-calc(176);
+    }
+
+    .grid_container
+    {
+      margin-bottom: 107px;
+
+      .grid_header
+      {
+        padding-left: 0;
+        margin-bottom: 25px;
+      }
+
+      .grid_main
+      {
+        background: $background;
+
+        a
+        {
+          text-decoration: none;
+          display: inline-block;
+
+          @include media-breakpoint-up(lg)
+          {
+            margin-right: 20px;
+          }
+        }
+
+        .grid_ticket
+        {
+          background: $white;
+
+          @include media-breakpoint-up(lg)
+          {
+            width: 350px;
+            // height: 312px;
+            margin-bottom: 20px;
+          }
+
+          &.new
+          {
+            border-left: solid 7px $secondary-color;
+          }
+
+          .ticket_number
+          {
+            margin-left: 0;
+            margin-right: 21px;
+          }
+
+          .grid_animal_icon
+          {
+            .ticket_icon
+            {
+              @include media-breakpoint-up(lg)
+              {
+                height: 78px;
+                width: 78px;
+                padding: 0;
+                position: relative;
+              }
+
+              img#animal_icon
+              {
+                @include media-breakpoint-up(lg)
+                {
+                  height: 60%;
+                  width: 60%;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                }
+              }
+            }
+          }
+
+          .ticket_main_info
+          {
+            @include media-breakpoint-up(lg)
+            {
+              margin-left: 17px;
+            }
+
+            .ticket_address
+            {
+              span
+              {
+                font-size: 14px;
+
+                br
+                {
+                  display: block;
+                  margin: -10px 0;
+                  content: "";
+                }
+              }
+            }
+          }
+          .ticket_description
+          {
+            @include media-breakpoint-up(lg)
+            {
+              grid-column: 1/6;
+              margin-left: 21px;
+              margin-right: 21px;
+              height: 175px;
+            }
+          }
+        }
+      }
     }
   }
 }
