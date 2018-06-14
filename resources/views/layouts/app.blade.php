@@ -19,13 +19,10 @@
         <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
 
         <!-- Scripts -->
-<<<<<<< HEAD
-=======
         <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/app.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
->>>>>>> 58b4e657dc61d062ebdac6222202c149bbc00420
         @yield('scripts')
     </head>
     <body class="@yield('body_class')">

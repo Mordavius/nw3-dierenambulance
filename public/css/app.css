@@ -10856,12 +10856,19 @@ input[type="checkbox"] {
 
 .ticket_centralist .head {
   padding: 2.5rem 11.125rem;
+  display: none;
 }
 
 .ticket_centralist .head::after {
   display: block;
   content: "";
   clear: both;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .head {
+    display: block;
+  }
 }
 
 .ticket_centralist .head .left,
@@ -10883,6 +10890,7 @@ input[type="checkbox"] {
 .ticket_centralist .head .filters input {
   display: inline-block;
   width: auto;
+  margin-bottom: 0;
 }
 
 .ticket_centralist .ticket-wrapper {
@@ -11898,6 +11906,10 @@ input[type="checkbox"] {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   }
+}
+
+.navbar-toggler {
+  border: 0;
 }
 
 .profile-wrapper {
