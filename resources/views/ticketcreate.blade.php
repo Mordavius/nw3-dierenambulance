@@ -237,22 +237,25 @@
                 ]) !!}
                 <div class="new_ticket_information">
                     <label class="general">Algemeen</label>
-
-                    <div class="alert-danger danger" style="display:none"></div>
                     <br />
 
                     <div class="new_ticket_info">
                         <label class="general_labels centralist">Centralist:</label>
                         <input id="centralist" type="label" name="centralist" class="general_information centralist" value="{{ Auth::user()->name }}"></input>
                         <label class="general_labels date">Datum:</label>
-                        <input type="label" name="date" class="general_information date" id="date" value="{{ Carbon::today()->format('Y-m-d') }}"></label>
+                        <input id="date" class="general_information date" type="date" name="date"
+                               @if($ticket && $ticket->date)
+                               value="{{ date('Y-m-d', strtotime($ticket->date)) }}"
+                               @else
+                               value="{{ date('Y-m-d') }}"
+                                @endif
+                        />
                         <label class="general_labels time">Tijd</label>
                         <input name="time" type="label" class="general_information time" id="time" value="{{Carbon::now('Europe/Amsterdam')->toTimeString()}}" ></text>
                     </div>
 
                     <div class="address_info_new_ticket">
                         <label class="location_label">Locatie</label>
-                        <div class="alert-danger postal_code" style="display:none"></div>
                         <input type="label" class="address_info" placeholder="Straat" name="address" id="address"/>
                         <input type="label" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number"/>
                         <input type="label" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code"/>

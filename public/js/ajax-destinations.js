@@ -152,24 +152,35 @@ $(document).ready(function() {
                 success: function (data) {
                 console.log(data);
 
-                $empty = $('#myModal').find("input").filter(function() {
-                        return this.value === "";
-                    });
-
-                if($empty.length) {
-                    jQuery.each(data.errors, function(key, data){
-        		    jQuery('.alert-danger').show();
-        		    jQuery('.alert-danger').append('<p>'+data+'</p>');
-                        });
+                if(document.getElementById('postal_code').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen postcode ingevoerd</p>');
                 }
 
-                if (state == "add"){ //if user added a new record
-                    $('#tasks-list').append(destination);
-                }else{ //if user updated an existing record
-                    $("#destination" + task_id).replaceWith( destination );
+                if(document.getElementById('house_number').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen huisnummer ingevoerd</p>');
                 }
 
-                $('#destination').trigger("reset");
+                if(document.getElementById('address').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen straatnaam ingevoerd</p>');
+                }
+
+                if(document.getElementById('city').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen plaats ingevoerd</p>');
+                }
+
+                if(document.getElementById('milage').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen kilometerstand ingevoerd</p>');
+                    return false;
+                }
+
+               else {
+                   location.reload();
+               }
 
                 // $('#myModal').modal('hide')
                 },
@@ -281,32 +292,17 @@ $(document).ready(function() {
                     data: formData,
                     dataType: 'json',
                     success: function (data) {
-                    console.log(data);
 
-                $empty = $('#myModal').find("input").filter(function() {
-                        return this.value === "";
-                    });
 
-                if($empty.length) {
-                    jQuery.each(data.errors, function(key, data){
-        		    jQuery('.alert-danger').show();
-        		    jQuery('.alert-danger').append('<p>'+data+'</p>');
-                        });
-                }
+                   if(document.getElementById('payment_invoice').value === '' && document.getElementById('payment_gifts').value === '') {
+                        jQuery('.alert.alert-danger').show();
+        		        jQuery('.alert.alert-danger').append('<p>Betaling niet ingevoerd</p>');
+                    }
 
-                if (state == "add"){ //if user added a new record
-                    //
-                }else { //if user updated an existing record
+                   else {
+                       location.reload();
+                   }
 
-                    $("#finances" + task_id).replaceWith( finances );
-                }
-                    $('#finances').trigger("reset");
-                },
-                complete: function(data) {
-                    if(data.status == 'success') {
-                    location.reload();
-                    $('#myModal-payment').modal('hide')
-                }
                 },
                     error: function (data) {
                     console.log('Error:', data);
@@ -421,39 +417,44 @@ $(document).ready(function() {
                     success: function (data) {
                     console.log(data);
 
-                $empty = $('#myModal').find("input").filter(function() {
-                        return this.value === "";
-                    });
-
-                if($empty.length) {
-                    jQuery.each(data.errors, function(key, data){
-        		    jQuery('.alert-danger').show();
-        		    jQuery('.alert-danger').append('<p>'+data+'</p>');
-                        });
+                if(document.getElementById('name').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen naam ingevoerd</p>');
                 }
 
-                if (state == "add"){ //if user added a new record
-                    //$('#owner-list').append(owner);
-                }else { //if user updated an existing record
-
-                    $("#owner" + task_id).replaceWith( owner );
+                if(document.getElementById('telephone_number').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen telefoon ingevoerd</p>');
                 }
-                    $('#owner').trigger("reset");
-                },
-                complete: function(data) {
-                    if(data.status == 'success') {
-                        location.reload();
-                        $('#myModal-owner').modal('hide')
-                    }
-                },
+
+                if(document.getElementById('owner_postal_code').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen postcode ingevoerd</p>');
+                }
+
+                if(document.getElementById('owner_house_number').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen huisnummer ingevoerd</p>');
+                }
+
+                if(document.getElementById('owner_address').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen straatnaam ingevoerd</p>');
+                }
+
+                if(document.getElementById('owner_city').value === '') {
+                    jQuery('.alert.alert-danger').show();
+    		        jQuery('.alert.alert-danger').append('<p>Geen plaats ingevoerd</p>');
+                }
+
+               else {
+                   location.reload();
+               }
+
+               },
                     error: function (data) {
                     console.log('Error:', data);
                 }
                 });
                 });
                 });
-
-
-
-
-

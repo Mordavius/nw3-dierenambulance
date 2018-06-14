@@ -39,11 +39,18 @@ class AnonymizeReporters extends Command
     {
         $checkdate = strtotime('-1 month');
         $tickets = Ticket::all();
-        foreach ($tickets as $ticket) {
-            if (strtotime($ticket->created_at) <= $checkdate && $ticket->reporter_name != "anoniem") {
-                $ticket->reporter_name = "anoniem";
-                $ticket->telephone = "0000000000";
-                $ticket->save();
+        if ($tickets) {
+            try {
+                foreach ($tickets as $ticket) {
+                    if (strtotime($ticket->created_at) <= $checkdate && $ticket->reporter_name != "anoniem") {
+                        $ticket->reporter_name = "anoniem";
+                        $ticket->telephone = "0000000000";
+                        $ticket->save();
+                    }
+                }
+            }
+            catch (\Exception $e){
+                Log::channel('sentry')->critical("Critical error anonymizing users ",$e);
             }
         }
     }

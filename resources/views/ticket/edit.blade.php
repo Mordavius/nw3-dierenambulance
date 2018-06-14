@@ -221,7 +221,7 @@
                                                 </div>
                                             @endif
 
-                                            <div class="alert-danger" style="display:none"></div>
+                                            <div class="alert alert-danger" style="display:none"></div>
 
                                             <div class="form-group {{ $errors->has('known') ? 'has-error' : '' }}">
                                                 <label>Bekende adressen</label>
@@ -393,7 +393,7 @@
                                                     </div>
                                                 @endif
 
-                                                <div class="alert-danger" style="display:none"></div>
+                                                <div class="alert alert-danger" style="display:none"></div>
 
                                                 {!! Form::label('owner-animal', 'Melder is ook eigenaar van het dier') !!}
                                                 <input type="checkbox" id="animalowner"  onclick="animalOwner()">

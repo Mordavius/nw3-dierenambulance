@@ -28,7 +28,7 @@ Route::group(['middleware' => 'IsAdmin'], function () {
     Route::get('/exporteren', 'AdministrationController@export')->name('Exporteren')->middleware('auth');
     Route::get('/kwartaaloverzicht', 'AdministrationController@quartexports')->name('Kwartaaloverzicht')->middleware('auth');
     Route::get('/administratie/download/{filename}', 'AdministrationController@quartdownload')->middleware('auth');
-    Route::get('downloadExcel', 'AdministrationController@downloadExcel')->middleware('auth');
+    Route::post('downloadExcel', 'AdministrationController@downloadExcel')->middleware('auth');
     // Route::post('/melding/post', 'TicketController@postDestination')->middleware('auth');
 
     // CRUD User Controllers
@@ -67,16 +67,14 @@ Route::resource('profiel', 'ProfileController')->middleware('auth');
 
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
 
-
-Route::get('/dikkezoekfunctie', 'SearchController@index');
 Route::get('/search', 'TicketController@search');
 
-Route::get('/destination', 'TestController@index')->middleware('auth');
-
+// Ajax create functions
 Route::post('/destination/{ticket_id?}', 'TicketController@createAjax')->middleware('auth');
 Route::post('/finances/{ticket_id?}', 'TicketController@createAjaxFinance')->middleware('auth');
 Route::post('/owners/{ticket_id?}', 'TicketController@createAjaxOwner')->middleware('auth');
 
+// Ajax delete functions
 Route::delete('/destination/{task_id?}', 'TicketController@destroyAjax')->middleware('auth');
 Route::delete('/finances/{task_id?}', 'TicketController@destroyAjaxPayment')->middleware('auth');
 
