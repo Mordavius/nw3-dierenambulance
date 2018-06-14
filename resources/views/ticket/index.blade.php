@@ -26,6 +26,19 @@
               <div class="result_amount">{{$unfinishedtickets->count()}} melding(en)</div>
           </div>
           <div class="grid_main">
+
+                  <div class="form-group">
+                      <input type="text" class="form-controller" id="search" name="search">
+                  </div>
+                  <table class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+
               @foreach($unfinishedtickets as $unfinishedticket)
                 @foreach($animals as $animal)
                     @if($unfinishedticket->animal_id == $animal->id)

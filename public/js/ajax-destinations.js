@@ -62,28 +62,6 @@ $(document).ready(function() {
 $(document).ready(function(){
     var url = "/destination";
 
-    // //display modal form for task editing
-    // $('.open-modal').click(function(){
-    //     var task_id = $(this).val();
-    //
-    //     $.get(url + '/' + task_id, function (data) {
-    //         //success data
-    //         console.log(data);
-    //         $('#task_id').val(data.destination_id);
-    //         $('#ticket_id').val(data.ticket_id);
-    //         $('#postal_code').val(data.postal_code);
-    //         $('#address').val(data.address);
-    //         $('#house_number').val(data.house_number);
-    //         $('#city').val(data.city);
-    //         $('#township').val(data.township);
-    //         $('#verhicle').val(data.verhicle);
-    //         $('#milage').val(data.milage);
-    //         $('#btn-save').val("update");
-    //
-    //         $('#myModal').modal('show');
-    //     })
-    // });
-
     //display modal form for creating new task
     $('#btn-add-destination').click(function(){
         $('#btn-save').val("add");
@@ -214,24 +192,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     var url = "/finances";
-
-    //display modal form for task editing
-    // $('.open-modal').click(function(){
-    //     var task_id = $(this).val();
-    //
-    //     $.get(url + '/' + task_id, function (data) {
-    //         //success data
-    //         console.log(data);
-    //         $('#task_id').val(data.finances_id);
-    //         $('#ticket_id').val(data.ticket_id);
-    //         $('#payment_invoice').val(data.payment_invoice);
-    //         $('#payment_gift').val(data.payment_gift);
-    //         $('#payment_method').val(data.payment_method);
-    //         $('#btn-save-payment').val("update");
-    //
-    //         $('#myModal-payment').modal('show');
-    //     })
-    // });
 
     //display modal form for creating new task
     $('#btn-add-payment').click(function(){

@@ -21,19 +21,3 @@ class IsAdmin
         return redirect('/error');
     }
 }
-
-
-/*         $user = Auth::user();
-
-        if($user->isAdmin()) {
-            return redirect('/admin');
-        }
-        if($user->isAmbulance()) {
-            return redirect('/ambulance');
-        }
-        if($user->isCentralist()) {
-            return redirect('/centralist');
-        }
-
-        return $next($request);
-*/

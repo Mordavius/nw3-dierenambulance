@@ -97,8 +97,7 @@
                             <td class="italic">{{$loaddestinations->milage}}</td>
                         </tr>
                     </table>
-
-                    <button id="delete" name="delete" data-toggle="delete" class="btn-delete-location" value="{{$loaddestinations->id}}">
+                      <button id="delete" name="delete" data-toggle="delete" class="delete-task" value="{{$loaddestinations->id}}">
                         <img src="https://nw3-dierenambulance.test/images/delete.svg" alt="Verwijderen" class="icon">
                     </button>
 

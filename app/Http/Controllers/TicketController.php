@@ -66,7 +66,6 @@ class TicketController extends Controller
             'house_number' => 'required',
             'address' => 'required',
             'city' => 'required',
-            'township' => 'required',
             'milage' => 'required|numeric',
         ]);
 
