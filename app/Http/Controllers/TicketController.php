@@ -301,7 +301,6 @@ class TicketController extends Controller
         $this->validate($request, [
             'date' => 'required',
             'time' => 'required',
-        //    'telephone' => 'sometimes|numeric',
         ]);
 
         //dd($animal);
@@ -317,11 +316,13 @@ class TicketController extends Controller
 
         // Updates the data for the requested fields
         $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');
-        $animal = Animal::findOrFail($animal_id);
-        $animal->animal_species = Input::get('animal_species');
-        $animal->gender = Input::get('gender');
-        $animal->description = Input::get('description');
-        //$animal->save(); // Saves the data
+        ($animal = Animal::findOrFail($animal_id));
+
+        Animal::whereIn('id', $animal)->update([
+            'animal_species' => Input::get('animal_species'),
+            'gender' => Input::get('gender'),
+            'description' => Input::get('comments'),
+        ]);
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
     }
