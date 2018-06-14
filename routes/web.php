@@ -43,7 +43,6 @@ Route::group(['middleware' => 'IsCentralist'], function () {
     Route::get('centralist', 'HomeController@centralist')->name('centralist')->middleware('auth');
 });
 
-
 //Route::get('search', ['uses' => 'TicketController@index', 'as' => 'search',]);
 
 // Bus Changes Controllers
@@ -52,9 +51,7 @@ Route::resource('buswissel', 'BusChangeController')->middleware('auth');
 // Route::get('pdfview',array('as'=>'pdfview','uses'=>'AdministrationController@pdfview'));
 
 // CRUD Notification Controllers
-Route::resource('melding', 'TicketController')->middleware('auth', function() {
-
-});
+Route::resource('melding', 'TicketController')->middleware('auth', function() {});
 
 //CRUD Bus Controllers
 Route::resource('bus', 'BusController')->middleware('auth');
@@ -67,16 +64,14 @@ Route::resource('profiel', 'ProfileController')->middleware('auth');
 
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
 
-
-Route::get('/dikkezoekfunctie', 'SearchController@index');
 Route::get('/search', 'TicketController@search');
 
-Route::get('/destination', 'TestController@index')->middleware('auth');
-
+// Ajax create functions
 Route::post('/destination/{ticket_id?}', 'TicketController@createAjax')->middleware('auth');
 Route::post('/finances/{ticket_id?}', 'TicketController@createAjaxFinance')->middleware('auth');
 Route::post('/owners/{ticket_id?}', 'TicketController@createAjaxOwner')->middleware('auth');
 
+// Ajax delete functions
 Route::delete('/destination/{task_id?}', 'TicketController@destroyAjax')->middleware('auth');
 Route::delete('/finances/{task_id?}', 'TicketController@destroyAjaxPayment')->middleware('auth');
 

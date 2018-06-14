@@ -19,8 +19,9 @@ class BusChangeRequest extends FormRequest
     public function messages()
     {
         return [
-            'date.required' => 'Geen geldige datum ingevoerd.',
-            'time.required'  => 'Geen geldige tijd ingevoerd.',
+            'bus_type.required' => 'Geen voertuig ingevoerd.',
+            'milage.required'  => 'Geen kilometerstand ingevoerd.',
+            'milage.numeric'  => 'Geen numerieke kilometerstand ingevoerd.',
         ];
     }
 
@@ -32,8 +33,8 @@ class BusChangeRequest extends FormRequest
     public function rules()
     {
         return [
-            'date'     => 'required',
-            'time'    => 'required'
+            'bus_type'     => 'required',
+            'milage'    => 'required|numeric'
         ];
     }
 }

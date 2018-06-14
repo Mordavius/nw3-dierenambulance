@@ -54,7 +54,7 @@
                                         <td>{{$loaddestinations->verhicle}}</td>
                                         <td>{{$loaddestinations->milage}}</td>
                                         <td>
-                                            <button id="delete" name="delete" data-toggle="delete" class="btn btn-danger btn-xs btn-delete delete-task" value="{{$loaddestinations->id}}">Verwijder</button>
+                                                <button id="delete" name="delete" data-toggle="delete" class="btn btn-danger btn-xs btn-delete delete-task" value="{{$loaddestinations->id}}">Verwijder</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="form-group {{ $errors->has('comments') ? 'has-error' : '' }}">
                                         {!! Form::label('Opmerkingen') !!}
-                                        {!! Form::textarea('comments', null, ['class' => 'form-control']) !!}
+                                        {!! Form::textarea('comments', $animaldescription->first(), ['class' => 'form-control']) !!}
                                         @if($errors->has('comments'))
                                             <span class="help-block">{{ $errors->first('comments') }}</span>
                                         @endif
@@ -221,7 +221,7 @@
                                                 </div>
                                             @endif
 
-                                            <div class="alert-danger" style="display:none"></div>
+                                            <div class="alert alert-danger" style="display:none"></div>
 
                                             <div class="form-group {{ $errors->has('known') ? 'has-error' : '' }}">
                                                 <label>Bekende adressen</label>
@@ -284,11 +284,7 @@
 
                                             <div class="form-group {{ $errors->has('verhicle') ? 'has-error' : '' }}">
                                                 {!! Form::label('Voertuig') !!} <br />
-                                                <select name="verhicle" id="verhicle">
-                                                    @foreach($bus as $buses)
-                                                        <option value="{{$buses}}">{{$buses}}</option>
-                                                    @endforeach
-                                                </select>
+                                                {!! Form::text('verhicle', $verhicle->first(), ['class' => 'form-control', 'id' => 'verhicle', 'value' => '', 'disabled']) !!}
                                                 @if($errors->has('verhicle'))
                                                     <span class="help-block">
                                                         {{ $errors->first('verhicle') }}
@@ -314,13 +310,11 @@
                                             <button type="button" class="btn btn-primary" id="btn-save" name="btn-save" value="add">Opslaan</button>
                                             <input type="hidden" id="task_id" name="task_id" value="0">
                                             <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
-
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Modal (Pop up when detail destinations button clicked) -->
                             <div class="modal fade" id="myModal-payment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -370,8 +364,6 @@
                                             <button type="button" class="btn btn-primary" id="btn-save-payment" name="btn-save-payment" value="add">Opslaan</button>
                                             <input type="hidden" id="task_id" name="task_id" value="0">
                                             <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -393,7 +385,7 @@
                                                     </div>
                                                 @endif
 
-                                                <div class="alert-danger" style="display:none"></div>
+                                                <div class="alert alert-danger" style="display:none"></div>
 
                                                 {!! Form::label('owner-animal', 'Melder is ook eigenaar van het dier') !!}
                                                 <input type="checkbox" id="animalowner"  onclick="animalOwner()">

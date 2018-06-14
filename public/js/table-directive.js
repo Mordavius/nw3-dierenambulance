@@ -143,21 +143,20 @@ var app = angular.module("app", [])
 
 
         function next() {
-            if(page1.className == "pages current_page")
-            {
-                footer_button_back.style.visibility = "visible";
-                page1.style.marginLeft = "-100%";
-                page2.style.marginLeft = "0%";
-                page2.style.height = "84%"
-                page2.className = "pages current_page";
-                map.style.height = "100%";
-                map.style.width = "100%";
-                ticket_information.name = name_text_field.value;
-                ticket_information.number = number_text_field.value;
-                $scope.map.invalidateSize();
-                page1.className = "pages";
-                circle1.className = "circle";
-                circle2.className = "circle highlighted";
+            if(page1.className == "pages current_page") {
+                    footer_button_back.style.visibility = "visible";
+                    page1.style.marginLeft = "-100%";
+                    page2.style.marginLeft = "0%";
+                    page2.style.height = "84%"
+                    page2.className = "pages current_page";
+                    map.style.height = "100%";
+                    map.style.width = "100%";
+                    ticket_information.name = name_text_field.value;
+                    ticket_information.number = number_text_field.value;
+                    $scope.map.invalidateSize();
+                    page1.className = "pages";
+                    circle1.className = "circle";
+                    circle2.className = "circle highlighted";
 
             }else if(page2.className == "pages current_page")
             {
@@ -285,27 +284,6 @@ var app = angular.module("app", [])
 
 
             });
-
-            var x = document.forms["submit_form"]["postal_code"].value;
-            if (x == "") {
-                jQuery('.alert-danger.postal_code').show();
-                jQuery('.alert-danger.postal_code').append('<p>Postcode is niet ingevuld!</p>');
-                return false;
-            }
-
-            var x = document.forms["submit_form"]["reporter_name"].value;
-            if (x == "") {
-                jQuery('.alert-danger.name').show();
-                jQuery('.alert-danger.name').append('<p>Naam is niet ingevuld!</p>');
-                return false;
-            }
-
-            var x = document.forms["submit_form"]["telephone"].value;
-            if (x == "") {
-                jQuery('.alert-danger.telephone').show();
-                jQuery('.alert-danger.telephone').append('<p>Telefoonnummer is niet ingevuld!</p>');
-                return false;
-            }
 
             document.forms["submit_form"].submit();
         }

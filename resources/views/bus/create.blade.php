@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Nieuwe buswissel
+                    Nieuwe bus toevoegen
                 </div>
                 <div class="card-body">
                     <a href="javascript:history.back()">
@@ -29,7 +29,7 @@
                         {!! Form::text('bus_type', null, ['class' => 'form-control']) !!}
 
                         @if($errors->has('bus_type'))
-                          <span class="help-block">{{ $errors->first('bus_type') }}</span>
+                          <br /><span class="alert alert-danger">{{ $errors->first('bus_type') }}</span><br /><br />
                         @endif
                     </div>
 
@@ -38,7 +38,7 @@
                         {!! Form::text('milage', null, ['class' => 'form-control']) !!}
 
                         @if($errors->has('milage'))
-                          <span class="help-block">{{ $errors->first('milage') }}</span>
+                            <br /><span class="alert alert-danger">{{ $errors->first('milage') }}</span><br /><br />
                         @endif
                     </div>
 
