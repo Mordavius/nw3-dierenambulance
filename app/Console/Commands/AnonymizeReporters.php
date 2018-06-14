@@ -50,7 +50,7 @@ class AnonymizeReporters extends Command
                 }
             }
             catch (\Exception $e){
-                Log::channel('sentry')->critical("Critical error anonymizing users ",$e);
+                Log::channel('sentry')->critical("Critical error anonymizing users ",$e->getMessage());
             }
         }
     }

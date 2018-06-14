@@ -52,7 +52,7 @@ class AdministrationController extends Controller
             return Storage::download('exports/' . $filename);
         }
         catch (FileNotFoundException $e) {
-            Log::channel('sentry')->error($e);
+            Log::channel('sentry')->error($e->getMessage());
             return Redirect::back()->withErrors(['Het door u opgevraagde bestand bestaat niet, neem contact op met de webmaster of probeer dit handmatig']);
         }
     }

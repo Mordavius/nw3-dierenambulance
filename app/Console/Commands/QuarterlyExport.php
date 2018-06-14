@@ -62,7 +62,7 @@ class QuarterlyExport extends Command
         }
         catch (QueryException $e) {
             echo "Er is wat fout gegaan tijdens het automatisch exporteren, probeer dit handmatig";
-            Log::channel('sentry')->critical("Critical error during quarterly export: " . $e);
+            Log::channel('sentry')->critical("Critical error during quarterly export: " . $e->getMessage());
         }
     }
 

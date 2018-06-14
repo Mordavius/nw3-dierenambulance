@@ -85,6 +85,7 @@ class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
             if ($ticket->centralist) { $new_ticket['dispatcher'] = $ticket->centralist; }
             if ($ticket->driver) { $new_ticket['driver'] = $ticket->driver; }
             if ($ticket->passenger) { $new_ticket['passenger'] = $ticket->passenger; }
+
             if ($animal) {
                 if ($animal->animal_species) {
                     $new_ticket['species'] = $animal->animal_species;
@@ -102,6 +103,7 @@ class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
                     $new_ticket['animal_description'] = $animal->description;
                 }
             }
+
             if($destinations) {
                 if ($destinations->postal_code) {
                     $new_ticket['postal_code'] = $destinations->postal_code;
@@ -119,6 +121,7 @@ class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
                     $new_ticket['milage'] = $destinations->milage;
                 }
             }
+
             if($finance) {
                 if ($finance->payment_invoice) {
                     $new_ticket['invoice'] = $finance->payment_invoice;
@@ -130,6 +133,7 @@ class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
                     $new_ticket['gifts'] = $finance->payment_gifts;
                 }
             }
+            
             array_push($collection_array, $new_ticket);
         }
         return new Collection($collection_array);
