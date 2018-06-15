@@ -68,8 +68,8 @@ var app = angular.module("app", [])
 			updateAddressInformation(obj, e);
         })
         if(marker){
-        $scope.map.removeLayer(marker);
-    }
+            $scope.map.removeLayer(marker);
+        }
 	}
 
     var coords = $('#map2').data('coordinates')
@@ -123,14 +123,18 @@ var app = angular.module("app", [])
         $('#searchButton').click(searchButtonClicked);
 
         function searchButtonClicked(){
-            var searchText = document.getElementById("searchTextBox").value;
+            var searchText = document.getElementById("searchTextBox").value.replace(/\s/g, '');
+
             makeRequest("GET", geocodeQuery(searchText), function(err, result) {
                 if(err) { throw err; }
-
                 var searchedURLJson = JSON.parse(result);
-                //console.log(searchedURL);
-                setMarkerForLocation(searchedURLJson);
-            })
+
+                makeRequest("GET", reverseGeocodeQuery("json", searchedURLJson[0].lat, searchedURLJson[0].lon, 18), function(err, result2) {
+        			if(err) { throw err; }
+                    var searchedURLJson2 = JSON.parse(result2);
+                    setMarkerForLocation(searchedURLJson2);
+                });
+            });
         }
 
         function geocodeQuery(searchText) {
@@ -139,14 +143,20 @@ var app = angular.module("app", [])
         }
 
         function setMarkerForLocation(searchedURLJson) {
-            var searchedLat = searchedURLJson[0].lat;
-            var searchedLon = searchedURLJson[0].lon;
+            var searchedLat = searchedURLJson.lat;
+            var searchedLon = searchedURLJson.lon;
+            var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
 
-            //var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
+            address_field.innerHTML = searchedURLJson.address.road  ? searchedURLJson.address.road + " " : "Straatnaam onbekend";
+            house_number_field.innerHTML = searchedURLJson.address.house_number ? searchedURLJson.address.house_number + " ": " ";
+            postal_code_field.innerHTML = searchedURLJson.address.postcode ? searchedURLJson.address.postcode + " " : "Kan postcode niet vinden";
+            city_field.innerHTML = searchedURLJson.address.suburb ? searchedURLJson.address.suburb : "Kan stad niet vinden";
+            township_field.innerHTML = searchedURLJson.address.city ? searchedURLJson.address.city : "Kan gemeente niet vinden";
+            // coordinates_field.value = JSON.stringify(e.latlng);
 
-            $scope.map.setView(new L.LatLng(searchedLat, searchedLon), 12);
+
+            $scope.map.setView(new L.LatLng(searchedLat, searchedLon), 15);
         }
-
 
         function getLocation() {
             if (navigator.geolocation) navigator.geolocation.getCurrentPosition(showPosition);

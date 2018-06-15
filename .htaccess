@@ -19,6 +19,6 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
 RewriteEngine On
-RewriteCond %{HTTP_HOST} ^nasvanmark.nl/dierenambulance [NC]
+RewriteCond %{HTTP_HOST} ^notepet.nl [NC]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI}

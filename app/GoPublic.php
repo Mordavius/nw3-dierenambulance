@@ -9,6 +9,6 @@ class GoPublic extends \Illuminate\Foundation\Application
 	 */
 	public function publicPath()
 	{
-		return $this->basePath.DIRECTORY_SEPARATOR.'../../domains/nasvanmark.nl/public_html/dierenambulance';
+		return $this->basePath.DIRECTORY_SEPARATOR.'../../domains/notepet.nl/public_html';
 	}
 }

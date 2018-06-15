@@ -106,7 +106,7 @@
                 @endforeach
 
                 <div class="btn-center">
-                    {!! Form::button('Extra locatie', ['class' => 'btn-primary', 'value' => 'btn-add-destination', 'id' => 'btn-add-destination', 'name' => 'btn-add-destination']) !!}
+                    {!! Form::button('Extra locatie', ['class' => 'btn-primary btn-add-payment', 'value' => 'btn-add-destination', 'id' => 'btn-add-destination', 'name' => 'btn-add-destination']) !!}
                 </div>
             </div>
             <div class="edit-ticket-dier">
@@ -181,7 +181,7 @@
                     @endif
                 </div>
         <div class="btn-center">
-            {!! Form::button('Extra betaling', ['class' => 'btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
+            {!! Form::button('Extra betaling', ['class' => 'btn-primary btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
         </div>
         {!! Form::close() !!}
 

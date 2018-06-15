@@ -50,9 +50,9 @@
                             #{{ $unfinishedticket->id }}
                         </div>
                         <div class="grid_animal_icon">
-                            <div class="ticket_icon">
+                            <!-- <div class="ticket_icon">
                                 <img src="/images/hond-icon.png" id="animal_icon">
-                            </div>
+                            </div> -->
                         </div>
                         <div class="ticket_main_info">
                             <div class="ticket_title">{{$animal->animal_species}}</div>
@@ -80,7 +80,7 @@
       </div>
       <div class="grid_container">
           <div class="grid_header">
-              <select id="times">
+              <!-- <select id="times">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -109,7 +109,7 @@
           <option value="year">
               Jaren
           </option>
-      </select>
+      </select> -->
               <div class="tickets closed_tickets">Afgeronde meldingen</div>
           </div>
           <div class="grid_main">
@@ -121,9 +121,9 @@
                                   #{{ $finishedticket->id }}
                               </div>
                               <div class="grid_animal_icon">
-                                  <div class="ticket_icon">
+                                  <!-- <div class="ticket_icon">
                                       <img src="/images/hond-icon.png" id="animal_icon">
-                                  </div>
+                                  </div> -->
                               </div>
                               <div class="ticket_main_info">
                                   <div class="ticket_title">{{$animal->animal_species}}</div>

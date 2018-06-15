@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'cron@nasvanmark.nl'),
+        'address' => env('MAIL_FROM_ADDRESS', 'cron@notepet.nl'),
         'name' => env('MAIL_FROM_NAME', 'Cron'),
     ],
 

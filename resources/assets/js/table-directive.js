@@ -113,7 +113,7 @@ var app = angular.module("app", [])
 		var searchedLat = searchedURLJson[0].lat;
 		var searchedLon = searchedURLJson[0].lon;
 
-		//var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
+		var marker = L.marker({lat: searchedLat, lng: searchedLon}).addTo($scope.map);
 
 		$scope.map.setView(new L.LatLng(searchedLat, searchedLon), 12);
 	}
