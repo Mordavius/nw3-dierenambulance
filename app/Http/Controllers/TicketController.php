@@ -89,8 +89,14 @@ class TicketController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()->all()]);
+<<<<<<< HEAD
         } else {
             $finance = Finance::create($request->all());
+=======
+        }
+        else {
+            $finance = Ticket::create($request->all());
+>>>>>>> 1ac7035d9339b54bb18d6fb7b1ff8f3e78021cdc
             return response()->json($finance);
         }
     }
@@ -135,10 +141,7 @@ class TicketController extends Controller
             if ($search) {
                 foreach ($search as $key => $city) {
                     $output.='<tr>'.
-                        // '<td>'.$animals[0]->animal_species.' <br />'.$animals[0]->gender.'</td>'.
-                        //  '<td>'.$animals[0]->description.'</td>'.
                         '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
-                        //  '<td>'.$tickets[0]->date.' '.$tickets[0]->time.'</td>'.
                         '<td><a href="/melding/' . $city->ticket_id . '/edit"><i class="btn btn-primary">Aanpassen</i></a></td>' .
                         '</tr>';
                 }
