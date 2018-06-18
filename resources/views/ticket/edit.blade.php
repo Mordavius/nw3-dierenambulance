@@ -195,13 +195,7 @@
                     </div>
                     <div class="modal-body" id="messages">
 
-                        @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                        @endif
-
-                        <div class="alert-danger" style="display:none"></div>
+                        <div class="alert alert-danger destination" style="display:none"></div>
 
                         <div class="form-group {{ $errors->has('known') ? 'has-error' : '' }}">
                             <select required name="users" id="knownAddress">
@@ -248,17 +242,21 @@
                             </span>
                             @endif
                         </div>
+                            <div class="form-group {{ $errors->has('township') ? 'has-error' : '' }}">
+                                {!! Form::text('township', null, ['class' => 'form-control', 'id' => 'township', 'value' => '', 'placeholder' => 'Gemeente']) !!}
+                                @if($errors->has('township'))
+                                    <span class="help-block">
+                                        {{ $errors->first('township') }}
+                                    </span>
+                                @endif
+                            </div>
                         <div class="form-group {{ $errors->has('verhicle') ? 'has-error' : '' }}">
-                            <select name="verhicle" id="verhicle">
-                                <option value="" selected class="selected">Voertuig</option>
-                                @foreach($bus as $buses)
-                                <option value="{{$buses}}">{{$buses}}</option>
-                                @endforeach
-                            </select>
+                            {!! Form::label('Voertuig') !!} <br />
+                            {!! Form::text('verhicle', $verhicle->first(), ['class' => 'form-control', 'id' => 'verhicle', 'value' => '', 'placeholder' => 'Geen bus gekoppeld', 'disabled']) !!}
                             @if($errors->has('verhicle'))
-                            <span class="help-block">
-                                {{ $errors->first('verhicle') }}
-                            </span>
+                                <span class="help-block">
+                                    {{ $errors->first('verhicle') }}
+                                </span>
                             @endif
                         </div>
 
@@ -295,7 +293,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <div class="alert alert-danger" style="display:none"></div>
+                        <div class="alert alert-danger payment" style="display:none"></div>
                         <div class="form-group {{ $errors->has('payment_invoice') ? 'has-error' : '' }}">
                             {!! Form::text('payment_invoice', null, ['class' => 'form-control', 'id' => 'payment_invoice', 'value' => '', 'placeholder' => 'Factuur']) !!}
                             @if($errors->has('payment_invoice'))

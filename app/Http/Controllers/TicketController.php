@@ -94,7 +94,7 @@ class TicketController extends Controller
             return response()->json(['errors'=>$validator->errors()->all()]);
         }
         else {
-            $finance = Finance::create($request->all());
+            $finance = Ticket::create($request->all());
             return response()->json($finance);
         }
     }
@@ -142,10 +142,7 @@ class TicketController extends Controller
             {
                 foreach ($search as $key => $city) {
                     $output.='<tr>'.
-                        // '<td>'.$animals[0]->animal_species.' <br />'.$animals[0]->gender.'</td>'.
-                        //  '<td>'.$animals[0]->description.'</td>'.
                         '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
-                        //  '<td>'.$tickets[0]->date.' '.$tickets[0]->time.'</td>'.
                         '<td><a href="/melding/' . $city->ticket_id . '/edit"><i class="btn btn-primary">Aanpassen</i></a></td>' .
                         '</tr>';
 
