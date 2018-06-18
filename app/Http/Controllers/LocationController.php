@@ -7,6 +7,7 @@ use App\Location;
 use Bjrnblm\Messagebird\Messagebird;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use MessageBird\Client;
 use MessageBird\Common\HttpClient;
 use MessageBird\Resources\Chat\Message;
@@ -70,7 +71,7 @@ class LocationController extends Controller
         $client = new Client('');
         $messagebird = new Messagebird($client);
         $phonenumber = substr($request->phonenumber, 1);
-        $message = $messagebird->createMessage("Dierenambu",["+31".$phonenumber], "https://mainlink/api/location/".$request->id);
+        $message = $messagebird->createMessage("Dierenambu",["+31".$phonenumber], URL('/api/location/'.$request->id));
 
         if (is_object($message) && $message->recipients->items[0]->status === 'sent') {
             return response(json_encode('message sent'), 200);
@@ -84,6 +85,7 @@ class LocationController extends Controller
             Log::channel('sentry')->error('Messagebird API error: ' . $message);
             return response(json_encode('something went wrong'), 400);
         }
+
     }
 
     public function markersOnCoordinates()
