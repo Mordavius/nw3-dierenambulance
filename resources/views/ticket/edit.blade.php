@@ -261,7 +261,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('milage') ? 'has-error' : '' }}">
-                            {!! Form::text('milage', null, ['class' => 'form-control', 'id' => 'milage', 'value' => '', 'placeholder' => 'Kilometer op locatie']) !!}
+                            {!! Form::number('milage', null, ['class' => 'form-control', 'id' => 'milage', 'value' => '', 'placeholder' => 'Kilometer op locatie']) !!}
                             @if($errors->has('milage'))
                             <span class="help-block">
                                 {{ $errors->first('milage') }}
@@ -295,7 +295,7 @@
 
                         <div class="alert alert-danger payment" style="display:none"></div>
                         <div class="form-group {{ $errors->has('payment_invoice') ? 'has-error' : '' }}">
-                            {!! Form::text('payment_invoice', null, ['class' => 'form-control', 'id' => 'payment_invoice', 'value' => '', 'placeholder' => 'Factuur']) !!}
+                            {!! Form::number('payment_invoice', null, ['class' => 'form-control', 'id' => 'payment_invoice', 'value' => '', 'placeholder' => 'Factuur bedrag']) !!}
                             @if($errors->has('payment_invoice'))
                             <span class="help-block">
                                 {{ $errors->first('payment_invoice') }}
@@ -305,7 +305,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('payment_gifts') ? 'has-error' : '' }}">
-                            {!! Form::text('payment_gifts', null, ['class' => 'form-control', 'id' => 'payment_gifts', 'value' => '', 'placeholder' => 'Gift']) !!}
+                            {!! Form::number('payment_gifts', null, ['class' => 'form-control', 'id' => 'payment_gifts', 'value' => '', 'placeholder' => 'Gift bedrag']) !!}
                             @if($errors->has('payment_gifts'))
                             <span class="help-block">
                                 {{ $errors->first('payment_gifts') }}

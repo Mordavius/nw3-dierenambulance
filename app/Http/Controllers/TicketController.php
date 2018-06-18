@@ -94,8 +94,13 @@ class TicketController extends Controller
             return response()->json(['errors'=>$validator->errors()->all()]);
         }
         else {
-            $finance = Ticket::create($request->all());
-            return response()->json($finance);
+            $ticket_id = $request->ticket_id;
+            Ticket::where('id', $ticket_id)->update([
+                'payment_invoice' => Input::get('payment_invoice'),
+                'payment_gifts' => Input::get('payment_gifts'),
+                'payment_method' => Input::get('payment_method'),
+            ]);
+            return response()->json();
         }
     }
 
