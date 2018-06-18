@@ -89,14 +89,9 @@ class TicketController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()->all()]);
-<<<<<<< HEAD
-        } else {
-            $finance = Finance::create($request->all());
-=======
         }
         else {
             $finance = Ticket::create($request->all());
->>>>>>> 1ac7035d9339b54bb18d6fb7b1ff8f3e78021cdc
             return response()->json($finance);
         }
     }
