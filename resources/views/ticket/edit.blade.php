@@ -134,11 +134,11 @@
                     <h2>Financiën</h2>
 
                     <h6> Factuur </h6>
-                    @if($ticket->invoice)
+                    @if($ticket->payment_invoice)
                     <div class="factuur-card">
-                        <span> €{{$ticket->invoice}} </span>
+                        <span> €{{$ticket->payment_invoice}} </span>
 
-                        @if ($ticket->payment_method_invoice == "Contant")
+                        @if ($ticket->payment_method == "Contant")
                         <img src="https://nw3-dierenambulance.test/images/cash-multiple-dark.svg" class="icon">
                         <img src="https://nw3-dierenambulance.test/images/credit-card-light.svg" class="icon">
                         @else
@@ -158,12 +158,12 @@
                 <div class="gift-wrap">
                     <h6> Gift </h6>
 
-                    @if($ticket->gift)
+                    @if($ticket->payment_gifts)
                     <div class="gift-card">
 
-                        <span> €{{$ticket->gift}} </span>
+                        <span> €{{$ticket->payment_gifts}} </span>
 
-                        @if ($ticket->payment_method_gift == "Contant")
+                        @if ($ticket->payment_method == "Gepint")
                         <img src="https://nw3-dierenambulance.test/images/cash-multiple-dark.svg" class="icon">
                         <img src="https://nw3-dierenambulance.test/images/credit-card-light.svg" class="icon">
                         @else
