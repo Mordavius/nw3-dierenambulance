@@ -42,6 +42,11 @@
           <div class="grid_header">
               <div class="tickets open_tickets"><h2>Openstaande meldingen</h2></div>
               <div class="result_amount"><span>{{$unfinishedtickets->count()}} melding(en)</span></div>
+              @if(session('message'))
+                  <div class="alert alert-success">
+                      {{ session('message') }}
+                  </div>
+              @endif
           </div>
           <div class="grid_main">
               @foreach($unfinishedtickets as $unfinishedticket)

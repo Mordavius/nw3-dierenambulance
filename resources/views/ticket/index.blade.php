@@ -19,6 +19,11 @@
     </button>
 </a>
 <div class="pages current_page" id="page1">
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
   <div class="tickets ticket-wrapper" >
       <div class="grid_container current_page">
           <div class="grid_header">

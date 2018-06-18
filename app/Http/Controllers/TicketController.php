@@ -42,7 +42,7 @@ class TicketController extends Controller
 
         foreach ($tickets_id as $ticket_id) {
             array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
-}       
+        }
         //TODO: Check tickets for not finished tickets
         // Check destinations for coordinates based on not finished tickets
         // Send that data to map.
@@ -66,11 +66,9 @@ class TicketController extends Controller
             'milage' => 'required|numeric',
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()->all()]);
-        }
-        else {
+        } else {
             $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
 
             $bus = Input::get('verhicle');
@@ -89,11 +87,9 @@ class TicketController extends Controller
             'payment_gifts' => 'required_without:payment_invoice',
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()->all()]);
-        }
-        else {
+        } else {
             $finance = Finance::create($request->all());
             return response()->json($finance);
         }
@@ -110,36 +106,33 @@ class TicketController extends Controller
             'owner_city' => 'required',
         ]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()->all()]);
-        }
-        else {
+        } else {
                 $owner = Owner::create($request->all());
                 return response()->json($owner);
-            }
+        }
     }
 
-    public function knownusers($id){
+    public function knownusers($id)
+    {
         $knownusers = Known::where('id', $id)->get();
         return response()->json($knownusers);
     }
 
-    public function animalowner($id){
+    public function animalowner($id)
+    {
         $animalowner = Ticket::where('id', $id)->get();
         return response()->json($animalowner);
     }
 
     public function search(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $output="";
-            $search=Destination::where('city','LIKE','%'.$request->search."%")->get();
+            $search=Destination::where('city', 'LIKE', '%'.$request->search."%")->get();
 
-
-            if($search)
-            {
+            if ($search) {
                 foreach ($search as $key => $city) {
                     $output.='<tr>'.
                         // '<td>'.$animals[0]->animal_species.' <br />'.$animals[0]->gender.'</td>'.
@@ -148,12 +141,10 @@ class TicketController extends Controller
                         //  '<td>'.$tickets[0]->date.' '.$tickets[0]->time.'</td>'.
                         '<td><a href="/melding/' . $city->ticket_id . '/edit"><i class="btn btn-primary">Aanpassen</i></a></td>' .
                         '</tr>';
-
                 }
-                if(Input::get('search') == "") {
+                if (Input::get('search') == "") {
                     return "";
-                }
-                else {
+                } else {
                     return Response($output);
                 }
             }
@@ -200,7 +191,7 @@ class TicketController extends Controller
 
         $animal->save(); // Saves the data
 
-        $bus = Bus::where('bus_type',$request->verhicle)->first();
+        $bus = Bus::where('bus_type', $request->verhicle)->first();
         //dd($bus);
 
         // Stores the data for the requested fields
@@ -236,6 +227,16 @@ class TicketController extends Controller
         $destination->save();// Saves the data
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
+    }
+
+    public function finish($id)
+    {
+        //Finish the ticket
+        DB::table('tickets')
+            ->where('id', $id)
+            ->update(['finished' => 1]);
+
+        return redirect('melding')->with('message', 'Melding afgerond!');
     }
 
     /**
@@ -339,40 +340,41 @@ class TicketController extends Controller
         return response()->json('Ticket verwijdert', 200);
     }
 
-    public function destroyAjax($task_id) {
+    public function destroyAjax($task_id)
+    {
         try {
             $task = Destination::destroy($task_id);
             return response()->json($task);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json($e);
         }
     }
 
-    public function destroyAjaxPayment($task_id) {
+    public function destroyAjaxPayment($task_id)
+    {
         try {
             $task = Finance::destroy($task_id);
             return response()->json($task);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json($e);
         }
     }
 
-    public function filterTickets(Request $request){
+    public function filterTickets(Request $request)
+    {
         $amount = $request->amount;
-        switch ($request->date){
+        switch ($request->date) {
             case 'week':
-                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Weeks"));
+                $date = date("Y-m-d h:i:s", strtotime("-".$amount." Weeks"));
                 break;
             case 'month':
-                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Months"));
+                $date = date("Y-m-d h:i:s", strtotime("-".$amount." Months"));
                 break;
             case 'year':
-                $date = date("Y-m-d h:i:s",strtotime("-".$amount." Years"));
+                $date = date("Y-m-d h:i:s", strtotime("-".$amount." Years"));
                 break;
             default:
-                $date = date("Y-m-d h:i:s",strtotime("-1000 Years"));
+                $date = date("Y-m-d h:i:s", strtotime("-1000 Years"));
         }
         $ticket = Ticket::query()->whereBetween('date', [$date, date(now())]);
         $tickets_id = $ticket->pluck('id');
@@ -380,8 +382,7 @@ class TicketController extends Controller
         $destination_array = [];
         $animals = [];
 
-        foreach($tickets_id as $ticket_id)
-        {
+        foreach ($tickets_id as $ticket_id) {
             array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
             array_push($animals, Animal::where('id', $ticket_id)->first());
         }
@@ -390,16 +391,15 @@ class TicketController extends Controller
         //$animals = Animal::all();
 
         return response()->json(['tickets' =>  $ticket->get(), 'destinations'=>$destination_array, 'animals'=>$animals], 200);
-
     }
 
 
-    public function destroyAjaxOwner($task_id) {
+    public function destroyAjaxOwner($task_id)
+    {
         try {
             $task = Owner::destroy($task_id);
             return response()->json($task);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json($e);
         }
     }

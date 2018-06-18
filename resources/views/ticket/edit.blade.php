@@ -185,6 +185,10 @@
         </div>
         {!! Form::close() !!}
 
+        {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'pull-left'])!!}
+            {{Form::submit('Afronden',['class' => 'btn btn-success'])}}
+        {!!Form::close()!!}
+
         <!-- Modal (Pop up when detail destinations button clicked) -->
         <div class="modal fade" id="destination_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
