@@ -7,8 +7,8 @@
     <body>
     <div class="container">
         <div class="row justify-content-center">
-            <p id="demo">Click the button to get your coordinates.</p>
-            <button onclick="getLocation()">Try It</button>
+            <p id="demo">Druk op de knop om uw locatie door te geven</p>
+            <button onclick="getLocation()">Locatie doorgeven</button>
         </div>
     </div>
     <script type="text/javascript">

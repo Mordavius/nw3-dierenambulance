@@ -67,9 +67,10 @@ class LocationController extends Controller
 
     public function askLocationSMS(Request $request)
     {
-        $client = new Client('acceskey');
+        $client = new Client('');
         $messagebird = new Messagebird($client);
-        $message = $messagebird->createMessage("Dierenambu",["+31"/*$request->phonenumber*/], " mainlink/location/".$request->id);
+        $phonenumber = substr($request->phonenumber, 1);
+        $message = $messagebird->createMessage("Dierenambu",["+31".$phonenumber], "https://mainlink/api/location/".$request->id);
 
         if (is_object($message) && $message->recipients->items[0]->status === 'sent') {
             return response(json_encode('message sent'), 200);
@@ -83,7 +84,6 @@ class LocationController extends Controller
             Log::channel('sentry')->error('Messagebird API error: ' . $message);
             return response(json_encode('something went wrong'), 400);
         }
-
     }
 
     public function markersOnCoordinates()

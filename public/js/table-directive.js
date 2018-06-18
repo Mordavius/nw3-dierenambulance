@@ -367,6 +367,7 @@ var app = angular.module("app", [])
                 type: 'GET',
                 url: 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon + '&zoom=18&addressdetails=1',
                 success: function (data) {
+                    console.log(data);
                     if(data.address && data.display_name) {
                         if (data.address.house_number &&
                             data.address.road &&
@@ -375,18 +376,18 @@ var app = angular.module("app", [])
                             data.address.suburb) {
                             //console.log('complete address found');
                             //console.log(data.address);
-                            var postalcode = document.getElementById('postal_code');
-                            var housenumber = document.getElementById('house_number');
-                            var address = document.getElementById('address');
-                            var city = document.getElementById('city');
-                            var township = document.getElementById('township');
+                            var postalcode = document.getElementById('postal_code_field');
+                            var housenumber = document.getElementById('house_number_field');
+                            var address = document.getElementById('address_field');
+                            var city = document.getElementById('city_field');
+                            var township = document.getElementById('township_field');
                             var nocode = document.getElementById('nocode'); // TODO: deze nog even standaard op false zetten als het allemaal gelukt is
                             if (postalcode, housenumber, address, city, township) {
-                                postalcode.value = data.address.postcode;
-                                housenumber.value = data.address.house_number;
-                                address.value = data.address.road;
-                                city.value = data.address.city;
-                                township.value = data.address.suburb;
+                                postalcode.innerText = data.address.postcode;
+                                housenumber.innerText = data.address.house_number;
+                                address.innerText = data.address.road;
+                                city.innerText = data.address.city;
+                                township.innerText = data.address.suburb;
                                 L.marker({lat: lat, lng: lon}).addTo($scope.map);
                                 $scope.map.setView(new L.LatLng(lat, lon), 13);
                             }
@@ -403,33 +404,36 @@ var app = angular.module("app", [])
             }
         });
     }
-    $('#sendLocationButton').click(sendLocationRequest);
-    function sendLocationRequest(){
-        $.ajax({
-            type:'POST',
-            url:'/api/mail',
-            data: {id: locationId},
-            success: function() {
-                alert("mail verzonden");
-                getLocationRecord();
-            }
-        });
-    }
-
-    // function sendLocationRequest() {
+     $('#sendLocationButton').click(sendLocationRequest);
+    // function sendLocationRequest(){
     //     $.ajax({
-    //         type: 'POST',
-    //         url: '/api/sms',
+    //         type:'POST',
+    //         url:'/api/mail',
     //         data: {id: locationId},
-    //         success: function () {
-    //             alert("SMS verzonden");
+    //         success: function() {
+    //             alert("mail verzonden");
     //             getLocationRecord();
-    //         },
-    //         error: function () {
-    //             alert("Er is iets fout gegaan, als u dit bericht vaker ziet neem dan contact op met de beheerder");
     //         }
     //     });
     // }
+
+    function sendLocationRequest() {
+        $.ajax({
+            type: 'POST',
+            url: '/api/sms',
+            data: {id: locationId,
+                    phonenumber: $('#number_text_field').val()
+            },
+            success: function (data) {
+                alert("SMS verzonden");
+                console.log(data);
+                getLocationRecord();
+            },
+            error: function () {
+                alert("Er is iets fout gegaan, als u dit bericht vaker ziet neem dan contact op met de beheerder");
+            }
+        });
+    }
 }]);
 
 function selectAnimalSpieces(animal_species, image_animal){
