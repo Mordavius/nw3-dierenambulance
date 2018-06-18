@@ -39,11 +39,17 @@
 
     .filters
     {
-      input
+      margin-top: 80px;
+
+      input:not([type="submit"])
       {
         display: inline-block;
         width: auto;
         margin-bottom: 0;
+        margin-right: 10px;
+        border: 1px solid $light-gray;
+        font-size: 18px;
+        padding: 13px 11px;
       }
     }
   }

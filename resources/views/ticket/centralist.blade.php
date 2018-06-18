@@ -30,9 +30,10 @@
     <input class="search_field" type="search" name="search" placeholder="Zoeken..">
   </div>
   <div class="filters">
-    <input type="text" name="" value="">
-    <input type="text" name="" value="">
-    <input class="btn btn-success" type="submit" name="" value="Filteren">
+    <input type="date" name="date" value="">
+    <input type="text" name="animal_species" value="">
+    <input type="text" name="location" value="">
+    <input class="btn btn-success" type="submit" name="submit" value="Filteren">
   </div>
 </div>
 

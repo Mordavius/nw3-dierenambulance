@@ -10611,13 +10611,10 @@ main {
 
 .wrapper .content .btn-success {
   float: right;
-  background: #288B5F;
-  font-size: 16px;
-  padding: 5px 18px 5px 18px;
-  border-radius: 0;
   margin-top: 0 !important;
   margin-right: 21px;
-  border: none;
+  font-size: 16px;
+  padding: 5px 18px 5px 18px;
 }
 
 @media (min-width: 992px) {
@@ -10766,7 +10763,7 @@ main {
   border: none;
 }
 
-input:not([type="checkbox"]),
+input:not([type="checkbox"]):not([type="submit"]),
 textarea,
 select {
   border: 0;
@@ -10779,14 +10776,14 @@ select {
   padding-left: 0.25rem;
 }
 
-input:not([type="checkbox"]):focus,
+input:not([type="checkbox"]):not([type="submit"]):focus,
 textarea:focus,
 select:focus {
   outline: none;
   border-bottom: 1px solid #000;
 }
 
-input:not([type="checkbox"])::-webkit-inner-spin-button,
+input:not([type="checkbox"]):not([type="submit"])::-webkit-inner-spin-button,
 textarea::-webkit-inner-spin-button,
 select::-webkit-inner-spin-button {
   display: none;
@@ -10887,10 +10884,18 @@ input[type="checkbox"] {
   border: 1px solid #B8B8B8;
 }
 
-.ticket_centralist .head .filters input {
+.ticket_centralist .head .filters {
+  margin-top: 80px;
+}
+
+.ticket_centralist .head .filters input:not([type="submit"]) {
   display: inline-block;
   width: auto;
   margin-bottom: 0;
+  margin-right: 10px;
+  border: 1px solid #F2F2F2;
+  font-size: 18px;
+  padding: 13px 11px;
 }
 
 .ticket_centralist .ticket-wrapper {
@@ -11051,9 +11056,21 @@ input[type="checkbox"] {
   }
 }
 
+.btn-success {
+  background: #288B5F;
+  border-radius: 0;
+  border: none;
+  padding: 13px 18px;
+  color: #fff;
+}
+
+.btn-success.full-width {
+  width: 100%;
+}
+
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -11785,7 +11802,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 
@@ -11889,6 +11906,63 @@ input[type="checkbox"] {
   left: 12px;
   margin-top: 15px;
   visibility: hidden;
+}
+
+.login_page .navbar {
+  display: none;
+}
+
+.login_page .container {
+  padding: 120px 21px 0 21px;
+  text-align: center;
+}
+
+.login_page .container .logo_wrap {
+  margin-bottom: 89px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .login_page .container .logo_wrap {
+    margin-bottom: 187px;
+  }
+}
+
+.login_page .container .logo_wrap .logo {
+  max-width: 241px;
+  width: 241px;
+  height: 86px;
+}
+
+@media (min-width: 992px) {
+  .login_page .container .logo_wrap .logo {
+    max-width: 418px;
+    width: 418px;
+    height: 149px;
+  }
+}
+
+.login_page .container form {
+  text-align: left;
+}
+
+@media (min-width: 992px) {
+  .login_page .container form {
+    width: 418px;
+  }
+}
+
+.login_page .container .btn-link {
+  padding: 0;
+  color: #000;
+  text-decoration: underline;
+  margin-top: 7px;
+  font-size: 14px;
 }
 
 .logo {
