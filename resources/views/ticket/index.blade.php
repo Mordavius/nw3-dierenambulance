@@ -57,7 +57,8 @@
                         <div class="ticket_main_info">
                             <div class="ticket_title">{{$animal->animal_species}}</div>
                             <div class="ticket_address">
-                                @foreach($destinations as $destination)
+                                {{$destination_array}}
+                                @foreach($destination_array as $destination)
                                     @if($destination->ticket_id == $unfinishedticket->id)
                                         {{$destination->address}}
                                         @if($destination->house_number != '0')

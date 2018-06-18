@@ -66,15 +66,15 @@
                                   </div>
                                   <div class="ticket_address">
                                     <span>
-                                      @foreach($destinations as $destination)
-                                          @if($destination->ticket_id == $unfinishedticket->id)
-                                              {{$destination->address}}
-                                              @if($destination->house_number != '0')
-                                                  {{$destination->house_number}}
+                                      @foreach($destination_array as $destination)
+                                          @if($destination['ticket_id'] == $unfinishedticket->id)
+                                              {{$destination['address']}}
+                                              @if($destination['house_number'] != '0')
+                                                  {{$destination['house_number']}}
                                               @endif
                                               ,<br>
-                                              {{$destination->postal_code}}
-                                              {{$destination->city}}
+                                              {{$destination['postal_code']}}
+                                              {{$destination['city']}}
                                           @endif
                                       @endforeach
                                     </span>

@@ -40,12 +40,9 @@ class TicketController extends Controller
         $tickets_id = Ticket::all()->pluck("id");
         $destination_array = [];
 
-        foreach($tickets_id as $ticket_id)
-        {
-            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first()
-            );
-        }
-
+        foreach ($tickets_id as $ticket_id) {
+            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
+}       
         //TODO: Check tickets for not finished tickets
         // Check destinations for coordinates based on not finished tickets
         // Send that data to map.
