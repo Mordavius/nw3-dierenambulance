@@ -254,12 +254,12 @@
                                     </span>
                                 @endif
                             </div>
-                        <div class="form-group {{ $errors->has('verhicle') ? 'has-error' : '' }}">
+                        <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
                             {!! Form::label('Voertuig') !!} <br />
-                            {!! Form::text('verhicle', $verhicle->first(), ['class' => 'form-control', 'id' => 'verhicle', 'value' => '', 'placeholder' => 'Geen bus gekoppeld', 'disabled']) !!}
-                            @if($errors->has('verhicle'))
+                            {!! Form::text('vehicle', $vehicle->first(), ['class' => 'form-control', 'id' => 'vehicle', 'value' => '', 'placeholder' => 'Geen bus gekoppeld', 'disabled']) !!}
+                            @if($errors->has('vehicle'))
                                 <span class="help-block">
-                                    {{ $errors->first('verhicle') }}
+                                    {{ $errors->first('vehicle') }}
                                 </span>
                             @endif
                         </div>

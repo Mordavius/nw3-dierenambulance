@@ -121,7 +121,7 @@ $(document).ready(function(){
             house_number: $('#house_number').val(),
             city: $('#city').val(),
             township: $('#township').val(),
-            verhicle: $('#verhicle').val(),
+            vehicle: $('#vehicle').val(),
             milage: $('#milage').val(),
         }
 

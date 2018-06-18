@@ -71,7 +71,7 @@ class TicketController extends Controller
         } else {
             $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
 
-            $bus = Input::get('verhicle');
+            $bus = Input::get('vehicle');
             $milage = Destination::get(['milage'])->last()->toArray();
 
             Bus::where('bus_type', $bus)->update($milage);
@@ -189,7 +189,7 @@ class TicketController extends Controller
 
         $animal->save(); // Saves the data
 
-        $bus = Bus::where('bus_type', $request->verhicle)->first();
+        $bus = Bus::where('bus_type', $request->vehicle)->first();
         //dd($bus);
 
         // Stores the data for the requested fields
@@ -218,7 +218,7 @@ class TicketController extends Controller
             'township' => $request->get('township'),
             'coordinates' => $request->get('coordinates'),
             'ticket_id' => $ticket->id,
-            'verhicle' => $request->get('verhicle'),
+            'vehicle' => $request->get('vehicle'),
             // 'milage' => $request->get('milage'),
         ]);
 
@@ -262,7 +262,7 @@ class TicketController extends Controller
         $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
         $destinations = Destination::where('ticket_id', $ticket_id)->get();
         $loaddestination = Destination::where('ticket_id', $ticket_id)->get();
-        $verhicle = Destination::where('ticket_id', $ticket_id)->pluck('verhicle');
+        $vehicle = Destination::where('ticket_id', $ticket_id)->pluck('vehicle');
         $loadfinances = Finance::where('ticket_id', $ticket_id)->get();
         $loadowners = Owner::where('ticket_id', $ticket_id)->get();
         $animalowner = Ticket::all();
@@ -273,7 +273,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
         $animal = Animal::where('id', $animal_id)->pluck('animal_species');
         $animaldescription = Animal::where('id', $animal_id)->pluck('description');
-        return view("ticket.edit", compact('tickets_id', 'destinations', 'verhicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animaldescription', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id', 'animal'));
+        return view("ticket.edit", compact('tickets_id', 'destinations', 'vehicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animaldescription', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id', 'animal'));
     }
     /**
      * Update the specified resource in storage.
