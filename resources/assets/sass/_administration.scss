@@ -1,3 +1,6 @@
+.svgwrapper path {
+    fill: black;
+}
 .wrapper
 {
   @include media-breakpoint-up(lg)
