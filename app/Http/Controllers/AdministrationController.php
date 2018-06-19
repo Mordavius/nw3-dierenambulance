@@ -65,6 +65,7 @@ class AdministrationController extends Controller
     // Download the excel in xlsx format
     public function downloadExcel(Request $request)
     {
+        //check if withfinances is set
         if (!$request->withfinances){
         $withfinances = 'false';
         }

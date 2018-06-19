@@ -13,16 +13,25 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
     use Exportable;
     public function __construct(string $startdate = null, string $enddate = null, string $animal = 'all', string $township = 'all', string $with_finances = 'true')
     {
+        /*
+        this is the constructor, in the constructor the parameters will be bound to the variables which will be used in the function.
+        */
+
+        //the earlier date
         $this->startdate = $startdate;
+        //the current date
         $this->enddate   = $enddate;
+        //the animal selected in export
         $this->animal_select = $animal;
+        //the chosen township
         $this->township = $township;
+        //exporting finances or not
         $this->with_finances = $with_finances;
     }
 
     public function headings(): array
     {
-
+        //the headings that will be added to the top of the excel file
         $headings = [
             'Datum',
             'Tijd',
@@ -39,14 +48,14 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
             'Stad',
             'Gemeente',
         ];
-
+        //checks if finances need to be exported
         if ($this->with_finances == 'true'){
             array_push($headings, 'Factuur', 'Betaalmethode', 'Giften', 'Kilometerstand');
         }
-
         return $headings;
     }
 
+    //creates an instance of a new ticket with default values
     function getNewTicket(){
         $new_ticket = [
             'date' => ' ',
@@ -64,6 +73,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
             'city' => 'onbekend',
             'township' => 'onbekend',
         ];
+        //checks if finances need to be exported
         if ($this->with_finances == 'true') {
             $new_ticket += [
                 'invoice' => 'n.v.t.',
@@ -74,19 +84,21 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
         return $new_ticket;
     }
 
-    // Grab all data from tickets between now and 3 months ago
+    // Grab all data from tickets between the $startdate and $enddate and all other constraints
     public function collection()
     {
         $collection_array = array();
         $tickets = '';
 
-
+        //this should never happen but if it does it acts as a get all
         if ($this->startdate === null && $this->enddate === null) {
             $tickets = Ticket::all()->get();
         } else {
+            //gets all the tickets between the two dates
             $tickets = Ticket::query()->whereBetween('date', [$this->enddate, $this->startdate])->get();
         }
 
+        //loops through all retrieved tickets and checks if there are constraints
         foreach ($tickets as $ticket) {
             if ($this->animal_select != 'all') {
                 $animal = Animal::where([['id', $ticket->animal_id], ['animal_species', $this->animal_select],])->first();
@@ -103,7 +115,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
                 $finance = Finance::where('ticket_id', $ticket->id)->first();
             }
 
-
+            //if all three exist generate a new ticket and fill it with data
             if ($ticket && $animal && $destinations) {
                 $new_ticket = $this->getNewTicket();
 
@@ -171,9 +183,11 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
                         }
                     }
                 }
+                //push new ticket to collection array
                 array_push($collection_array, $new_ticket);
             }
         }
+        //return collection to laravel/excel
         return new Collection($collection_array);
     }
 }
