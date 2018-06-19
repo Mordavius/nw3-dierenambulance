@@ -89,3 +89,6 @@ Route::delete('/owners/{task_id?}', 'TicketController@destroyAjaxOwner')->middle
 Route::get('/knownusers/{id}', 'TicketController@knownusers')->middleware('auth');
 Route::get('/location/{id}', 'LocationController@setLocation')->middleware('auth');
 Route::get('/animalowner/{id}', 'TicketController@animalowner')->middleware('auth');
+
+//Route to update ticket
+Route::post('ticket/{id}/finish', ['as' => 'ticket.finish', 'uses' => 'TicketController@finish'])->middleware('auth');

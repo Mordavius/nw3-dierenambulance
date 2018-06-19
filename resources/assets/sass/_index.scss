@@ -10,7 +10,10 @@
 
   .head
   {
-    padding: rem-calc(40) rem-calc(178);
+    @media (min-width: 992px) { padding: rem-calc(40) rem-calc(100); }
+
+    @media (min-width: 1500px) { padding: rem-calc(40) rem-calc(176); }
+
     @include clearfix;
     display: none;
 
@@ -24,9 +27,22 @@
       padding: 0;
     }
 
-    #toggle-button
+    #toggle-button-desktop
     {
-      margin-bottom: 0;
+      border: none;
+      padding: 0;
+      background: none;
+
+      #map-image-desktop{
+      	margin-right: 10px;
+      	height: 24px;
+      	width: 16px;
+
+      }
+      #list-image-desktop{
+      	height: 18px;
+      	width: 22px;
+      }
     }
 
     .search_field
@@ -34,16 +50,23 @@
       width: 350px;
       margin-left: 38px;
       margin-bottom: 0;
-      border: 1px solid $gray;
+      padding: 13px 11px;
+      border: 1px solid $light-gray;
     }
 
     .filters
     {
-      input
+      margin-top: 80px;
+
+      input:not([type="submit"])
       {
         display: inline-block;
         width: auto;
         margin-bottom: 0;
+        margin-right: 10px;
+        border: 1px solid $light-gray;
+        font-size: 18px;
+        padding: 13px 11px;
       }
     }
   }
@@ -53,10 +76,15 @@
     padding: rem-calc(22) 0;
     background: $background;
 
-    @include media-breakpoint-up(lg)
-    {
-      padding: rem-calc(22) rem-calc(176);
-    }
+    // @media (min-width: 992px) { padding: rem-calc(22) rem-calc(65); }
+
+    @media (min-width: 992px) { padding: rem-calc(22) rem-calc(100); }
+
+    @media (min-width: 1500px) { padding: rem-calc(22) rem-calc(176); }
+
+    // @media only screen and (max-width: 1500px) {
+    //   padding: rem-calc(22) rem-calc(100);
+    // }
 
     .grid_container
     {
@@ -64,35 +92,42 @@
 
       .grid_header
       {
-        padding-left: 0;
         margin-bottom: 25px;
+        padding-left: 21px;
+
+        @include media-breakpoint-up(lg)
+        {
+          padding-left: 0;
+        }
       }
 
       .grid_main
       {
         background: $background;
+        border: 1px solid #E5E5E5;
+
+        @include media-breakpoint-up(lg)
+        {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          grid-gap: 1rem;
+        }
 
         a
         {
           text-decoration: none;
-          display: inline-block;
 
           @include media-breakpoint-up(lg)
           {
-            margin-right: 20px;
+            display: inline-block;
           }
         }
 
         .grid_ticket
         {
           background: $white;
-
-          @include media-breakpoint-up(lg)
-          {
-            width: 350px;
-            // height: 312px;
-            margin-bottom: 20px;
-          }
+          border: 0;
+          border-bottom: 1px solid #E5E5E5;
 
           &.new
           {
@@ -109,24 +144,28 @@
           {
             .ticket_icon
             {
+              padding: 0;
+              position: relative;
+              margin-right: 18px;
+
               @include media-breakpoint-up(lg)
               {
                 height: 78px;
                 width: 78px;
-                padding: 0;
-                position: relative;
+                margin-right: 0;
               }
 
               img#animal_icon
               {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
                 @include media-breakpoint-up(lg)
                 {
                   height: 60%;
                   width: 60%;
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
                 }
               }
             }
@@ -156,11 +195,13 @@
           }
           .ticket_description
           {
+            grid-column: 1/6;
+            margin-left: 21px;
+            margin-right: 21px;
+            font-size: 18px;
+
             @include media-breakpoint-up(lg)
             {
-              grid-column: 1/6;
-              margin-left: 21px;
-              margin-right: 21px;
               height: 175px;
             }
           }

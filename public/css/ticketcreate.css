@@ -180,6 +180,7 @@ body{
     transition: height .5s;
     height: 442px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 .animal_card{
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
@@ -215,7 +216,7 @@ body{
     height: 0;
     overflow: hidden;
     width: 331px;
-    margin: 20px 20px 0;
+    margin: 20px 20px 10px 0;
 }
 #selected_animal{
     margin: 10px 0 0 65px;

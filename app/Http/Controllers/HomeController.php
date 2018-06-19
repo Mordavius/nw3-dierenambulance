@@ -25,7 +25,7 @@ class HomeController extends Controller
     // Show the admin page
     public function admin()
     {
-        return view('admin');
+        return redirect('/melding');
     }
     // Show the centralist page
     public function centralist()

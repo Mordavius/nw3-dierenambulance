@@ -19,6 +19,11 @@
     </button>
 </a>
 <div class="pages current_page" id="page1">
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
   <div class="tickets ticket-wrapper" >
       <div class="grid_container current_page">
           <div class="grid_header">
@@ -51,13 +56,14 @@
                         </div>
                         <div class="grid_animal_icon">
                             <div class="ticket_icon">
-                                <img src="/images/hond-icon.png" id="animal_icon">
+                                <img src="/images/"{{$animal->animal_species}}".svg" id="animal_icon">
                             </div>
                         </div>
                         <div class="ticket_main_info">
                             <div class="ticket_title">{{$animal->animal_species}}</div>
                             <div class="ticket_address">
-                                @foreach($destinations as $destination)
+                                {{$destination_array}}
+                                @foreach($destination_array as $destination)
                                     @if($destination->ticket_id == $unfinishedticket->id)
                                         {{$destination->address}}
                                         @if($destination->house_number != '0')
@@ -80,7 +86,7 @@
       </div>
       <div class="grid_container">
           <div class="grid_header">
-              <select id="times">
+              <!-- <select id="times">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -109,7 +115,7 @@
           <option value="year">
               Jaren
           </option>
-      </select>
+      </select> -->
               <div class="tickets closed_tickets">Afgeronde meldingen</div>
           </div>
           <div class="grid_main">
@@ -117,13 +123,15 @@
                       @foreach($animals as $animal)
                           @if($finishedticket->animal_id == $animal->id)
                           <div class="grid_ticket">
+                              <div class="test">
+                              </div>
                               <div class="ticket_number">
                                   #{{ $finishedticket->id }}
                               </div>
                               <div class="grid_animal_icon">
-                                  <div class="ticket_icon">
+                                  <!-- <div class="ticket_icon">
                                       <img src="/images/hond-icon.png" id="animal_icon">
-                                  </div>
+                                  </div> -->
                               </div>
                               <div class="ticket_main_info">
                                   <div class="ticket_title">{{$animal->animal_species}}</div>

@@ -29,13 +29,10 @@
     .btn-success
     {
       float: right;
-      background: $primary-color;
-      font-size: 16px;
-      padding: 5px 18px 5px 18px;
-      border-radius: 0;
       margin-top: 0!important;
       margin-right: 21px;
-      border: none;
+      font-size: 16px;
+      padding: 5px 18px 5px 18px;
 
       @include media-breakpoint-up(lg)
       {

@@ -6,15 +6,16 @@ use App\Destination;
 
 use Illuminate\Http\Request;
 
-class testController extends Controller
+class TestController extends Controller
 {
     public function index()
     {
         $tasks = Destination::all();
-       return view('ticket.test')->with('tasks',$tasks);
+        return view('ticket.test')->with('tasks', $tasks);
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $task = Destination::create($request->all());
 
       //  $input = request()->all();
@@ -24,8 +25,8 @@ class testController extends Controller
        // return Response::json($task);
     }
 
-    public function edit(Request $request, $task_id) {
-
+    public function edit(Request $request, $task_id)
+    {
         $task = Destination::find($task_id);
 
         $task->postal_code = $request->postal_code;
@@ -34,10 +35,9 @@ class testController extends Controller
         $task->save();
 
         return response()->json($task);
-
     }
-
-    public function destroy($task_id) {
+    public function destroy($task_id)
+    {
         $task = Destination::destroy($task_id);
 
         return response()->json($task);

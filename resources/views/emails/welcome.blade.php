@@ -10,7 +10,7 @@ Your registered email-id is {{$user['email']}}
 
 
 
-<a href="http://nw3-dierenambulance.test/passwords/reset/{{$user['id']}}/{{$user['token']}}"><button>Wachtwoord wijzigen</button></a>
+<a href="https://notepet.nl/passwords/reset/{{$user['id']}}/{{$user['token']}}"><button>Wachtwoord wijzigen</button></a>
 </body>
 
 </html>
