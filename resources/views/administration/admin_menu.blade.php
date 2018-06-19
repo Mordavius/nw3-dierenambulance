@@ -1,7 +1,7 @@
 <div class="admin-menu">
   <ul>
     <li class="menu-item {{ (Request::is('administratie') ? 'active' : '') }}">
-        <a href="../administratie">
+        <a href="/administratie">
             <div class="svgwrapper icon">
             <?php echo file_get_contents("images/users.svg"); ?> <span class="icon"> Gebruikers </span>
             </div>
@@ -9,18 +9,21 @@
     </li>
     <li class="menu-item {{ (Request::is('bus') ? 'active' : '') }}">
       <a href="/bus">
-        <img class="icon" src="{{asset('images/car.svg')}}" alt="Voertuigen"> <span>Voertuigen</span>
-      </a>
+          <div class="svgwrapper icon">
+          <?php echo file_get_contents("images/car.svg"); ?> <span class="icon"> Voertuigen </span>
+          </div>      </a>
     </li>
     <li class="menu-item {{ (Request::is('bekende-adressen') ? 'active' : '') }}">
       <a href="/bekende-adressen">
-        <img class="icon" src="{{asset('images/location.svg')}}" alt="Bekende adressen"> <span>Bekende adressen</span>
-      </a>
+          <div class="svgwrapper icon">
+          <?php echo file_get_contents("images/location.svg"); ?> <span class="icon"> Bekende adressen </span>
+          </div>      </a>
     </li>
     <li class="menu-item {{ (Request::is('exporteren') ? 'active' : '') }}">
       <a href="/exporteren">
-        <img class="icon" src="{{asset('images/export.svg')}}" alt="Export"> <span>Export</span>
-      </a>
+          <div class="svgwrapper icon">
+          <?php echo file_get_contents("images/export.svg"); ?> <span class="icon"> Exporteren </span>
+          </div>      </a>
     </li>
   </ul>
 </div>

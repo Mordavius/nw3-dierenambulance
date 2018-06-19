@@ -34,6 +34,15 @@
     <input type="text" name="animal_species" value="">
     <input type="text" name="location" value="">
     <input class="btn btn-success" type="submit" name="submit" value="Filteren">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+              <th>Zoekresultaten</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
   </div>
 </div>
 
@@ -50,15 +59,7 @@
               @endif
           </div>
           <div class="grid_main">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                      <th>Zoekresultaten</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
