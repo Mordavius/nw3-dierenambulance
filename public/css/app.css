@@ -10601,6 +10601,7 @@ main {
 .wrapper .content h1 {
   margin-bottom: 2.375rem;
   display: none;
+  font-size: 24px;
 }
 
 @media (min-width: 992px) {
@@ -10619,7 +10620,7 @@ main {
 
 @media (min-width: 992px) {
   .wrapper .content .btn-success {
-    margin-right: none;
+    margin-right: 0;
   }
 }
 
@@ -10664,6 +10665,7 @@ main {
   text-transform: capitalize;
   margin-bottom: 0;
   line-height: 1;
+  font-size: 24px;
 }
 
 .wrapper .content .list .list-item .delete {
@@ -10834,6 +10836,10 @@ input[type="checkbox"] {
 .segmented-control .segmented-control__item .segmented-control__label:focus {
   background: #2D9CDB;
   color: #fff;
+}
+
+.segmented-control .segmented-control__item .segmented-control__input {
+  width: auto;
 }
 
 .segmented-control .segmented-control__item .segmented-control__input:checked + .segmented-control__label {
