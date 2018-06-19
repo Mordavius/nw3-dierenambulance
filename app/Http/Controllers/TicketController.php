@@ -12,7 +12,6 @@ use App\Finance;
 use App\Known;
 use App\Bus;
 use App\Owner;
-use DB;
 use App\Http\Requests\TicketStoreRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -117,8 +116,17 @@ class TicketController extends Controller
 
     public function knownusers($id)
     {
-        $knownusers = Known::where('id', $id)->get();
-        return response()->json($knownusers);
+        //$values = input::get($knownAddress->id);
+
+       // dd($id);
+        if(is_numeric($id)) {
+            $knownAddress = Known::where('id', $id)->get();
+            return response()->json($knownAddress);
+    }
+        else {
+            $knownUsers = User::where('name', $id)->get();
+            return response()->json($knownUsers);
+        }
     }
 
     public function animalowner($id)
@@ -267,13 +275,13 @@ class TicketController extends Controller
         $loadowners = Owner::where('ticket_id', $ticket_id)->get();
         $animalowner = Ticket::all();
         $known = Known::all();
+        $knownUser = User::all();
         $animals = Animal::where('id', $animal_id)->get();// Grabs animal based on animal id
-
         $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
         $animal = Animal::where('id', $animal_id)->pluck('animal_species');
         $animaldescription = Animal::where('id', $animal_id)->pluck('description');
-        return view("ticket.edit", compact('tickets_id', 'destinations', 'vehicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animaldescription', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id', 'animal'));
+        return view("ticket.edit", compact('tickets_id', 'destinations', 'knownUser', 'vehicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animaldescription', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id', 'animal'));
     }
     /**
      * Update the specified resource in storage.
