@@ -147,12 +147,8 @@ $(document).ready(function(){
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save').val();
-
         var type = "POST"; //for creating new resource
-        var task_id = $('#task_id').val();
         var my_url = url;
-        var formMessages = $('#messages');
 
         console.log(formData);
 
@@ -240,8 +236,10 @@ $(document).ready(function(){
                 url: url + '/' + task_id,
                 success: function (data) {
                     console.log(data);
-                    location.reload();
-                    $("#finances" + task_id).remove();
+                    $("payment_invoice").remove();
+                    $("payment_gifts").remove();
+                    $("payment_method").remove();
+                    //location.reload();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -268,15 +266,12 @@ $(document).ready(function(){
             ticket_id: $('#ticket_id').val(),
             payment_invoice: $('#payment_invoice').val(),
             payment_gifts: $('#payment_gifts').val(),
-            payment_method: $('#payment_method').val(),
+            payment_method: $('#payment_method').val()
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save-payment').val();
         var type = "POST"; //for creating new resource
-        var task_id = $('#task_id').val();
         var my_url = url;
-        var append = (append === undefined ? false : true);
 
         console.log(formData);
 
@@ -393,11 +388,8 @@ $(document).ready(function(){
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save-owner').val();
         var type = "POST"; //for creating new resource
-        var task_id = $('#task_id').val();
         var my_url = url;
-        var append = (append === undefined ? false : true);
 
         console.log(formData);
 
