@@ -10852,8 +10852,19 @@ input[type="checkbox"] {
 }
 
 .ticket_centralist .head {
-  padding: 2.5rem 11.125rem;
   display: none;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .head {
+    padding: 2.5rem 6.25rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .ticket_centralist .head {
+    padding: 2.5rem 11rem;
+  }
 }
 
 .ticket_centralist .head::after {
@@ -10873,15 +10884,29 @@ input[type="checkbox"] {
   padding: 0;
 }
 
-.ticket_centralist .head #toggle-button {
-  margin-bottom: 0;
+.ticket_centralist .head #toggle-button-desktop {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.ticket_centralist .head #toggle-button-desktop #map-image-desktop {
+  margin-right: 10px;
+  height: 24px;
+  width: 16px;
+}
+
+.ticket_centralist .head #toggle-button-desktop #list-image-desktop {
+  height: 18px;
+  width: 22px;
 }
 
 .ticket_centralist .head .search_field {
   width: 350px;
   margin-left: 38px;
   margin-bottom: 0;
-  border: 1px solid #B8B8B8;
+  padding: 13px 11px;
+  border: 1px solid #F2F2F2;
 }
 
 .ticket_centralist .head .filters {
@@ -10905,6 +10930,12 @@ input[type="checkbox"] {
 
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper {
+    padding: 1.375rem 6.25rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .ticket_centralist .ticket-wrapper {
     padding: 1.375rem 11rem;
   }
 }
@@ -10914,34 +10945,43 @@ input[type="checkbox"] {
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_header {
-  padding-left: 0;
   margin-bottom: 25px;
+  padding-left: 21px;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_header {
+    padding-left: 0;
+  }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main {
   background: #F4F4F4;
+  border: 1px solid #E5E5E5;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 1rem;
+  }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main a {
   text-decoration: none;
-  display: inline-block;
 }
 
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main a {
-    margin-right: 20px;
+    display: inline-block;
   }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
   background: #fff;
-}
-
-@media (min-width: 992px) {
-  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
-    width: 350px;
-    margin-bottom: 20px;
-  }
+  border: 0;
+  border-bottom: 1px solid #E5E5E5;
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket.new {
@@ -10953,24 +10993,32 @@ input[type="checkbox"] {
   margin-right: 21px;
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon {
+  padding: 0;
+  position: relative;
+  margin-right: 18px;
+}
+
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon {
     height: 78px;
     width: 78px;
-    padding: 0;
-    position: relative;
+    margin-right: 0;
   }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon img#animal_icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon img#animal_icon {
     height: 60%;
     width: 60%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
   }
 }
 
@@ -10990,11 +11038,15 @@ input[type="checkbox"] {
   content: "";
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
+  grid-column: 1/6;
+  margin-left: 21px;
+  margin-right: 21px;
+  font-size: 18px;
+}
+
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
-    grid-column: 1/6;
-    margin-left: 21px;
-    margin-right: 21px;
     height: 175px;
   }
 }

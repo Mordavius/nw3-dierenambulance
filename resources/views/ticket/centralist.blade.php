@@ -23,9 +23,9 @@
       <h1>Meldingen</h1>
   </div>
   <div class="right">
-    <button id="toggle-button">
-      <img id="map-image" src="images/map-view.png">
-      <img id="list-image" src="images/list-view-active.png">
+    <button id="toggle-button-desktop">
+      <img id="map-image-desktop" src="images/map-view.png">
+      <img id="list-image-desktop" src="images/list-view-active.png">
     </button>
     <input class="search_field" type="search" name="search" placeholder="Zoeken..">
   </div>
@@ -54,7 +54,7 @@
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
                           <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
-                          <div class="grid_ticket">
+                          <article class="grid_ticket">
                               <div class="test">
                               </div>
                               <div class="ticket_number">
@@ -87,7 +87,7 @@
                                   </div>
                               </div>
                               <p class="ticket_description">{{str_limit($animal->description, 75)}}</p>
-                          </div>
+                          </article>
                       </a>
                           @endif
                       @endforeach
