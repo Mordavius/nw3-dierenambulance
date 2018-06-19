@@ -27,10 +27,9 @@ class CreateTicketTable extends Migration
             $table->string('passenger')->nullable();
             $table->tinyInteger('finished')->default('0')->length('1');
             $table->integer('priority');
-            $table->integer('invoice')->nullable();
-            $table->string('payment_method_invoice')->nullable();
-            $table->integer('gift')->nullable();
-            $table->string('payment_method_gift')->nullable();
+            $table->integer('payment_invoice')->nullable();
+            $table->integer('payment_gift')->nullable();
+            $table->string('payment_method')->nullable();
             $table->timestamps();
             // finance tables
         });

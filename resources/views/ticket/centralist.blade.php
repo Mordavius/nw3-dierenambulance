@@ -27,7 +27,7 @@
       <img id="map-image-desktop" src="images/map-view.png">
       <img id="list-image-desktop" src="images/list-view-active.png">
     </button>
-    <input class="search_field" type="search" name="search" placeholder="Zoeken..">
+      <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
   <div class="filters">
     <input type="date" name="date" value="">
@@ -50,6 +50,16 @@
               @endif
           </div>
           <div class="grid_main">
+
+              <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
@@ -62,7 +72,7 @@
                               </div>
                               <div class="grid_animal_icon">
                                   <div class="ticket_icon">
-                                      <img src="/images/hond.svg" id="animal_icon">
+                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
                                   </div>
                               </div>
                               <div class="ticket_main_info">
@@ -103,12 +113,14 @@
                       @foreach($animals as $animal)
                           @if($finishedticket->animal_id == $animal->id)
                           <div class="grid_ticket">
+                              <div class="test">
+                              </div>
                               <div class="ticket_number">
                                   #{{ $finishedticket->id }}
                               </div>
                               <div class="grid_animal_icon">
                                   <div class="ticket_icon">
-                                      <img src="/images/hond-icon.png" id="animal_icon">
+                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
                                   </div>
                               </div>
                               <div class="ticket_main_info">
@@ -147,6 +159,24 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+            }
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
 
 
 @section('scripts')

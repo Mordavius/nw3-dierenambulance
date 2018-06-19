@@ -62,14 +62,12 @@
                     <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
                 </div>
                 <div class="phone_number">
-                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">    
-                  </div>
+                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">
                 </div>
-                <label for="eigenaar"><input type="checkbox" name="eigenaar" value="eigenaar">Melder is eigenaar</label>
-                <span></span>
-                <p class="boodschap">Vergeet niet te melden dat de gegevens van de melder worden opgeslagen</p>
             </div>
+            <p class="boodschap">Vergeet niet te melden dat de gegevens van de melder worden opgeslagen</p>
         </div>
+    </div>
     <div class="pages" id="page2">
         <div class="page">
             <div class="title_page">
@@ -130,8 +128,8 @@
                             <span>Konijn</span>
                         </div>
                     </div>
-                    <div class="animal_card" onclick="selectAnimalSpieces('Anders', 'images/dino.svg');">
-                      <img src="{{asset('images/dino.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Anders', 'images/anders.svg');">
+                      <img src="{{asset('images/anders.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Anders</span>
                         </div>

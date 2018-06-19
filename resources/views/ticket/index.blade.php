@@ -55,9 +55,9 @@
                             #{{ $unfinishedticket->id }}
                         </div>
                         <div class="grid_animal_icon">
-                            <!-- <div class="ticket_icon">
-                                <img src="/images/hond-icon.png" id="animal_icon">
-                            </div> -->
+                            <div class="ticket_icon">
+                                <img src="/images/"{{$animal->animal_species}}".svg" id="animal_icon">
+                            </div>
                         </div>
                         <div class="ticket_main_info">
                             <div class="ticket_title">{{$animal->animal_species}}</div>
@@ -123,6 +123,8 @@
                       @foreach($animals as $animal)
                           @if($finishedticket->animal_id == $animal->id)
                           <div class="grid_ticket">
+                              <div class="test">
+                              </div>
                               <div class="ticket_number">
                                   #{{ $finishedticket->id }}
                               </div>

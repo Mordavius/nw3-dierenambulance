@@ -2,7 +2,9 @@
   <ul>
     <li class="menu-item {{ (Request::is('administratie') ? 'active' : '') }}">
       <a href="../administratie">
-        <img class="icon" src="{{asset('images/users.svg')}}" alt="Gebruikers"> <span>Gebruikers</span>
+        <svg width="23px" height="21px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+            <path id="{{asset('images/users.svg')}}" .../><span>Gebruikers</span>
+        </svg>
       </a>
     </li>
     <li class="menu-item {{ (Request::is('bus') ? 'active' : '') }}">
