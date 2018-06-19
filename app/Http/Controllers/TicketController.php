@@ -370,35 +370,26 @@ class TicketController extends Controller
 
     public function filterTickets(Request $request)
     {
-        $amount = $request->amount;
-        switch ($request->date) {
-            case 'week':
-                $date = date("Y-m-d h:i:s", strtotime("-".$amount." Weeks"));
-                break;
-            case 'month':
-                $date = date("Y-m-d h:i:s", strtotime("-".$amount." Months"));
-                break;
-            case 'year':
-                $date = date("Y-m-d h:i:s", strtotime("-".$amount." Years"));
-                break;
-            default:
-                $date = date("Y-m-d h:i:s", strtotime("-1000 Years"));
-        }
-        $ticket = Ticket::query()->whereBetween('date', [$date, date(now())]);
-        $tickets_id = $ticket->pluck('id');
-
+        $date = $request->date;
+        $animal = $request->animal;
+        $city = $request->city;
+        $tickets = Ticket::query()->whereBetween('date', [$date, date(now())])->get();
         $destination_array = [];
-        $animals = [];
+        $animal_array = [];
+        $ticket_array = [];
 
-        foreach ($tickets_id as $ticket_id) {
-            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
-            array_push($animals, Animal::where('id', $ticket_id)->first());
+        foreach ($tickets as $ticket) {
+                $animalresult = Animal::where([['id', $ticket->id], ['animal_species', $animal],])->first();
+                $destinationresult = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%'.$city.'%']])->first();
+
+                if($ticket && $animalresult && $destinationresult){
+                    array_push($ticket_array, $ticket);
+                    array_push($animal_array, $animalresult);
+                    array_push($destination_array, $destinationresult);
+                }
         }
-        $destination_array;
-        $animals;
-        //$animals = Animal::all();
 
-        return response()->json(['tickets' =>  $ticket->get(), 'destinations'=>$destination_array, 'animals'=>$animals], 200);
+        return response()->json(['tickets' =>  $ticket_array, 'destinations'=>$destination_array, 'animals'=>$animal_array], 200);
     }
 
 

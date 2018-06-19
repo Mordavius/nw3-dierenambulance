@@ -30,10 +30,10 @@
       <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
   <div class="filters">
-    <input type="date" name="date" value="">
-    <input type="text" name="animal_species" value="">
-    <input type="text" name="location" value="">
-    <input class="btn btn-success" type="submit" name="submit" value="Filteren">
+    <input type="date" name="date" value="" id="date">
+    <input type="text" name="animal_species" value="" id="animal_species">
+    <input type="text" name="location" value="" id="location">
+    <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
   </div>
 </div>
 
@@ -183,5 +183,6 @@
 <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/filter.js') }}"></script>
 @endsection
 @endsection
