@@ -19,10 +19,14 @@
   width: 100%;
 }
 
+.edit-menu-ticket {
+  h1, h6 {
+  margin-bottom: 0;
+  display: inline;
+}}
+
 .edit-menu-ticket h6 {
   color: $dark-gray;
-  margin-bottom: 0;
-  display: inline-block;
 }
 
 .edit_ticket {
@@ -86,7 +90,7 @@ td {
 
 .edit-ticket-financien h6 {
   font-size: rem-calc(18) !important;
-  font-weight: bold;
+  // font-weight: bold;
   margin: 0 0 0 0;
 }
 

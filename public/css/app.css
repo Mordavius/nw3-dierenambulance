@@ -11971,10 +11971,14 @@ input[type="checkbox"] {
   width: 100%;
 }
 
+.edit-menu-ticket h1,
+.edit-menu-ticket h6 {
+  margin-bottom: 0;
+  display: inline;
+}
+
 .edit-menu-ticket h6 {
   color: #828282;
-  margin-bottom: 0;
-  display: inline-block;
 }
 
 .edit_ticket main {
@@ -12051,7 +12055,6 @@ td {
 
 .edit-ticket-financien h6 {
   font-size: 1.125rem !important;
-  font-weight: bold;
   margin: 0 0 0 0;
 }
 

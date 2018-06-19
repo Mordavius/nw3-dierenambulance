@@ -34,6 +34,7 @@
                 Centralist: {{ Auth::user()->name }}</br>
                 Datum: {{ Carbon::today()->format('Y-m-d') }}</br>
                 Tijd: {{ $ticket->time }}</br>
+                Bus: {{ $ticket->vehicle }}
             </div>
 
 
