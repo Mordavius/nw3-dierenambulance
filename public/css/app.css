@@ -12014,6 +12014,34 @@ input[type="checkbox"] {
   }
 }
 
+.edit_ticket main {
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+
+.edit_ticket .content h2 {
+  color: #828282;
+  margin: 0rem;
+}
+
+.edit_ticket button {
+  padding: 0px !important;
+}
+
+.edit-ticket-blok {
+  margin-bottom: 1.25rem;
+}
+
+.delete-task:focus,
+#edit-save-btn:focus {
+  outline: none;
+}
+
+.delete-task:hover,
+#edit-save-btn:hover {
+  cursor: pointer;
+}
+
 .edit-menu-ticket {
   width: 100%;
   background: #fff;
@@ -12054,40 +12082,12 @@ input[type="checkbox"] {
   color: #828282;
 }
 
-.edit_ticket main {
-  margin-bottom: 100px;
-}
-
 @media (min-width: 575px) {
   .edit_ticket .edit-menu-ticket {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
   }
-}
-
-h1.header {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  padding-left: 0.625rem;
-}
-
-.edit-ticket-algemeen,
-.edit-ticket-melder,
-.edit-ticket-locatie,
-.edit-ticket-dier,
-.edit-ticket-eigenaar,
-.edit-ticket-financien {
-  margin-bottom: 1.25rem;
-}
-
-.content h2 {
-  color: #828282;
-  margin: 0rem;
-}
-
-td {
-  padding: 0px !important;
 }
 
 .locatie-wrap {
@@ -12098,6 +12098,18 @@ td {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0.8125rem;
+}
+
+.locatie-wrap table {
+  width: 100%;
+}
+
+td {
+  padding: 0px !important;
+}
+
+img.delete-dest {
+  padding: 0px 0px 0px 10px;
 }
 
 .btn-delete-location,
@@ -12126,12 +12138,37 @@ td {
   margin-top: 0.625rem;
 }
 
-.edit-ticket-financien h6 {
+.grey {
+  background-color: #F2F2F2;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0.625rem 1.5625rem 0.625rem 0.9375rem;
+  margin-bottom: 0px;
+  border-bottom: 1px solid #B8B8B8;
+}
+
+@media (min-width: 575px) {
+  .grey {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+.th {
+  color: #828282;
+  font-weight: normal;
+}
+
+.factuur-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.edit-ticket-blok.financien h6 {
   font-size: 1.125rem !important;
   margin: 0 0 0 0;
 }
 
-.edit-ticket-financien span:first-child {
+.edit-ticket-blok.financien span:first-child {
   padding: 0.9375rem 1.25rem;
   width: 100%;
 }
@@ -12147,14 +12184,6 @@ td {
   margin: 0.625rem 0 0.625rem 0;
 }
 
-.factuur-wrap {
-  margin-bottom: 1.25rem;
-}
-
-.locatie-wrap table {
-  width: 100%;
-}
-
 .factuur-card img,
 .gift-card img {
   padding: 0.9375rem 1.25rem;
@@ -12166,14 +12195,6 @@ td {
   border: none;
 }
 
-button {
-  padding: 0px !important;
-}
-
-img.delete-dest {
-  padding: 0px 0px 0px 10px;
-}
-
 .delete-task {
   background: none;
   border: none;
@@ -12181,15 +12202,6 @@ img.delete-dest {
 
 .italic {
   font-style: italic;
-}
-
-.grey {
-  background-color: #F2F2F2;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 0.625rem 0.9375rem;
-  margin-bottom: 0px;
-  border-bottom: 1px solid #B8B8B8;
 }
 
 .edit_ticket nav {
@@ -12218,18 +12230,6 @@ select .selected {
   padding: 5px 10px !important;
   background-color: #288B5F;
   border-color: #288B5F;
-}
-
-@media (min-width: 575px) {
-  .grey {
-    width: 100%;
-    margin-left: 0px;
-  }
-}
-
-.th {
-  color: #828282;
-  font-weight: normal;
 }
 
 @-webkit-keyframes leaflet-gestures-fadein {
