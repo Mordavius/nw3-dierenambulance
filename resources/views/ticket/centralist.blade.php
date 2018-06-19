@@ -62,7 +62,7 @@
                               </div>
                               <div class="grid_animal_icon">
                                   <div class="ticket_icon">
-                                      <img src="/images/hond.svg" id="animal_icon">
+                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
                                   </div>
                               </div>
                               <div class="ticket_main_info">
@@ -108,7 +108,7 @@
                               </div>
                               <div class="grid_animal_icon">
                                   <div class="ticket_icon">
-                                      <img src="/images/hond-icon.png" id="animal_icon">
+                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
                                   </div>
                               </div>
                               <div class="ticket_main_info">
