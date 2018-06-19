@@ -2,16 +2,18 @@
 @section('content')
 @section('body_class', 'edit_ticket')
 
-<div class="edit-menu">
-    <a href="{{ url()->previous() }}"><img src="{{asset('images/close.svg')}}" alt=""></a>
+<div class="edit-menu-balk">
+    <div class="edit-menu-ticket container">
+        <a href="../"><img src="{{asset('images/close.svg')}}" alt=""></a>
 
-    @foreach($animals as $animal)
-    <div><h1>{{$animal->animal_species}}</h1> <h6>{{$animal->breed}}</h6></div>
-    @endforeach
+        @foreach($animals as $animal)
+        <div><h1>{{$animal->animal_species}}</h1> <h6>{{$animal->breed}}</h6></div>
+        @endforeach
 
-    <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
-        <img src="{{asset('images/check.svg')}}">
-    </button>
+        <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
+            <img src="{{asset('images/check.svg')}}">
+        </button>
+  </div>
 </div>
 
 <div class="container">
@@ -32,6 +34,7 @@
                 Centralist: {{ Auth::user()->name }}</br>
                 Datum: {{ Carbon::today()->format('Y-m-d') }}</br>
                 Tijd: {{ $ticket->time }}</br>
+                Bus: {{ $ticket->vehicle }}
             </div>
 
 
@@ -65,6 +68,9 @@
                 @if ($loop->first)
                 <div class="locatie-wrap">
                     <table>
+                      <tr>
+                          <th class="th">Melder locatie</th>
+                      </tr>
                         <tr>
                             <td>{{$loaddestinations->address}} {{$loaddestinations->house_number}}</td>
                         </tr>
@@ -85,6 +91,9 @@
                     <!-- Check welke bestemming het is en dat cijfer invullen Bestemming X -->
                     <table>
                         <tr>
+                            <th class="th">Bestemming {{$loop->index}}</th>
+                        </tr>
+                        <tr>
                             <td>{{$loaddestinations->address}} {{$loaddestinations->house_number}}</td>
                         </tr>
                         <tr>
@@ -98,7 +107,7 @@
                         </tr>
                     </table>
                       <button id="delete" name="delete" data-toggle="delete" class="delete-task" value="{{$loaddestinations->id}}">
-                        <img src="https://nw3-dierenambulance.test/images/delete.svg" alt="Verwijderen" class="icon">
+                        <img src="https://nw3-dierenambulance.test/images/delete.svg" alt="Verwijderen" class="delete-dest">
                     </button>
 
                 </div>
@@ -134,11 +143,11 @@
                     <h2>Financiën</h2>
 
                     <h6> Factuur </h6>
-                    @if($ticket->invoice)
+                    @if($ticket->payment_invoice)
                     <div class="factuur-card">
-                        <span> €{{$ticket->invoice}} </span>
+                        <span> €{{$ticket->payment_invoice}} </span>
 
-                        @if ($ticket->payment_method_invoice == "Contant")
+                        @if ($ticket->payment_method == "Contant")
                         <img src="https://nw3-dierenambulance.test/images/cash-multiple-dark.svg" class="icon">
                         <img src="https://nw3-dierenambulance.test/images/credit-card-light.svg" class="icon">
                         @else
@@ -158,12 +167,12 @@
                 <div class="gift-wrap">
                     <h6> Gift </h6>
 
-                    @if($ticket->gift)
+                    @if($ticket->payment_gifts)
                     <div class="gift-card">
 
-                        <span> €{{$ticket->gift}} </span>
+                        <span> €{{$ticket->payment_gifts}} </span>
 
-                        @if ($ticket->payment_method_gift == "Contant")
+                        @if ($ticket->payment_method == "Gepint")
                         <img src="https://nw3-dierenambulance.test/images/cash-multiple-dark.svg" class="icon">
                         <img src="https://nw3-dierenambulance.test/images/credit-card-light.svg" class="icon">
                         @else
@@ -184,10 +193,6 @@
             {!! Form::button('Extra betaling', ['class' => 'btn-primary btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
         </div>
         {!! Form::close() !!}
-
-        {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'pull-left'])!!}
-            {{Form::submit('Afronden',['class' => 'btn btn-success'])}}
-        {!!Form::close()!!}
 
         <!-- Modal (Pop up when detail destinations button clicked) -->
         <div class="modal fade" id="destination_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -265,7 +270,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('milage') ? 'has-error' : '' }}">
-                            {!! Form::text('milage', null, ['class' => 'form-control', 'id' => 'milage', 'value' => '', 'placeholder' => 'Kilometer op locatie']) !!}
+                            {!! Form::number('milage', null, ['class' => 'form-control', 'id' => 'milage', 'value' => '', 'placeholder' => 'Kilometer op locatie']) !!}
                             @if($errors->has('milage'))
                             <span class="help-block">
                                 {{ $errors->first('milage') }}
@@ -299,7 +304,7 @@
 
                         <div class="alert alert-danger payment" style="display:none"></div>
                         <div class="form-group {{ $errors->has('payment_invoice') ? 'has-error' : '' }}">
-                            {!! Form::text('payment_invoice', null, ['class' => 'form-control', 'id' => 'payment_invoice', 'value' => '', 'placeholder' => 'Factuur']) !!}
+                            {!! Form::number('payment_invoice', null, ['class' => 'form-control', 'id' => 'payment_invoice', 'value' => '', 'placeholder' => 'Factuur bedrag']) !!}
                             @if($errors->has('payment_invoice'))
                             <span class="help-block">
                                 {{ $errors->first('payment_invoice') }}
@@ -309,7 +314,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('payment_gifts') ? 'has-error' : '' }}">
-                            {!! Form::text('payment_gifts', null, ['class' => 'form-control', 'id' => 'payment_gifts', 'value' => '', 'placeholder' => 'Gift']) !!}
+                            {!! Form::number('payment_gifts', null, ['class' => 'form-control', 'id' => 'payment_gifts', 'value' => '', 'placeholder' => 'Gift bedrag']) !!}
                             @if($errors->has('payment_gifts'))
                             <span class="help-block">
                                 {{ $errors->first('payment_gifts') }}
