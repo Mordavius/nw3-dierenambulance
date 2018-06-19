@@ -8,18 +8,22 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Ticket;
 
-class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
+class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
 {
     use Exportable;
-    public function __construct(string $startdate = null, string $enddate = null)
+    public function __construct(string $startdate = null, string $enddate = null, string $animal = 'all', string $township = 'all', string $with_finances = 'true')
     {
         $this->startdate = $startdate;
         $this->enddate   = $enddate;
+        $this->animal_select = $animal;
+        $this->township = $township;
+        $this->with_finances = $with_finances;
     }
 
-        public function headings(): array
+    public function headings(): array
     {
-        return [
+
+        $headings = [
             'Datum',
             'Tijd',
             'Centralist',
@@ -34,59 +38,92 @@ class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
             'Postcode',
             'Stad',
             'Gemeente',
-            'Factuur',
-            'Betaalmethode',
-            'Giften',
-            'Kilometerstand'
         ];
+
+        if ($this->with_finances == 'true'){
+            array_push($headings, 'Factuur', 'Betaalmethode', 'Giften', 'Kilometerstand');
+        }
+
+        return $headings;
     }
 
-        // Grab all data from tickets between now and 3 months ago
-        public function collection()
+    function getNewTicket(){
+        $new_ticket = [
+            'date' => ' ',
+            'time' => ' ',
+            'dispatcher' => 'onbekend',
+            'driver' => 'onbekend',
+            'passenger' => 'onbekend',
+            'species' => 'onbekend',
+            'breed' => 'onbekend',
+            'gender' => 'onbekend',
+            'catch_cage' => 'n.v.t.',
+            'animal_description' => 'onbekend',
+            'address' => 'onbekend',
+            'postal_code' => 'geen postcode',
+            'city' => 'onbekend',
+            'township' => 'onbekend',
+        ];
+        if ($this->with_finances == 'true') {
+            $new_ticket += [
+                'invoice' => 'n.v.t.',
+                'payment_method' => 'n.v.t.',
+                'gifts' => 'n.v.t.',
+                'milage' => 'n.v.t.'];
+        }
+        return $new_ticket;
+    }
+
+    // Grab all data from tickets between now and 3 months ago
+    public function collection()
     {
         $collection_array = array();
         $tickets = '';
-        //dd($this->enddate, $this->startdate);
+
 
         if ($this->startdate === null && $this->enddate === null) {
             $tickets = Ticket::all()->get();
         } else {
             $tickets = Ticket::query()->whereBetween('date', [$this->enddate, $this->startdate])->get();
         }
-        //$tickets = Ticket::query()->whereBetween('date', [$this->quarter, date(now())])->get();
-        foreach ($tickets as $ticket){
-            $new_ticket = [
-                'date' => ' ',
-                'time' => ' ',
-                'dispatcher' => 'onbekend',
-                'driver' => 'onbekend',
-                'passenger' => 'onbekend',
-                'species' => 'onbekend',
-                'breed' => 'onbekend',
-                'gender' => 'onbekend',
-                'catch_cage' => 'n.v.t.',
-                'animal_description' => 'onbekend',
-                'address' => 'onbekend',
-                'postal_code' => 'geen postcode',
-                'city' => 'onbekend',
-                'township' => 'onbekend',
-                'invoice' => 'n.v.t.',
-                'payment_method' => 'n.v.t.',
-                'gifts' => 'n.v.t.',
-                'milage' => 'n.v.t.'
-            ];
-            $animal = Animal::where('id', $ticket->animal_id)->first();
-            $bus = Bus::where('id', $ticket->bus_id)->first();
-            $finance = Finance::where('ticket_id', $ticket->id)->first();
-            $destinations = Destination::where('ticket_id', $ticket->id)->first();
 
-            if ($ticket->date) { $new_ticket['date'] = $ticket->date; }
-            if ($ticket->time) { $new_ticket['time'] = $ticket->time; }
-            if ($ticket->centralist) { $new_ticket['dispatcher'] = $ticket->centralist; }
-            if ($ticket->driver) { $new_ticket['driver'] = $ticket->driver; }
-            if ($ticket->passenger) { $new_ticket['passenger'] = $ticket->passenger; }
+        foreach ($tickets as $ticket) {
+            if ($this->animal_select != 'all') {
+                $animal = Animal::where([['id', $ticket->animal_id], ['animal_species', $this->animal_select],])->first();
+            } else {
+                $animal = Animal::where('id', $ticket->animal_id)->first();
+            }
+            if ($this->township != 'all') {
+                $destinations = Destination::where([['ticket_id', $ticket->id], ['township', $this->township],])->first();
+            } else {
+                $destinations = Destination::where('ticket_id', $ticket->id)->first();
+            }
+            if ($this->with_finances == 'true') {
+                $bus = Bus::where('id', $ticket->bus_id)->first();
+                $finance = Finance::where('ticket_id', $ticket->id)->first();
+            }
 
-            if ($animal) {
+
+            if ($ticket && $animal && $destinations) {
+                $new_ticket = $this->getNewTicket();
+
+                if ($ticket->date) {
+                    $new_ticket['date'] = $ticket->date;
+                }
+                if ($ticket->time) {
+                    $new_ticket['time'] = $ticket->time;
+                }
+                if ($ticket->centralist) {
+                    $new_ticket['dispatcher'] = $ticket->centralist;
+                }
+                if ($ticket->driver) {
+                    $new_ticket['driver'] = $ticket->driver;
+                }
+                if ($ticket->passenger) {
+                    $new_ticket['passenger'] = $ticket->passenger;
+                }
+
+
                 if ($animal->animal_species) {
                     $new_ticket['species'] = $animal->animal_species;
                 }
@@ -102,9 +139,8 @@ class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
                 if ($animal->description) {
                     $new_ticket['animal_description'] = $animal->description;
                 }
-            }
 
-            if($destinations) {
+
                 if ($destinations->postal_code) {
                     $new_ticket['postal_code'] = $destinations->postal_code;
                 }
@@ -117,24 +153,26 @@ class TicketExport implements FromCollection, WithHeadings, ShouldAutoSize
                 if ($destinations->township) {
                     $new_ticket['township'] = $destinations->township;
                 }
-                if ($destinations->milage){
+                if ($destinations->milage) {
                     $new_ticket['milage'] = $destinations->milage;
                 }
-            }
 
-            if($finance) {
-                if ($finance->payment_invoice) {
-                    $new_ticket['invoice'] = $finance->payment_invoice;
+
+                if ($this->with_finances == 'true') {
+                    if ($finance) {
+                        if ($finance->payment_invoice) {
+                            $new_ticket['invoice'] = $finance->payment_invoice;
+                        }
+                        if ($finance->payment_method) {
+                            $new_ticket['payment_method'] = $finance->payment_method;
+                        }
+                        if ($finance->payment_gifts) {
+                            $new_ticket['gifts'] = $finance->payment_gifts;
+                        }
+                    }
                 }
-                if ($finance->payment_method) {
-                    $new_ticket['payment_method'] = $finance->payment_method;
-                }
-                if ($finance->payment_gifts) {
-                    $new_ticket['gifts'] = $finance->payment_gifts;
-                }
+                array_push($collection_array, $new_ticket);
             }
-            
-            array_push($collection_array, $new_ticket);
         }
         return new Collection($collection_array);
     }
