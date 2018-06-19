@@ -51,7 +51,7 @@
       margin-left: 38px;
       margin-bottom: 0;
       padding: 13px 11px;
-      border: 1px solid $light-gray;
+      border: 1px solid $gray;
     }
 
     .filters
@@ -64,7 +64,7 @@
         width: auto;
         margin-bottom: 0;
         margin-right: 10px;
-        border: 1px solid $light-gray;
+        border: 1px solid $gray;
         font-size: 18px;
         padding: 13px 11px;
       }
@@ -76,15 +76,9 @@
     padding: rem-calc(22) 0;
     background: $background;
 
-    // @media (min-width: 992px) { padding: rem-calc(22) rem-calc(65); }
-
     @media (min-width: 992px) { padding: rem-calc(22) rem-calc(100); }
 
     @media (min-width: 1500px) { padding: rem-calc(22) rem-calc(176); }
-
-    // @media only screen and (max-width: 1500px) {
-    //   padding: rem-calc(22) rem-calc(100);
-    // }
 
     .grid_container
     {
@@ -111,6 +105,23 @@
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
           grid-gap: 1rem;
+          border: none;
+        }
+
+        .table
+        {
+          background-color: $white;
+
+          thead
+          {
+            margin-top: 20px;
+            margin-bottom: 20px;
+          }
+
+          td
+          {
+            padding: 21px;
+          }
         }
 
         a
@@ -128,6 +139,11 @@
           background: $white;
           border: 0;
           border-bottom: 1px solid #E5E5E5;
+
+          @include media-breakpoint-up(lg)
+          {
+            border: 1px solid #E5E5E5;
+          }
 
           &.new
           {

@@ -50,16 +50,15 @@
               @endif
           </div>
           <div class="grid_main">
-
-              <table class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-              </table>
-
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                      <th>Zoekresultaten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
