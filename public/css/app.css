@@ -11392,6 +11392,12 @@ input[type="checkbox"] {
   }
 }
 
+.ticketcreate .main .pages .page .boodschap {
+  color: #828282;
+  font-size: 0.875rem;
+  margin: 2.8125rem 1.3125rem 0 1.3125rem;
+}
+
 .ticketcreate .main .pages .page .reporter_info {
   padding: 20px;
   margin-bottom: 50px;
@@ -11434,13 +11440,6 @@ input[type="checkbox"] {
     grid-row: 1/1;
     grid-column: 2/3;
   }
-}
-
-.ticketcreate .main .pages .page .reporter_info .boodschap {
-  color: #828282;
-  font-size: 0.875rem;
-  margin-bottom: 0;
-  margin-top: 2.8125rem;
 }
 
 .ticketcreate .main .pages .page .searchStuff {
