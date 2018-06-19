@@ -11,7 +11,6 @@ use League\Flysystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use App\User;
 
-
 class AdministrationController extends Controller
 {
     // Setup construct for the Excel library
@@ -38,7 +37,8 @@ class AdministrationController extends Controller
         return view('administration.export', compact('ticket'));
     }
 
-    public function quartexports(){
+    public function quartexports()
+    {
         $quarterlies = Quarterfinance::all();
         return view('administration.quarterly', compact('quarterlies'));
     }
@@ -50,8 +50,7 @@ class AdministrationController extends Controller
         $filepath = $storage . $filename;
         try {
             return Storage::download('exports/' . $filename);
-        }
-        catch (FileNotFoundException $e) {
+        } catch (FileNotFoundException $e) {
             Log::channel('sentry')->error($e->getMessage());
             return Redirect::back()->withErrors(['Het door u opgevraagde bestand bestaat niet, neem contact op met de webmaster of probeer dit handmatig']);
         }

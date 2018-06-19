@@ -43,6 +43,11 @@
           <div class="grid_header">
               <div class="tickets open_tickets"><h2>Openstaande meldingen</h2></div>
               <div class="result_amount"><span>{{$unfinishedtickets->count()}} melding(en)</span></div>
+              @if(session('message'))
+                  <div class="alert alert-success">
+                      {{ session('message') }}
+                  </div>
+              @endif
           </div>
           <div class="grid_main">
               @foreach($unfinishedtickets as $unfinishedticket)
@@ -67,15 +72,15 @@
                                   </div>
                                   <div class="ticket_address">
                                     <span>
-                                      @foreach($destinations as $destination)
-                                          @if($destination->ticket_id == $unfinishedticket->id)
-                                              {{$destination->address}}
-                                              @if($destination->house_number != '0')
-                                                  {{$destination->house_number}}
+                                      @foreach($destination_array as $destination)
+                                          @if($destination['ticket_id'] == $unfinishedticket->id)
+                                              {{$destination['address']}}
+                                              @if($destination['house_number'] != '0')
+                                                  {{$destination['house_number']}}
                                               @endif
                                               ,<br>
-                                              {{$destination->postal_code}}
-                                              {{$destination->city}}
+                                              {{$destination['postal_code']}}
+                                              {{$destination['city']}}
                                           @endif
                                       @endforeach
                                     </span>

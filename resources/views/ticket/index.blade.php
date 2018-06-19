@@ -19,6 +19,11 @@
     </button>
 </a>
 <div class="pages current_page" id="page1">
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
   <div class="tickets ticket-wrapper" >
       <div class="grid_container current_page">
           <div class="grid_header">
@@ -57,7 +62,8 @@
                         <div class="ticket_main_info">
                             <div class="ticket_title">{{$animal->animal_species}}</div>
                             <div class="ticket_address">
-                                @foreach($destinations as $destination)
+                                {{$destination_array}}
+                                @foreach($destination_array as $destination)
                                     @if($destination->ticket_id == $unfinishedticket->id)
                                         {{$destination->address}}
                                         @if($destination->house_number != '0')
