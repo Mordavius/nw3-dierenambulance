@@ -11053,7 +11053,7 @@ input[type="checkbox"] {
 
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -11785,7 +11785,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 
@@ -11941,16 +11941,52 @@ input[type="checkbox"] {
   }
 }
 
-.edit-header {
+.edit-menu-ticket {
+  width: 100%;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1.125rem 1.5rem;
+}
+
+.edit-menu-ticket button {
+  background: none;
+  border: none;
+}
+
+.edit-menu-balk {
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   width: 100%;
 }
 
-.edit-menu h6 {
+.edit-menu-ticket h6 {
   color: #828282;
   margin-bottom: 0;
   display: inline-block;
+}
+
+.edit_ticket main {
+  margin-bottom: 100px;
+}
+
+@media (min-width: 575px) {
+  .edit_ticket .edit-menu-ticket {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 h1.header {
@@ -12058,8 +12094,13 @@ button {
   padding: 0px !important;
 }
 
-img.icon {
+img.delete-dest {
   padding: 0px 0px 0px 10px;
+}
+
+.delete-task {
+  background: none;
+  border: none;
 }
 
 .italic {
@@ -12108,6 +12149,11 @@ select .selected {
     width: 100%;
     margin-left: 0px;
   }
+}
+
+.th {
+  color: #828282;
+  font-weight: normal;
 }
 
 @-webkit-keyframes leaflet-gestures-fadein {

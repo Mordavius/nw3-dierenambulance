@@ -2,16 +2,18 @@
 @section('content')
 @section('body_class', 'edit_ticket')
 
-<div class="edit-menu">
-    <a href="{{ url()->previous() }}"><img src="{{asset('images/close.svg')}}" alt=""></a>
+<div class="edit-menu-balk">
+    <div class="edit-menu-ticket container">
+        <a href="../"><img src="{{asset('images/close.svg')}}" alt=""></a>
 
-    @foreach($animals as $animal)
-    <div><h1>{{$animal->animal_species}}</h1> <h6>{{$animal->breed}}</h6></div>
-    @endforeach
+        @foreach($animals as $animal)
+        <div><h1>{{$animal->animal_species}}</h1> <h6>{{$animal->breed}}</h6></div>
+        @endforeach
 
-    <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
-        <img src="{{asset('images/check.svg')}}">
-    </button>
+        <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
+            <img src="{{asset('images/check.svg')}}">
+        </button>
+  </div>
 </div>
 
 <div class="container">
@@ -65,6 +67,9 @@
                 @if ($loop->first)
                 <div class="locatie-wrap">
                     <table>
+                      <tr>
+                          <th class="th">Melder locatie</th>
+                      </tr>
                         <tr>
                             <td>{{$loaddestinations->address}} {{$loaddestinations->house_number}}</td>
                         </tr>
@@ -85,6 +90,9 @@
                     <!-- Check welke bestemming het is en dat cijfer invullen Bestemming X -->
                     <table>
                         <tr>
+                            <th class="th">Bestemming {{$loop->index}}</th>
+                        </tr>
+                        <tr>
                             <td>{{$loaddestinations->address}} {{$loaddestinations->house_number}}</td>
                         </tr>
                         <tr>
@@ -98,7 +106,7 @@
                         </tr>
                     </table>
                       <button id="delete" name="delete" data-toggle="delete" class="delete-task" value="{{$loaddestinations->id}}">
-                        <img src="https://nw3-dierenambulance.test/images/delete.svg" alt="Verwijderen" class="icon">
+                        <img src="https://nw3-dierenambulance.test/images/delete.svg" alt="Verwijderen" class="delete-dest">
                     </button>
 
                 </div>
