@@ -20,16 +20,20 @@
         <input type="date" name="startdate" id="startdate"/>
         <input type="date" name="enddate" id="enddate"/>
         <select placeholder="Dier" id="animal" type="text" name="animal">
-            <option value="">Hoi</option>
-            <option value="">Hoi</option>
-            <option value="">Hoi</option>
+            <option value="all">Alles</option>
+            <option value="Hond">Hond</option>
+            <option value="Kat">Kat</option>
+            <option value="Vogel">Vogel</option>
+            <option value="Egel">Egel</option>
+            <option value="Konijn">Konijn</option>
+            <option value="Anders">Anders</option>
         </select>
         <select placeholder="Gemeente" id="township" type="text" name="township">
-            <option value="">Hoi</option>
-            <option value="">Hoi</option>
-            <option value="">Hoi</option>
+            @foreach($destinations as $destination)
+                <option value="{{$destination->township}}">{{$destination->township}}</option>
+            @endforeach
         </select>
-        <input type="checkbox" id="financien" name="Met financiën" value="Met financiën"><label for="financien">Met financiën</label>
+        <input type="checkbox" id="financien" name="withfinance" value="true"><label for="financien">Met financiën</label>
         <button class="btn btn-success full-width">
             Exporteren naar Excel
         </button>

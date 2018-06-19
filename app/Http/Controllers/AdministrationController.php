@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Destination;
+use App\Ticket;
 use App\TicketExport;
 use App\Quarterfinance;
 use Illuminate\Support\Facades\Log;
@@ -35,7 +37,9 @@ class AdministrationController extends Controller
     // Export function for showing the page
     public function export()
     {
-        return view('administration.export', compact('ticket'));
+        $ticket = Ticket::all();
+        $destinations = Destination::all()->unique('township');
+        return view('administration.export', compact('ticket', 'destinations'));
     }
 
     public function quartexports(){
@@ -61,6 +65,13 @@ class AdministrationController extends Controller
     // Download the excel in xlsx format
     public function downloadExcel(Request $request)
     {
-        return $this->excel->download(new TicketExport($request->startdate, $request->enddate), 'meldingen.xlsx');
+        //check if withfinances is set
+        if (!$request->withfinances){
+        $withfinances = 'false';
+        }
+        else {
+            $withfinances = $request->withfinance;
+        }
+        return $this->excel->download(new TicketExport($request->enddate, $request->startdate, $request->animal, $request->township, $withfinances), 'meldingen.xlsx');
     }
 }
