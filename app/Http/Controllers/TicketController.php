@@ -196,7 +196,6 @@ class TicketController extends Controller
         $animal->save(); // Saves the data
 
         $bus = Bus::where('bus_type', $request->vehicle)->first();
-        //dd($bus);
 
         // Stores the data for the requested fields
         $ticket = new Ticket([
@@ -210,7 +209,7 @@ class TicketController extends Controller
             'centralist' => $request->get('centralist'),
             'reporter_name' => $request->get('reporter_name'),
             'telephone' => $request->get('telephone'),
-            // 'bus_id' => $bus->id,
+            'bus_id' => $bus->id,
         ]);
 
         $ticket->save(); // Saves the data
@@ -225,7 +224,7 @@ class TicketController extends Controller
             'coordinates' => $request->get('coordinates'),
             'ticket_id' => $ticket->id,
             'vehicle' => $request->get('vehicle'),
-            // 'milage' => $request->get('milage'),
+            'milage' => $request->get('milage'),
         ]);
 
         $destination->save();// Saves the data
