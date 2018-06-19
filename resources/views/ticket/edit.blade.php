@@ -193,6 +193,9 @@
             {!! Form::button('Extra betaling', ['class' => 'btn-primary btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
         </div>
         {!! Form::close() !!}
+        {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'pull-left'])!!}
+            {{Form::submit('Afronden',['class' => 'btn btn-success'])}}
+        {!!Form::close()!!}
 
         <!-- Modal (Pop up when detail destinations button clicked) -->
         <div class="modal fade" id="destination_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
