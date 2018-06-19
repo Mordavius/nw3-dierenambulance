@@ -12,6 +12,7 @@ use App\Finance;
 use App\Known;
 use App\Bus;
 use App\Owner;
+use DB;
 use App\Http\Requests\TicketStoreRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
