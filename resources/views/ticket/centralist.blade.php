@@ -27,7 +27,7 @@
       <img id="map-image" src="images/map-view.png">
       <img id="list-image" src="images/list-view-active.png">
     </button>
-    <input class="search_field" type="search" name="search" placeholder="Zoeken..">
+      <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
   <div class="filters">
     <input type="date" name="date" value="">
@@ -50,6 +50,16 @@
               @endif
           </div>
           <div class="grid_main">
+
+              <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
@@ -149,6 +159,24 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+            }
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
 
 
 @section('scripts')
