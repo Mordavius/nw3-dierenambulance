@@ -10725,6 +10725,7 @@ main {
 .wrapper .content h1 {
   margin-bottom: 2.375rem;
   display: none;
+  font-size: 24px;
 }
 
 @media (min-width: 992px) {
@@ -10743,7 +10744,7 @@ main {
 
 @media (min-width: 992px) {
   .wrapper .content .btn-success {
-    margin-right: none;
+    margin-right: 0;
   }
 }
 
@@ -10788,6 +10789,7 @@ main {
   text-transform: capitalize;
   margin-bottom: 0;
   line-height: 1;
+  font-size: 24px;
 }
 
 .wrapper .content .list .list-item .delete {
@@ -10960,6 +10962,10 @@ input[type="checkbox"] {
   color: #fff;
 }
 
+.segmented-control .segmented-control__item .segmented-control__input {
+  width: auto;
+}
+
 .segmented-control .segmented-control__item .segmented-control__input:checked + .segmented-control__label {
   background: #2D9CDB;
   color: #fff;
@@ -11030,7 +11036,7 @@ input[type="checkbox"] {
   margin-left: 38px;
   margin-bottom: 0;
   padding: 13px 11px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #B8B8B8;
 }
 
 .ticket_centralist .head .filters {
@@ -11042,7 +11048,7 @@ input[type="checkbox"] {
   width: auto;
   margin-bottom: 0;
   margin-right: 10px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #B8B8B8;
   font-size: 18px;
   padding: 13px 11px;
 }
@@ -11089,7 +11095,21 @@ input[type="checkbox"] {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 1rem;
+    border: none;
   }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .table {
+  background-color: #fff;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .table thead {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .table td {
+  padding: 21px;
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main a {
@@ -11106,6 +11126,12 @@ input[type="checkbox"] {
   background: #fff;
   border: 0;
   border-bottom: 1px solid #E5E5E5;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
+    border: 1px solid #E5E5E5;
+  }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket.new {

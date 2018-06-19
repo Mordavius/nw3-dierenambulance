@@ -112,7 +112,6 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
             }
             if ($this->with_finances == 'true') {
                 $bus = Bus::where('id', $ticket->bus_id)->first();
-                $finance = Finance::where('ticket_id', $ticket->id)->first();
             }
 
             //if all three exist generate a new ticket and fill it with data
@@ -171,17 +170,15 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
 
 
                 if ($this->with_finances == 'true') {
-                    if ($finance) {
-                        if ($finance->payment_invoice) {
-                            $new_ticket['invoice'] = $finance->payment_invoice;
+                        if ($ticket->payment_invoice) {
+                            $new_ticket['invoice'] = $ticket->payment_invoice;
                         }
-                        if ($finance->payment_method) {
-                            $new_ticket['payment_method'] = $finance->payment_method;
+                        if ($ticket->payment_method) {
+                            $new_ticket['payment_method'] = $ticket->payment_method;
                         }
-                        if ($finance->payment_gifts) {
-                            $new_ticket['gifts'] = $finance->payment_gifts;
+                        if ($ticket->payment_gifts) {
+                            $new_ticket['gifts'] = $ticket->payment_gifts;
                         }
-                    }
                 }
                 //push new ticket to collection array
                 array_push($collection_array, $new_ticket);
