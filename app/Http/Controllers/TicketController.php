@@ -116,9 +116,6 @@ class TicketController extends Controller
 
     public function knownusers($id)
     {
-        //$values = input::get($knownAddress->id);
-
-       // dd($id);
         if(is_numeric($id)) {
             $knownAddress = Known::where('id', $id)->get();
             return response()->json($knownAddress);
