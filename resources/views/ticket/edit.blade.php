@@ -207,6 +207,9 @@
                                 @foreach($known as $knownAddress)
                                 <option value="{{$knownAddress->id}}">{{$knownAddress->location_name}}</option>
                                 @endforeach
+                                @foreach($knownUser as $knownUsers)
+                                    <option value="{{$knownUsers->name}}">{{$knownUsers->name}}</option>
+                                @endforeach
                             </select>
                             @if($errors->has('known'))
                             <span class="help-block">
