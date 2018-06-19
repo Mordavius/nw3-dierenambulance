@@ -10715,6 +10715,7 @@ main {
 
 .edit_page .content {
   padding: 3.125rem 1.3125rem 0 1.3125rem;
+  margin-bottom: 50px;
 }
 
 .edit_page .content h1 {
