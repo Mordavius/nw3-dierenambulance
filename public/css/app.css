@@ -11070,7 +11070,7 @@ input[type="checkbox"] {
 
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -11336,7 +11336,7 @@ input[type="checkbox"] {
 }
 
 .ticketcreate .main .pages #map {
-  height: 500px !important;
+  height: 600px !important;
 }
 
 @media (min-width: 992px) {
@@ -11392,6 +11392,12 @@ input[type="checkbox"] {
   }
 }
 
+.ticketcreate .main .pages .page .boodschap {
+  color: #828282;
+  font-size: 0.875rem;
+  margin: 2.8125rem 1.3125rem 0 1.3125rem;
+}
+
 .ticketcreate .main .pages .page .reporter_info {
   padding: 20px;
   margin-bottom: 50px;
@@ -11434,13 +11440,6 @@ input[type="checkbox"] {
     grid-row: 1/1;
     grid-column: 2/3;
   }
-}
-
-.ticketcreate .main .pages .page .reporter_info .boodschap {
-  color: #828282;
-  font-size: 0.875rem;
-  margin-bottom: 0;
-  margin-top: 2.8125rem;
 }
 
 .ticketcreate .main .pages .page .searchStuff {
@@ -11515,7 +11514,7 @@ input[type="checkbox"] {
   -webkit-transition: height .5s;
   transition: height .5s;
   height: 442px;
-  overflow: hidden;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 992px) {
@@ -11589,7 +11588,7 @@ input[type="checkbox"] {
   height: 0;
   overflow: hidden;
   width: 331px;
-  margin: 20px 20px 0;
+  margin: 20px 20px 10px 21px;
 }
 
 @media (min-width: 992px) {
@@ -11802,7 +11801,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 

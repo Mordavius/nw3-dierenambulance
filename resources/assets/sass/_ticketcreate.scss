@@ -125,7 +125,7 @@
 
       #map
       {
-        height: 500px!important;
+        height: 600px!important;
 
         @include media-breakpoint-up(lg)
         {
@@ -181,6 +181,12 @@
             visibility: visible;
           }
         }
+        .boodschap
+        {
+          color: $dark-gray;
+          font-size: rem-calc(14);
+          margin: rem-calc(45) rem-calc(21) 0 rem-calc(21);
+        }
 
         .reporter_info
         {
@@ -225,16 +231,7 @@
               grid-column: 2/3;
             }
           }
-
-          .boodschap
-          {
-            color: $dark-gray;
-            font-size: rem-calc(14);
-            margin-bottom: 0;
-            margin-top: rem-calc(45);
-          }
         }
-
         .searchStuff
         {
           width: 100%;
@@ -314,7 +311,7 @@
             -webkit-transition: height .5s;
             transition: height .5s;
             height: 442px;
-            overflow: hidden;
+            margin-bottom: 10px;
 
             @include media-breakpoint-up(lg)
             {
@@ -392,7 +389,7 @@
             height: 0;
             overflow: hidden;
             width: 331px;
-            margin: 20px 20px 0;
+            margin: 20px 20px 10px 21px;
 
             @include media-breakpoint-up(lg)
             {
