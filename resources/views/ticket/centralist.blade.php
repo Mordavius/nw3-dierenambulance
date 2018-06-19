@@ -103,6 +103,8 @@
                       @foreach($animals as $animal)
                           @if($finishedticket->animal_id == $animal->id)
                           <div class="grid_ticket">
+                              <div class="test">
+                              </div>
                               <div class="ticket_number">
                                   #{{ $finishedticket->id }}
                               </div>
