@@ -65,7 +65,7 @@ class AdministrationController extends Controller
     public function downloadExcel(Request $request)
     {
         //check if withfinances is set
-        if (!$request->withfinances){
+        if (!$request->withfinance){
         $withfinances = 'false';
         }
         else {
