@@ -15,6 +15,7 @@ use App\Owner;
 use App\Http\Requests\TicketStoreRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -273,7 +274,6 @@ class TicketController extends Controller
         $destinations = Destination::where('ticket_id', $ticket_id)->get();
         $loaddestination = Destination::where('ticket_id', $ticket_id)->get();
         $vehicle = Destination::where('ticket_id', $ticket_id)->pluck('vehicle');
-        $loadfinances = Finance::where('ticket_id', $ticket_id)->get();
         $loadowners = Owner::where('ticket_id', $ticket_id)->get();
         $animalowner = Ticket::all();
         $known = Known::all();
@@ -283,7 +283,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
         $animal = Animal::where('id', $animal_id)->pluck('animal_species');
         $animaldescription = Animal::where('id', $animal_id)->pluck('description');
-        return view("ticket.edit", compact('tickets_id', 'destinations', 'knownUser', 'vehicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animaldescription', 'animals', 'loadfinances', 'loaddestination', 'known', 'ticket_id', 'animal'));
+        return view("ticket.edit", compact('tickets_id', 'destinations', 'knownUser', 'vehicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner', 'animaldescription', 'animals', 'loaddestination', 'known', 'ticket_id', 'animal'));
     }
     /**
      * Update the specified resource in storage.
