@@ -1,11 +1,11 @@
 <div class="admin-menu">
   <ul>
     <li class="menu-item {{ (Request::is('administratie') ? 'active' : '') }}">
-      <a href="../administratie">
-        <svg width="23px" height="21px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-            <path id="{{asset('images/users.svg')}}" .../><span>Gebruikers</span>
-        </svg>
-      </a>
+        <a href="../administratie">
+            <div class="svgwrapper icon">
+            <?php echo file_get_contents("images/users.svg"); ?> <span class="icon"> Gebruikers </span>
+            </div>
+        </a>
     </li>
     <li class="menu-item {{ (Request::is('bus') ? 'active' : '') }}">
       <a href="/bus">

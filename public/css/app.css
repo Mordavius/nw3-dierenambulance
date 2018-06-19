@@ -10411,6 +10411,126 @@ a.text-dark:focus {
   }
 }
 
+/* http://meyerweb.com/eric/tools/css/reset/ */
+
+/* v1.0 | 20080212 */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+/* remember to define focus styles! */
+
+:focus {
+  outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+
+ins {
+  text-decoration: none;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 h1,
 h2,
 h3,
@@ -10575,6 +10695,10 @@ main {
   .edit_page .admin-menu {
     display: inline-block;
   }
+}
+
+.svgwrapper path {
+  fill: black;
 }
 
 @media (min-width: 992px) {
@@ -11149,7 +11273,7 @@ input[type="checkbox"] {
 
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -11880,7 +12004,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 
@@ -12093,6 +12217,34 @@ input[type="checkbox"] {
   }
 }
 
+.edit_ticket main {
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+
+.edit_ticket .content h2 {
+  color: #828282;
+  margin: 0rem;
+}
+
+.edit_ticket button {
+  padding: 0px !important;
+}
+
+.edit-ticket-blok {
+  margin-bottom: 1.25rem;
+}
+
+.delete-task:focus,
+#edit-save-btn:focus {
+  outline: none;
+}
+
+.delete-task:hover,
+#edit-save-btn:hover {
+  cursor: pointer;
+}
+
 .edit-menu-ticket {
   width: 100%;
   background: #fff;
@@ -12133,40 +12285,12 @@ input[type="checkbox"] {
   color: #828282;
 }
 
-.edit_ticket main {
-  margin-bottom: 100px;
-}
-
 @media (min-width: 575px) {
   .edit_ticket .edit-menu-ticket {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
   }
-}
-
-h1.header {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  padding-left: 0.625rem;
-}
-
-.edit-ticket-algemeen,
-.edit-ticket-melder,
-.edit-ticket-locatie,
-.edit-ticket-dier,
-.edit-ticket-eigenaar,
-.edit-ticket-financien {
-  margin-bottom: 1.25rem;
-}
-
-.content h2 {
-  color: #828282;
-  margin: 0rem;
-}
-
-td {
-  padding: 0px !important;
 }
 
 .locatie-wrap {
@@ -12177,6 +12301,18 @@ td {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0.8125rem;
+}
+
+.locatie-wrap table {
+  width: 100%;
+}
+
+td {
+  padding: 0px !important;
+}
+
+img.delete-dest {
+  padding: 0px 0px 0px 10px;
 }
 
 .btn-delete-location,
@@ -12205,12 +12341,37 @@ td {
   margin-top: 0.625rem;
 }
 
-.edit-ticket-financien h6 {
+.grey {
+  background-color: #F2F2F2;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0.625rem 1.5625rem 0.625rem 0.9375rem;
+  margin-bottom: 0px;
+  border-bottom: 1px solid #B8B8B8;
+}
+
+@media (min-width: 575px) {
+  .grey {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+.th {
+  color: #828282;
+  font-weight: normal;
+}
+
+.factuur-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.edit-ticket-blok.financien h6 {
   font-size: 1.125rem !important;
   margin: 0 0 0 0;
 }
 
-.edit-ticket-financien span:first-child {
+.edit-ticket-blok.financien span:first-child {
   padding: 0.9375rem 1.25rem;
   width: 100%;
 }
@@ -12226,14 +12387,6 @@ td {
   margin: 0.625rem 0 0.625rem 0;
 }
 
-.factuur-wrap {
-  margin-bottom: 1.25rem;
-}
-
-.locatie-wrap table {
-  width: 100%;
-}
-
 .factuur-card img,
 .gift-card img {
   padding: 0.9375rem 1.25rem;
@@ -12245,14 +12398,6 @@ td {
   border: none;
 }
 
-button {
-  padding: 0px !important;
-}
-
-img.delete-dest {
-  padding: 0px 0px 0px 10px;
-}
-
 .delete-task {
   background: none;
   border: none;
@@ -12260,15 +12405,6 @@ img.delete-dest {
 
 .italic {
   font-style: italic;
-}
-
-.grey {
-  background-color: #F2F2F2;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 0.625rem 0.9375rem;
-  margin-bottom: 0px;
-  border-bottom: 1px solid #B8B8B8;
 }
 
 .edit_ticket nav {
@@ -12297,18 +12433,6 @@ select .selected {
   padding: 5px 10px !important;
   background-color: #288B5F;
   border-color: #288B5F;
-}
-
-@media (min-width: 575px) {
-  .grey {
-    width: 100%;
-    margin-left: 0px;
-  }
-}
-
-.th {
-  color: #828282;
-  font-weight: normal;
 }
 
 @-webkit-keyframes leaflet-gestures-fadein {
