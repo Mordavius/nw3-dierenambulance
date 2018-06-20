@@ -155,6 +155,7 @@
       </div>
   </div>
 </div>
+</div>
 <div class="pages" id="page2">
     <div ng-app="app">
         <div ng-controller="TableController" >
@@ -207,6 +208,7 @@
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+
 <script type="text/javascript" src="{{asset('js/filter.js') }}"></script>
 @endsection
 @endsection

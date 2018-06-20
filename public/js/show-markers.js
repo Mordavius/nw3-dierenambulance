@@ -1,7 +1,6 @@
 var app = angular.module("app", [])
 .controller("TableController", ['$scope','$http', function($scope, $http){
 
-    $scope.distance = [];
     $scope.map = L.map("map", {
     center: [53, 5.7],
     zoom: 10,
@@ -15,16 +14,18 @@ var app = angular.module("app", [])
         minZoom: 1,
     }).addTo($scope.map);
 
-	var coords = $('#map').data('coordinates')
-	coords.forEach(function(coord){
-		placeMarker(coord);
-	})
+    var coords = $('#map').data('coordinates')
 
-	function placeMarker(i){
-		var latlng = L.latLng(i.lat, i.lng);
-		var marker = L.marker(latlng).addTo($scope.map);
-        $scope.distance.push(latlng);
-	}
+	coords.forEach(function(coord){
+        if (coord != null) {
+            placeMarker(coord);
+        }
+        function placeMarker(i){
+            var latlng = L.latLng(i.lat, i.lng);
+            var marker = L.marker(latlng).addTo($scope.map);
+            // $scope.distance.push(latlng);
+        }
+	})
 
 $('#toggle-button').click(toggle);
 $('#toggle-button-desktop').click(toggle);
