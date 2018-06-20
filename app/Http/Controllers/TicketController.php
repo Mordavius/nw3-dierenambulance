@@ -373,14 +373,26 @@ class TicketController extends Controller
         $date = $request->date;
         $animal = $request->animal;
         $city = $request->city;
+
         $tickets = Ticket::query()->whereBetween('date', [$date, date(now())])->get();
         $destination_array = [];
         $animal_array = [];
         $ticket_array = [];
 
         foreach ($tickets as $ticket) {
-                $animalresult = Animal::where([['id', $ticket->id], ['animal_species', $animal],])->first();
-                $destinationresult = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%'.$city.'%']])->first();
+
+                if ($animal == 'alles'){
+                    $animalresult = Animal::where('id', $ticket->id)->first();
+                }
+                else {
+                    $animalresult = Animal::where([['id', $ticket->id], ['animal_species', $animal],])->first();
+                }
+                if ($city == 'alles') {
+                    $destinationresult = Destination::where('id', $ticket->id)->first();
+                }
+                else {
+                    $destinationresult = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%' . $city . '%']])->first();
+                }
 
                 if($ticket && $animalresult && $destinationresult){
                     array_push($ticket_array, $ticket);

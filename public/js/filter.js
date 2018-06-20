@@ -23,6 +23,17 @@ function filterTickets() {
     var animalfieldvalue = $('#animal_species').val();
     var locationfield = $('#location').val();
 
+
+    console.log(animalfieldvalue, locationfield);
+    if (animalfieldvalue == ''){
+        animalfieldvalue = 'alles';
+    }
+    if (locationfield == ''){
+        locationfield = 'alles';
+    }
+
+
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
