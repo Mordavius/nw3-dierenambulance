@@ -24,6 +24,7 @@
             <option value="Anders">Anders</option>
         </select>
         <select placeholder="Gemeente" id="township" type="text" name="township">
+            <option value="all">Alles</option>
             @foreach($destinations as $destination)
                 <option value="{{$destination->township}}">{{$destination->township}}</option>
             @endforeach
