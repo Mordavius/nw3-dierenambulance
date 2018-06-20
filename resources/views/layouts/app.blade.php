@@ -19,9 +19,7 @@
         <link rel="stylesheet" href="{{ url('/') }}/css/style.css">
 
         <!-- Scripts -->
-        <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
-        <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
-        <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
+
     </head>
     <body class="@yield('body_class')">
         <div id="app">
@@ -89,8 +87,12 @@
             </main>
         </div>
         </div>
-        @yield('scripts')
+
+        <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
+        <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
+        @yield('scripts')
 
     </body>
 

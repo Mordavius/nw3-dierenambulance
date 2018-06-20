@@ -360,7 +360,6 @@
 @section('scripts')
 <meta name="_token" content="{!! csrf_token() !!}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="{{asset('js/angular.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/ajax-destinations.js')}}"></script>
 <script src="{{asset('js/table-directive.js')}}"></script>
