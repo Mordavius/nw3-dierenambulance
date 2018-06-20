@@ -205,7 +205,6 @@
 
 @section('scripts')
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/filter.js') }}"></script>
