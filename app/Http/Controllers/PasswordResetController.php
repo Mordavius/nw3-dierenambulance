@@ -29,6 +29,11 @@ class PasswordResetController extends Controller
     {
         $new_password = $request['password'];
         User::where('id', $id)->update([
+            'postal_code' => $request['postal_code'],
+            'address' => $request['address'],
+            'house_number' => $request['house_number'],
+            'city' => $request['city'],
+            'township' => $request['township'],
             'password' => Hash::make($new_password), // Hash the password
         ]);
         return redirect('/')->with('alert', "Wachtwoord opgeslagen");
