@@ -18,8 +18,8 @@ class CreateOwnersTable extends Migration
             $table->integer('ticket_id');
             $table->string('name');
             $table->string('telephone_number');
-            $table->string('postal_code');
-            $table->string('address');
+            $table->string('owner_postal_code');
+            $table->string('owner_address');
             $table->string('owner_house_number')->nullable();
             $table->string('owner_city');
             $table->string('owner_township');
