@@ -17,7 +17,6 @@ class CreateBusTable extends Migration
             $table->increments('id');
             $table->string('bus_type');
             $table->integer('milage')->default(0);
-            $table->integer('buschange_id');
             $table->timestamps();
         });
     }

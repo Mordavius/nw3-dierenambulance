@@ -50,3 +50,18 @@
 		0% {transform: rotate(0deg);}
 		100% {transform: rotate(180deg);}
 	}
+
+
+  .btn-success
+  {
+    background: $primary-color;
+    border-radius: 0;
+    border: none;
+    padding: 13px 18px;
+    color: $white;
+
+    &.full-width
+    {
+      width: 100%;
+    }
+  }

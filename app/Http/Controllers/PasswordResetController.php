@@ -17,7 +17,8 @@ class PasswordResetController extends Controller
     }
     public function index($id, $token)
     {
-        $user = User::where('token', $token)->get();
+        // dd($id, $token);
+        $user = User::where('token', '=', $token)->get();
         $token_user = User::where('token', $token)->pluck('token');
 
         if ($token == $token_user[0]) {

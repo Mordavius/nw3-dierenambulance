@@ -1,37 +1,101 @@
-.edit-header {
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-  width: 100%;
+//=============================================================================
+//                               Algemeen
+//=============================================================================
+.edit_ticket {
+  main {
+    margin-bottom: 100px;
+    overflow: hidden;
+  }
+  .container{
+    padding-top: 60px;
+  }
+
+  .content h2 {
+    color: #828282;
+    margin: rem-calc(0);
+  }
+  button {
+    padding: 0px !important;
+  }
 }
 
-.edit-menu h6 {
-  color: $dark-gray;
-  margin-bottom: 0;
-  display: inline-block;
-}
-
-h1.header {
-  padding-top: rem-calc(10);
-  padding-bottom: rem-calc(10);
-  padding-left: rem-calc(10);
-}
-
-.edit-ticket-algemeen, .edit-ticket-melder, .edit-ticket-locatie, .edit-ticket-dier, .edit-ticket-eigenaar, .edit-ticket-financien {
+.edit-ticket-blok {
   margin-bottom: rem-calc(20);
 }
 
-.content h2 {
-  color: #828282;
-  margin: rem-calc(0);
+.delete-task, #edit-save-btn {
+  &:focus {
+    outline: none;
+}
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+//=============================================================================
+//                                header
+//=============================================================================
+
+.edit-menu-ticket {
+  width: 100%;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.125rem 1.5rem;
+  button {
+    background: none;
+    border: none;
+  }
+}
+
+.edit-menu-balk {
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  display: fixed;
+}
+
+.edit-menu-ticket {
+  h1, h6 {
+  margin-bottom: 0;
+  display: inline;
+}}
+
+.edit-menu-ticket h6 {
+  color: $dark-gray;
+}
+
+@media (min-width: 575px) {
+  .edit_ticket {
+    .edit-menu-ticket {
+      display: flex;
+    }
+  }
+}
+
+//=============================================================================
+//                                Content
+//=============================================================================
+//Locatie
+.locatie-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: rem-calc(13);
+}
+
+.locatie-wrap table {
+  width: 100%;
 }
 
 td {
   padding: 0px !important;
 }
 
-.locatie-wrap {
-  display: flex;
-  align-items: center;
-  margin-bottom: rem-calc(13);
+img.delete-dest {
+  padding: 0px 0px 0px 10px;
 }
 
 .btn-delete-location, .close-model {
@@ -54,13 +118,39 @@ td {
   margin-top: rem-calc(10);
 }
 
-.edit-ticket-financien h6 {
+.grey {
+  background-color: $light-gray;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: rem-calc(10) rem-calc(25) rem-calc(10) rem-calc(15);
+  margin-bottom: 0px;
+  border-bottom: 1px solid $gray;
+}
+
+@media (min-width: 575px) {
+  .grey {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+.th {
+  color: $dark-gray;
+  font-weight: normal;
+}
+
+
+//Financiën
+.factuur-wrap {
+  margin-bottom: rem-calc(20);
+}
+
+.edit-ticket-blok.financien h6 {
   font-size: rem-calc(18) !important;
-  font-weight: bold;
   margin: 0 0 0 0;
 }
 
-.edit-ticket-financien span:first-child {
+.edit-ticket-blok.financien span:first-child {
   padding: rem-calc(15) rem-calc(20);
   width: 100%;
 }
@@ -70,14 +160,6 @@ td {
   overflow: hidden;
   display: flex;
   margin: rem-calc(10) 0 rem-calc(10) 0;
-}
-
-.factuur-wrap {
-  margin-bottom: rem-calc(20);
-}
-
-.locatie-wrap table {
-  width: 100%;
 }
 
 .factuur-card img, .gift-card img {
@@ -90,25 +172,13 @@ td {
   border: none;
 }
 
-button {
-  padding: 0px !important;
-}
-
-img.icon {
-  padding: 0px 0px 0px 10px;
+.delete-task {
+  background: none;
+  border: none;
 }
 
 .italic {
   font-style: italic;
-}
-
-.grey {
-  background-color: $light-gray;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: rem-calc(10) rem-calc(15);
-  margin-bottom: 0px;
-  border-bottom: 1px solid $gray;
 }
 
 .edit_ticket nav {
@@ -119,6 +189,9 @@ select .selected {
   color: #888;
 }
 
+//=============================================================================
+//                                Modal
+//=============================================================================
 .close-model {
   padding: 1rem;
 }
@@ -135,11 +208,4 @@ select .selected {
   padding: 5px 10px !important;
   background-color: $primary-color;
   border-color: $primary-color;
-}
-
-@media (min-width: 575px) {
-  .grey {
-    width: 100%;
-    margin-left: 0px;
-  }
 }

@@ -19,8 +19,6 @@ class CreateAnimalTable extends Migration
             $table->string('breed')->nullable();
             $table->string('injury')->nullable();
             $table->string('gender');
-            $table->boolean('catch_cage')->nullable();
-            $table->string('chip_number')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });

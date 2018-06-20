@@ -12,7 +12,8 @@ class Buschange extends Model
     // Set the columns for storing data in the database
     protected $fillable = ['bus', 'from', 'to', 'milage', 'date'];
 
-    public function role() {
+    public function role()
+    {
 
         return $this->belongsTo('App\Role');
     }

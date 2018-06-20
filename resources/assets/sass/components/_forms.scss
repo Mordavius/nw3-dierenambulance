@@ -1,4 +1,4 @@
-input:not([type="checkbox"]),
+input:not([type="checkbox"]):not([type="submit"]),
 textarea,
 select
 {
@@ -42,6 +42,10 @@ input[type="checkbox"]
     padding: 0;
     list-style-type: none;
 
+    .selected{
+        background: $secondary-color;
+        color: $white;
+    }
     input
     {
       position: absolute;
@@ -71,6 +75,11 @@ input[type="checkbox"]
     {
         background: $secondary-color;
         color: $white;
+    }
+
+    .segmented-control__input
+    {
+      width: auto;
     }
 
     .segmented-control__input:checked + .segmented-control__label {

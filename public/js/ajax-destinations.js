@@ -90,7 +90,6 @@ $(document).ready(function(){
                 success: function (data) {
                     console.log(data);
                     location.reload();
-                    $("#destination" + task_id).remove();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -121,17 +120,13 @@ $(document).ready(function(){
             house_number: $('#house_number').val(),
             city: $('#city').val(),
             township: $('#township').val(),
-            verhicle: $('#verhicle').val(),
+            vehicle: $('#vehicle').val(),
             milage: $('#milage').val(),
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save').val();
-
         var type = "POST"; //for creating new resource
-        var task_id = $('#task_id').val();
         var my_url = url;
-        var formMessages = $('#messages');
 
         console.log(formData);
 
@@ -145,28 +140,28 @@ $(document).ready(function(){
                 // console.log(data);
 
                 if(document.getElementById('postal_code').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen postcode ingevoerd</p>');
+                    jQuery('.alert.alert-danger.destination').show();
+                    jQuery('.alert.alert-danger.destination').append('<p>Geen postcode ingevoerd</p>');
                 }
 
                 if(document.getElementById('house_number').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen huisnummer ingevoerd</p>');
+                    jQuery('.alert.alert-danger.destination').show();
+                    jQuery('.alert.alert-danger.destination').append('<p>Geen huisnummer ingevoerd</p>');
                 }
 
                 if(document.getElementById('address').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen straatnaam ingevoerd</p>');
+                    jQuery('.alert.alert-danger.destination').show();
+                    jQuery('.alert.alert-danger.destination').append('<p>Geen straatnaam ingevoerd</p>');
                 }
 
                 if(document.getElementById('city').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen plaats ingevoerd</p>');
+                    jQuery('.alert.alert-danger.destination').show();
+                    jQuery('.alert.alert-danger.destination').append('<p>Geen plaats ingevoerd</p>');
                 }
 
                 if(document.getElementById('milage').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen kilometerstand ingevoerd</p>');
+                    jQuery('.alert.alert-danger.destination').show();
+                    jQuery('.alert.alert-danger.destination').append('<p>Geen kilometerstand ingevoerd</p>');
                     return false;
                 }
 
@@ -179,7 +174,7 @@ $(document).ready(function(){
             complete: function(data) {
                 if(data.status == 'success') {
                     location.reload();
-                    $('#myModal-payment').modal('hide')
+                    $('#myModal').modal('hide')
                 }
             },
             error: function (data) {
@@ -220,7 +215,6 @@ $(document).ready(function(){
                 success: function (data) {
                     console.log(data);
                     location.reload();
-                    $("#finances" + task_id).remove();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -247,15 +241,12 @@ $(document).ready(function(){
             ticket_id: $('#ticket_id').val(),
             payment_invoice: $('#payment_invoice').val(),
             payment_gifts: $('#payment_gifts').val(),
-            payment_method: $('#payment_method').val(),
+            payment_method: $('#payment_method').val()
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save-payment').val();
         var type = "POST"; //for creating new resource
-        var task_id = $('#task_id').val();
         var my_url = url;
-        var append = (append === undefined ? false : true);
 
         console.log(formData);
 
@@ -268,8 +259,8 @@ $(document).ready(function(){
 
 
                 if(document.getElementById('payment_invoice').value === '' && document.getElementById('payment_gifts').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Betaling niet ingevoerd</p>');
+                    jQuery('.alert.alert-danger.payment').show();
+                    jQuery('.alert.alert-danger.payment').append('<p>Betaling niet ingevoerd</p>');
                 }
 
                 else {
@@ -372,11 +363,8 @@ $(document).ready(function(){
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save-owner').val();
         var type = "POST"; //for creating new resource
-        var task_id = $('#task_id').val();
         var my_url = url;
-        var append = (append === undefined ? false : true);
 
         console.log(formData);
 
@@ -389,33 +377,33 @@ $(document).ready(function(){
                 console.log(data);
 
                 if(document.getElementById('name').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen naam ingevoerd</p>');
+                    jQuery('.alert.alert-danger.owner').show();
+                    jQuery('.alert.alert-danger.owner').append('<p>Geen naam ingevoerd</p>');
                 }
 
                 if(document.getElementById('telephone_number').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen telefoon ingevoerd</p>');
+                    jQuery('.alert.alert-danger.owner').show();
+                    jQuery('.alert.alert-danger.owner').append('<p>Geen telefoon ingevoerd</p>');
                 }
 
                 if(document.getElementById('owner_postal_code').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen postcode ingevoerd</p>');
+                    jQuery('.alert.alert-danger.owner').show();
+                    jQuery('.alert.alert-danger.owner').append('<p>Geen postcode ingevoerd</p>');
                 }
 
                 if(document.getElementById('owner_house_number').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen huisnummer ingevoerd</p>');
+                    jQuery('.alert.alert-danger.owner').show();
+                    jQuery('.alert.alert-danger.owner').append('<p>Geen huisnummer ingevoerd</p>');
                 }
 
                 if(document.getElementById('owner_address').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen straatnaam ingevoerd</p>');
+                    jQuery('.alert.alert-danger.owner').show();
+                    jQuery('.alert.alert-danger.owner').append('<p>Geen straatnaam ingevoerd</p>');
                 }
 
                 if(document.getElementById('owner_city').value === '') {
-                    jQuery('.alert.alert-danger').show();
-                    jQuery('.alert.alert-danger').append('<p>Geen plaats ingevoerd</p>');
+                    jQuery('.alert.alert-danger.owner').show();
+                    jQuery('.alert.alert-danger.owner').append('<p>Geen plaats ingevoerd</p>');
                 }
 
                 else {

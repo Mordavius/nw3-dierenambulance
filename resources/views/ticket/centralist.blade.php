@@ -23,16 +23,18 @@
       <h1>Meldingen</h1>
   </div>
   <div class="right">
-    <button id="toggle-button">
-      <img id="map-image" src="images/map-view.png">
-      <img id="list-image" src="images/list-view-active.png">
+    <button id="toggle-button-desktop">
+      <img id="map-image-desktop" src="images/map-view.png">
+      <img id="list-image-desktop" src="images/list-view-active.png">
     </button>
-    <input class="search_field" type="search" name="search" placeholder="Zoeken..">
+      <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
   <div class="filters">
-    <input type="text" name="" value="">
-    <input type="text" name="" value="">
-    <input class="btn btn-success" type="submit" name="" value="Filteren">
+    <input type="date" name="date" value="" id="date">
+    <input type="text" name="animal_species" value="" id="animal_species">
+    <input type="text" name="location" value="" id="location">
+    <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+    <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
   </div>
 </div>
 
@@ -42,13 +44,31 @@
           <div class="grid_header">
               <div class="tickets open_tickets"><h2>Openstaande meldingen</h2></div>
               <div class="result_amount"><span>{{$unfinishedtickets->count()}} melding(en)</span></div>
+              @if(session('message'))
+                  <div class="alert alert-success">
+                      {{ session('message') }}
+                  </div>
+              @endif
           </div>
+          <div class="grid_main" id="unfinished">
           <div class="grid_main">
+
+              <div class="panel-body">
+                  <table class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+              </div>
+
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
                           <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
-                          <div class="grid_ticket">
+                          <article class="grid_ticket">
                               <div class="test">
                               </div>
                               <div class="ticket_number">
@@ -56,7 +76,7 @@
                               </div>
                               <div class="grid_animal_icon">
                                   <div class="ticket_icon">
-                                      <img src="/images/hond.svg" id="animal_icon">
+                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
                                   </div>
                               </div>
                               <div class="ticket_main_info">
@@ -66,22 +86,22 @@
                                   </div>
                                   <div class="ticket_address">
                                     <span>
-                                      @foreach($destinations as $destination)
-                                          @if($destination->ticket_id == $unfinishedticket->id)
-                                              {{$destination->address}}
-                                              @if($destination->house_number != '0')
-                                                  {{$destination->house_number}}
+                                      @foreach($destination_array as $destination)
+                                          @if($destination['ticket_id'] == $unfinishedticket->id)
+                                              {{$destination['address']}}
+                                              @if($destination['house_number'] != '0')
+                                                  {{$destination['house_number']}}
                                               @endif
                                               ,<br>
-                                              {{$destination->postal_code}}
-                                              {{$destination->city}}
+                                              {{$destination['postal_code']}}
+                                              {{$destination['city']}}
                                           @endif
                                       @endforeach
                                     </span>
                                   </div>
                               </div>
                               <p class="ticket_description">{{str_limit($animal->description, 75)}}</p>
-                          </div>
+                          </article>
                       </a>
                           @endif
                       @endforeach
@@ -92,17 +112,19 @@
           <div class="grid_header">
               <div class="tickets closed_tickets"><h2>Afgeronde meldingen</h2></div>
           </div>
-          <div class="grid_main">
+          <div class="grid_main" id="finished">
               @foreach($finishedtickets as $finishedticket)
                       @foreach($animals as $animal)
                           @if($finishedticket->animal_id == $animal->id)
                           <div class="grid_ticket">
+                              <div class="test">
+                              </div>
                               <div class="ticket_number">
                                   #{{ $finishedticket->id }}
                               </div>
                               <div class="grid_animal_icon">
                                   <div class="ticket_icon">
-                                      <img src="/images/hond-icon.png" id="animal_icon">
+                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
                                   </div>
                               </div>
                               <div class="ticket_main_info">
@@ -142,11 +164,50 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+            }
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+
+
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+            }
+        });
+    })
+
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+
 
 @section('scripts')
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/filter.js') }}"></script>
 @endsection
 @endsection

@@ -62,14 +62,12 @@
                     <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
                 </div>
                 <div class="phone_number">
-                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">    
-                  </div>
+                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">
                 </div>
-                <label for="eigenaar"><input type="checkbox" name="eigenaar" value="eigenaar">Melder is eigenaar</label>
-                <span></span>
-                <p class="boodschap">Vergeet niet te melden dat de gegevens van de melder worden opgeslagen</p>
             </div>
+            <p class="boodschap">Vergeet niet te melden dat de gegevens van de melder worden opgeslagen</p>
         </div>
+    </div>
     <div class="pages" id="page2">
         <div class="page">
             <div class="title_page">
@@ -85,6 +83,7 @@
                     Ga
                 </button>
             </div>
+            <input type="button" id="sendLocationButton" class="btn btn-success">
             <div id="app" ng-app="app">
                 <div ng-controller="TableController" >
                     <div id="map" class="panel panel-default panel-success">
@@ -130,8 +129,8 @@
                             <span>Konijn</span>
                         </div>
                     </div>
-                    <div class="animal_card" onclick="selectAnimalSpieces('Anders', 'images/dino.svg');">
-                      <img src="{{asset('images/dino.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Anders', 'images/anders.svg');">
+                      <img src="{{asset('images/anders.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Anders</span>
                         </div>
@@ -270,7 +269,20 @@
                 </div>
                 <div class="priority_new_ticket">
                     <label class="priority_label">Prioriteit</label>
-                    <span class="ticket_text_field" class="bus">Sprinter</span>
+                    <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
+                        {!! Form::label('Selecteer het voertuig') !!} <br />
+                        <select name="vehicle" id="vehicle">
+                            @foreach($bus as $buses)
+                                <option value="{{$buses}}">{{$buses}}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('vehicle'))
+                            <span class="help-block">
+                                {{ $errors->first('vehicle') }}
+                            </span>
+                        @endif
+                    </div>
+                    <input type="hidden" id="milage" name="milage" value={{ $milage }}>
                     <input class="ticket_text_field" type="label" name="priority" id="priority"/>
                 </div>
               </div>

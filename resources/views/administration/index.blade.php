@@ -1,11 +1,6 @@
 @extends('layouts.app')
 @section('content')
 @include('administration.admin_menu')
-<a href="/melding/create">
-    <button class="round">
-        <img src="../images/plus.png" class="rotate-button"/>
-    </button>
-</a>
 <div class="wrapper">
     @if (session('status'))
         <div class="alert alert-success">

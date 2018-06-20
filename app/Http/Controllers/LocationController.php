@@ -7,6 +7,7 @@ use App\Location;
 use Bjrnblm\Messagebird\Messagebird;
 use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use MessageBird\Client;
 use MessageBird\Common\HttpClient;
 use MessageBird\Resources\Chat\Message;
@@ -67,9 +68,10 @@ class LocationController extends Controller
 
     public function askLocationSMS(Request $request)
     {
-        $client = new Client('acceskey');
+        $client = new Client('');
         $messagebird = new Messagebird($client);
-        $message = $messagebird->createMessage("Dierenambu",["+31"/*$request->phonenumber*/], " mainlink/location/".$request->id);
+        $phonenumber = substr($request->phonenumber, 1);
+        $message = $messagebird->createMessage("Dierenambu",["+31".$phonenumber], URL('/api/location/'.$request->id));
 
         if (is_object($message) && $message->recipients->items[0]->status === 'sent') {
             return response(json_encode('message sent'), 200);

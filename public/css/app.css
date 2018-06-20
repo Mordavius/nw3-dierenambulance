@@ -10411,6 +10411,126 @@ a.text-dark:focus {
   }
 }
 
+/* http://meyerweb.com/eric/tools/css/reset/ */
+
+/* v1.0 | 20080212 */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+/* remember to define focus styles! */
+
+:focus {
+  outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+
+ins {
+  text-decoration: none;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 h1,
 h2,
 h3,
@@ -10481,7 +10601,7 @@ main {
 
 .admin-menu ul {
   list-style-type: none;
-  padding: 15px 21px 0 21px;
+  padding: 0px 21px 0 21px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10507,6 +10627,14 @@ main {
 .admin-menu ul li.menu-item {
   display: inline-block;
   border-bottom: #fff solid 5px;
+  width: 25%;
+}
+
+@media (min-width: 992px) {
+  .admin-menu ul li.menu-item {
+    width: 100%;
+    text-align: none;
+  }
 }
 
 .admin-menu ul li.menu-item.active {
@@ -10522,6 +10650,10 @@ main {
   }
 }
 
+.admin-menu ul li.menu-item.active a .svgwrapper path {
+  fill: black;
+}
+
 @media (min-width: 992px) {
   .admin-menu ul li.menu-item {
     padding: 3.3125rem 0;
@@ -10532,7 +10664,7 @@ main {
 .admin-menu ul li.menu-item a {
   color: #000;
   text-decoration: none;
-  padding: 0.5rem;
+  text-align: center;
 }
 
 .admin-menu ul li.menu-item .icon {
@@ -10577,6 +10709,10 @@ main {
   }
 }
 
+.svgwrapper path {
+  fill: gray;
+}
+
 @media (min-width: 992px) {
   .wrapper {
     padding-top: 3.5625rem;
@@ -10601,6 +10737,7 @@ main {
 .wrapper .content h1 {
   margin-bottom: 2.375rem;
   display: none;
+  font-size: 24px;
 }
 
 @media (min-width: 992px) {
@@ -10611,18 +10748,15 @@ main {
 
 .wrapper .content .btn-success {
   float: right;
-  background: #288B5F;
-  font-size: 16px;
-  padding: 5px 18px 5px 18px;
-  border-radius: 0;
   margin-top: 0 !important;
   margin-right: 21px;
-  border: none;
+  font-size: 16px;
+  padding: 5px 18px 5px 18px;
 }
 
 @media (min-width: 992px) {
   .wrapper .content .btn-success {
-    margin-right: none;
+    margin-right: 0;
   }
 }
 
@@ -10667,6 +10801,7 @@ main {
   text-transform: capitalize;
   margin-bottom: 0;
   line-height: 1;
+  font-size: 24px;
 }
 
 .wrapper .content .list .list-item .delete {
@@ -10716,6 +10851,7 @@ main {
 
 .edit_page .content {
   padding: 3.125rem 1.3125rem 0 1.3125rem;
+  margin-bottom: 50px;
 }
 
 .edit_page .content h1 {
@@ -10766,7 +10902,7 @@ main {
   border: none;
 }
 
-input:not([type="checkbox"]),
+input:not([type="checkbox"]):not([type="submit"]),
 textarea,
 select {
   border: 0;
@@ -10779,14 +10915,14 @@ select {
   padding-left: 0.25rem;
 }
 
-input:not([type="checkbox"]):focus,
+input:not([type="checkbox"]):not([type="submit"]):focus,
 textarea:focus,
 select:focus {
   outline: none;
   border-bottom: 1px solid #000;
 }
 
-input:not([type="checkbox"])::-webkit-inner-spin-button,
+input:not([type="checkbox"]):not([type="submit"])::-webkit-inner-spin-button,
 textarea::-webkit-inner-spin-button,
 select::-webkit-inner-spin-button {
   display: none;
@@ -10809,6 +10945,11 @@ input[type="checkbox"] {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+.segmented-control .segmented-control__item .selected {
+  background: #2D9CDB;
+  color: #fff;
 }
 
 .segmented-control .segmented-control__item input {
@@ -10839,6 +10980,10 @@ input[type="checkbox"] {
   color: #fff;
 }
 
+.segmented-control .segmented-control__item .segmented-control__input {
+  width: auto;
+}
+
 .segmented-control .segmented-control__item .segmented-control__input:checked + .segmented-control__label {
   background: #2D9CDB;
   color: #fff;
@@ -10855,8 +11000,19 @@ input[type="checkbox"] {
 }
 
 .ticket_centralist .head {
-  padding: 2.5rem 11.125rem;
   display: none;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .head {
+    padding: 2.5rem 6.25rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .ticket_centralist .head {
+    padding: 2.5rem 11rem;
+  }
 }
 
 .ticket_centralist .head::after {
@@ -10876,21 +11032,43 @@ input[type="checkbox"] {
   padding: 0;
 }
 
-.ticket_centralist .head #toggle-button {
-  margin-bottom: 0;
+.ticket_centralist .head #toggle-button-desktop {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.ticket_centralist .head #toggle-button-desktop #map-image-desktop {
+  margin-right: 10px;
+  height: 24px;
+  width: 16px;
+}
+
+.ticket_centralist .head #toggle-button-desktop #list-image-desktop {
+  height: 18px;
+  width: 22px;
 }
 
 .ticket_centralist .head .search_field {
   width: 350px;
   margin-left: 38px;
   margin-bottom: 0;
+  padding: 13px 11px;
   border: 1px solid #B8B8B8;
 }
 
-.ticket_centralist .head .filters input {
+.ticket_centralist .head .filters {
+  margin-top: 80px;
+}
+
+.ticket_centralist .head .filters input:not([type="submit"]) {
   display: inline-block;
   width: auto;
   margin-bottom: 0;
+  margin-right: 10px;
+  border: 1px solid #B8B8B8;
+  font-size: 18px;
+  padding: 13px 11px;
 }
 
 .ticket_centralist .ticket-wrapper {
@@ -10899,6 +11077,12 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper {
+    padding: 1.375rem 6.25rem;
+  }
+}
+
+@media (min-width: 1500px) {
   .ticket_centralist .ticket-wrapper {
     padding: 1.375rem 11rem;
   }
@@ -10909,33 +11093,62 @@ input[type="checkbox"] {
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_header {
-  padding-left: 0;
   margin-bottom: 25px;
+  padding-left: 21px;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_header {
+    padding-left: 0;
+  }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main {
   background: #F4F4F4;
+  border: 1px solid #E5E5E5;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 1rem;
+    border: none;
+  }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .table {
+  background-color: #fff;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .table thead {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .table td {
+  padding: 21px;
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main a {
   text-decoration: none;
-  display: inline-block;
 }
 
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main a {
-    margin-right: 20px;
+    display: inline-block;
   }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
   background: #fff;
+  border: 0;
+  border-bottom: 1px solid #E5E5E5;
 }
 
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
-    width: 350px;
-    margin-bottom: 20px;
+    border: 1px solid #E5E5E5;
   }
 }
 
@@ -10948,24 +11161,32 @@ input[type="checkbox"] {
   margin-right: 21px;
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon {
+  padding: 0;
+  position: relative;
+  margin-right: 18px;
+}
+
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon {
     height: 78px;
     width: 78px;
-    padding: 0;
-    position: relative;
+    margin-right: 0;
   }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon img#animal_icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .grid_animal_icon .ticket_icon img#animal_icon {
     height: 60%;
     width: 60%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
   }
 }
 
@@ -10985,11 +11206,15 @@ input[type="checkbox"] {
   content: "";
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
+  grid-column: 1/6;
+  margin-left: 21px;
+  margin-right: 21px;
+  font-size: 18px;
+}
+
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
-    grid-column: 1/6;
-    margin-left: 21px;
-    margin-right: 21px;
     height: 175px;
   }
 }
@@ -11049,6 +11274,18 @@ input[type="checkbox"] {
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
   }
+}
+
+.btn-success {
+  background: #288B5F;
+  border-radius: 0;
+  border: none;
+  padding: 13px 18px;
+  color: #fff;
+}
+
+.btn-success.full-width {
+  width: 100%;
 }
 
 .grid_container {
@@ -11319,7 +11556,7 @@ input[type="checkbox"] {
 }
 
 .ticketcreate .main .pages #map {
-  height: 500px !important;
+  height: 600px !important;
 }
 
 @media (min-width: 992px) {
@@ -11375,6 +11612,12 @@ input[type="checkbox"] {
   }
 }
 
+.ticketcreate .main .pages .page .boodschap {
+  color: #828282;
+  font-size: 0.875rem;
+  margin: 2.8125rem 1.3125rem 0 1.3125rem;
+}
+
 .ticketcreate .main .pages .page .reporter_info {
   padding: 20px;
   margin-bottom: 50px;
@@ -11417,13 +11660,6 @@ input[type="checkbox"] {
     grid-row: 1/1;
     grid-column: 2/3;
   }
-}
-
-.ticketcreate .main .pages .page .reporter_info .boodschap {
-  color: #828282;
-  font-size: 0.875rem;
-  margin-bottom: 0;
-  margin-top: 2.8125rem;
 }
 
 .ticketcreate .main .pages .page .searchStuff {
@@ -11498,7 +11734,7 @@ input[type="checkbox"] {
   -webkit-transition: height .5s;
   transition: height .5s;
   height: 442px;
-  overflow: hidden;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 992px) {
@@ -11572,7 +11808,7 @@ input[type="checkbox"] {
   height: 0;
   overflow: hidden;
   width: 331px;
-  margin: 20px 20px 0;
+  margin: 20px 20px 10px 21px;
 }
 
 @media (min-width: 992px) {
@@ -11891,6 +12127,63 @@ input[type="checkbox"] {
   visibility: hidden;
 }
 
+.login_page .navbar {
+  display: none;
+}
+
+.login_page .container {
+  padding: 120px 21px 0 21px;
+  text-align: center;
+}
+
+.login_page .container .logo_wrap {
+  margin-bottom: 89px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .login_page .container .logo_wrap {
+    margin-bottom: 187px;
+  }
+}
+
+.login_page .container .logo_wrap .logo {
+  max-width: 241px;
+  width: 241px;
+  height: 86px;
+}
+
+@media (min-width: 992px) {
+  .login_page .container .logo_wrap .logo {
+    max-width: 418px;
+    width: 418px;
+    height: 149px;
+  }
+}
+
+.login_page .container form {
+  text-align: left;
+}
+
+@media (min-width: 992px) {
+  .login_page .container form {
+    width: 418px;
+  }
+}
+
+.login_page .container .btn-link {
+  padding: 0;
+  color: #000;
+  text-decoration: underline;
+  margin-top: 7px;
+  font-size: 14px;
+}
+
 .logo {
   max-width: 150px;
 }
@@ -11941,40 +12234,80 @@ input[type="checkbox"] {
   }
 }
 
-.edit-header {
+.edit_ticket main {
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+
+.edit_ticket .content h2 {
+  color: #828282;
+  margin: 0rem;
+}
+
+.edit_ticket button {
+  padding: 0px !important;
+}
+
+.edit-ticket-blok {
+  margin-bottom: 1.25rem;
+}
+
+.delete-task:focus,
+#edit-save-btn:focus {
+  outline: none;
+}
+
+.delete-task:hover,
+#edit-save-btn:hover {
+  cursor: pointer;
+}
+
+.edit-menu-ticket {
+  width: 100%;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1.125rem 1.5rem;
+}
+
+.edit-menu-ticket button {
+  background: none;
+  border: none;
+}
+
+.edit-menu-balk {
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   width: 100%;
 }
 
-.edit-menu h6 {
-  color: #828282;
+.edit-menu-ticket h1,
+.edit-menu-ticket h6 {
   margin-bottom: 0;
-  display: inline-block;
+  display: inline;
 }
 
-h1.header {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-  padding-left: 0.625rem;
-}
-
-.edit-ticket-algemeen,
-.edit-ticket-melder,
-.edit-ticket-locatie,
-.edit-ticket-dier,
-.edit-ticket-eigenaar,
-.edit-ticket-financien {
-  margin-bottom: 1.25rem;
-}
-
-.content h2 {
+.edit-menu-ticket h6 {
   color: #828282;
-  margin: 0rem;
 }
 
-td {
-  padding: 0px !important;
+@media (min-width: 575px) {
+  .edit_ticket .edit-menu-ticket {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 .locatie-wrap {
@@ -11985,6 +12318,18 @@ td {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0.8125rem;
+}
+
+.locatie-wrap table {
+  width: 100%;
+}
+
+td {
+  padding: 0px !important;
+}
+
+img.delete-dest {
+  padding: 0px 0px 0px 10px;
 }
 
 .btn-delete-location,
@@ -12013,13 +12358,37 @@ td {
   margin-top: 0.625rem;
 }
 
-.edit-ticket-financien h6 {
+.grey {
+  background-color: #F2F2F2;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0.625rem 1.5625rem 0.625rem 0.9375rem;
+  margin-bottom: 0px;
+  border-bottom: 1px solid #B8B8B8;
+}
+
+@media (min-width: 575px) {
+  .grey {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+.th {
+  color: #828282;
+  font-weight: normal;
+}
+
+.factuur-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.edit-ticket-blok.financien h6 {
   font-size: 1.125rem !important;
-  font-weight: bold;
   margin: 0 0 0 0;
 }
 
-.edit-ticket-financien span:first-child {
+.edit-ticket-blok.financien span:first-child {
   padding: 0.9375rem 1.25rem;
   width: 100%;
 }
@@ -12035,14 +12404,6 @@ td {
   margin: 0.625rem 0 0.625rem 0;
 }
 
-.factuur-wrap {
-  margin-bottom: 1.25rem;
-}
-
-.locatie-wrap table {
-  width: 100%;
-}
-
 .factuur-card img,
 .gift-card img {
   padding: 0.9375rem 1.25rem;
@@ -12054,25 +12415,13 @@ td {
   border: none;
 }
 
-button {
-  padding: 0px !important;
-}
-
-img.icon {
-  padding: 0px 0px 0px 10px;
+.delete-task {
+  background: none;
+  border: none;
 }
 
 .italic {
   font-style: italic;
-}
-
-.grey {
-  background-color: #F2F2F2;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 0.625rem 0.9375rem;
-  margin-bottom: 0px;
-  border-bottom: 1px solid #B8B8B8;
 }
 
 .edit_ticket nav {
@@ -12101,13 +12450,6 @@ select .selected {
   padding: 5px 10px !important;
   background-color: #288B5F;
   border-color: #288B5F;
-}
-
-@media (min-width: 575px) {
-  .grey {
-    width: 100%;
-    margin-left: 0px;
-  }
 }
 
 @-webkit-keyframes leaflet-gestures-fadein {

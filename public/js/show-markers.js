@@ -27,6 +27,7 @@ var app = angular.module("app", [])
 	}
 
 $('#toggle-button').click(toggle);
+$('#toggle-button-desktop').click(toggle);
 var img_array_map= new Array('images/map-view.png','images/map-view-active.png');
 var img_array_list= new Array('images/list-view-active.png','images/list-view.png');
 var i = 0;

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Destination;
+use App\Ticket;
 use App\TicketExport;
 use App\Quarterfinance;
 use Illuminate\Support\Facades\Log;
@@ -10,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 use League\Flysystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use App\User;
-
 
 class AdministrationController extends Controller
 {
@@ -35,10 +36,13 @@ class AdministrationController extends Controller
     // Export function for showing the page
     public function export()
     {
-        return view('administration.export', compact('ticket'));
+        $ticket = Ticket::all();
+        $destinations = Destination::all()->unique('township');
+        return view('administration.export', compact('ticket', 'destinations'));
     }
 
-    public function quartexports(){
+    public function quartexports()
+    {
         $quarterlies = Quarterfinance::all();
         return view('administration.quarterly', compact('quarterlies'));
     }
@@ -50,8 +54,7 @@ class AdministrationController extends Controller
         $filepath = $storage . $filename;
         try {
             return Storage::download('exports/' . $filename);
-        }
-        catch (FileNotFoundException $e) {
+        } catch (FileNotFoundException $e) {
             Log::channel('sentry')->error($e->getMessage());
             return Redirect::back()->withErrors(['Het door u opgevraagde bestand bestaat niet, neem contact op met de webmaster of probeer dit handmatig']);
         }
@@ -61,6 +64,13 @@ class AdministrationController extends Controller
     // Download the excel in xlsx format
     public function downloadExcel(Request $request)
     {
-        return $this->excel->download(new TicketExport($request->startdate, $request->enddate), 'meldingen.xlsx');
+        //check if withfinances is set
+        if (!$request->withfinance){
+        $withfinances = 'false';
+        }
+        else {
+            $withfinances = $request->withfinance;
+        }
+        return $this->excel->download(new TicketExport($request->enddate, $request->startdate, $request->animal, $request->township, $withfinances), 'meldingen.xlsx');
     }
 }
