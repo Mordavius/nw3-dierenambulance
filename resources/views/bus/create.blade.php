@@ -17,15 +17,21 @@
           'route' => 'bus.store'])
       !!}
       <div class="form-group{{ $errors->has('busname') ? 'has-error' : ''}}">
-          {!! Form::text('bus_type', null, ['class' => 'form-control'], [ 'placeholder' => 'Voertuig naam']) !!}
+          {!! Form::text('bus_type', null, ['class' => 'form-control', 'placeholder' => 'Voertuig naam']) !!}
 
           @if($errors->has('bus_type'))
             <br /><span class="alert alert-danger">{{ $errors->first('bus_type') }}</span><br /><br />
           @endif
       </div>
+      {!! Form::text('milage', null, ['class' => 'form-control', 'placeholder' => 'Kilometerstand']) !!}
 
-          {!! Form::submit('Opslaan', ['class' => 'btn btn-success']) !!}
-      {!! Form::close()   !!}
+       @if($errors->has('milage'))
+        <br /><span class="alert alert-danger">{{ $errors->first('milage') }}</span><br /><br />
+       @endif
+
+       {!! Form::submit('Opslaan', ['class' => 'btn btn-success']) !!}
+       {!! Form::close()   !!}
+   </div>
   </section>
 </div>
 @endsection

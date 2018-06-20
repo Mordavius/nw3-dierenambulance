@@ -12239,6 +12239,10 @@ input[type="checkbox"] {
   overflow: hidden;
 }
 
+.edit_ticket .container {
+  padding-top: 60px;
+}
+
 .edit_ticket .content h2 {
   color: #828282;
   margin: 0rem;
@@ -12290,6 +12294,7 @@ input[type="checkbox"] {
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   width: 100%;
+  display: fixed;
 }
 
 .edit-menu-ticket h1,
