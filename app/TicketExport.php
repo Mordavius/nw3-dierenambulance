@@ -50,7 +50,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
         ];
         //checks if finances need to be exported
         if ($this->with_finances == 'true'){
-            array_push($headings, 'Factuur', 'Betaalmethode', 'Giften', 'Kilometerstand');
+            array_push($headings, 'Factuur', 'Betaalmethode', 'Giften', 'Begin Kilometerstand', 'Eind Kilometerstand');
         }
         return $headings;
     }
@@ -79,7 +79,8 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
                 'invoice' => 'n.v.t.',
                 'payment_method' => 'n.v.t.',
                 'gifts' => 'n.v.t.',
-                'milage' => 'n.v.t.'];
+                'startmilage' => 'n.v.t.',
+                'endmilage' => 'n.v.t.'];
         }
         return $new_ticket;
     }
@@ -107,8 +108,10 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
             }
             if ($this->township != 'all') {
                 $destinations = Destination::where([['ticket_id', $ticket->id], ['township', $this->township],])->first();
+                $destinations2 = Destination::where('ticket_id', $ticket->id)->orderBy('id', 'desc')->first();
             } else {
                 $destinations = Destination::where('ticket_id', $ticket->id)->first();
+                $destinations2 = Destination::where('ticket_id', $ticket->id)->orderBy('id', 'desc')->first();
             }
             if ($this->with_finances == 'true') {
                 $bus = Bus::where('id', $ticket->bus_id)->first();
@@ -165,7 +168,10 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
                     $new_ticket['township'] = $destinations->township;
                 }
                 if ($destinations->milage) {
-                    $new_ticket['milage'] = $destinations->milage;
+                    $new_ticket['startmilage'] = $destinations->milage;
+                }
+                if ($destinations2->milage){
+                    $new_ticket['endmilage'] = $destinations2->milage;
                 }
 
 
