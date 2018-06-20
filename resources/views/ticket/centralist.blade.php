@@ -4,18 +4,18 @@
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png"></img>
-            <img id="list-image" src="images/list-view-active.png"></img>
+            <img id="map-image" src="images/Map-view.png"></img>
+            <img id="list-image" src="images/List-view-active.png"></img>
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png">
-        <img id="filter-icon" src="/images/filter-icon.png">
+        <img id="search-icon" src="/images/Search-icon.png">
+        <img id="filter-icon" src="/images/Filter-icon.png">
     </div>
 </div>
 <a href="/melding/create">
     <button class="round">
-        <img src="../images/plus.png" class="rotate-button"/>
+        <img src="/images/Plus.png" class="rotate-button"/>
     </button>
 </a>
 <div class="head">
@@ -24,8 +24,8 @@
   </div>
   <div class="right">
     <button id="toggle-button-desktop">
-      <img id="map-image-desktop" src="images/map-view.png">
-      <img id="list-image-desktop" src="images/list-view-active.png">
+      <img id="map-image-desktop" src="images/Map-view.png">
+      <img id="list-image-desktop" src="images/List-view-active.png">
     </button>
       <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
