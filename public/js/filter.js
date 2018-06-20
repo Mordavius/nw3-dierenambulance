@@ -24,7 +24,6 @@ function filterTickets() {
     var locationfield = $('#location').val();
 
 
-    console.log(animalfieldvalue, locationfield);
     if (animalfieldvalue == ''){
         animalfieldvalue = 'alles';
     }
@@ -43,7 +42,7 @@ function filterTickets() {
         type: 'GET',
         url: 'api/ticketfilter/'+datefield +'/'+ animalfieldvalue +'/'+locationfield,
         success: function (data) {
-            console.log(data);
+            //console.log(data);
             var i = 0;
             var finishedgrid = $('#finished');
             var unfinishedgrid = $('#unfinished');

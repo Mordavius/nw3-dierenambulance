@@ -382,10 +382,10 @@ class TicketController extends Controller
         foreach ($tickets as $ticket) {
 
                 if ($animal == 'alles'){
-                    $animalresult = Animal::where('id', $ticket->id)->first();
+                    $animalresult = Animal::where('id', $ticket->animal_id)->first();
                 }
                 else {
-                    $animalresult = Animal::where([['id', $ticket->id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
+                    $animalresult = Animal::where([['id', $ticket->animal_id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
                 }
                 if ($city == 'alles') {
                     $destinationresult = Destination::where('id', $ticket->id)->first();
