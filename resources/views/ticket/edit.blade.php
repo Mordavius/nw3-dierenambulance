@@ -107,7 +107,7 @@
                         </tr>
                     </table>
                       <button id="delete" name="delete" data-toggle="delete" class="delete-task" value="{{$loaddestinations->id}}">
-                        <img src="{{asset('images/delete.svg')}}" alt="Verwijderen" class="delete-dest">
+                        <img src="{{asset('images/Delete.svg')}}" alt="Verwijderen" class="delete-dest">
                     </button>
 
                 </div>
