@@ -30,19 +30,11 @@
       <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
   <div class="filters">
-    <input type="date" name="date" value="">
-    <input type="text" name="animal_species" value="">
-    <input type="text" name="location" value="">
-    <input class="btn btn-success" type="submit" name="submit" value="Filteren">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-              <th>Zoekresultaten</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <input type="date" name="date" value="" id="date">
+    <input type="text" name="animal_species" value="" id="animal_species">
+    <input type="text" name="location" value="" id="location">
+    <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+    <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
   </div>
 </div>
 
@@ -58,8 +50,7 @@
                   </div>
               @endif
           </div>
-          <div class="grid_main">
-
+          <div class="grid_main" id="unfinished">
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
@@ -108,7 +99,7 @@
           <div class="grid_header">
               <div class="tickets closed_tickets"><h2>Afgeronde meldingen</h2></div>
           </div>
-          <div class="grid_main">
+          <div class="grid_main" id="finished">
               @foreach($finishedtickets as $finishedticket)
                       @foreach($animals as $animal)
                           @if($finishedticket->animal_id == $animal->id)
@@ -184,5 +175,6 @@
 <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/filter.js') }}"></script>
 @endsection
 @endsection
