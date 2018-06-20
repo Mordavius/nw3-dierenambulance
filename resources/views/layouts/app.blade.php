@@ -22,7 +22,6 @@
         <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
-        @yield('scripts')
     </head>
     <body class="@yield('body_class')">
         <div id="app">
