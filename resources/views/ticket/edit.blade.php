@@ -4,14 +4,14 @@
 
 <div class="edit-menu-balk">
     <div class="edit-menu-ticket container">
-        <a href="../"><img src="{{asset('images/close.svg')}}" alt=""></a>
+        <a href="../"><img src="{{asset('images/Close.svg')}}" alt=""></a>
 
         @foreach($animals as $animal)
         <div><h1>{{$animal->animal_species}}</h1> <h6>{{$animal->breed}}</h6></div>
         @endforeach
 
         <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
-            <img src="{{asset('images/check.svg')}}">
+            <img src="{{asset('images/Check.svg')}}">
         </button>
   </div>
 </div>
@@ -107,7 +107,7 @@
                         </tr>
                     </table>
                       <button id="delete" name="delete" data-toggle="delete" class="delete-task" value="{{$loaddestinations->id}}">
-                        <img src="{{asset('images/delete.svg')}}" alt="Verwijderen" class="delete-dest">
+                        <img src="{{asset('images/Delete.svg')}}" alt="Verwijderen" class="delete-dest">
                     </button>
 
                 </div>
@@ -357,10 +357,11 @@
 
 
 @endsection
+@section('scripts')
 <meta name="_token" content="{!! csrf_token() !!}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="{{asset('js/angular.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/ajax-destinations.js')}}"></script>
 <script src="{{asset('js/table-directive.js')}}"></script>
 <script src="{{asset('js/edit-ticket.js')}}"></script>
+@endsection

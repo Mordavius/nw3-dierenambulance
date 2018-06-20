@@ -7,13 +7,13 @@
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png">
-            <img id="list-image" src="images/list-view-active.png">
+            <img id="map-image" src="images/Map-view.png">
+            <img id="list-image" src="images/List-view-active.png">
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png">
-        <img id="filter-icon" src="/images/filter-icon.png">
+        <img id="search-icon" src="/images/Search-icon.png">
+        <img id="filter-icon" src="/images/Filter-icon.png">
     </div>
 </div>
     <a href="/melding/create">
@@ -159,7 +159,6 @@
 
 @section('scripts')
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
 

@@ -4,18 +4,18 @@
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png"></img>
-            <img id="list-image" src="images/list-view-active.png"></img>
+            <img id="map-image" src="images/Map-view.png"></img>
+            <img id="list-image" src="images/List-view-active.png"></img>
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png">
-        <img id="filter-icon" src="/images/filter-icon.png">
+        <img id="search-icon" src="/images/Search-icon.png">
+        <img id="filter-icon" src="/images/Filter-icon.png">
     </div>
 </div>
 <a href="/melding/create">
     <button class="round">
-        <img src="../images/plus.png" class="rotate-button"/>
+        <img src="/images/Plus.png" class="rotate-button"/>
     </button>
 </a>
 <div class="head">
@@ -24,8 +24,8 @@
   </div>
   <div class="right">
     <button id="toggle-button-desktop">
-      <img id="map-image-desktop" src="images/map-view.png">
-      <img id="list-image-desktop" src="images/list-view-active.png">
+      <img id="map-image-desktop" src="images/Map-view.png">
+      <img id="list-image-desktop" src="images/List-view-active.png">
     </button>
       <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
@@ -51,19 +51,6 @@
               @endif
           </div>
           <div class="grid_main" id="unfinished">
-          <div class="grid_main">
-
-              <div class="panel-body">
-                  <table class="table table-bordered table-hover">
-                      <thead>
-                      <tr>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      </tbody>
-                  </table>
-              </div>
-
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
@@ -163,51 +150,32 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $('#search').on('keyup',function(){
-        $value=$(this).val();
-        $.ajax({
-            type : 'get',
-            url : '{{URL::to('search')}}',
-            data:{'search':$value},
-            success:function(data){
-                $('tbody').html(data);
-            }
-        });
-    })
-</script>
-
-<script type="text/javascript">
-    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-</script>
-
-
-<script type="text/javascript">
-    $('#search').on('keyup',function(){
-        $value=$(this).val();
-        $.ajax({
-            type : 'get',
-            url : '{{URL::to('search')}}',
-            data:{'search':$value},
-            success:function(data){
-                $('tbody').html(data);
-            }
-        });
-    })
-
-</script>
-
-<script type="text/javascript">
-    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-</script>
-
-
 @section('scripts')
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+            }
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+
+
+
+
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+
 <script type="text/javascript" src="{{asset('js/filter.js') }}"></script>
 @endsection
 @endsection

@@ -377,25 +377,23 @@ class TicketController extends Controller
         $ticket_array = [];
 
         foreach ($tickets as $ticket) {
+            if ($animal == 'alles') {
+                $animalresult = Animal::where('id', $ticket->animal_id)->first();
+            }else {
+                $animalresult = Animal::where([['id', $ticket->animal_id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
+            }
+            if ($city == 'alles') {
+                $destinationresult = Destination::where('id', $ticket->id)->first();
+            }
+            else {
+                $destinationresult = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%' . $city . '%']])->first();
+            }
 
-                if ($animal == 'alles'){
-                    $animalresult = Animal::where('id', $ticket->animal_id)->first();
-                }
-                else {
-                    $animalresult = Animal::where([['id', $ticket->animal_id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
-                }
-                if ($city == 'alles') {
-                    $destinationresult = Destination::where('id', $ticket->id)->first();
-                }
-                else {
-                    $destinationresult = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%' . $city . '%']])->first();
-                }
-
-                if($ticket && $animalresult && $destinationresult){
-                    array_push($ticket_array, $ticket);
-                    array_push($animal_array, $animalresult);
-                    array_push($destination_array, $destinationresult);
-                }
+            if($ticket && $animalresult && $destinationresult){
+                array_push($ticket_array, $ticket);
+                array_push($animal_array, $animalresult);
+                array_push($destination_array, $destinationresult);
+            }
         }
         return response()->json(['tickets' =>  $ticket_array, 'destinations'=>$destination_array, 'animals'=>$animal_array], 200);
     }
