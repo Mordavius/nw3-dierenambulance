@@ -42,6 +42,10 @@ input[type="checkbox"]
     padding: 0;
     list-style-type: none;
 
+    .selected{
+        background: $secondary-color;
+        color: $white;
+    }
     input
     {
       position: absolute;
