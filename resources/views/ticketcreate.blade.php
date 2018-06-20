@@ -99,38 +99,38 @@
             </div>
             <div class="animal_page">
                 <div class="animal_cards" id="animal_cards">
-                    <div class="animal_card" onclick="selectAnimalSpieces('Hond', 'images/hond.svg');">
-                        <img src="{{asset('images/hond.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Hond', 'images/Hond.svg');">
+                        <img src="{{asset('images/Hond.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Hond</span>
                         </div>
                     </div>
-                    <div class="animal_card" onclick="selectAnimalSpieces('Kat', 'images/kat.svg');">
-                      <img src="{{asset('images/kat.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Kat', 'images/Kat.svg');">
+                      <img src="{{asset('images/Kat.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Kat</span>
                         </div>
                     </div>
-                    <div class="animal_card" onclick="selectAnimalSpieces('Vogel', 'images/vogel.svg');">
-                      <img src="{{asset('images/vogel.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Vogel', 'images/Vogel.svg');">
+                      <img src="{{asset('images/Vogel.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Vogel</span>
                         </div>
                     </div>
-                    <div class="animal_card" onclick="selectAnimalSpieces('Egel', 'images/egel.svg');">
-                      <img src="{{asset('images/egel.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Egel', 'images/Egel.svg');">
+                      <img src="{{asset('images/Egel.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Egel</span>
                         </div>
                     </div>
-                    <div class="animal_card" onclick="selectAnimalSpieces('Konijn', 'images/konijn.svg');">
-                      <img src="{{asset('images/konijn.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Konijn', 'images/Konijn.svg');">
+                      <img src="{{asset('images/Konijn.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Konijn</span>
                         </div>
                     </div>
-                    <div class="animal_card" onclick="selectAnimalSpieces('Anders', 'images/anders.svg');">
-                      <img src="{{asset('images/anders.svg')}}" alt="">
+                    <div class="animal_card" onclick="selectAnimalSpieces('Anders', 'images/Anders.svg');">
+                      <img src="{{asset('images/Anders.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Anders</span>
                         </div>
