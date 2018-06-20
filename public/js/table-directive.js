@@ -33,7 +33,7 @@ var app = angular.module("app", [])
 
 	$scope.coordinates = [];
     var ticket_information = {"name": "", "number": "",
-    "address": "", "house_number": "", "postal_code": "", "city": "",
+    "address": "", "house_number": "", "postal_code": "", "city": "", "township": "",
     "coordinates": "", "selected_animal": "", "breed": "", "gender":""
     , "chip_number": "", "injury": "", "description": "", "priority":""};
 
@@ -194,7 +194,7 @@ var app = angular.module("app", [])
             footer_button_back.style.visibility = "visible";
             page1.style.marginLeft = "-100%";
             page2.style.marginLeft = "0%";
-            page2.style.height = "84%"
+            page2.style.height = "110%"
             page2.className = "pages current_page";
             map.style.height = "100%";
             map.style.width = "100%";
@@ -216,6 +216,7 @@ var app = angular.module("app", [])
             ticket_information.house_number = house_number_field.innerHTML;
             ticket_information.postal_code = postal_code_field.innerHTML;
             ticket_information.city = city_field.innerHTML;
+            ticket_information.township = township_field.innerHTML;
             ticket_information.coordinates = coordinates_field.value;
             address_field.innerHTML = "";
             house_number_field.innerHTML ="";

@@ -10947,6 +10947,11 @@ input[type="checkbox"] {
   list-style-type: none;
 }
 
+.segmented-control .segmented-control__item .selected {
+  background: #2D9CDB;
+  color: #fff;
+}
+
 .segmented-control .segmented-control__item input {
   position: absolute;
   visibility: hidden;
