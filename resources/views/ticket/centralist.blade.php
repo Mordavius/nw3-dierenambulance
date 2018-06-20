@@ -51,6 +51,19 @@
               @endif
           </div>
           <div class="grid_main" id="unfinished">
+          <div class="grid_main">
+
+              <div class="panel-body">
+                  <table class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+              </div>
+
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
@@ -163,6 +176,26 @@
             }
         });
     })
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+
+
+<script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+                $('tbody').html(data);
+            }
+        });
+    })
+
 </script>
 
 <script type="text/javascript">

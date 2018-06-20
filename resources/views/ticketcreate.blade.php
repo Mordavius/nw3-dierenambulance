@@ -269,7 +269,20 @@
                 </div>
                 <div class="priority_new_ticket">
                     <label class="priority_label">Prioriteit</label>
-                    <span class="ticket_text_field" class="bus">Sprinter</span>
+                    <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
+                        {!! Form::label('Selecteer het voertuig') !!} <br />
+                        <select name="vehicle" id="vehicle">
+                            @foreach($bus as $buses)
+                                <option value="{{$buses}}">{{$buses}}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('vehicle'))
+                            <span class="help-block">
+                                {{ $errors->first('vehicle') }}
+                            </span>
+                        @endif
+                    </div>
+                    <input type="hidden" id="milage" name="milage" value={{ $milage }}>
                     <input class="ticket_text_field" type="label" name="priority" id="priority"/>
                 </div>
               </div>
