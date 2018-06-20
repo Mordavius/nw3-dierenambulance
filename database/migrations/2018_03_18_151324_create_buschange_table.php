@@ -17,7 +17,6 @@ class CreateBuschangeTable extends Migration
             $table->increments('id');
             $table->string('from');
             $table->string('to');
-            $table->date('date');
             $table->string('bus')->nullable();
             $table->integer('milage')->nullable();
             $table->date('date')->nullable();
