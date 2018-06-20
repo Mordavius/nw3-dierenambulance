@@ -142,7 +142,6 @@
       </div>
   </div>
 </div>
-</div>
 <div class="pages" id="page2">
     <div ng-app="app">
         <div ng-controller="TableController" >
