@@ -1,17 +1,15 @@
-@extends('layouts.app')
-@section('content')
 @section('body_class', 'edit_ticket')
 
 <div class="edit-menu-balk">
     <div class="edit-menu-ticket container">
-        <a href="../"><img src="{{asset('images/close.svg')}}" alt=""></a>
+        <a href="../"><img src="{{asset('images/Close.svg')}}" alt=""></a>
 
         @foreach($animals as $animal)
         <div><h1>{{$animal->animal_species}}</h1> <h6>{{$animal->breed}}</h6></div>
         @endforeach
 
         <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
-            <img src="{{asset('images/check.svg')}}">
+            <img src="{{asset('images/Check.svg')}}">
         </button>
   </div>
 </div>
