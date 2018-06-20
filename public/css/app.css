@@ -12516,4 +12516,3 @@ select .selected {
 .leaflet-gesture-handling-scroll-warning:after {
   content: attr(data-gesture-handling-scroll-content);
 }
-
