@@ -90,7 +90,6 @@ $(document).ready(function(){
                 success: function (data) {
                     console.log(data);
                     location.reload();
-                    $("#destination" + task_id).remove();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -215,10 +214,7 @@ $(document).ready(function(){
                 url: url + '/' + task_id,
                 success: function (data) {
                     console.log(data);
-                    $("payment_invoice").remove();
-                    $("payment_gifts").remove();
-                    $("payment_method").remove();
-                    //location.reload();
+                    location.reload();
                 },
                 error: function (data) {
                     console.log('Error:', data);

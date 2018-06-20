@@ -167,12 +167,12 @@
                 <div class="gift-wrap">
                     <h6> Gift </h6>
 
-                    @if($ticket->payment_gifts)
+                    @if($ticket->payment_gift)
                     <div class="gift-card">
 
-                        <span> €{{$ticket->payment_gifts}} </span>
+                        <span> €{{$ticket->payment_gift}} </span>
 
-                        @if ($ticket->payment_method == "Gepint")
+                        @if ($ticket->payment_method == "Contant")
                         <img src="https://nw3-dierenambulance.test/images/cash-multiple-dark.svg" class="icon">
                         <img src="https://nw3-dierenambulance.test/images/credit-card-light.svg" class="icon">
                         @else
