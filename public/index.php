@@ -22,7 +22,7 @@ define('LARAVEL_START', microtime(true));
 */
 
 if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'notepet.nl' ) {
-   require __DIR__ . '/../../../../applications/nw3-dierenambulance/vendor/autoload.php';
+   require __DIR__ . '/../../../applications/nw3-dierenambulance/vendor/autoload.php';
 } else {
    require __DIR__.'/../vendor/autoload.php';
 }
@@ -39,7 +39,7 @@ if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'notepet.nl' ) {
 */
 
 if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'notepet.nl' ) {
-   $app = require_once __DIR__.'/../../../../applications/nw3-dierenambulance/bootstrap/app.php';
+   $app = require_once __DIR__.'/../../../applications/nw3-dierenambulance/bootstrap/app.php';
 } else {
    $app = require_once __DIR__.'/../bootstrap/app.php';
 }

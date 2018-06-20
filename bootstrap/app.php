@@ -10,7 +10,7 @@
 | the IoC container for the system binding all of the various parts.
 |
 */
-if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === env('remote_host') ) {
+if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'notepet.nl' ) {
     $app = new App\GoPublic(
         realpath(__DIR__.'/../')
     );
