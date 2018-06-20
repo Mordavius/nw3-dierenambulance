@@ -12,6 +12,7 @@ use App\Finance;
 use App\Known;
 use App\Bus;
 use App\Owner;
+use DB;
 use App\Http\Requests\TicketStoreRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -147,13 +148,13 @@ class TicketController extends Controller
             if ($search) {
                 foreach ($search as $key => $city) {
                     $output.='<tr>'.
-                        '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
-                        '<td><a href="/melding/' . $city->ticket_id . '/edit"><i class="btn btn-primary">Aanpassen</i></a></td>' .
+                        '<td><a href="/melding/' . $city->ticket_id . '/edit">'.$city->postal_code.' '.$city->address.' '.$city->house_number.' '.$city->city.'</i></a></td>' .
                         '</tr>';
                 }
                 if (Input::get('search') == "") {
                     return "";
-                } else {
+                }
+                else {
                     return Response($output);
                 }
             }
@@ -201,7 +202,6 @@ class TicketController extends Controller
         $animal->save(); // Saves the data
 
         $bus = Bus::where('bus_type', $request->vehicle)->first();
-        //dd($bus);
 
         // Stores the data for the requested fields
         $ticket = new Ticket([
@@ -215,7 +215,7 @@ class TicketController extends Controller
             'centralist' => $request->get('centralist'),
             'reporter_name' => $request->get('reporter_name'),
             'telephone' => $request->get('telephone'),
-            // 'bus_id' => $bus->id,
+            'bus_id' => $bus->id,
         ]);
 
         $ticket->save(); // Saves the data
@@ -230,7 +230,7 @@ class TicketController extends Controller
             'coordinates' => $request->get('coordinates'),
             'ticket_id' => $ticket->id,
             'vehicle' => $request->get('vehicle'),
-            // 'milage' => $request->get('milage'),
+            'milage' => $request->get('milage'),
         ]);
 
         $destination->save();// Saves the data
@@ -402,7 +402,6 @@ class TicketController extends Controller
         }
         return response()->json(['tickets' =>  $ticket_array, 'destinations'=>$destination_array, 'animals'=>$animal_array], 200);
     }
-
 
     public function destroyAjaxOwner($task_id)
     {

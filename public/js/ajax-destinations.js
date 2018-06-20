@@ -42,27 +42,6 @@ $(document).ready(function() {
             }
         });
     });
-    var users;
-    $('#knownUser').change(function(){
-        string = $('#knownUser').val()
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type:"GET",
-            url: "/knownusers/" + users,
-            success: function (data) {
-                console.log(data);
-                document.getElementById("postal_code").value = data[0].postal_code;
-                document.getElementById("house_number").value = data[0].house_number;
-                document.getElementById("address").value = data[0].address;
-                document.getElementById("city").value = data[0].city;
-                document.getElementById("township").value = data[0].township;
-            }
-        });
-    });
 });
 
 $(document).ready(function() {
