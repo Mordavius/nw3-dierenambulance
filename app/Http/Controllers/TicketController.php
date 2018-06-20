@@ -142,13 +142,13 @@ class TicketController extends Controller
             if ($search) {
                 foreach ($search as $key => $city) {
                     $output.='<tr>'.
-                        '<td>'.$city->postal_code.' <br /> '.$city->address.' '.$city->house_number.' '.$city->city.'</td>'.
-                        '<td><a href="/melding/' . $city->ticket_id . '/edit"><i class="btn btn-primary">Aanpassen</i></a></td>' .
+                        '<td><a href="/melding/' . $city->ticket_id . '/edit">'.$city->postal_code.' '.$city->address.' '.$city->house_number.' '.$city->city.'</i></a></td>' .
                         '</tr>';
                 }
                 if (Input::get('search') == "") {
                     return "";
-                } else {
+                }
+                else {
                     return Response($output);
                 }
             }
@@ -395,7 +395,6 @@ class TicketController extends Controller
 
         return response()->json(['tickets' =>  $ticket->get(), 'destinations'=>$destination_array, 'animals'=>$animals], 200);
     }
-
 
     public function destroyAjaxOwner($task_id)
     {

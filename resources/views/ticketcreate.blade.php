@@ -269,7 +269,7 @@
                 <div class="priority_new_ticket">
                     <label class="priority_label">Prioriteit</label>
                     <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
-                        {!! Form::label('Selecteer het voertuig voor de melding') !!} <br />
+                        {!! Form::label('Selecteer het voertuig') !!} <br />
                         <select name="vehicle" id="vehicle">
                             @foreach($bus as $buses)
                                 <option value="{{$buses}}">{{$buses}}</option>
