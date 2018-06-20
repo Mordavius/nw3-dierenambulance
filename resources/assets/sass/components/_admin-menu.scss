@@ -21,7 +21,7 @@ main
   ul
   {
     list-style-type: none;
-    padding: 15px 21px 0 21px;
+    padding: 0px 21px 0 21px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -36,6 +36,12 @@ main
     {
       display: inline-block;
       border-bottom: $white solid 5px;
+      width: 25%;
+      @include media-breakpoint-up(lg)
+      {
+        width: 100%;
+        text-align: none;
+      }
 
       &.active
       {
@@ -47,6 +53,10 @@ main
           border-bottom: 0;
           margin-bottom: 0;
           border-left: $primary-color solid 5px;
+
+        }
+        a .svgwrapper path {
+            fill: black;
         }
       }
 
@@ -60,7 +70,7 @@ main
       {
         color: $black;
         text-decoration: none;
-        padding: rem-calc(8);
+        text-align: center;
       }
 
       .icon

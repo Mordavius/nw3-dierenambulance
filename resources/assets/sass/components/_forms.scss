@@ -73,6 +73,11 @@ input[type="checkbox"]
         color: $white;
     }
 
+    .segmented-control__input
+    {
+      width: auto;
+    }
+
     .segmented-control__input:checked + .segmented-control__label {
         background: $secondary-color;
         color: $white;
