@@ -388,7 +388,6 @@ class TicketController extends Controller
                     array_push($destination_array, $destinationresult);
                 }
         }
-
         return response()->json(['tickets' =>  $ticket_array, 'destinations'=>$destination_array, 'animals'=>$animal_array], 200);
     }
 

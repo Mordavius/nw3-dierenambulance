@@ -34,6 +34,7 @@
     <input type="text" name="animal_species" value="" id="animal_species">
     <input type="text" name="location" value="" id="location">
     <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+    <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
   </div>
 </div>
 
@@ -49,16 +50,16 @@
                   </div>
               @endif
           </div>
-          <div class="grid_main">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                      <th>Zoekresultaten</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+          <div class="grid_main" id="unfinished">
+            {{--<table class="table table-bordered table-hover">--}}
+                {{--<thead>--}}
+                    {{--<tr>--}}
+                      {{--<th>Zoekresultaten</th>--}}
+                    {{--</tr>--}}
+                {{--</thead>--}}
+                {{--<tbody>--}}
+                {{--</tbody>--}}
+            {{--</table>--}}
               @foreach($unfinishedtickets as $unfinishedticket)
                       @foreach($animals as $animal)
                           @if($unfinishedticket->animal_id == $animal->id)
@@ -107,7 +108,7 @@
           <div class="grid_header">
               <div class="tickets closed_tickets"><h2>Afgeronde meldingen</h2></div>
           </div>
-          <div class="grid_main">
+          <div class="grid_main" id="finished">
               @foreach($finishedtickets as $finishedticket)
                       @foreach($animals as $animal)
                           @if($finishedticket->animal_id == $animal->id)
