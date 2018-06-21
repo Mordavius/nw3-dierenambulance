@@ -5,6 +5,11 @@
   <div class="logo_wrap">
     <img class="logo1" src="{{ asset('images/Dierenambulance-logo.svg') }}">
   </div>
+  @if(session('message'))
+      <div class="alert alert-success">
+          {{ session('message') }}
+      </div>
+  @endif
       <form method="POST" action="{{ route('login') }}">
           @csrf
           <div class="form-group">

@@ -21,9 +21,12 @@ class PasswordResetController extends Controller
         $user = User::where('token', '=', $token)->get();
         $token_user = User::where('token', $token)->pluck('token');
 
-        if ($token == $token_user[0]) {
-            return view('user.PasswordReset', compact('user'));
-        }
+        if ($token_user != null) {
+            if ($token == $token_user[0]) {
+                return view('user.PasswordReset', compact('user'));
+            }
+        } return redirect('/')->with('message', 'Gebruiker niet gevonden')
+
     }
     public function update(Request $request, $id)
     {
@@ -34,8 +37,9 @@ class PasswordResetController extends Controller
             'house_number' => $request['house_number'],
             'city' => $request['city'],
             'township' => $request['township'],
+            'token' => '',
             'password' => Hash::make($new_password), // Hash the password
         ]);
-        return redirect('/')->with('alert', "Wachtwoord opgeslagen");
+        return redirect('/')->with('message', "Wachtwoord opgeslagen");
     }
 }
