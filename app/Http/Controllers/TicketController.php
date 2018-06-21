@@ -167,17 +167,24 @@ class TicketController extends Controller
     {
         $milage = Bus::all('milage')->pluck('milage')->first();
         $bus = Bus::all('bus_type')->pluck("bus_type");
-        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->orderBy('created_at')->get();
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->get();
         $unfinishedtickets_id = Ticket::where('finished', '0')->orderBy('date', 'desc')->pluck('id');
         $animals = Animal::all();
         $destinations = Destination::whereIn('ticket_id', $unfinishedtickets_id)->get();            //$coordinateStrings = Destination::where('ticket_id', $unfinishedticket)->get();
         $coordinateStrings = $destinations->pluck('coordinates')->toArray();
-        //Decodes the array for better formatting.
+
+        $tickets_id = Ticket::all()->pluck("id");
+        $destination_array = [];
+
+        foreach ($tickets_id as $ticket_id) {
+            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
+        }
+
         $coordinates = array_map(function ($coordinateString) {
             return json_decode($coordinateString);
         }, $coordinateStrings);
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
-        return view('ticketcreate', compact('animals', 'unfinishedtickets', 'destinations', 'coordinates', 'user', 'ticket', 'coordinates', 'bus', 'milage'));
+        return view('ticketcreate', compact('animals', 'unfinishedtickets', 'destination_array', 'coordinates', 'user', 'ticket', 'coordinates', 'bus', 'milage'));
     }
 
     /**
@@ -188,6 +195,17 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->get();
+        $priority = $request->get('priority');
+        foreach ($unfinishedtickets as $unfinishedticket) {
+            if ($priority = $unfinishedticket->priority) {
+                Ticket::where('priority', $request->get('priority'))->update([
+                    'priority' => $priority + 1
+                ]);
+            }
+        }
+
         // Stores the data for the requested fields
         $animal = new Animal([
             'animal_species' => $request->get('animal_species'),

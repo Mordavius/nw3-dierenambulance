@@ -6,18 +6,18 @@
     <div class="icon_bar">
         <div class="icon_bar_item reporter">
             <div class="circle highlighted" id="circle1">
-              <a href="#page1" class="circle_letter">
-                  1
-              </a>
+                <a href="#page1" class="circle_letter">
+                    1
+                </a>
             </div>
             <span id="span1" class="span">Melder</span>
         </div>
         <span id="divider1" class="divider"></span>
         <div class="icon_bar_item location">
             <div class="circle" id="circle2">
-              <a href="#page2" class="circle_letter">
-                  2
-              </a>
+                <a href="#page2" class="circle_letter">
+                    2
+                </a>
             </div>
             <span id="span2" class="span">Locatie</span>
         </div>
@@ -106,31 +106,31 @@
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Kat', 'images/Kat.svg');">
-                      <img src="{{asset('images/Kat.svg')}}" alt="">
+                        <img src="{{asset('images/Kat.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Kat</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Vogel', 'images/Vogel.svg');">
-                      <img src="{{asset('images/Vogel.svg')}}" alt="">
+                        <img src="{{asset('images/Vogel.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Vogel</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Egel', 'images/Egel.svg');">
-                      <img src="{{asset('images/Egel.svg')}}" alt="">
+                        <img src="{{asset('images/Egel.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Egel</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Konijn', 'images/Konijn.svg');">
-                      <img src="{{asset('images/Konijn.svg')}}" alt="">
+                        <img src="{{asset('images/Konijn.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Konijn</span>
                         </div>
                     </div>
                     <div class="animal_card" onclick="selectAnimalSpieces('Anders', 'images/Anders.svg');">
-                      <img src="{{asset('images/Anders.svg')}}" alt="">
+                        <img src="{{asset('images/Anders.svg')}}" alt="">
                         <div class="animal_grid">
                             <span>Anders</span>
                         </div>
@@ -152,66 +152,65 @@
             <div class="title_page">
                 <h1>Prioriteit</h1>
             </div>
+        </div>
+        <div class="map_grid">
+            <div ng-app="app">
+                <div ng-controller="TableController" >
+                    <div id="map2" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
+                    </div>
+                </div>
             </div>
-            <div class="map_grid">
-              <div ng-app="app">
-                  <div ng-controller="TableController" >
-                      <div id="map2" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
-                      </div>
-                  </div>
-              </div>
-              <div class="ticket_cards_grid">
-                  <div class="new_ticket">
-                      <div class="new_ticket_prio">
-                          <input type="number" class="new_ticket_priority" name="priority_field" id="priority_field" placeholder="-">
-                      </div>
-                      <div class="animal_main_info" id="animal_main_info">
-                          <div class="animal_title" id="animal_title">
-                          </div>
-                          <p class="animal_breed" id="animal_breed">
-                          </p>
-                      </div>
-                      <div class="destination_info" id="destination_info">
-                      </div>
-                  </div>
-                  <div class="bus_name">
-                      <h2 class="bus_name_title">Bus</h2>
-                      <div class="bus_task_list">
-                          @foreach($destinations as $destination)
-                              <div class="ticket">
-                                  @foreach($unfinishedtickets as $unfinishedticket)
-                                      @if($unfinishedticket->id == $destination->ticket_id)
-                                      <div class="ticket_priority">
-                                          {{$unfinishedticket->priority}}
-                                      </div>
-                                      @foreach($animals as $animal)
-                                      @if($unfinishedticket->animal_id == $animal->id)
-                                              <div class="unfinishedtickets_animal_title">
-                                                  {{$animal->animal_species}}
-                                              </div>
-                                              <div class="unfinishedtickets_animal_breed">
-                                                  {{$animal->breed}}
-                                              </div>
-                                      @endif
-                                      @endforeach
-                                  <div class="ticket_address">
-                                      {{$destination->address}}
-                                      @if($destination->house_number != '0')
-                                          {{$destination->house_number}}
-                                      @endif
-                                      ,
-                                      {{$destination->postal_code}}
-                                      {{$destination->city}}
-                                  </div>
-                                  @endif
-                                  @endforeach
-                              </div>
-                          @endforeach
-                      </div>
-                  </div>
-              </div>
+            <div class="ticket_cards_grid">
+                <div class="new_ticket">
+                    <div class="new_ticket_prio">
+                        <input type="number" class="new_ticket_priority" name="priority_field" id="priority_field" placeholder="-">
+                    </div>
+                    <div class="animal_main_info" id="animal_main_info">
+                        <div class="animal_title" id="animal_title">
+                        </div>
+                        <p class="animal_breed" id="animal_breed">
+                        </p>
+                    </div>
+                    <div class="destination_info" id="destination_info">
+                    </div>
+                </div>
+                <div class="bus_name">
+                    <h2 class="bus_name_title">Bus</h2>
+                    <div class="bus_task_list">
+                        @foreach($unfinishedtickets as $unfinishedticket)
+                            @foreach($destination_array as $destination)
+                            @if($unfinishedticket->id == $destination['ticket_id'])
+                            <div class="ticket">
+                                <div class="ticket_priority">
+                                    {{$unfinishedticket->priority}}
+                                </div>
+                                @foreach($animals as $animal)
+                                    @if($unfinishedticket->animal_id == $animal->id)
+                                        <div class="unfinishedtickets_animal_title">
+                                            {{$animal->animal_species}}
+                                        </div>
+                                        <div class="unfinishedtickets_animal_breed">
+                                            {{$animal->breed}}
+                                        </div>
+                                    @endif
+                                @endforeach
+                                <div class="ticket_address">
+                                    {{$destination['address']}}
+                                    @if($destination['house_number'] != '0')
+                                        {{$destination['house_number']}}
+                                    @endif
+                                    ,
+                                    {{$destination['postal_code']}}
+                                    {{$destination['city']}}
+                                </div>
+                            </div>
+                            @endif
+                            @endforeach
+                        @endforeach
+                    </div>
+                </div>
             </div>
-
+        </div>
     </div>
     <div class="pages" id="page5">
         <div class="page">
@@ -222,85 +221,85 @@
                 'method' => 'POST',
                 'route' => 'melding.store',
                 'id' => 'submit_form'
-            ]) !!}
-            <div class="new_ticket_information">
-              <div class="left_info">
-                <div ng-app="app">
-                  <div ng-controller="TableController" >
-                      <div id="map3" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
-                      </div>
-                  </div>
-                </div>
-                <label class="general">Algemeen</label>
-                <div class="new_ticket_info">
-                    <label class="general_labels centralist">Centralist:</label>
-                    <input id="centralist" type="label" name="centralist" class="general_information centralist" value="{{ Auth::user()->name }}"></input>
-                    <label class="general_labels date">Datum:</label>
-                    <input type="label" name="date" class="general_information date" id="date" value="{{ Carbon::today()->format('Y-m-d') }}"></label>
-                    <label class="general_labels time">Tijd</label>
-                    <input name="time" type="label" class="general_information time" id="time" value="{{Carbon::now('Europe/Amsterdam')->toTimeString()}}" ></text>
-                </div>
-              </div>
-              <div class="right_info">
-                <div class="address_info_new_ticket">
-                    <label class="location_label">Locatie</label>
-                    <input type="label" class="address_info" placeholder="Straat" name="address" id="address"/>
-                    <input type="label" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number"/>
-                    <input type="label" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code"/>
-                    <input type="label" class="address_info" placeholder="Stad" name="city" id="city"/>
-                    <input type="hidden" class="address_info township" placeholder="Gemeente" name="township" id="township"/>
-                    <input type="hidden" name="coordinates" id="coordinates"/>
-                </div>
-                <div class="reporter_new_ticket">
-                    <label class="reporter_label">Melder</label>
-                    <input type="text" id="reporter_name" class="ticket_text_field" placeholder="Naam" name="reporter_name"/>
-                    <input type="text" id="phone_number" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone"/>
-                </div>
-                <div class="animal_new_ticket">
-                    <label class="reporter_label">Dier</label>
-                    <div class="animal_info_new_ticket" id="animal_info">
-                        <input class="ticket_text_field" id="animal_species" type="text" name="animal_species" placeholder="Soort"/>
-                        <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
-                        <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender"/>
-                        <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number"/>
-                        <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury"/>
-                        <textarea rows="4" wrap="soft" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description"/></textarea>
+                ]) !!}
+                <div class="new_ticket_information">
+                    <div class="left_info">
+                        <div ng-app="app">
+                            <div ng-controller="TableController" >
+                                <div id="map3" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
+                                </div>
+                            </div>
+                        </div>
+                        <label class="general">Algemeen</label>
+                        <div class="new_ticket_info">
+                            <label class="general_labels centralist">Centralist:</label>
+                            <input id="centralist" type="label" name="centralist" class="general_information centralist" value="{{ Auth::user()->name }}"></input>
+                            <label class="general_labels date">Datum:</label>
+                            <input type="label" name="date" class="general_information date" id="date" value="{{ Carbon::today()->format('Y-m-d') }}"></label>
+                            <label class="general_labels time">Tijd</label>
+                            <input name="time" type="label" class="general_information time" id="time" value="{{Carbon::now('Europe/Amsterdam')->toTimeString()}}" ></text>
+                        </div>
+                    </div>
+                    <div class="right_info">
+                        <div class="address_info_new_ticket">
+                            <label class="location_label">Locatie</label>
+                            <input type="label" class="address_info" placeholder="Straat" name="address" id="address"/>
+                            <input type="label" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number"/>
+                            <input type="label" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code"/>
+                            <input type="label" class="address_info" placeholder="Stad" name="city" id="city"/>
+                            <input type="hidden" class="address_info township" placeholder="Gemeente" name="township" id="township"/>
+                            <input type="hidden" name="coordinates" id="coordinates"/>
+                        </div>
+                        <div class="reporter_new_ticket">
+                            <label class="reporter_label">Melder</label>
+                            <input type="text" id="reporter_name" class="ticket_text_field" placeholder="Naam" name="reporter_name"/>
+                            <input type="text" id="phone_number" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone"/>
+                        </div>
+                        <div class="animal_new_ticket">
+                            <label class="reporter_label">Dier</label>
+                            <div class="animal_info_new_ticket" id="animal_info">
+                                <input class="ticket_text_field" id="animal_species" type="text" name="animal_species" placeholder="Soort"/>
+                                <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
+                                <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender"/>
+                                <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number"/>
+                                <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury"/>
+                                <textarea rows="4" wrap="soft" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description"/></textarea>
+                            </div>
+                        </div>
+                        <div class="priority_new_ticket">
+                            <label class="priority_label">Prioriteit</label>
+                            <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
+                                {!! Form::label('Selecteer het voertuig') !!} <br />
+                                <select name="vehicle" id="vehicle">
+                                    @foreach($bus as $buses)
+                                    <option value="{{$buses}}">{{$buses}}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('vehicle'))
+                                <span class="help-block">
+                                    {{ $errors->first('vehicle') }}
+                                </span>
+                                @endif
+                            </div>
+                            <input type="hidden" id="milage" name="milage" value={{ $milage }}>
+                            <input class="ticket_text_field" type="label" name="priority" id="priority"/>
+                        </div>
                     </div>
                 </div>
-                <div class="priority_new_ticket">
-                    <label class="priority_label">Prioriteit</label>
-                    <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
-                        {!! Form::label('Selecteer het voertuig') !!} <br />
-                        <select name="vehicle" id="vehicle">
-                            @foreach($bus as $buses)
-                                <option value="{{$buses}}">{{$buses}}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('vehicle'))
-                            <span class="help-block">
-                                {{ $errors->first('vehicle') }}
-                            </span>
-                        @endif
-                    </div>
-                    <input type="hidden" id="milage" name="milage" value={{ $milage }}>
-                    <input class="ticket_text_field" type="label" name="priority" id="priority"/>
-                </div>
-              </div>
+                <input class="footer_button_submit" type="button" id="footer_button_submit" name="" value="Opslaan">
+                {!! Form::close() !!}
             </div>
-            <input class="footer_button_submit" type="button" id="footer_button_submit" name="" value="Opslaan">
-            {!! Form::close() !!}
         </div>
     </div>
-</div>
-<div class="footer" id="footer">
-    <button id="footer_button_back" class="footer_button">< Vorige</button>
-    <div class="address_info_grid">
-        <span contenteditable="true" class="address_info" name="address" id="address_field"></span>
-        <span contenteditable="true" class="address_info" name="house_number" id="house_number_field"></span>
-        <span contenteditable="true" class="address_info" name="postal_code" id="postal_code_field"></span>
-        <br>
-        <span contenteditable="true" class="address_info" name="city_field" id="city_field"></span>
-        <span contenteditable="true" class="address_info" name="township" id="township_field"></span>
+    <div class="footer" id="footer">
+        <button id="footer_button_back" class="footer_button">< Vorige</button>
+        <div class="address_info_grid">
+            <span contenteditable="true" class="address_info" name="address" id="address_field"></span>
+            <span contenteditable="true" class="address_info" name="house_number" id="house_number_field"></span>
+            <span contenteditable="true" class="address_info" name="postal_code" id="postal_code_field"></span>
+            <br>
+            <span contenteditable="true" class="address_info" name="city_field" id="city_field"></span>
+            <span contenteditable="true" class="address_info" name="township" id="township_field"></span>
             <!-- <input type="text" class="address_info" placeholder="Straat" name="address" id="address_field"/>
             <input type="text" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number_field"/>
             <input type="text" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code_field"/>
@@ -309,11 +308,11 @@
             <input type="hidden" name="coordinates" id="coordinates_field"/>
         </div>
         <button id="footer_button_forward" class="footer_button">Volgende ></button>
-</div>
+    </div>
 
-@endsection
-@section('scripts')
-<script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/leaflet-gesture-handling.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/table-directive.js') }}"></script>
-@endsection
+    @endsection
+    @section('scripts')
+    <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/leaflet-gesture-handling.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/table-directive.js') }}"></script>
+    @endsection
