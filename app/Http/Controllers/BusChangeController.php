@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
-use App\BusChange;
+use App\Buschange;
 use App\User;
 use App\Bus;
 use App\Http\Controllers\Input;
