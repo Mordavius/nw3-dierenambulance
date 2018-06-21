@@ -25,8 +25,7 @@ class PasswordResetController extends Controller
             if ($token == $token_user[0]) {
                 return view('user.PasswordReset', compact('user'));
             }
-        } return redirect('/')->with('message', 'Gebruiker niet gevonden')
-
+        } return redirect('/')->with('message', 'Gebruiker niet gevonden');
     }
     public function update(Request $request, $id)
     {
