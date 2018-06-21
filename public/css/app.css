@@ -12234,6 +12234,10 @@ input[type="checkbox"] {
   }
 }
 
+.edit_ticket nav {
+  display: none;
+}
+
 .edit_ticket main {
   margin-bottom: 100px;
   overflow: hidden;
@@ -12429,10 +12433,6 @@ img.delete-dest {
   font-style: italic;
 }
 
-.edit_ticket nav {
-  display: none;
-}
-
 select .selected {
   color: #888;
 }
@@ -12516,3 +12516,22 @@ select .selected {
 .leaflet-gesture-handling-scroll-warning:after {
   content: attr(data-gesture-handling-scroll-content);
 }
+
+.password_edit nav {
+  display: none;
+}
+
+.password_edit .page {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.password_edit .logo_wrap {
+  margin: 0.9375rem auto;
+  width: 11%;
+}
+
+.password_edit h1 {
+  margin: 1.25rem auto;
+}
+

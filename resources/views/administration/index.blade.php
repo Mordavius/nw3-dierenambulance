@@ -2,9 +2,9 @@
 @section('content')
 @include('administration.admin_menu')
 <div class="wrapper">
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
+    @if (session('message'))
+        <div class="alert alert-danger">
+            {{ session('message') }}
         </div>
     @endif
     <section class="content">

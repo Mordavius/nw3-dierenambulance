@@ -104,6 +104,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::findOrFail($id)->delete(); // Find the correct user by id and delete it
-        return redirect("/leden")->with("message", "Gebruiker is verwijderd!");
+        return redirect("/administratie")->with("message", "Gebruiker is verwijderd!");
     }
 }

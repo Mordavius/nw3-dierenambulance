@@ -28,7 +28,7 @@
       <div class="grid_container current_page">
           <div class="grid_header">
               <div class="tickets open_tickets">Openstaande meldingen</div>
-              <div class="result_amount">{{$unfinishedtickets->count()}} melding(en)</div>
+              <div class="result_amount">{{$unfinishedtickets_array->count()}} melding(en)</div>
           </div>
           <div class="grid_main">
 
@@ -44,7 +44,7 @@
                       </tbody>
                   </table>
 
-              @foreach($unfinishedtickets as $unfinishedticket)
+              @foreach($unfinishedtickets_array as $unfinishedticket)
                 @foreach($animals as $animal)
                     @if($unfinishedticket->animal_id == $animal->id)
                     <a href="{{ route('melding.edit', $unfinishedticket->id) }}">

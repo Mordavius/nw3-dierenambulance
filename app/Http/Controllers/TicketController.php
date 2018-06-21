@@ -35,8 +35,7 @@ class TicketController extends Controller
         $search = $request->input('search'); // Get  the input from the search field
         // Grabs all the existing tickets and split the finished and unfinished
         $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
-        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('id', 'desc')->get();
-
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
         $tickets_id = Ticket::all()->pluck("id");
         $destination_array = [];
 
@@ -55,6 +54,7 @@ class TicketController extends Controller
         }, $coordinateStrings);
         return view('ticket.centralist', compact('animals', 'destinations', 'destination_array', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
     }
+
 
     public function createAjax(Request $request)
     {
@@ -167,7 +167,7 @@ class TicketController extends Controller
     {
         $milage = Bus::all('milage')->pluck('milage')->first();
         $bus = Bus::all('bus_type')->pluck("bus_type");
-        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->get();
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->orderBy('created_at')->get();
         $unfinishedtickets_id = Ticket::where('finished', '0')->orderBy('date', 'desc')->pluck('id');
         $animals = Animal::all();
         $destinations = Destination::whereIn('ticket_id', $unfinishedtickets_id)->get();            //$coordinateStrings = Destination::where('ticket_id', $unfinishedticket)->get();
@@ -379,17 +379,16 @@ class TicketController extends Controller
         foreach ($tickets as $ticket) {
             if ($animal == 'alles') {
                 $animalresult = Animal::where('id', $ticket->animal_id)->first();
-            }else {
+            } else {
                 $animalresult = Animal::where([['id', $ticket->animal_id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
             }
             if ($city == 'alles') {
                 $destinationresult = Destination::where('id', $ticket->id)->first();
-            }
-            else {
+            } else {
                 $destinationresult = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%' . $city . '%']])->first();
             }
 
-            if($ticket && $animalresult && $destinationresult){
+            if ($ticket && $animalresult && $destinationresult) {
                 array_push($ticket_array, $ticket);
                 array_push($animal_array, $animalresult);
                 array_push($destination_array, $destinationresult);
