@@ -5,7 +5,7 @@
 @include('administration.edit_menu')
 @section('body_class', 'edit_page')
 <div class="wrapper">
-  <form class="content" method="POST" action="{{ route('register') }}">
+  <form id="register" class="content" method="POST" action="{{ route('register') }}">
     <h1>Nieuwe gebruiker</h1>
       @csrf
       <div class="form-group">
