@@ -12535,3 +12535,7 @@ select .selected {
   margin: 1.25rem auto;
 }
 
+.password_edit h2 {
+  margin: 0;
+}
+
