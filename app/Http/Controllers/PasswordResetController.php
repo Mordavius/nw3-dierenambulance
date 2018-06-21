@@ -21,11 +21,11 @@ class PasswordResetController extends Controller
         $user = User::where('token', '=', $token)->get();
         $token_user = User::where('token', $token)->pluck('token');
 
-        if ($token_user != null) {
+        if (count($token_user) != 0) {
             if ($token == $token_user[0]) {
                 return view('user.PasswordReset', compact('user'));
             }
-        } return redirect('/')->with('message', 'Gebruiker niet gevonden');
+        } return redirect('/')->with('message', "Gebruiker niet gevonden");
     }
     public function update(Request $request, $id)
     {
