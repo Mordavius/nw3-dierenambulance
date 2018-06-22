@@ -191,12 +191,12 @@ var app = angular.module("app", [])
             jQuery("p.alert").remove();
             if (name_text_field.value == ""){
                 jQuery('.alert-danger.name').show();
-                jQuery('.alert-danger.name').append('<p class="alert">Naam is niet ingevuld!</p>');
+                jQuery('.alert-danger.name').append('<p class="alert">Naam melder is niet ingevuld!</p>');
                 return false;
             }if(number_text_field.value == ""){
                 jQuery('.alert-danger.name').hide();
                 jQuery('.alert-danger.name').show();
-                jQuery('.alert-danger.name').append('<p class="alert">Telefoonnummer is niet ingevuld!</p>');
+                jQuery('.alert-danger.name').append('<p class="alert">Telefoonnummer melder is niet ingevuld!</p>');
             }else{
             footer_button_back.style.visibility = "visible";
             page1.style.marginLeft = "-100%";
@@ -216,27 +216,45 @@ var app = angular.module("app", [])
         }
         }else if(page2.className == "pages current_page")
          {
-            page2.style.marginLeft = "-100%";
-            page3.style.marginLeft = "0%";
-            page3.className = "pages current_page";
-            ticket_information.address = address_field.innerHTML;
-            ticket_information.house_number = house_number_field.innerHTML;
-            ticket_information.postal_code = postal_code_field.innerHTML;
-            ticket_information.city = city_field.innerHTML;
-            ticket_information.township = township_field.innerHTML;
-            ticket_information.coordinates = coordinates_field.value;
-            address_field.innerHTML = "";
-            house_number_field.innerHTML ="";
-            postal_code_field.innerHTML = "";
-            city_field.innerHTML = "";
-            township_field.innerHTML = "";
-            page2.className = "pages";
-            circle2.className = "circle previous";
-            span2.className = "span previous";
-            divider2.className = "divider previous";
-            circle3.className = "circle highlighted";
+             page2.style.marginLeft = "-100%";
+             page3.style.marginLeft = "0%";
+             page3.className = "pages current_page";
+             ticket_information.address = address_field.innerHTML;
+             ticket_information.house_number = house_number_field.innerHTML;
+             ticket_information.postal_code = postal_code_field.innerHTML;
+             ticket_information.city = city_field.innerHTML;
+             ticket_information.township = township_field.innerHTML;
+             ticket_information.coordinates = coordinates_field.value;
+             address_field.innerHTML = "";
+             house_number_field.innerHTML = "";
+             postal_code_field.innerHTML = "";
+             city_field.innerHTML = "";
+             township_field.innerHTML = "";
+             page2.className = "pages";
+             circle2.className = "circle previous";
+             span2.className = "span previous";
+             divider2.className = "divider previous";
+             circle3.className = "circle highlighted";
+
         }else if(page3.className == "pages current_page")
         {
+            jQuery("p.alert").remove();
+            if (selected_animal.innerText == ""){
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Diersoort niet ingevuld</p>');
+                return false;
+            }
+            if(injury_field.value == "") {
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Verwondingen niet ingevuld</p>');
+                return false;
+            }
+            if(description_field.value == ""){
+            jQuery('.alert-danger.name').hide();
+            jQuery('.alert-danger.name').show();
+            jQuery('.alert-danger.name').append('<p class="alert">Opmerking niet ingevuld</p>');
+        }else {
             page3.style.marginLeft = "-100%";
             page4.style.marginLeft = "0%";
             page4.style.marginBottom = "55px";
@@ -256,21 +274,28 @@ var app = angular.module("app", [])
             span3.className = "span previous";
             divider3.className = "divider previous";
             circle4.className = "circle highlighted";
-       }else if(page4.className == "pages current_page")
-       {
-          footer_button_forward.style.visibility = "hidden";
-          ticket_information.priority = priority_field.value;
-          page4.style.marginLeft = "-100%";
-          page5.style.marginLeft = "0%";
-          page5.className = "pages current_page";
-          page4.className = "pages";
-          circle4.className = "circle previous";
-          span4.className = "span previous";
-          divider4.className = "divider previous";
-          circle5.className = "circle highlighted";
-          loadTicketInformation();
-          console.log(ticket_information);
-      }
+        }
+       }else if(page4.className == "pages current_page") {
+            jQuery("p.alert").remove();
+            if (priority_field.value == "") {
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Prioriteit niet ingevuld</p>');
+            } else {
+                footer_button_forward.style.visibility = "hidden";
+                ticket_information.priority = priority_field.value;
+                page4.style.marginLeft = "-100%";
+                page5.style.marginLeft = "0%";
+                page5.className = "pages current_page";
+                page4.className = "pages";
+                circle4.className = "circle previous";
+                span4.className = "span previous";
+                divider4.className = "divider previous";
+                circle5.className = "circle highlighted";
+                loadTicketInformation();
+                console.log(ticket_information);
+            }
+        }
     }
 
     function back() {
@@ -344,18 +369,82 @@ var app = angular.module("app", [])
     }
 
     $('#footer_button_submit').click(submit);
-    function submit(){
-        var postcode = postal_code.value.replace(/\s/g, '');
-        makeRequest("GET", geocodeQuery(postcode), function(err, result) {
-			if(err) { throw err; };
-
-        var obj = JSON.parse(result);
-        var latLngSubmit = {"lat": obj[0].lat, "lng": obj[0].lon};
-	    coordinates.value = JSON.stringify(latLngSubmit);
-        document.forms["submit_form"].submit();
-
-    });
-}
+    function submit() {
+        if (page5.className == "pages current_page") {
+            jQuery("p.alert").remove();
+            if (postal_code.value == "") {
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Postcode niet ingevuld</p>');
+                return false;
+            }
+            if (name_text_field.value == ""){
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Naam melder is niet ingevuld!</p>');
+                return false;
+            }if(number_text_field.value == ""){
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Telefoonnummer melder is niet ingevuld!</p>');
+                return false;
+            }
+            if (animal_species.value == ""){
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Diersoort niet ingevuld</p>');
+                return false;
+            }
+            if(injury.value == "") {
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Verwondingen niet ingevuld</p>');
+            }
+            if(description.value == ""){
+                jQuery('.alert-danger.name').hide();
+                jQuery('.alert-danger.name').show();
+                jQuery('.alert-danger.name').append('<p class="alert">Opmerking niet ingevuld</p>');
+            }
+            else {
+                var postcode = postal_code.value.replace(/\s/g, '');
+                makeRequest("GET", geocodeQuery(postcode), function (err, result) {
+                    if (err) {
+                        throw err;
+                    }
+                    var obj = JSON.parse(result);
+                    if (obj[0] == undefined) {
+                        if (page5.className == "pages current_page") {
+                            jQuery("p.alert").remove();
+                            jQuery('.alert-danger.name').show();
+                            jQuery('.alert-danger.name').append('<p class="alert">Ingevulde postcode is ongeldig</p>');
+                        }
+                    }
+                    else {
+                        var latLngSubmit = {"lat": obj[0].lat, "lng": obj[0].lon};
+                        coordinates.value = JSON.stringify(latLngSubmit);
+                        console.log(obj);
+                        makeRequest("GET", reverseGeocodeQuery("json", obj[0].lat, obj[0].lon, 18), function(err, result2) {
+                            if(err) { throw err; }
+                            var searchedURLJson2 = JSON.parse(result2);
+                            setMarkerForLocation(searchedURLJson2);
+                            ticket_information.address = address_field.innerHTML;
+                            ticket_information.house_number = house_number_field.innerHTML;
+                            ticket_information.postal_code = postal_code_field.innerHTML;
+                            ticket_information.city = city_field.innerHTML;
+                            ticket_information.township = township_field.innerHTML;
+                            ticket_information.coordinates = coordinates_field.value;
+                            if (address.value == "" && house_number.value == "" && city.value == "") {
+                                address.value = ticket_information.address;
+                                house_number.value = ticket_information.house_number;
+                                postal_code.value = ticket_information.postal_code;
+                                city.value = ticket_information.city;
+                                township.value = ticket_information.township;
+                            }
+                        });
+                        document.forms["submit_form"].submit();
+                    }
+                });
+            }
+        }
+    }
 
     function getLocationRecord(){
         $.ajax({

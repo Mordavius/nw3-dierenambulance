@@ -90,6 +90,7 @@
             <div class="title_page">
                 <h1>Dier</h1>
             </div>
+            <div class="alert-danger name" style="display:none"></div>
             <div class="animal_page">
                 <div class="animal_cards" id="animal_cards">
                     <div class="animal_card" onclick="selectAnimalSpieces('Hond', 'images/Hond.svg');">
@@ -145,6 +146,7 @@
             <div class="title_page">
                 <h1>Prioriteit</h1>
             </div>
+            <div class="alert-danger name" style="display:none"></div>
         </div>
         <div class="map_grid">
             <div ng-app="app">
@@ -210,6 +212,7 @@
             <div class="title_page">
                 <h1>Overzicht</h1>
             </div>
+            <div class="alert-danger name" style="display:none"></div>
             {!! Form::model($ticket, [
                 'method' => 'POST',
                 'route' => 'melding.store',
