@@ -289,7 +289,9 @@ class TicketController extends Controller
         $loaddestination = Destination::where('ticket_id', $ticket_id)->get();
         $vehicle = Destination::where('ticket_id', $ticket_id)->pluck('vehicle');
         $loadowners = Owner::where('ticket_id', $ticket_id)->get();
+        $owner_id = Owner::where('ticket_id', $ticket_id)->pluck('id');
         $animalowner = Ticket::all();
+        $owners = Owner::where('ticket_id', $ticket_id)->get();
         $known = Known::all();
         $knownUser = User::all();
         $animals = Animal::where('id', $animal_id)->get();// Grabs animal based on animal id
@@ -298,7 +300,7 @@ class TicketController extends Controller
         $animal = Animal::where('id', $animal_id)->pluck('animal_species');
         $animaldescription = Animal::where('id', $animal_id)->pluck('description');
         return view("ticket.edit", compact('tickets_id', 'destinations', 'knownUser', 'vehicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner',
-            'animaldescription', 'animals', 'loaddestination', 'known', 'ticket_id', 'animal'));
+            'animaldescription', 'animals', 'loaddestination', 'known', 'ticket_id', 'animal', 'owners', 'owner_id'));
     }
 
     /**
@@ -310,15 +312,6 @@ class TicketController extends Controller
      */
     public function update(Request $request, $ticket_id)
     {
-        // Updates the data for the requested fields
-        $destination = new Destination([
-            'postal_code' => $request->get('postal_code'),
-            'address' => $request->get('address'),
-            'house_number' => $request->get('house_number'),
-            'city' => $request->get('city'),
-            'coordinates' => $request->get('coordinates'),
-        ]);
-
         // Updates the data for the requested fields
         $ticket = Ticket::findOrFail($ticket_id);
         $ticket->date = Input::get('date');
@@ -336,6 +329,19 @@ class TicketController extends Controller
             'animal_species' => Input::get('animal_species'),
             'gender' => Input::get('gender'),
             'description' => Input::get('comments'),
+        ]);
+
+        $owner_id = Ticket::where('id', $ticket_id)->pluck('id');
+
+        Owner::whereIn('id', $owner_id)->update([
+            'name' => Input::get('name'),
+            'owner_house_number' => Input::get('owner_house_number'),
+            'telephone_number' => Input::get('telephone_number'),
+            'owner_address' => Input::get('owner_address'),
+            'owner_city' => Input::get('owner_city'),
+            'owner_township' => Input::get('owner_township'),
+            'owner_postal_code' => Input::get('owner_postal_code'),
+            'ticket_id' => $ticket_id,
         ]);
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
@@ -415,10 +421,10 @@ class TicketController extends Controller
         return response()->json(['tickets' =>  $ticket_array, 'destinations'=>$destination_array, 'animals'=>$animal_array], 200);
     }
 
-    public function destroyAjaxOwner($task_id)
+    public function destroyAjaxOwner($owner_id)
     {
         try {
-            $task = Owner::destroy($task_id);
+            $task = Owner::destroy($owner_id);
             return response()->json($task);
         } catch (\Exception $e) {
             return response()->json($e);

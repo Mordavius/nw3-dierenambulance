@@ -89,7 +89,7 @@ $(document).ready(function(){
                 url: url + '/' + task_id,
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+                    //location.reload();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -328,7 +328,6 @@ $(document).ready(function(){
                 success: function (data) {
                     console.log(data);
                     location.reload();
-                    $("#owner" + task_id).remove();
                 },
                 error: function (data) {
                     console.log('Error:', data);
