@@ -7,7 +7,7 @@
       Nieuwe gebruiker
     @endif
   </h1>
-  <button type="submit" class="">
+  <button onclick="registerButton();" type="submit" class="">
       <img src="{{asset('images/check.svg')}}" alt="">
   </button>
 </div>

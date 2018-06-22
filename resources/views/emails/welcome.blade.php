@@ -6,7 +6,7 @@
 <body>
 <h2>Welkom bij Notepet, {{$user['name']}}</h2>
 <br/>
-Je bent geregistreerd met dit e-mail adres:{{$user['email']}}
+Je bent geregistreerd met dit e-mail adres: {{$user['email']}}
 
 
 <br/>
