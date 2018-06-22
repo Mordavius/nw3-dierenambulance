@@ -36,27 +36,12 @@ class TicketController extends Controller
         // Grabs all the existing tickets and split the finished and unfinished
         $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
         $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
-        $tickets_id = Ticket::all()->pluck("id");
-        $destination_array = [];
 
-        foreach ($tickets_id as $ticket_id) {
-            array_push($destination_array, Destination::where('ticket_id', $ticket_id)->first());
-        }
-        //TODO: Check tickets for not finished tickets
-        // Check destinations for coordinates based on not finished tickets
-        // Send that data to map.
-        $destinations = Destination::orderBy('created_at', 'asc')->paginate(15); // Grabs all the existing locations, searches in the locations and paginate at 15 results
-        $animals = Animal::all(); // Grabs all te existings animals
-        $coordinateStrings = $destinations->pluck('coordinates')->toArray(); //Grabs the coordinates and puts it into an array.
-        //Decodes the array for better formatting.
-        $coordinates = array_map(function ($coordinateString) {
-            return json_decode($coordinateString);
-        }, $coordinateStrings);
-        return view('ticket.centralist', compact('animals', 'destinations', 'destination_array', 'search', 'coordinates', 'finishedtickets', 'unfinishedtickets'));
+        return view('ticket.centralist', compact( 'search', 'finishedtickets', 'unfinishedtickets'));
     }
 
 
-    public function createAjax(Request $request)
+    public function createAjaxDestination(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'postal_code' => 'required',
@@ -64,17 +49,17 @@ class TicketController extends Controller
             'address' => 'required',
             'city' => 'required',
             'milage' => 'required|numeric',
+            'ticket_id' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         } else {
-            $destination = Destination::create($request->all()); // ->where('ticket_id', $ticket_id)->get();
+            $destination = Destination::create($request->all());
+            $ticket = Ticket::findOrFail($request->get('ticket_id'));
+            $bus = $ticket->bus;
 
-            $bus = Input::get('vehicle');
-            $milage = Destination::get(['milage'])->last()->toArray();
-
-            Bus::where('bus_type', $bus)->update($milage);
+	        $bus->update(['milage' => $request->get('milage')]);
 
             return response()->json($destination);
         }
@@ -195,15 +180,11 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+	    $priority = $request->get('priority');
+        $unfinishedtickets = Ticket::where('finished', '=', '0')->where('priority', '>=', $priority)->get();
 
-        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('priority', 'asc')->get();
-        $priority = $request->get('priority');
         foreach ($unfinishedtickets as $unfinishedticket) {
-            if ($priority = $unfinishedticket->priority) {
-                Ticket::where('priority', $request->get('priority'))->update([
-                    'priority' => $priority + 1
-                ]);
-            }
+	        $unfinishedticket->update(['priority' => $unfinishedticket->priority + 1]);
         }
 
         // Stores the data for the requested fields
@@ -211,29 +192,21 @@ class TicketController extends Controller
             'animal_species' => $request->get('animal_species'),
             'gender' => $request->get('gender'),
             'description' => $request->get('description'),
+            'breed' => $request->get('breed'),
+            'injury' => $request->get('injury'),
         ]);
-
-        $animal->save(); // Saves the data
 
         $bus = Bus::where('bus_type', $request->vehicle)->first();
 
         // Stores the data for the requested fields
         $ticket = new Ticket([
-            'animal_id' => $animal->id,
-            'breed' => $request->get('breed'),
-            'chip_number' => $request->get('chip_number'),
-            'injury' => $request->get('injury'),
             'priority' => $request->get('priority'),
             'date' => $request->get('date'),
             'time' => $request->get('time'),
             'centralist' => $request->get('centralist'),
             'reporter_name' => $request->get('reporter_name'),
             'telephone' => $request->get('telephone'),
-            'bus_id' => $bus->id,
         ]);
-
-        $ticket->save(); // Saves the data
-
         // Stores the data for the requested fields
         $destination = new Destination([
             'postal_code' => $request->get('postal_code'),
@@ -243,11 +216,17 @@ class TicketController extends Controller
             'township' => $request->get('township'),
             'coordinates' => $request->get('coordinates'),
             'ticket_id' => $ticket->id,
-            'vehicle' => $request->get('vehicle'),
             'milage' => $request->get('milage'),
         ]);
 
-        $destination->save();// Saves the data
+        try {
+            $ticket->save();
+		    $ticket->animal()->save($animal);
+		    $bus->tickets()->save($ticket);
+		    $ticket->animal()->save($destination);
+	    } catch (\Exception $e) {
+	        return response()->json($e);
+        }
 
         return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
     }
@@ -262,12 +241,13 @@ class TicketController extends Controller
         return redirect('melding')->with('message', 'Melding afgerond!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param $ticket_id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
     public function show($ticket_id)
     {
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
@@ -275,74 +255,57 @@ class TicketController extends Controller
         return view("ticket.show", compact('ticket', 'user', 'tickets'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param $ticket_id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
     public function edit($ticket_id)
     {
-        $bus = Bus::all('bus_type')->pluck("bus_type");
-        $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
-        $destinations = Destination::where('ticket_id', $ticket_id)->get();
-        $loaddestination = Destination::where('ticket_id', $ticket_id)->get();
-        $vehicle = Destination::where('ticket_id', $ticket_id)->pluck('vehicle');
-        $loadowners = Owner::where('ticket_id', $ticket_id)->get();
-        $owner_id = Owner::where('ticket_id', $ticket_id)->pluck('id');
-        $animalowner = Ticket::all();
-        $owners = Owner::where('ticket_id', $ticket_id)->get();
-        $known = Known::all();
-        $knownUser = User::all();
-        $animals = Animal::where('id', $animal_id)->get();// Grabs animal based on animal id
-        $users = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
-        $ticket = Ticket::findOrFail($ticket_id);// Grabs the ticket with the correct id
-        $animal = Animal::where('id', $animal_id)->pluck('animal_species');
-        $animaldescription = Animal::where('id', $animal_id)->pluck('description');
-        return view("ticket.edit", compact('tickets_id', 'destinations', 'knownUser', 'vehicle', 'destination_array', 'bus', 'ticket', 'loadowners', 'users', 'animalowner',
-            'animaldescription', 'animals', 'loaddestination', 'known', 'ticket_id', 'animal', 'owners', 'owner_id'));
+    	$ticket = Ticket::findOrFail($ticket_id);
+        $known_addresses = Known::all();
+        $known_users = User::all();
+        return view("ticket.edit", compact(['ticket', 'known_addresses', 'known_users']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param Request $request
+	 * @param         $ticket_id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
     public function update(Request $request, $ticket_id)
     {
-        // Updates the data for the requested fields
-        $ticket = Ticket::findOrFail($ticket_id);
-        $ticket->date = Input::get('date');
-        $ticket->time = Input::get('time');
-        $ticket->centralist = Input::get('centralist');
-        $ticket->reporter_name = Input::get('reporter_name');
-        $ticket->telephone = Input::get('telephone');
-        $ticket->save(); // Saves the data
+    	$ticket = Ticket::findOrFail($ticket_id);
+        $ticket->telephone = $request->get('telephone');
+        $ticket->save();
 
-        // Updates the data for the requested fields
-        $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');
-        $animal = Animal::findOrFail($animal_id);
-
-        Animal::whereIn('id', $animal)->update([
-            'animal_species' => Input::get('animal_species'),
-            'gender' => Input::get('gender'),
-            'description' => Input::get('comments'),
+        $animal = $ticket->animal;
+        $animal->update([
+            'animal_species' => $request->get('animal_species'),
+            'breed' => $request->get('breed'),
+            'gender' => $request->get('gender'),
+            'injury' => $request->get('injury'),
+            'description' => $request->get('description'),
         ]);
 
-        $owner_id = Ticket::where('id', $ticket_id)->pluck('id');
-
-        Owner::whereIn('id', $owner_id)->update([
-            'name' => Input::get('name'),
-            'owner_house_number' => Input::get('owner_house_number'),
-            'telephone_number' => Input::get('telephone_number'),
-            'owner_address' => Input::get('owner_address'),
-            'owner_city' => Input::get('owner_city'),
-            'owner_township' => Input::get('owner_township'),
-            'owner_postal_code' => Input::get('owner_postal_code'),
-            'ticket_id' => $ticket_id,
-        ]);
+	    $owner = $ticket->owner;
+//	    dd($request->all());
+	    if ($owner) {
+		    $owner->update([
+	            'name' => $request->get('owner_name'),
+	            'owner_house_number' => $request->get('owner_house_number'),
+	            'telephone_number' => $request->get('owner_telephone_number'),
+	            'owner_address' => $request->get('owner_address'),
+	            'owner_city' => $request->get('owner_city'),
+	            'owner_township' => $request->get('owner_township'),
+	            'owner_postal_code' => $request->get('owner_postal_code'),
+	        ]);
+	    }
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
     }
@@ -370,19 +333,19 @@ class TicketController extends Controller
         return response()->json('Ticket verwijdert', 200);
     }
 
-    public function destroyAjax($task_id)
+    public function destroyAjaxDestination($destination_id)
     {
         try {
-            $task = Destination::destroy($task_id);
-            return response()->json($task);
+            $destination = Destination::destroy($destination_id);
+            return response()->json($destination);
         } catch (\Exception $e) {
             return response()->json($e);
         }
     }
 
-    public function destroyAjaxPayment($task_id)
+    public function destroyAjaxPayment($ticket_id)
     {
-        Ticket::where('id', $task_id)->update([
+        Ticket::where('id', $ticket_id)->update([
             'payment_invoice' => 0,
             'payment_gift' => 0,
         ]);

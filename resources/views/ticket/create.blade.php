@@ -11,7 +11,7 @@
                 <div class="card-header">
                     Melding maken
                 </div>
-                <input id="searchTextBox" type="text"/>
+
 
                 <button id="searchButton">
                     Ga

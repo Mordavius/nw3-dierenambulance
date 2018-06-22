@@ -4,8 +4,8 @@
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/Map-view.png"></img>
-            <img id="list-image" src="images/List-view-active.png"></img>
+            <img id="map-image" src="/images/Map-view.png" />
+            <img id="list-image" src="/images/List-view-active.png" />
         </button>
     </div>
     <div class="right">
@@ -24,8 +24,8 @@
   </div>
   <div class="right">
     <button id="toggle-button-desktop">
-      <img id="map-image-desktop" src="images/Map-view.png">
-      <img id="list-image-desktop" src="images/List-view-active.png">
+      <img id="map-image-desktop" src="/images/Map-view.png">
+      <img id="list-image-desktop" src="/images/List-view-active.png">
     </button>
       <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
@@ -52,46 +52,38 @@
           </div>
           <div class="grid_main" id="unfinished">
               @foreach($unfinishedtickets as $unfinishedticket)
-                      @foreach($animals as $animal)
-                          @if($unfinishedticket->animal_id == $animal->id)
-                          <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
-                          <article class="grid_ticket">
-                              <div class="test">
-                              </div>
-                              <div class="ticket_number">
-                                  #{{ $unfinishedticket->id }}
-                              </div>
-                              <div class="grid_animal_icon">
-                                  <div class="ticket_icon">
-                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
-                                  </div>
+                  <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
+                      <article class="grid_ticket">
+                          <div class="test">
+                          </div>
+                          <div class="ticket_number">
+                              #{{ $unfinishedticket->id }}
+                          </div>
+                          <div class="grid_animal_icon">
+                              <div class="ticket_icon">
+                                  <img src="/images/{{$unfinishedticket->animal->animal_species}}.svg" id="animal_icon">
                               </div>
                               <div class="ticket_main_info">
                                   <div class="ticket_title">
-                                    <h3>{{$animal->animal_species}}</h3>
-                                    <span class="subheading">{{$animal->breed}}</span>
+                                    <h3>{{$unfinishedticket->animal->animal_species}}</h3>
+                                    <span class="subheading">{{$unfinishedticket->animal->breed}}</span>
                                   </div>
                                   <div class="ticket_address">
                                     <span>
-                                      @foreach($destination_array as $destination)
-                                          @if($destination['ticket_id'] == $unfinishedticket->id)
-                                              {{$destination['address']}}
-                                              @if($destination['house_number'] != '0')
-                                                  {{$destination['house_number']}}
-                                              @endif
-                                              ,<br>
-                                              {{$destination['postal_code']}}
-                                              {{$destination['city']}}
+                                          {{$unfinishedticket->mainDestination()['address']}}
+                                          @if($unfinishedticket->mainDestination()['house_number'] != '0')
+                                              {{$unfinishedticket->mainDestination()['house_number']}}
                                           @endif
-                                      @endforeach
+                                          ,<br>
+                                          {{$unfinishedticket->mainDestination()['postal_code']}}
+                                          {{$unfinishedticket->mainDestination()['city']}}
                                     </span>
                                   </div>
-                              </div>
-                              <p class="ticket_description">{{str_limit($animal->description, 75)}}</p>
-                          </article>
-                      </a>
-                          @endif
-                      @endforeach
+                            </div>
+                              <p class="ticket_description">{{str_limit($unfinishedticket->animal->description, 75)}}</p>
+                          </div>
+                      </article>
+                  </a>
               @endforeach
           </div>
       </div>
@@ -101,42 +93,34 @@
           </div>
           <div class="grid_main" id="finished">
               @foreach($finishedtickets as $finishedticket)
-                      @foreach($animals as $animal)
-                          @if($finishedticket->animal_id == $animal->id)
-                          <div class="grid_ticket">
-                              <div class="test">
-                              </div>
-                              <div class="ticket_number">
-                                  #{{ $finishedticket->id }}
-                              </div>
-                              <div class="grid_animal_icon">
-                                  <div class="ticket_icon">
-                                      <img src="/images/{{$animal->animal_species}}.svg" id="animal_icon">
-                                  </div>
-                              </div>
-                              <div class="ticket_main_info">
-                                  <div class="ticket_title">{{$animal->animal_species}}</div>
-                                  <div class="ticket_address">
-                                      @foreach($destinations as $destination)
-                                          @if($destination->ticket_id == $finishedticket->id)
-                                              {{$destination->address}}
-                                              @if($destination->house_number != '0')
-                                                  {{$destination->house_number}}
-                                              @endif
-                                              ,
-                                              {{$destination->postal_code}}
-                                              {{$destination->city}}
-                                          @endif
-                                      @endforeach
-                                  </div>
-                              </div>
-
-                              <article class="ticket_description">
-                                  {{$animal->description}}
-                              </article>
+                  <div class="grid_ticket">
+                      <div class="test">
+                      </div>
+                      <div class="ticket_number">
+                          #{{ $finishedticket->id }}
+                      </div>
+                      <div class="grid_animal_icon">
+                          <div class="ticket_icon">
+                              <img src="/images/{{$finishedticket->animal->animal_species}}.svg" id="animal_icon">
                           </div>
-                          @endif
-                      @endforeach
+                      </div>
+                      <div class="ticket_main_info">
+                          <div class="ticket_title">{{$finishedticket->animal->animal_species}}</div>
+                          <div class="ticket_address">
+                              {{$finishedticket->mainDestination()->address}}
+                              @if($finishedticket->mainDestination()->house_number != '0')
+                                  {{$finishedticket->mainDestination()->house_number}}
+                              @endif
+                              ,
+                              {{$finishedticket->mainDestination()->postal_code}}
+                              {{$finishedticket->mainDestination()->city}}
+                          </div>
+                      </div>
+
+                      <article class="ticket_description">
+                          {{$finishedticket->animal->description}}
+                      </article>
+                  </div>
               @endforeach
           </div>
       </div>
@@ -145,8 +129,8 @@
 <div class="pages" id="page2">
     <div ng-app="app">
         <div ng-controller="TableController" >
-            <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
-            </div>
+{{--            <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">--}}
+            {{--</div>--}}
         </div>
     </div>
 </div>

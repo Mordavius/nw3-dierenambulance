@@ -10,8 +10,8 @@ class Bus extends Model
     protected $fillable = ['bus_type', 'buschange_id', 'milage'];
 
     // Setting the relationship between a bus and a ticket
-    public function busTicket()
+    public function tickets()
     {
-        return $this->belongsTo('App\Ticket');
+        return $this->hasMany('App\Ticket');
     }
 }

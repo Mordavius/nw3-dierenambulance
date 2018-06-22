@@ -11,7 +11,7 @@ class Destination extends Model
     //
 
     // Set the relationship between a destination and a ticket
-    public function destinationTicket()
+    public function ticket()
     {
         return $this->belongsTo('App\Ticket', 'destination_id', 'id');
     }

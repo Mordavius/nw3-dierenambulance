@@ -74,12 +74,12 @@ Route::post('/passwords/reset/{id}/{token}', 'PasswordResetController@update');
 Route::get('/search', 'TicketController@search');
 
 // Ajax create functions
-Route::post('/destination/{ticket_id?}', 'TicketController@createAjax')->middleware('auth');
+Route::post('/destination/{ticket_id?}', 'TicketController@createAjaxDestination')->middleware('auth');
 Route::post('/finances/{ticket_id?}', 'TicketController@createAjaxFinance')->middleware('auth');
 Route::post('/owners/{ticket_id?}', 'TicketController@createAjaxOwner')->middleware('auth');
 
 // Ajax delete functions
-Route::delete('/destination/{task_id?}', 'TicketController@destroyAjax')->middleware('auth');
+Route::delete('/destination/{task_id?}', 'TicketController@destroyAjaxDestination')->middleware('auth');
 Route::delete('/finances/{task_id?}', 'TicketController@destroyAjaxPayment')->middleware('auth');
 
 Route::delete('/tickets/{ticket_id?}', 'TicketController@destroyTicketAjax')->middleware('auth');

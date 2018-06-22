@@ -120,9 +120,8 @@ $(document).ready(function(){
             house_number: $('#house_number').val(),
             city: $('#city').val(),
             township: $('#township').val(),
-            vehicle: $('#vehicle').val(),
             milage: $('#milage').val(),
-        }
+        };
 
         //used to determine the http verb to use [add=POST], [update=PUT]
         var type = "POST"; //for creating new resource
