@@ -59,10 +59,10 @@
             <div class="alert-danger name" style="display:none"></div>
             <div class="reporter_info">
                 <div class="name">
-                    <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name" value="dsafadsf">
+                    <input type="text" id="name_text_field" class="ticket_text_field" placeholder="Naam" name="reporter_name">
                 </div>
                 <div class="phone_number">
-                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone" value="asdf">
+                    <input type="text" id="number_text_field" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone">
                 </div>
             </div>
             <p class="boodschap">Vergeet niet te melden dat de gegevens van de melder worden opgeslagen</p>
