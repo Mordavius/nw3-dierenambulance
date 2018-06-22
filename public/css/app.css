@@ -12110,12 +12110,6 @@ input[type="checkbox"] {
   border: 0;
 }
 
-@media (min-width: 992px) {
-  .ticketcreate .footer .footer_button {
-    right: 15%;
-  }
-}
-
 .ticketcreate .footer #footer_button_forward {
   right: 12px;
   margin-top: 15px;

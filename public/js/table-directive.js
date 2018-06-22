@@ -122,6 +122,13 @@ var app = angular.module("app", [])
 
         $('#searchButton').click(searchButtonClicked);
 
+        $("#searchTextBox").on('keyup', function (e) {
+            console.log('koekkoek');
+            if (e.keyCode == 13) {
+                searchButtonClicked();
+            }
+        });
+
         function searchButtonClicked(){
             var searchText = document.getElementById("searchTextBox").value.replace(/\s/g, '');
 
