@@ -75,15 +75,8 @@
             </div>
             <div class="searchStuff">
                 <input id="searchTextBox" type="text" placeholder="Zoeken"/>
-                <select id="knownAddress">
-                    <option value="test1">Eerste</option>
-                    <option value="test2">Tweede</option>
-                </select>
-                <button id="searchButton" class="btn-succes">
-                    Ga
-                </button>
+                <button id="sendLocationButton" class="btn btn-success">Locatie van melder opvragen</button>
             </div>
-            <input type="button" id="sendLocationButton" class="btn btn-success">
             <div id="app" ng-app="app">
                 <div ng-controller="TableController" >
                     <div id="map" class="panel panel-default panel-success">

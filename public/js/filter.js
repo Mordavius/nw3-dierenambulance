@@ -30,6 +30,9 @@ function filterTickets() {
     if (locationfield == ''){
         locationfield = 'alles';
     }
+    if (datefield == ''){
+        alert('Vul a.u.b. een datum in')
+    }
 
 
     $.ajaxSetup({
