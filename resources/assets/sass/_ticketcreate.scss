@@ -727,11 +727,6 @@
           margin: auto;
           background-color: #FFFFFF;
           border: 0;
-
-          @include media-breakpoint-up(lg)
-          {
-            right: 15%;
-          }
       }
 
       #footer_button_forward{
