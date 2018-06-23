@@ -50,9 +50,9 @@
             @endif
         </li>
         <li class="segmented-control__item">
-            <input class="segmented-control__input" type="radio" id="option-beheerder" name="role_id">
+            <input class="segmented-control__input" type="radio" id="option-beheerder" value="1" name="role_id">
             @if($user->role_id == 1)
-            <label class="segmented-control__label selected" for="option-beheerder" value="Ambulance">Beheerder</label>
+            <label class="segmented-control__label selected" for="option-beheerder" value="Beheerder">Beheerder</label>
             @else
             <label class="segmented-control__label" for="option-beheerder" value="Beheerder">Beheerder</label>
             @endif
