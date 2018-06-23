@@ -129,7 +129,7 @@
 <div class="pages" id="page2">
     <div ng-app="app">
         <div ng-controller="TableController" >
-            <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
+            <div id="map" data-coordinates="{{ json_encode($unfinishedtickets) }}" class="panel panel-default panel-success">
             </div>
         </div>
     </div>
