@@ -1,5 +1,8 @@
 <?php
 
+// TODO: Kwown moet eigenlijk naar known_addresses veranderd worden.
+// TODO: Ook het eindpunt (address) zou naar known_addresses kunnen)
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
