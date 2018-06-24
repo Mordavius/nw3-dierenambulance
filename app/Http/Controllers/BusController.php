@@ -21,8 +21,8 @@ class BusController extends Controller
      */
     public function index()
     {
-        $bus = Bus::All(); // Grabs all the existing bus details
-        return view('bus.index', compact('bus'));
+        $buses = Bus::All(); // Grabs all the existing bus details
+        return view('bus.index', compact('buses'));
     }
 
     /**
@@ -32,15 +32,15 @@ class BusController extends Controller
      */
     public function create(Request $bus)
     {
-            return view('bus.create', compact('bus'));
+        return view('bus.create', compact('bus'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param BusChangeRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
     public function store(BusChangeRequest $request)
     {
         // Stores the data for the requested fields

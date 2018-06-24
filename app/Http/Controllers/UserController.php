@@ -80,12 +80,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $new_password = $request->get('password');
-        // dd($new_password);
+
         if (Hash::check($new_password, Auth::user()->password)) {
             return redirect("/leden/{$id}/edit")->with("message", "Het ingevoerde wachtwoord is al eens gebruikt.");
         }
+
         // Update the requested data for the fields
-        User::findOrFail($id)->update([
+        $user->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($new_password), // Hash the password
