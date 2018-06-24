@@ -62,6 +62,7 @@ class LocationController extends Controller
         Mail::send('mail', $data, function($message) use ($request) {
             $message->to($request->mail, $request->name)->subject
                 ('Laravel HTML Testing Mail');
+            //TODO: FF aanpassen @girgis
             $message->from('@gmail.com','Dierenambulance');
         });
 
