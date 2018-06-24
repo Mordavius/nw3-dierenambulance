@@ -13,13 +13,13 @@
         </a>
         <br />
         <br />
-          @if (! $bus->count())
+          @if (! $buses->count())
           <div class="alert alert-danger">
               <strong>Geen bussen gevonden</strong>
           </div>
           @else
             <div class="list">
-              @foreach($bus as $bus)
+              @foreach($buses as $bus)
                 <div class="list-item">
                   <a href="#"> <!-- link naar bus -->
                     <div class="headings">
