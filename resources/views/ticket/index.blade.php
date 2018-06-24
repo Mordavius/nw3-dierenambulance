@@ -1,79 +1,172 @@
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="{{ asset('css/leaflet.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.css') }}">
-<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @extends('layouts.app')
-
+@section('body_class', 'ticket_page')
 @section('content')
-<div class="container">
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png">
-            <img id="list-image" src="images/list-view-active.png">
+            <img id="map-image" src="images/Map-view.png">
+            <img id="list-image" src="images/List-view-active.png">
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png">
-        <img id="filter-icon" src="/images/filter-icon.png">
+        <img id="search-icon" src="/images/Search-icon.png">
+        <img id="filter-icon" src="/images/Filter-icon.png">
     </div>
 </div>
-
-<div class="container testin">
-    <div class="row justify-content-center">
-
-        <div class="container">
-            <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3>Test search </h3>
-                        <br /><br /><br />
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <input type="text" class="form-controller" id="search" name="search">
-                            <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket_id }}>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<a href="/melding/create">
+    <button class="round">
+        <img src="/images/Plus.png" class="rotate-button"/>
+    </button>
+</a>
+<div class="pages current_page" id="page1">
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
         </div>
+    @endif
+  <div class="tickets ticket-wrapper" >
+      <div class="grid_container current_page">
+          <div class="grid_header">
+              <div class="tickets open_tickets">Openstaande meldingen</div>
+              <div class="result_amount">{{$unfinishedtickets_array->count()}} melding(en)</div>
+          </div>
+          <div class="grid_main">
 
-        <div class="col-md-12" id="target">
-            <div class="text-center"></div>
-            <div class="form-group {{ $errors->has('filter') ? 'has-error' : '' }}">
-                {!! Form::label('Laat meldingen zien vanaf') !!}
-                {!! Form::select('filter', ["alles", "week", "month", "year"]) !!}
-                @if($errors->has('filter'))
-                    <span class="help-block">
-                        {{ $errors->first('filter') }}
-                    </span>
-                @endif
+                  <div class="form-group">
+                      <input type="text" class="form-controller" id="search" name="search">
+                  </div>
+                  <table class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
 
-                    <div class="form-inline">
-
-                    </div>
-                <div class="card">
-                    <div class="card-header">
-                        Dashboard
-                    </div>
-                    <div class="card-body">
-                        <a href="javascript:history.back()">
-                            <div class="btn btn-primary">
-                                Terug naar het menu
+              @foreach($unfinishedtickets_array as $unfinishedticket)
+                @foreach($animals as $animal)
+                    @if($unfinishedticket->animal_id == $animal->id)
+                    <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
+                    <div class="grid_ticket">
+                        <div class="test">
+                        </div>
+                        <div class="ticket_number">
+                            #{{ $unfinishedticket->id }}
+                        </div>
+                        <div class="grid_animal_icon">
+                            <div class="ticket_icon">
+                                <img src="/images/"{{$animal->animal_species}}".svg" id="animal_icon">
                             </div>
-                        </a>
-                        <br />
-                        <br />
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
+                        </div>
+                        <div class="ticket_main_info">
+                            <div class="ticket_title">{{$animal->animal_species}}</div>
+                            <div class="ticket_address">
+                                {{$destination_array}}
+                                @foreach($destination_array as $destination)
+                                    @if($destination->ticket_id == $unfinishedticket->id)
+                                        {{$destination->address}}
+                                        @if($destination->house_number != '0')
+                                            {{$destination->house_number}}
+                                        @endif
+                                        ,
+                                        {{$destination->postal_code}}
+                                        {{$destination->city}}
+                                    @endif
+                                @endforeach
                             </div>
-                        @endif
-                        <h4>Actieve meldingen</h4>
+                        </div>
+                        <p class="ticket_description">{{str_limit($animal->description, 75)}}</p>
+                    </div>
+                    </a>
+                    @endif
+                @endforeach
+              @endforeach
+          </div>
+      </div>
+      <div class="grid_container">
+          <div class="grid_header">
+              <!-- <select id="times">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+          </select>
+
+          <select id="tf" onclick="filterTickets()">
+              <option>Filter</option>
+          <option value="everything">
+              Alles
+          </option>
+          <option value="week">
+              Weken
+          </option>
+          <option value="month">
+              Maanden
+          </option>
+          <option value="year">
+              Jaren
+          </option>
+      </select> -->
+              <div class="tickets closed_tickets">Afgeronde meldingen</div>
+          </div>
+          <div class="grid_main">
+              @foreach($finishedtickets as $finishedticket)
+                      @foreach($animals as $animal)
+                          @if($finishedticket->animal_id == $animal->id)
+                          <div class="grid_ticket">
+                              <div class="test">
+                              </div>
+                              <div class="ticket_number">
+                                  #{{ $finishedticket->id }}
+                              </div>
+                              <div class="grid_animal_icon">
+                                  <!-- <div class="ticket_icon">
+                                      <img src="/images/hond-icon.png" id="animal_icon">
+                                  </div> -->
+                              </div>
+                              <div class="ticket_main_info">
+                                  <div class="ticket_title">{{$animal->animal_species}}</div>
+                                  <div class="ticket_address">
+                                      @foreach($destinations as $destination)
+                                          @if($destination->ticket_id == $finishedticket->id)
+                                              {{$destination->address}}
+                                              @if($destination->house_number != '0')
+                                                  {{$destination->house_number}}
+                                              @endif
+                                              ,
+                                              {{$destination->postal_code}}
+                                              {{$destination->city}}
+                                          @endif
+                                      @endforeach
+                                  </div>
+                              </div>
+
+                              <article class="ticket_description">
+                                  {{$animal->description}}
+                              </article>
+                          </div>
+                          @endif
+                      @endforeach
+              @endforeach
+          </div>
+      </div>
+  </div>
+</div>
+<div class="pages" id="page2">
+    <div ng-app="app">
+        <div ng-controller="TableController" >
+            <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
+                            Actieve meldingen
+                        </h4>
                         <div class="box-body ">
                             @if(session('message'))
                                 <div class="alert alert-info">
@@ -104,10 +197,9 @@
                                         </tr>
                                     </thead>
                                     <tbody class="zoekresultaten">
-                                        @foreach($tickets as $ticket)
-                                            @if($ticket->finished == '0')
+                                        @foreach($unfinishedtickets as $unfinishedticket)
                                             <tr>@foreach($animals as $animal)
-                                                    @if($ticket->id == $animal->ticket_id)
+                                                    @if($unfinishedticket->id == $animal->ticket_id)
                                                         <td>{{ $animal->animal_species }}
                                                         <br />
                                                         {{ $animal->gender}}</td>
@@ -115,8 +207,8 @@
                                                     @endif
 
                                                 @endforeach
-                                                @foreach($destination_array as $destination)
-                                                    @if($ticket->id == $destination->ticket_id)
+                                                @foreach($destinations as $destination)
+                                                    @if($unfinishedticket->id == $destination->ticket_id)
 
                                                     <!-- {!! Form::hidden('coordinates', $destination->coordinates, ['id' => 'test']) !!} -->
                                                         <td>
@@ -146,7 +238,6 @@
                                                     {!! Form::close() !!}
                                                 </td>
                                             </tr>
-
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -154,11 +245,12 @@
                         </div>
                         <br />
                         <br />
-                        <h4>
+
+                        <h4 id="finishedtext">
                             Afgeronde meldingen
                         </h4>
                         <div class="box-body">
-                            @if (! $tickets->count())
+                            @if (! $finishedtickets->count())
                             <div class="alert alert-danger">
                                 <strong>Geen meldingen gevonden</strong>
                             </div>
@@ -180,16 +272,17 @@
                                             <td>Action</td>
                                         </tr>
                                     </thead>
+                                    <tbody id="finished">
                                     <tbody>
                                         @foreach($finishedtickets as $finishedticket)
                                             <tr>@foreach($animals as $animal)
-                                                @if($finishedticket->animal_id == $animal->id)
+                                                  @if($finishedticket->animal_id == $animal->id)
                                                     <td>{{ $animal->animal_species }}
                                                     <br />
                                                     {{ $animal->gender}}</td>
                                                     <td>{{$animal->description}}</td>
-                                                @endif
-                                            @endforeach
+                                                  @endif
+                                                @endforeach
                                                 @foreach($destinations as $destination)
                                                     @if($destination->ticket_id == $finishedticket->id)
                                                     <td>
@@ -228,33 +321,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12" id="target2" style="display:none;">
-
-            <div ng-app="app">
-                    <div ng-controller="TableController" >
-                        <div id="map" data-coordinates="{{ json_encode($coordinates) }}" class="panel panel-default panel-success">
-                        </div>
-                      </div>
-            </div>
-        </div>
-        <a href="/melding/create">
-            <button class="round">
-                <img src="../images/plus.png" class="rotate-button"/>
-            </button>
-        </a>
-
     </div>
 </div>
-</div>
 
+@endsection
 
 @section('scripts')
     <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
-    <script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/filter.js')}}"></script>
+
 
     <script type="text/javascript">
         $('#search').on('keyup',function(){
@@ -268,12 +347,10 @@
                 }
             });
         })
-
     </script>
 
     <script type="text/javascript">
         $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
     </script>
 
-@endsection
 @endsection

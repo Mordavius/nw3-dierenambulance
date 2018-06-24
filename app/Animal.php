@@ -10,7 +10,7 @@ class Animal extends Model
     protected $fillable = ['ticket_id', 'animal_species', 'breed', 'catch_cage', 'chip_number', 'gender', 'injury', 'description'];
 
     // Set the relationship with a animal and a ticket
-    public function animalTicket()
+    public function ticket()
     {
         return $this->belongsTo('App\Ticket');
     }

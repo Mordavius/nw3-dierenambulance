@@ -1,45 +1,43 @@
 <?php
 
+// TODO: Volgens mij kan deze nog de container in...
+
 namespace App\Http\Controllers;
 
 use App\Destination;
 
 use Illuminate\Http\Request;
 
-class testController extends Controller
+class TestController extends Controller
 {
     public function index()
     {
-        $tasks = Destination::all();
-       return view('ticket.test')->with('tasks',$tasks);
+        $destinations = Destination::all();
+        return view('ticket.test')->with('tasks', $destinations);
     }
 
-    public function create(Request $request) {
-        $task = Destination::create($request->all());
+    public function create(Request $request)
+    {
+        $destination = Destination::create($request->all());
 
-      //  $input = request()->all();
-
-        return response()->json($task);
-
-       // return Response::json($task);
+        return response()->json($destination);
     }
 
-    public function edit(Request $request, $task_id) {
+    public function edit(Request $request, $id)
+    {
+        $destination = Destination::find($id);
 
-        $task = Destination::find($task_id);
+	    $destination->postal_code = $request->postal_code;
+	    $destination->city = $request->city;
 
-        $task->postal_code = $request->postal_code;
-        $task->city = $request->city;
+	    $destination->save();
 
-        $task->save();
-
-        return response()->json($task);
-
+        return response()->json($destination);
     }
+    public function destroy($id)
+    {
+        $destinations = Destination::destroy($id);
 
-    public function destroy($task_id) {
-        $task = Destination::destroy($task_id);
-
-        return response()->json($task);
+        return response()->json($destinations);
     }
 }

@@ -32,7 +32,11 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single, sentry'],
+        ],
+
+        'sentry' => [
+            'driver' => 'sentry',
         ],
 
         'single' => [

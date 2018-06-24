@@ -1,2 +1,2 @@
-o "Copy public folder to nasvanmark.nl/dierenambulance"
-rsync -rv ./public/ ../../domains/nasvanmark.nl/public_html/dierenambulance
+o "Copy public folder to notepet.nl"
+rsync -rv ./public/ ../../domains/notepet.nl/public_html

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
+use App\Http\Requests\BusChangeRequest;
 use App\Bus;
 
 class BusController extends Controller
@@ -20,8 +21,8 @@ class BusController extends Controller
      */
     public function index()
     {
-        $bus = Bus::All(); // Grabs all the existing bus details
-        return view('bus.index', compact('bus'));
+        $buses = Bus::All(); // Grabs all the existing bus details
+        return view('bus.index', compact('buses'));
     }
 
     /**
@@ -29,18 +30,18 @@ class BusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Bus $bus)
+    public function create(Request $bus)
     {
-            return view('bus.create', compact('bus'));
+        return view('bus.create', compact('bus'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param BusChangeRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+    public function store(BusChangeRequest $request)
     {
         // Stores the data for the requested fields
         $bus = new Bus([

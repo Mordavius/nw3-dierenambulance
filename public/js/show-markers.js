@@ -1,7 +1,6 @@
 var app = angular.module("app", [])
 .controller("TableController", ['$scope','$http', function($scope, $http){
 
-    $scope.distance = [];
     $scope.map = L.map("map", {
     center: [53, 5.7],
     zoom: 10,
@@ -15,20 +14,23 @@ var app = angular.module("app", [])
         minZoom: 1,
     }).addTo($scope.map);
 
-	var coords = $('#map').data('coordinates')
+    var coords = $('#map').data('coordinates')
+
 	coords.forEach(function(coord){
-		placeMarker(coord);
+        if (coord != null) {
+            placeMarker(coord);
+        }
+        function placeMarker(i){
+            var latlng = L.latLng(i.lat, i.lng);
+            var marker = L.marker(latlng).addTo($scope.map);
+            // $scope.distance.push(latlng);
+        }
 	})
 
-	function placeMarker(i){
-		var latlng = L.latLng(i.lat, i.lng);
-		var marker = L.marker(latlng).addTo($scope.map);
-        $scope.distance.push(latlng);
-	}
-
 $('#toggle-button').click(toggle);
-var img_array_map= new Array('images/map-view.png','images/map-view-active.png');
-var img_array_list= new Array('images/list-view-active.png','images/list-view.png');
+$('#toggle-button-desktop').click(toggle);
+var img_array_map= new Array('images/Map-view.png','images/Map-view-active.png');
+var img_array_list= new Array('images/List-view-active.png','images/List-view.png');
 var i = 0;
 
 function toggle () {

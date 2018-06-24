@@ -22,12 +22,3 @@ class CheckRole
         return $next($request);
     }
 }
-
-
-/*         if (! $request->user()->isAdmin()) {
-            return redirect('/ambulance-meldingen')->with('message', 'Alleen toegangbaar voor centralisten');
-        }
-        else {
-             redirect('/centralist-meldingen')->with('message', 'Alleen toegangbaar voor ambulance medewerkers');
-        }
-*/

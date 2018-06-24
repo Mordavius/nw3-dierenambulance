@@ -1,3 +1,6 @@
+.svgwrapper path {
+    fill: gray;
+}
 .wrapper
 {
   @include media-breakpoint-up(lg)
@@ -15,16 +18,30 @@
     padding-top: 0;
     @include clearfix;
 
+    h1
+    {
+      margin-bottom: rem-calc(38);
+      display: none;
+      font-size: 24px;
+
+      @include media-breakpoint-up(lg)
+      {
+        display: block;
+      }
+    }
+
     .btn-success
     {
       float: right;
-      background: $primary-color;
-      font-size: 16px;
-      padding: 5px 18px 5px 18px;
-      border-radius: 0;
       margin-top: 0!important;
       margin-right: 21px;
-      border: none;
+      font-size: 16px;
+      padding: 5px 18px 5px 18px;
+
+      @include media-breakpoint-up(lg)
+      {
+        margin-right: 0;
+      }
 
       &.full-width
       {
@@ -34,11 +51,6 @@
         {
           width: auto;
         }
-      }
-
-      @include media-breakpoint-up(lg)
-      {
-        margin-right: 0;
       }
     }
 
@@ -75,6 +87,7 @@
             text-transform: capitalize;
             margin-bottom: 0;
             line-height: 1;
+            font-size: 24px;
           }
         }
 

@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
         //Save a quarterly export of the tickets
         $schedule->command('export')
             ->quarterly()
-            ->emailOutputTo('g.w.n.h.iskondos@gmail.com')
-            ->withoutOverlapping();
+            ->emailOutputTo('info@dademeren.nl');
+            //->withoutOverlapping();
 
         //Anonymize reporters older than a month
         $schedule->command('anonymize')

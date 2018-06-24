@@ -1,0 +1,90 @@
+input:not([type="checkbox"]):not([type="submit"]),
+textarea,
+select
+{
+  border: 0;
+  border-bottom: 1px solid #C9C9C9;
+  border-radius: 0;
+  margin-bottom: rem-calc(30);
+  color: $black;
+  font-size: rem-calc(18);
+  width: 100%;
+  padding-left: rem-calc(4);
+
+  &:focus
+  {
+    outline: none;
+    border-bottom: 1px solid $black;
+  }
+
+  &::-webkit-inner-spin-button
+  {
+    display: none;
+  }
+}
+input[type="checkbox"]
+{
+  border: 1px solid #C9C9C9;
+  background-color: $white;
+}
+
+.segmented-control
+{
+  display: table;
+  width: 100%;
+  margin: 2em 0;
+  padding: 0;
+
+  .segmented-control__item
+  {
+    display: table-cell;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    .selected{
+        background: $secondary-color;
+        color: $white;
+    }
+    input
+    {
+      position: absolute;
+      visibility: hidden;
+    }
+
+    .segmented-control__label {
+        display: block;
+        margin: 0 -1px -1px 0; /* -1px margin removes double-thickness borders between items */
+        padding: rem-calc(5) .25em;
+
+        border: 1px solid #C9C9C9;
+
+        font: 14px/1.5 sans-serif;
+        text-align: center;
+
+        cursor: pointer;
+
+        @include media-breakpoint-up(lg)
+        {
+          padding: 1em .25em;
+        }
+    }
+
+    .segmented-control__label:hover,
+    .segmented-control__label:focus
+    {
+        background: $secondary-color;
+        color: $white;
+    }
+
+    .segmented-control__input
+    {
+      width: auto;
+    }
+
+    .segmented-control__input:checked + .segmented-control__label {
+        background: $secondary-color;
+        color: $white;
+    }
+  }
+}

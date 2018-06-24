@@ -2,9 +2,7 @@
 
 .col-6 {margin-left: auto; margin-right: auto;}
 
-.btn:not(:disabled):not(.disabled) {
-	margin-top: 10px;
-}
+
 
 html, body
 {

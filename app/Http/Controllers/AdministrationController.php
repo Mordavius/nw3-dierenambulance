@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Destination;
+use App\Ticket;
 use App\TicketExport;
 use App\Quarterfinance;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\FileNotFoundException;
+use Illuminate\Http\Request;
 use App\User;
 
 class AdministrationController extends Controller
@@ -23,17 +29,19 @@ class AdministrationController extends Controller
     public function index()
     {
             $users      = User::orderBy('name')->paginate(5); // Grab all existing users and paginate by 5 results
-            $usersCount = User::count(); // Count the users
-            return view("administration.index", compact('users', 'usersCount'));
+            return view("administration.index", compact('users'));
     }
 
     // Export function for showing the page
     public function export()
     {
-        return view('administration.export', compact('ticket'));
+        $ticket = Ticket::all();
+        $destinations = Destination::all()->unique('township');
+        return view('administration.export', compact('ticket', 'destinations'));
     }
 
-    public function quartexports(){
+    public function quartexports()
+    {
         $quarterlies = Quarterfinance::all();
         return view('administration.quarterly', compact('quarterlies'));
     }
@@ -43,13 +51,25 @@ class AdministrationController extends Controller
         $storage = Storage::url('exports/');
         //storage_path('exports\\');
         $filepath = $storage . $filename;
-        return Storage::download('exports/'.$filename);
+        try {
+            return Storage::download('exports/' . $filename);
+        } catch (FileNotFoundException $e) {
+            Log::channel('sentry')->error($e->getMessage());
+            return Redirect::back()->withErrors(['Het door u opgevraagde bestand bestaat niet, neem contact op met de webmaster of probeer dit handmatig']);
+        }
     }
 
 
     // Download the excel in xlsx format
-    public function downloadExcel()
+    public function downloadExcel(Request $request)
     {
-        return $this->excel->download(new TicketExport, 'meldingen.xlsx');
+        //check if withfinances is set
+        if (!$request->withfinance){
+        $withfinances = 'false';
+        }
+        else {
+            $withfinances = $request->withfinance;
+        }
+        return $this->excel->download(new TicketExport($request->enddate, $request->startdate, $request->animal, $request->township, $withfinances), 'meldingen.xlsx');
     }
 }

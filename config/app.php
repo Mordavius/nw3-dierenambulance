@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://nasvanmark.nl/dierenambulance'),
+    'url' => env('APP_URL', 'https://notepet.nl'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,20 +1,22 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/cssgrid.css') }}">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @extends('layouts.app')
 
 @section('content')
 <div class="icon-bar">
     <div class="left">
         <button id="toggle-button">
-            <img id="map-image" src="images/map-view.png">
-            <img id="list-image" src="images/list-view-active.png">
+            <img id="map-image" src="images/Map-view.png">
+            <img id="list-image" src="images/List-view-active.png">
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/search-icon.png">
-        <img id="filter-icon" src="/images/filter-icon.png">
+        <img id="search-icon" src="/images/Search-icon.png">
+        <img id="filter-icon" src="/images/Filter-icon.png">
     </div>
 </div>
-<a href="/melding/create">
+    <a href="/melding/create">
     <button class="round">
         <img src="../images/plus.png" class="rotate-button"/>
     </button>
@@ -28,16 +30,25 @@
         </div>
         <div class="grid_main">
 
-            <div class="panel-body">
-                <div class="form-group">
-                    <input type="text" class="form-controller" id="search" name="search">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" class="form-controller" id="search" name="search">
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
 
             @foreach($unfinishedtickets as $unfinishedticket)
                     @foreach($animals as $animal)
                         @if($unfinishedticket->animal_id == $animal->id)
-                        <div class="grid_ticket flag-new">
+                        <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
+                            <div class="grid_ticket flag-new">
                             <div class="test">
                             </div>
                             <div class="ticket_number">
@@ -66,6 +77,7 @@
                             </div>
                             <textarea wrap="soft" rows="3" readonly class="ticket_description">{{str_limit($animal->description, 75)}}</textarea>
                         </div>
+                    </a>
                         @endif
                     @endforeach
             @endforeach
@@ -125,13 +137,6 @@
     </div>
 </div>
 
-
-@section('scripts')
-<script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/angular.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
-
 <script type="text/javascript">
     $('#search').on('keyup',function(){
         $value=$(this).val();
@@ -150,6 +155,12 @@
 <script type="text/javascript">
     $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 </script>
+
+
+@section('scripts')
+<script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
 
 
 @endsection

@@ -2,56 +2,46 @@
 {
   .form-group
   {
-    input
+    &:last-child
     {
-      border: 0;
-      border-bottom: 1px solid #C9C9C9;
-      border-radius: 0;
-      margin-bottom: rem-calc(30);
+      display: none;
+
+      @include media-breakpoint-up(lg)
+      {
+        display: block;
+      }
+    }
+  }
+
+  .box-footer
+  {
+    display: none;
+
+    @include media-breakpoint-up(lg)
+    {
+      display: block;
     }
 
-    .segmented-control
+    @include clearfix;
+    .btn-success
     {
-      display: table;
-      width: 100%;
-      margin: 2em 0;
-      padding: 0;
+      float: right;
+      margin-right: 0;
+    }
+  }
 
-      .segmented-control__item
+  .content
+  {
+    padding: rem-calc(50) rem-calc(21) 0 rem-calc(21);
+    margin-bottom: 50px;
+
+    h1
+    {
+      display: none;
+
+      @include media-breakpoint-up(lg)
       {
-        display: table-cell;
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-
-        input
-        {
-          position: absolute;
-          visibility: hidden;
-        }
-
-        .segmented-control__label {
-            display: block;
-            margin: 0 -1px -1px 0; /* -1px margin removes double-thickness borders between items */
-            padding: 1em .25em;
-
-            border: 1px solid #C9C9C9;
-
-            font: 18px/1.5 sans-serif;
-            text-align: center;
-
-            cursor: pointer;
-        }
-
-        .segmented-control__label:hover {
-            background: $secondary-color;
-            color: $white;
-        }
-
-        .segmented-control__input:checked + .segmented-control__label {
-            background: $secondary-color;
-            color: $white;
-        }
+        display: block;
       }
     }
   }

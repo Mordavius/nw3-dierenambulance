@@ -80,12 +80,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $new_password = $request->get('password');
-        // dd($new_password);
+
         if (Hash::check($new_password, Auth::user()->password)) {
             return redirect("/leden/{$id}/edit")->with("message", "Het ingevoerde wachtwoord is al eens gebruikt.");
         }
+
         // Update the requested data for the fields
-        User::findOrFail($id)->update([
+        $user->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($new_password), // Hash the password
@@ -104,6 +105,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::findOrFail($id)->delete(); // Find the correct user by id and delete it
-        return redirect("/leden")->with("message", "Gebruiker is verwijderd!");
+        return redirect("/administratie")->with("message", "Gebruiker is verwijderd!");
     }
 }
