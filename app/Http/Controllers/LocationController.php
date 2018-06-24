@@ -23,6 +23,7 @@ class LocationController extends Controller
     {
 
     }
+
     // Show the location and set the location with id
     public function setLocation($id)
     {
@@ -32,10 +33,10 @@ class LocationController extends Controller
     // Grab the requested location and store the lat long coordinates
     public function writeLocation(Request $data)
     {
-        $loc = array('lat'=>$data->lat, 'lon'=>$data->lon);
+        $loc = array('lat' => $data->lat, 'lon' => $data->lon);
         $location = new Location([
-            'locationHash'=> $data->id,
-            'coordinates'=> json_encode($loc),
+            'locationHash' => $data->id,
+            'coordinates' => json_encode($loc),
         ]);
         $location->save(); // save the location
     }
@@ -51,18 +52,20 @@ class LocationController extends Controller
         } else {
             return response()->json('no location'); // response with 'no location' found
         }
-        //return response()->json(array('msg' => $location), 200);
     }
 
     public function askLocationMail(Request $request)
     {
         $this->request = $request;
-        $data = array('name'=>$request->name, 'link' => $request->id);
+        $data = array('name' => $request->name, 'link' => $request->id);
+
         Mail::send('mail', $data, function($message) use ($request) {
             $message->to($request->mail, $request->name)->subject
-            ('Laravel HTML Testing Mail');
+                ('Laravel HTML Testing Mail');
+            //TODO: FF aanpassen @girgis
             $message->from('@gmail.com','Dierenambulance');
         });
+
         return response('succes',200);
     }
 
@@ -71,7 +74,7 @@ class LocationController extends Controller
         $client = new Client('');
         $messagebird = new Messagebird($client);
         $phonenumber = substr($request->phonenumber, 1);
-        $message = $messagebird->createMessage("Dierenambu",["+31".$phonenumber], URL('/api/location/'.$request->id));
+        $message = $messagebird->createMessage("Dierenambu", ["+31".$phonenumber], URL('/api/location/'.$request->id));
 
         if (is_object($message) && $message->recipients->items[0]->status === 'sent') {
             return response(json_encode('message sent'), 200);

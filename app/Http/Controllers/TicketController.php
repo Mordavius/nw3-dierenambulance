@@ -76,12 +76,15 @@ class TicketController extends Controller
             return response()->json(['errors' => $validator->errors()->all()]);
         } else {
             $ticket_id = $request->ticket_id;
-            Ticket::where('id', $ticket_id)->update([
+            $ticket = Ticket::findOrFail($ticket_id);
+
+            $ticket->update([
                 'payment_invoice' => Input::get('payment_invoice'),
                 'payment_gift' => Input::get('payment_gifts'),
                 'payment_method' => Input::get('payment_method'),
             ]);
-            return response()->json();
+
+            return response()->json(); // Todo: helemaal geen enkele response?
         }
     }
 
@@ -294,7 +297,6 @@ class TicketController extends Controller
         ]);
 
 	    $owner = $ticket->owner;
-//	    dd($request->all());
 	    if ($owner) {
 		    $owner->update([
 	            'name' => $request->get('owner_name'),
@@ -318,11 +320,11 @@ class TicketController extends Controller
      */
     public function destroy($ticket_id)
     {
-        $animal_id = Ticket::where('id', $ticket_id)->pluck('animal_id');// Grabs the animal id based on the ticket id
-        //dd($animal_id);
-        Destination::where('ticket_id', $ticket_id)->delete();// Deletes destination based on ticket id
-        Animal::where('id', $animal_id)->delete();// Deletes animal based on animal id
-        Ticket::findOrFail($ticket_id)->delete();// Grabs the ticket with the correct id and deletes the ticket
+    	$ticket = Ticket::findOrFail($ticket_id);// Grabs the animal id based on the ticket id
+	    $ticket->destinations->delete();
+	    $ticket->animal->delete();
+	    $ticket->delete();
+
         return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
 
@@ -330,7 +332,8 @@ class TicketController extends Controller
     {
         Destination::where('ticket_id', $ticket_id)->delete();// Deletes destination based on ticket id
         Ticket::findOrFail($ticket_id)->delete();// Grabs the ticket with the correct id and deletes the ticket
-        return response()->json('Ticket verwijdert', 200);
+
+        return response()->json('Ticket verwijdert  ', 200);
     }
 
     public function destroyAjaxDestination($destination_id)
@@ -365,20 +368,20 @@ class TicketController extends Controller
 
         foreach ($tickets as $ticket) {
             if ($animal == 'alles') {
-                $animalresult = Animal::where('id', $ticket->animal_id)->first();
+                $animal_result = Animal::where('id', $ticket->animal_id)->first();
             } else {
-                $animalresult = Animal::where([['id', $ticket->animal_id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
+                $animal_result = Animal::where([['id', $ticket->animal_id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
             }
             if ($city == 'alles') {
-                $destinationresult = Destination::where('id', $ticket->id)->first();
+                $destination_result = Destination::where('id', $ticket->id)->first();
             } else {
-                $destinationresult = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%' . $city . '%']])->first();
+                $destination_result = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%' . $city . '%']])->first();
             }
 
-            if ($ticket && $animalresult && $destinationresult) {
+            if ($ticket && $animal_result && $destination_result) {
                 array_push($ticket_array, $ticket);
-                array_push($animal_array, $animalresult);
-                array_push($destination_array, $destinationresult);
+                array_push($animal_array, $animal_result);
+                array_push($destination_array, $destination_result);
             }
         }
         return response()->json(['tickets' =>  $ticket_array, 'destinations'=>$destination_array, 'animals'=>$animal_array], 200);
