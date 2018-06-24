@@ -52,7 +52,6 @@ class LocationController extends Controller
         } else {
             return response()->json('no location'); // response with 'no location' found
         }
-        //return response()->json(array('msg' => $location), 200);
     }
 
     public function askLocationMail(Request $request)
