@@ -1,5 +1,7 @@
 <?php
 
+// TODO: Volgens mij kan deze nog de container in...
+
 namespace App\Http\Controllers;
 
 use App\Destination;
@@ -10,36 +12,32 @@ class TestController extends Controller
 {
     public function index()
     {
-        $tasks = Destination::all();
-        return view('ticket.test')->with('tasks', $tasks);
+        $destinations = Destination::all();
+        return view('ticket.test')->with('tasks', $destinations);
     }
 
     public function create(Request $request)
     {
-        $task = Destination::create($request->all());
+        $destination = Destination::create($request->all());
 
-      //  $input = request()->all();
-
-        return response()->json($task);
-
-       // return Response::json($task);
+        return response()->json($destination);
     }
 
-    public function edit(Request $request, $task_id)
+    public function edit(Request $request, $id)
     {
-        $task = Destination::find($task_id);
+        $destination = Destination::find($id);
 
-        $task->postal_code = $request->postal_code;
-        $task->city = $request->city;
+	    $destination->postal_code = $request->postal_code;
+	    $destination->city = $request->city;
 
-        $task->save();
+	    $destination->save();
 
-        return response()->json($task);
+        return response()->json($destination);
     }
-    public function destroy($task_id)
+    public function destroy($id)
     {
-        $task = Destination::destroy($task_id);
+        $destinations = Destination::destroy($id);
 
-        return response()->json($task);
+        return response()->json($destinations);
     }
 }

@@ -38,10 +38,10 @@
         <div class="edit-ticket-blok">
             <h2>Melder</h2>
             <div class="form-group {{ $errors->has('reporter_name') ? 'has-error' : '' }}">
-                {!! Form::text('reporter_name', null, ['class' => 'form-control', 'placeholder'=> 'Melder', 'disabled']) !!}
+                {!! Form::text('reporter_name', null, ['placeholder'=> 'Melder', 'disabled']) !!}
             </div>
             <div class="form-group {{ $errors->has('telephone') ? 'has-error' : '' }}">
-                {!! Form::text('telephone', null, ['class' => 'form-control', 'placeholder' => 'Telefoonnummer', 'disabled']) !!}
+                {!! Form::text('telephone', null, ['placeholder' => 'Telefoonnummer', 'disabled']) !!}
 
                 @if($errors->has('telephone'))
                 <span class="help-block">
@@ -107,7 +107,7 @@
             @endforeach
 
             <div class="btn-center">
-                {!! Form::button('Extra locatie', ['class' => 'btn-primary btn-add-payment', 'value' => 'btn-add-destination', 'id' => 'btn-add-destination', 'name' => 'btn-add-destination']) !!}
+                {!! Form::button('Extra locatie', ['class' => 'btn-success btn-add-payment', 'value' => 'btn-add-destination', 'id' => 'btn-add-destination', 'name' => 'btn-add-destination']) !!}
             </div>
         </div>
         <div class="edit-ticket-blok">
@@ -120,8 +120,8 @@
         </div>
 
         <div class="edit-ticket-blok">
+          <h2>Eigenaar</h2>
             @if($ticket->owner)
-                <h2>Eigenaar</h2>
                 <input name="owner_name" type="text" value="{{$ticket->owner->name}}" placeholder="Naam">
                 <input name="owner_telephone_number" type="text" value="{{$ticket->owner->telephone_number}}" placeholder="Telefoonnummer">
                 <input name="owner_address" type="text" value="{{$ticket->owner->owner_address}}" placeholder="Adres">
@@ -133,13 +133,14 @@
                     <img src="{{asset('images/delete.svg')}}" alt="Verwijderen" class="delete-dest">&nbsp;&nbsp;Eigenaar Verwijderen&nbsp;
                 </button>
             @endif
-        </div>
 
         @if(!$ticket->owner)
-            <span class="italic"> Geen eigenaar gevonden </span><br />
-            {!! Form::button('Eigenaar toevoegen', ['class' => 'btn-primary btn-add-payment', 'value' => 'btn-add-destination', 'id' => 'btn-add-owner', 'name' => 'btn-add-owner']) !!}
-        <br /><br />
+            <span class="italic eigenaar"> Geen eigenaar gevonden </span>
+            <div class="btn-center">
+              {!! Form::button('Eigenaar toevoegen', ['class' => 'btn-success btn-add-payment', 'value' => 'btn-add-destination', 'id' => 'btn-add-owner', 'name' => 'btn-add-owner']) !!}
+          </div>
         @endif
+      </div>
 
         <div class="edit-ticket-blok financien">
             <div class="factuur-wrap">
@@ -193,21 +194,23 @@
                 @endif
             </div>
             <div class="btn-center">
-                {!! Form::button('Wijzig betaling', ['class' => 'btn-primary btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
+                {!! Form::button('Wijzig betaling', ['class' => 'btn-success btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
             </div>
                 {!! Form::close() !!}
-            {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'pull-left'])!!}
-                {{Form::submit('Afronden',['class' => 'btn btn-success'])}}
+            {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'btn-center'])!!}
+                {{Form::submit('Afronden',['class' => 'btn-success btn-success'])}}
             {!!Form::close()!!}
         </div>
 
         <!-- Modal (Pop up when detail destinations button clicked) -->
         <div class="modal fade" id="destination_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content-ticket">
+                    <div class="modal-header-ticket">
                         <h2 class="modal-title" id="myModalLabel">Bestemming toevoegen</h2>
-                        <button type="button" class="close-model" data-dismiss="modal" aria-label="Close"><h2 aria-hidden="true">X</h2></button>
+                        <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
+                              <img src="{{asset('images/close-black.svg')}}">
+                        </button>
                     </div>
                     <div class="modal-body" id="messages">
 
@@ -230,7 +233,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('postal_code') ? 'has-error' : '' }}">
-                            {!! Form::text('postal_code',  false , ['class' => 'form-control', 'id' => 'postal_code', 'placeholder' => 'Postcode']) !!}
+                            {!! Form::text('postal_code',  false , ['id' => 'postal_code', 'placeholder' => 'Postcode']) !!}
                             @if($errors->has('postal_code'))
                             <span class="help-block">
                                 {{ $errors->first('postal_code') }}
@@ -238,7 +241,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                            {!! Form::text('address', null, ['class' => 'form-control', 'id'=> 'address', 'value' => '' , 'placeholder' => 'Straatnaam']) !!}
+                            {!! Form::text('address', null, ['id'=> 'address', 'value' => '' , 'placeholder' => 'Straatnaam']) !!}
                             @if($errors->has('address'))
                             <span class="help-block">
                                 {{ $errors->first('address') }}
@@ -246,7 +249,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('house_number') ? 'has-error' : '' }}">
-                            {!! Form::text('house_number', null, ['class' => 'form-control', 'id' => 'house_number', 'value' => '', 'placeholder' => 'Huisnummer']) !!}
+                            {!! Form::text('house_number', null, ['id' => 'house_number', 'value' => '', 'placeholder' => 'Huisnummer']) !!}
                             @if($errors->has('house_number'))
                             <span class="help-block">
                                 {{ $errors->first('house_number') }}
@@ -254,7 +257,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('city') ? 'has-error' : '' }}">
-                            {!! Form::text('city', null, ['class' => 'form-control', 'id' => 'city', 'value' => '', 'placeholder' => 'Plaatsnaam']) !!}
+                            {!! Form::text('city', null, ['id' => 'city', 'value' => '', 'placeholder' => 'Plaatsnaam']) !!}
                             @if($errors->has('city'))
                             <span class="help-block">
                                 {{ $errors->first('city') }}
@@ -262,7 +265,7 @@
                             @endif
                         </div>
                             <div class="form-group {{ $errors->has('township') ? 'has-error' : '' }}">
-                                {!! Form::text('township', null, ['class' => 'form-control', 'id' => 'township', 'value' => '', 'placeholder' => 'Gemeente']) !!}
+                                {!! Form::text('township', null, ['id' => 'township', 'value' => '', 'placeholder' => 'Gemeente']) !!}
                                 @if($errors->has('township'))
                                     <span class="help-block">
                                         {{ $errors->first('township') }}
@@ -275,7 +278,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('milage') ? 'has-error' : '' }}">
-                            {!! Form::number('milage', null, ['class' => 'form-control', 'id' => 'milage', 'value' => '', 'placeholder' => 'Kilometer op locatie']) !!}
+                            {!! Form::number('milage', null, ['id' => 'milage', 'value' => '', 'placeholder' => 'Kilometer op locatie']) !!}
                             @if($errors->has('milage'))
                             <span class="help-block">
                                 {{ $errors->first('milage') }}
@@ -286,8 +289,8 @@
                         <div class="alert-success" style="display:none"></div>
 </form>
                     </div>
-                    <div class="modal-footer model-center">
-                        <button type="button" class="btn btn-primary" id="btn-save" name="btn-save" value="add">Opslaan</button>
+                    <div class="modal-footer-ticket model-center">
+                        <button type="button" class="btn-success" id="btn-save" name="btn-save" value="add">Opslaan</button>
                         <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket->id }}>
                     </div>
                 </div>
@@ -297,16 +300,18 @@
         <!-- Modal (Pop up when for adding a owner button clicked) -->
         <div class="modal fade" id="myModal-owner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content-ticket">
+                    <div class="modal-header-ticket">
                         <h2 class="modal-title" id="myModalLabel">Eigenaar toevoegen</h2>
-                        <button type="button" class="close-model" data-dismiss="modal" aria-label="Close"><h2 aria-hidden="true">X</h2></button>
+                        <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
+                            <img src="{{asset('images/close-black.svg')}}">
+                        </button>
                     </div>
                     <div class="modal-body">
 <form>
                         <div class="alert alert-danger owner" style="display:none"></div>
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                            {!! Form::text('name',  false , ['class' => 'form-control', 'id' => 'name', 'placeholder' => 'Naam']) !!}
+                            {!! Form::text('name',  false , ['id' => 'name', 'placeholder' => 'Naam']) !!}
                             @if($errors->has('name'))
                                 <span class="help-block">
                                 {{ $errors->first('name') }}
@@ -314,7 +319,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('telephone_number') ? 'has-error' : '' }}">
-                            {!! Form::text('telephone_number',  false , ['class' => 'form-control', 'id' => 'telephone_number', 'placeholder' => 'Telefoonnummer']) !!}
+                            {!! Form::text('telephone_number',  false , ['id' => 'telephone_number', 'placeholder' => 'Telefoonnummer']) !!}
                             @if($errors->has('telephone_number'))
                                 <span class="help-block">
                                 {{ $errors->first('telephone_number') }}
@@ -322,7 +327,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('owner_postal_code') ? 'has-error' : '' }}">
-                            {!! Form::text('owner_postal_code',  false , ['class' => 'form-control', 'id' => 'owner_postal_code', 'placeholder' => 'Postcode']) !!}
+                            {!! Form::text('owner_postal_code',  false , ['id' => 'owner_postal_code', 'placeholder' => 'Postcode']) !!}
                             @if($errors->has('owner_postal_code'))
                                 <span class="help-block">
                                 {{ $errors->first('owner_postal_code') }}
@@ -330,7 +335,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('owner_address') ? 'has-error' : '' }}">
-                            {!! Form::text('owner_address', null, ['class' => 'form-control', 'id'=> 'owner_address', 'value' => '' , 'placeholder' => 'Straatnaam']) !!}
+                            {!! Form::text('owner_address', null, ['id'=> 'owner_address', 'value' => '' , 'placeholder' => 'Straatnaam']) !!}
                             @if($errors->has('owner_address'))
                                 <span class="help-block">
                                 {{ $errors->first('owner_address') }}
@@ -338,7 +343,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('owner_house_number') ? 'has-error' : '' }}">
-                            {!! Form::text('owner_house_number', null, ['class' => 'form-control', 'id' => 'owner_house_number', 'value' => '', 'placeholder' => 'Huisnummer']) !!}
+                            {!! Form::text('owner_house_number', null, ['id' => 'owner_house_number', 'value' => '', 'placeholder' => 'Huisnummer']) !!}
                             @if($errors->has('owner_house_number'))
                                 <span class="help-block">
                                 {{ $errors->first('owner_house_number') }}
@@ -346,7 +351,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('owner_city') ? 'has-error' : '' }}">
-                            {!! Form::text('owner_city', null, ['class' => 'form-control', 'id' => 'owner_city', 'value' => '', 'placeholder' => 'Plaatsnaam']) !!}
+                            {!! Form::text('owner_city', null, ['id' => 'owner_city', 'value' => '', 'placeholder' => 'Plaatsnaam']) !!}
                             @if($errors->has('owner_city'))
                                 <span class="help-block">
                                 {{ $errors->first('owner_city') }}
@@ -354,7 +359,7 @@
                             @endif
                         </div>
                         <div class="form-group {{ $errors->has('owner_township') ? 'has-error' : '' }}">
-                            {!! Form::text('owner_township', null, ['class' => 'form-control', 'id' => 'owner_township', 'value' => '', 'placeholder' => 'Gemeente']) !!}
+                            {!! Form::text('owner_township', null, ['id' => 'owner_township', 'value' => '', 'placeholder' => 'Gemeente']) !!}
                             @if($errors->has('owner_township'))
                                 <span class="help-block">
                                         {{ $errors->first('owner_township') }}
@@ -363,8 +368,8 @@
                         </div>
 </form>
                     </div>
-                    <div class="modal-footer model-center">
-                        <button type="button" class="btn btn-primary" id="btn-save-owner" name="btn-save-owner" value="add">Opslaan</button>
+                    <div class="modal-footer-ticket model-center">
+                        <button type="button" class="btn-success" id="btn-save-owner" name="btn-save-owner" value="add">Opslaan</button>
                         <input type="hidden" id="task_id" name="task_id" value="0">
                         <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket->id }}>
                     </div>
@@ -374,16 +379,18 @@
         <!-- Modal (Pop up when factuur button clicked) -->
         <div class="modal fade" id="myModal-payment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content-ticket">
+                    <div class="modal-header-ticket">
                         <h2 class="modal-title" id="myModalLabel">Betaling toevoegen</h2>
-                        <button type="button" class="close-model" data-dismiss="modal" aria-label="Close"><h2 aria-hidden="true">X</h2></button>
+                        <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
+                            <img src="{{asset('images/close-black.svg')}}">
+                        </button>
                     </div>
                     <div class="modal-body">
 
                         <div class="alert alert-danger payment" style="display:none"></div>
                         <div class="form-group {{ $errors->has('payment_invoice') ? 'has-error' : '' }}">
-                            {!! Form::number('payment_invoice', null, ['class' => 'form-control', 'id' => 'payment_invoice', 'value' => '', 'placeholder' => 'Factuur bedrag']) !!}
+                            {!! Form::number('payment_invoice', null, ['id' => 'payment_invoice', 'value' => '', 'placeholder' => 'Factuur bedrag']) !!}
                             @if($errors->has('payment_invoice'))
                                 <span class="help-block">
                         {{ $errors->first('payment_invoice') }}
@@ -393,7 +400,7 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('payment_gifts') ? 'has-error' : '' }}">
-                            {!! Form::number('payment_gifts', null, ['class' => 'form-control', 'id' => 'payment_gifts', 'value' => '', 'placeholder' => 'Gift bedrag']) !!}
+                            {!! Form::number('payment_gifts', null, ['id' => 'payment_gifts', 'value' => '', 'placeholder' => 'Gift bedrag']) !!}
                             @if($errors->has('payment_gifts'))
                                 <span class="help-block">
                         {{ $errors->first('payment_gifts') }}
@@ -411,8 +418,8 @@
                             @endif
                         </div>
                     </div>
-                    <div class="modal-footer model-center">
-                        <button type="button" class="btn btn-primary" id="btn-save-payment" name="btn-save-payment" value="add">Opslaan</button>
+                    <div class="modal-footer-ticket model-center">
+                        <button type="button" class="btn-success" id="btn-save-payment" name="btn-save-payment" value="add">Opslaan</button>
                         <input type="hidden" id="task_id" name="task_id" value="0">
                         <input type="hidden" id="ticket_id" name="ticket_id" value={{ $ticket->id }}>
                     </div>

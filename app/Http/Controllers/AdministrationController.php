@@ -29,8 +29,7 @@ class AdministrationController extends Controller
     public function index()
     {
             $users      = User::orderBy('name')->paginate(5); // Grab all existing users and paginate by 5 results
-            $usersCount = User::count(); // Count the users
-            return view("administration.index", compact('users', 'usersCount'));
+            return view("administration.index", compact('users'));
     }
 
     // Export function for showing the page
