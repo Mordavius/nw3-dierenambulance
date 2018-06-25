@@ -376,7 +376,7 @@ class TicketController extends Controller
         return response()->json();
     }
 
-    public function filterTickets(Request $request)
+    public function filterTickets()
     {
 	    $ticket_search = Ticket::query(); // Start search query
 	    $date_filter = Input::get('date', null);
@@ -402,6 +402,7 @@ class TicketController extends Controller
 		    });
 	    }
 	    $ticket_search->with(['animal', 'destinations']);
+	    $ticket_search->orderBy('created_at', 'desc');
 
 	    $result = $ticket_search->get();
         return response()->json($result, 200);
