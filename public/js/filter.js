@@ -1,23 +1,3 @@
-function deleteTicket(ticketid) {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    var conf =  confirm("Klik op OK om de melding te verwijderen!");
-    if (conf == true) {
-        var trdel = document.getElementById('trdel' + ticketid);
-        trdel.parentNode.removeChild(trdel);
-        $.ajax({
-            type: 'DELETE',
-            url: '/tickets/' + ticketid,
-            success: function (data) {
-                alert(data);
-            }
-        })
-    }
-}
-
 function filterTickets() {
     let datefield = $('#date').val();
     let animalfieldvalue = $('#animal_species').val();
