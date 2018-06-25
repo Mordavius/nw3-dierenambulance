@@ -81,6 +81,7 @@
                                 </span>
                               </div>
                               <span class="ticket_description">{{str_limit($unfinishedticket->animal['description, 200'])}}</span>
+                              {{-- TODO: de beschrijving hierboven wordt nooit getoond. Als die weg moet, dan moet die ook uit filter.js --}}
                           </div>
                       </article>
                   </a>
