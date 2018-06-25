@@ -183,6 +183,19 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+//        $request->validate([
+//            'reporter_name' => 'required',
+//            'telephone' => 'required|numeric',
+//            'animal_species' => 'required',
+//            'injury' => 'required',
+//            'description' => 'required',
+//            'address' => 'required',
+//            'house_number' => 'required',
+//            'postal_code' => 'required',
+//            'city' => 'required',
+//            'township' => 'required'
+//        ]);
+
 	    $priority = $request->get('priority');
         $unfinishedtickets = Ticket::where('finished', '=', '0')->where('priority', '>=', $priority)->get();
 
