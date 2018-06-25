@@ -43,7 +43,7 @@
       <div class="grid_container current_page">
           <div class="grid_header">
               <div class="tickets open_tickets"><h2>Openstaande meldingen</h2></div>
-              <div class="result_amount"><span>{{$unfinishedtickets->count()}} melding(en)</span></div>
+              <div class="result_amount"><span id="number_results">{{$unfinishedtickets->count()}}</span><span> melding(en)</span></div>
               @if(session('message'))
                   <div class="alert alert-success">
                       {{ session('message') }}
