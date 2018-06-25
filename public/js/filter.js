@@ -27,7 +27,7 @@ function filterTickets() {
         success: function (data) {
             let finishedgrid = $('#finished')[0];
             let unfinishedgrid = $('#unfinished')[0];
-            let number_results = $('#number_results');
+            let number_results = $('#number_results')[0];
 
             if (finishedgrid != null && unfinishedgrid != null) {
                 finishedgrid.innerHTML = '';
@@ -70,7 +70,7 @@ function filterTickets() {
 		                '</a>';
                 });
 
-	            number_results.innerHTML = unfinished_counter;
+	            number_results.innerHTML = unfinished_counter.toString();
             }
         }
     });
