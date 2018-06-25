@@ -35,7 +35,6 @@ function filterTickets() {
     if (locationfield) {
 	    url += '&city=' + locationfield;
     }
-    console.log(url);
 
 	$.ajaxSetup({
         headers: {
