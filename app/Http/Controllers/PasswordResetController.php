@@ -15,18 +15,18 @@ class PasswordResetController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'update']]);
     }
+
     public function index($id, $token)
     {
-        // dd($id, $token);
         $user = User::where('token', '=', $token)->get();
         $token_user = User::where('token', $token)->pluck('token');
 
-        if (count($token_user) != 0) {
-            if ($token == $token_user[0]) {
-                return view('user.PasswordReset', compact('user'));
-            }
-        } return redirect('/')->with('message', "Gebruiker niet gevonden");
+        if (count($token_user) != 0 && $token == $token_user[0]) {
+            return view('user.PasswordReset', compact('user'));
+        }
+        return redirect('/')->with('message', "Gebruiker niet gevonden");
     }
+
     public function update(Request $request, $id)
     {
         $new_password = $request['password'];

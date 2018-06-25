@@ -89,36 +89,51 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
     public function collection()
     {
         $collection_array = array();
-        $tickets = '';
-
+	    $destinations2 = array();
         //this should never happen but if it does it acts as a get all
         if ($this->startdate === null && $this->enddate === null) {
-            $tickets = Ticket::all()->get();
+            $tickets = Ticket::all();
         } else {
             //gets all the tickets between the two dates
             $tickets = Ticket::query()->whereBetween('date', [$this->enddate, $this->startdate])->get();
         }
 
-        //loops through all retrieved tickets and checks if there are constraints
+        // loops through all retrieved tickets and checks if there are constraints
         foreach ($tickets as $ticket) {
-            if ($this->animal_select != 'all') {
-                $animal = Animal::where([['id', $ticket->animal_id], ['animal_species', $this->animal_select],])->first();
-            } else {
-                $animal = Animal::where('id', $ticket->animal_id)->first();
-            }
-            if ($this->township != 'all') {
-                $destinations = Destination::where([['ticket_id', $ticket->id], ['township', $this->township],])->first();
-                $destinations2 = Destination::where('ticket_id', $ticket->id)->orderBy('id', 'desc')->first();
-            } else {
-                $destinations = Destination::where('ticket_id', $ticket->id)->first();
-                $destinations2 = Destination::where('ticket_id', $ticket->id)->orderBy('id', 'desc')->first();
-            }
+	        $animal = null;
+	        $destinations = null;
+	        $destinations2 = null;
+
+	        if ($this->animal_select != 'all') {
+		        if ($ticket->animal && ($ticket->animal->animal_species == $this->animal_select)) {
+			        $animal = $ticket->animal;
+		        }
+	        } else {
+		        if ($ticket->animal) {
+			        $animal = $ticket->animal;
+		        }
+	        }
+
+	        if ($this->township != 'all') {
+		        if ($ticket->mainDestination() && ($ticket->mainDestination()->township == $this->township)) {
+			        $destinations = $ticket->mainDestination();
+		        }
+	        } else {
+		        if ($ticket->mainDestination()) {
+			        $destinations = $ticket->mainDestination();
+		        }
+	        }
+
+	        if ($ticket->destinations && count($ticket->destinations) > 1) {
+		        $destinations2 = end($ticket->destinations)[0];
+	        }
+
             if ($this->with_finances == 'true') {
-                $bus = Bus::where('id', $ticket->bus_id)->first();
+                $bus = $ticket->bus; // TODO: dit lijkt heulemaal niks te doen @girgis
             }
 
             //if all three exist generate a new ticket and fill it with data
-            if ($ticket && $animal && $destinations) {
+            if ($ticket && isset($animal) && isset($destinations)) {
                 $new_ticket = $this->getNewTicket();
 
                 if ($ticket->date) {
@@ -167,29 +182,33 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
                 if ($destinations->township) {
                     $new_ticket['township'] = $destinations->township;
                 }
-                if ($destinations->milage) {
-                    $new_ticket['startmilage'] = $destinations->milage;
-                }
-                if ($destinations2->milage){
-                    $new_ticket['endmilage'] = $destinations2->milage;
+
+	            if ($this->with_finances == 'true') {
+	                if ($destinations->milage) {
+	                    $new_ticket['startmilage'] = $destinations->milage;
+	                }
+	                if ($destinations2 && $destinations2->milage){
+	                    $new_ticket['endmilage'] = $destinations2->milage;
+	                }
                 }
 
 
                 if ($this->with_finances == 'true') {
-                        if ($ticket->payment_invoice) {
-                            $new_ticket['invoice'] = $ticket->payment_invoice;
-                        }
-                        if ($ticket->payment_method) {
-                            $new_ticket['payment_method'] = $ticket->payment_method;
-                        }
-                        if ($ticket->payment_gifts) {
-                            $new_ticket['gifts'] = $ticket->payment_gifts;
-                        }
+                    if ($ticket->payment_invoice) {
+                        $new_ticket['invoice'] = $ticket->payment_invoice;
+                    }
+                    if ($ticket->payment_method) {
+                        $new_ticket['payment_method'] = $ticket->payment_method;
+                    }
+                    if ($ticket->payment_gifts) {
+                        $new_ticket['gifts'] = $ticket->payment_gifts;
+                    }
                 }
                 //push new ticket to collection array
                 array_push($collection_array, $new_ticket);
             }
         }
+
         //return collection to laravel/excel
         return new Collection($collection_array);
     }

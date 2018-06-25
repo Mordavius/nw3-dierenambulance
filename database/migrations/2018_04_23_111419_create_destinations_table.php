@@ -16,7 +16,6 @@ class CreateDestinationsTable extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('ticket_id');
-            $table->string('vehicle')->nullable();
             $table->string('postal_code');
             $table->string('address');
             $table->string('house_number')->nullable();

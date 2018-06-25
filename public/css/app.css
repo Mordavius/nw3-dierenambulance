@@ -10535,7 +10535,7 @@ h1,
 h2,
 h3,
 h4 {
-  margin-bottom: 0;
+  margin-bottom: 0.9375rem;
 }
 
 h1 {
@@ -11290,7 +11290,7 @@ input[type="checkbox"] {
 
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -12021,7 +12021,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 
@@ -12228,6 +12228,10 @@ input[type="checkbox"] {
   }
 }
 
+.profile .container {
+  margin-top: 0.625rem;
+}
+
 .edit_ticket nav {
   display: none;
 }
@@ -12237,10 +12241,6 @@ input[type="checkbox"] {
   overflow: hidden;
 }
 
-.edit_ticket .container {
-  padding-top: 60px;
-}
-
 .edit_ticket .content h2 {
   color: #828282;
   margin: 0rem;
@@ -12248,6 +12248,10 @@ input[type="checkbox"] {
 
 .edit_ticket button {
   padding: 0px !important;
+}
+
+.edit_ticket .container:nth-child(2) {
+  padding-top: 80px;
 }
 
 .edit-ticket-blok {
@@ -12292,7 +12296,7 @@ input[type="checkbox"] {
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   width: 100%;
-  display: fixed;
+  position: fixed;
 }
 
 .edit-menu-ticket h1,

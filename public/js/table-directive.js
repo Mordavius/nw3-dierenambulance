@@ -35,7 +35,7 @@ var app = angular.module("app", [])
     var ticket_information = {"name": "", "number": "",
     "address": "", "house_number": "", "postal_code": "", "city": "", "township": "",
     "coordinates": "", "selected_animal": "", "breed": "", "gender":""
-    , "chip_number": "", "injury": "", "description": "", "priority":""};
+    , "injury": "", "description": "", "priority":""};
 
 
     L.tileLayer(
@@ -123,9 +123,8 @@ var app = angular.module("app", [])
         $('#searchButton').click(searchButtonClicked);
 
         $("#searchTextBox").on('keyup', function (e) {
-            console.log('koekkoek');
             if (e.keyCode == 13) {
-                searchButtonClicked();
+	            searchButtonClicked();
             }
         });
 
@@ -265,7 +264,6 @@ var app = angular.module("app", [])
             ticket_information.breed = breed_field.value;
             ticket_information.injury = injury_field.value;
             ticket_information.gender = gender_field.value;
-            ticket_information.chip_number = chip_number_field.value;
             ticket_information.description = description_field.value;
             $scope.map2.invalidateSize();
             loadTicketInformation();
@@ -362,7 +360,6 @@ var app = angular.module("app", [])
         animal_species.value = ticket_information.selected_animal;
         breed.value = ticket_information.breed;
         gender.value = ticket_information.gender;
-        chip_number.value = ticket_information.chip_number;
         injury.value = ticket_information.injury;
         description.value = ticket_information.description;
         priority.value = ticket_information.priority;

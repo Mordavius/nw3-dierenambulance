@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 class MailController extends Controller
 {
     // Send a mail for te requested location and response with 200
+	// TODO: @girgis, kan dit niet weg? Er staat vrij onzinnige emailadressen in namelijk
     public function askLocationMail(Request $request)
     {
         $data = array('name'=>"Virat Gandhi", 'link' => $request->id);

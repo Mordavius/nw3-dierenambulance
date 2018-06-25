@@ -48,7 +48,7 @@ class BusChangeController extends Controller
     public function store(Request $request)
     {
         // Stores the data for the requested fields
-        $buschange = new BusChange([
+        $bus_change = new BusChange([
           'bus' => $request->get('bus'),
           'from' => $request->get('from'),
           'to' => $request->get('to'),
@@ -61,7 +61,7 @@ class BusChangeController extends Controller
           'milage' => 'required',
         ]);
 
-        $buschange->save(); // saves the data
+	    $bus_change->save(); // saves the data
 
         $bus = $request->get('bus');
         $milage = BusChange::get(['milage'])->last()->toArray();

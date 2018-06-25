@@ -89,7 +89,7 @@ $(document).ready(function(){
                 url: url + '/' + task_id,
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+                    //location.reload();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -120,9 +120,8 @@ $(document).ready(function(){
             house_number: $('#house_number').val(),
             city: $('#city').val(),
             township: $('#township').val(),
-            vehicle: $('#vehicle').val(),
             milage: $('#milage').val(),
-        }
+        };
 
         //used to determine the http verb to use [add=POST], [update=PUT]
         var type = "POST"; //for creating new resource
@@ -328,7 +327,6 @@ $(document).ready(function(){
                 success: function (data) {
                     console.log(data);
                     location.reload();
-                    $("#owner" + task_id).remove();
                 },
                 error: function (data) {
                     console.log('Error:', data);

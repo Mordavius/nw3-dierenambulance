@@ -134,7 +134,6 @@
                 <div class="animal_info" id="animal_info">
                     <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed_field"/>
                     <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender_field"/>
-                    <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number_field"/>
                     <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury_field"/>
                     <textarea class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description_field"/></textarea>
                 </div>
@@ -173,34 +172,26 @@
                     <h2 class="bus_name_title">Bus</h2>
                     <div class="bus_task_list">
                         @foreach($unfinishedtickets as $unfinishedticket)
-                            @foreach($destination_array as $destination)
-                            @if($unfinishedticket->id == $destination['ticket_id'])
                             <div class="ticket">
                                 <div class="ticket_priority">
                                     {{$unfinishedticket->priority}}
                                 </div>
-                                @foreach($animals as $animal)
-                                    @if($unfinishedticket->animal_id == $animal->id)
-                                        <div class="unfinishedtickets_animal_title">
-                                            {{$animal->animal_species}}
-                                        </div>
-                                        <div class="unfinishedtickets_animal_breed">
-                                            {{$animal->breed}}
-                                        </div>
-                                    @endif
-                                @endforeach
+                                <div class="unfinishedtickets_animal_title">
+                                    {{$unfinishedticket->animal->animal_species}}
+                                </div>
+                                <div class="unfinishedtickets_animal_breed">
+                                    {{$unfinishedticket->animal->breed}}
+                                </div>
                                 <div class="ticket_address">
-                                    {{$destination['address']}}
-                                    @if($destination['house_number'] != '0')
-                                        {{$destination['house_number']}}
+                                    {{$unfinishedticket->mainDestination()['address']}}
+                                    @if($unfinishedticket->mainDestination()['house_number'] != '0')
+                                        {{$unfinishedticket->mainDestination()['house_number']}}
                                     @endif
                                     ,
-                                    {{$destination['postal_code']}}
-                                    {{$destination['city']}}
+                                    {{$unfinishedticket->mainDestination()['postal_code']}}
+                                    {{$unfinishedticket->mainDestination()['city']}}
                                 </div>
                             </div>
-                            @endif
-                            @endforeach
                         @endforeach
                     </div>
                 </div>
@@ -257,7 +248,6 @@
                                 <input class="ticket_text_field" id="animal_species" type="text" name="animal_species" placeholder="Soort"/>
                                 <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
                                 <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender"/>
-                                <input type="text" class="ticket_text_field chip_number" placeholder="ID" name="chip_number" id="chip_number"/>
                                 <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury"/>
                                 <textarea rows="4" wrap="soft" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description"/></textarea>
                             </div>

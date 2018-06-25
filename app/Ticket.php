@@ -12,11 +12,15 @@ class Ticket extends Model
     'reporter_name', 'telephone', 'driver', 'passenger'];
 
     // Tickets could have many destinations
-    public function destination()
+    public function destinations()
     {
-        //return $this->belongsTo('App\Destination', 'ticket_id', 'id');
        return $this->hasMany('App\Destination');
     }
+
+	public function mainDestination()
+	{
+		return $this->hasMany('App\Destination')->first();
+	}
 
     // Tickets could only have one animal
     public function animal()
@@ -27,7 +31,11 @@ class Ticket extends Model
     // Tickets could only have one bus
     public function bus()
     {
-        return $this->hasOne('App\Bus');
+        return $this->belongsTo('App\Bus');
+    }
+
+    public function owner() {
+    	return $this->hasOne('App\Owner');
     }
 
     /**
