@@ -61,26 +61,26 @@
                           </div>
                           <div class="grid_animal_icon">
                               <div class="ticket_icon">
-                                  <img src="/images/{{$unfinishedticket->animal->animal_species}}.svg" id="animal_icon">
+                                  <img src="/images/{{$unfinishedticket->animal['animal_species']}}.svg" id="animal_icon">
                               </div>
-                              <div class="ticket_main_info">
-                                  <div class="ticket_title">
-                                    <h3>{{$unfinishedticket->animal->animal_species}}</h3>
-                                    <span class="subheading">{{$unfinishedticket->animal->breed}}</span>
-                                  </div>
-                                  <div class="ticket_address">
-                                    <span>
-                                          {{$unfinishedticket->mainDestination()['address']}}
-                                          @if($unfinishedticket->mainDestination()['house_number'] != '0')
-                                              {{$unfinishedticket->mainDestination()['house_number']}}
-                                          @endif
-                                          ,<br>
-                                          {{$unfinishedticket->mainDestination()['postal_code']}}
-                                          {{$unfinishedticket->mainDestination()['city']}}
-                                    </span>
-                                  </div>
-                            </div>
-                              <p class="ticket_description">{{str_limit($unfinishedticket->animal->description, 75)}}</p>
+                          </div>
+                          <div class="ticket_main_info">
+                              <div class="ticket_title">
+                                <h3>{{$unfinishedticket->animal['animal_species']}}</h3>
+                                <span class="subheading">{{$unfinishedticket->animal['breed']}}</span>
+                              </div>
+                              <div class="ticket_address">
+                                <span>
+                                      {{$unfinishedticket->mainDestination()['address']}}
+                                      @if($unfinishedticket->mainDestination()['house_number'] != '0')
+                                          {{$unfinishedticket->mainDestination()['house_number']}}
+                                      @endif
+                                      ,<br>
+                                      {{$unfinishedticket->mainDestination()['postal_code']}}
+                                      {{$unfinishedticket->mainDestination()['city']}}
+                                </span>
+                              </div>
+                              <span class="ticket_description">{{str_limit($unfinishedticket->animal['description, 200'])}}</span>
                           </div>
                       </article>
                   </a>
@@ -101,11 +101,11 @@
                       </div>
                       <div class="grid_animal_icon">
                           <div class="ticket_icon">
-                              <img src="/images/{{$finishedticket->animal->animal_species}}.svg" id="animal_icon">
+                              <img src="/images/{{$finishedticket->animal['animal_species']}}.svg" id="animal_icon">
                           </div>
                       </div>
                       <div class="ticket_main_info">
-                          <div class="ticket_title">{{$finishedticket->animal->animal_species}}</div>
+                          <div class="ticket_title">{{$finishedticket->animal['animal_species']}}</div>
                           <div class="ticket_address">
                               {{$finishedticket->mainDestination()->address}}
                               @if($finishedticket->mainDestination()->house_number != '0')
@@ -118,7 +118,7 @@
                       </div>
 
                       <article class="ticket_description">
-                          {{$finishedticket->animal->description}}
+                          {{$finishedticket->animal['description']}}
                       </article>
                   </div>
               @endforeach
@@ -129,7 +129,7 @@
 <div class="pages" id="page2">
     <div ng-app="app">
         <div ng-controller="TableController" >
-            <div id="map" data-coordinates="{{ json_encode($unfinishedtickets) }}" class="panel panel-default panel-success">
+            <div id="map" data-coordinates="{{ $coordinates }}" class="panel panel-default panel-success">
             </div>
         </div>
     </div>

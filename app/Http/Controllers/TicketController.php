@@ -36,8 +36,16 @@ class TicketController extends Controller
         // Grabs all the existing tickets and split the finished and unfinished
         $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
         $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
+        $coordinates = [];
 
-        return view('ticket.centralist', compact( 'search', 'finishedtickets', 'unfinishedtickets'));
+        foreach ($unfinishedtickets as $unfinishedticket) {
+            if ($unfinishedticket->mainDestination()) {
+                array_push($coordinates, json_decode($unfinishedticket->mainDestination()->coordinates));
+            }
+        }
+        $coordinates = json_encode($coordinates);
+
+        return view('ticket.centralist', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
     }
 
 
