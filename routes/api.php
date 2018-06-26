@@ -19,6 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/sms', 'LocationController@askLocationSMS');
 Route::get('/location/show/{id}', 'LocationController@getLocation');
-Route::get('/ticketfilter/{date}/{animal}/{city}', 'TicketController@filterTickets');
+Route::get('/ticketfilter/', 'TicketController@filterTickets');
 Route::post('/location/write', 'LocationController@writeLocation');
 Route::get('/location/{id}', 'LocationController@setLocation');
