@@ -36,8 +36,16 @@ class TicketController extends Controller
         // Grabs all the existing tickets and split the finished and unfinished
         $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
         $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
+        $coordinates = [];
 
-        return view('ticket.centralist', compact( 'search', 'finishedtickets', 'unfinishedtickets'));
+        foreach ($unfinishedtickets as $unfinishedticket) {
+            if ($unfinishedticket->mainDestination()) {
+                array_push($coordinates, json_decode($unfinishedticket->mainDestination()->coordinates));
+            }
+        }
+        $coordinates = json_encode($coordinates);
+
+        return view('ticket.centralist', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
     }
 
 
@@ -283,7 +291,7 @@ class TicketController extends Controller
     	$ticket = Ticket::findOrFail($ticket_id);
         $known_addresses = Known::all();
         $known_users = User::all();
-        return view("ticket.edit", compact(['ticket', 'known_addresses', 'known_users']));
+        return view("ticket.edit", compact('ticket', 'known_addresses', 'known_users'));
     }
 
 	/**
@@ -368,36 +376,36 @@ class TicketController extends Controller
         return response()->json();
     }
 
-    public function filterTickets(Request $request)
+    public function filterTickets()
     {
-        $date = $request->date;
-        $animal = $request->animal;
-        $city = $request->city;
+	    $ticket_search = Ticket::query(); // Start search query
+	    $date_filter = Input::get('date', null);
+	    $animal_filter = Input::get('animal', null);
+	    $city_filter = Input::get('city', null);
 
-        $tickets = Ticket::query()->whereBetween('date', [$date, date(now())])->get();
-        $destination_array = [];
-        $animal_array = [];
-        $ticket_array = [];
+	    // Add date query
+	    if ($date_filter) {
+		    $ticket_search->whereBetween('date', [$date_filter, date(now())]);
+	    }
 
-        foreach ($tickets as $ticket) {
-            if ($animal == 'alles') {
-                $animal_result = Animal::where('id', $ticket->animal_id)->first();
-            } else {
-                $animal_result = Animal::where([['id', $ticket->animal_id], ['animal_species', 'LIKE', '%'. $animal. '%'],])->first();
-            }
-            if ($city == 'alles') {
-                $destination_result = Destination::where('id', $ticket->id)->first();
-            } else {
-                $destination_result = Destination::where([['id', $ticket->id], ['city', 'LIKE', '%' . $city . '%']])->first();
-            }
+	    // Add animal query
+	    if ($animal_filter) {
+		    $ticket_search->whereHas('animal', function($query) use ($animal_filter) {
+			    $query->where('animals.animal_species', 'LIKE', '%' . $animal_filter . '%');
+		    });
+	    }
 
-            if ($ticket && $animal_result && $destination_result) {
-                array_push($ticket_array, $ticket);
-                array_push($animal_array, $animal_result);
-                array_push($destination_array, $destination_result);
-            }
-        }
-        return response()->json(['tickets' =>  $ticket_array, 'destinations'=>$destination_array, 'animals'=>$animal_array], 200);
+	    // Add place query
+	    if ($city_filter) {
+		    $ticket_search->whereHas('destinations', function($query) use ($city_filter)  {
+			    $query->where('destinations.city', 'LIKE', '%' . $city_filter . '%');
+		    });
+	    }
+	    $ticket_search->with(['animal', 'destinations']);
+	    $ticket_search->orderBy('created_at', 'desc');
+
+	    $result = $ticket_search->get();
+        return response()->json($result, 200);
     }
 
     public function destroyAjaxOwner($owner_id)

@@ -30,9 +30,9 @@
       <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
   </div>
   <div class="filters">
-    <input type="date" name="date" value="" id="date">
-    <input type="text" name="animal_species" value="" id="animal_species">
-    <input type="text" name="location" value="" id="location">
+    <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
+    <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
+    <input type="text" name="location" value="" placeholder="Stad/Dorp" id="location">
     <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
     <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
   </div>
@@ -43,7 +43,7 @@
       <div class="grid_container current_page">
           <div class="grid_header">
               <div class="tickets open_tickets"><h2>Openstaande meldingen</h2></div>
-              <div class="result_amount"><span>{{$unfinishedtickets->count()}} melding(en)</span></div>
+              <div class="result_amount"><span id="number_results">{{$unfinishedtickets->count()}}</span><span> melding(en)</span></div>
               @if(session('message'))
                   <div class="alert alert-success">
                       {{ session('message') }}
@@ -61,26 +61,27 @@
                           </div>
                           <div class="grid_animal_icon">
                               <div class="ticket_icon">
-                                  <img src="/images/{{$unfinishedticket->animal->animal_species}}.svg" id="animal_icon">
+                                  <img src="/images/{{$unfinishedticket->animal['animal_species']}}.svg" id="animal_icon">
                               </div>
-                              <div class="ticket_main_info">
-                                  <div class="ticket_title">
-                                    <h3>{{$unfinishedticket->animal->animal_species}}</h3>
-                                    <span class="subheading">{{$unfinishedticket->animal->breed}}</span>
-                                  </div>
-                                  <div class="ticket_address">
-                                    <span>
-                                          {{$unfinishedticket->mainDestination()['address']}}
-                                          @if($unfinishedticket->mainDestination()['house_number'] != '0')
-                                              {{$unfinishedticket->mainDestination()['house_number']}}
-                                          @endif
-                                          ,<br>
-                                          {{$unfinishedticket->mainDestination()['postal_code']}}
-                                          {{$unfinishedticket->mainDestination()['city']}}
-                                    </span>
-                                  </div>
-                            </div>
-                              <p class="ticket_description">{{str_limit($unfinishedticket->animal->description, 75)}}</p>
+                          </div>
+                          <div class="ticket_main_info">
+                              <div class="ticket_title">
+                                <h3>{{$unfinishedticket->animal['animal_species']}}</h3>
+                                <span class="subheading">{{$unfinishedticket->animal['breed']}}</span>
+                              </div>
+                              <div class="ticket_address">
+                                <span>
+                                      {{$unfinishedticket->mainDestination()['address']}}
+                                      @if($unfinishedticket->mainDestination()['house_number'] != '0')
+                                          {{$unfinishedticket->mainDestination()['house_number']}}
+                                      @endif
+                                      ,<br>
+                                      {{$unfinishedticket->mainDestination()['postal_code']}}
+                                      {{$unfinishedticket->mainDestination()['city']}}
+                                </span>
+                              </div>
+                              <span class="ticket_description">{{str_limit($unfinishedticket->animal['description, 200'])}}</span>
+                              {{-- TODO: de beschrijving hierboven wordt nooit getoond. Als die weg moet, dan moet die ook uit filter.js --}}
                           </div>
                       </article>
                   </a>
@@ -101,11 +102,11 @@
                       </div>
                       <div class="grid_animal_icon">
                           <div class="ticket_icon">
-                              <img src="/images/{{$finishedticket->animal->animal_species}}.svg" id="animal_icon">
+                              <img src="/images/{{$finishedticket->animal['animal_species']}}.svg" id="animal_icon">
                           </div>
                       </div>
                       <div class="ticket_main_info">
-                          <div class="ticket_title">{{$finishedticket->animal->animal_species}}</div>
+                          <div class="ticket_title">{{$finishedticket->animal['animal_species']}}</div>
                           <div class="ticket_address">
                               {{$finishedticket->mainDestination()->address}}
                               @if($finishedticket->mainDestination()->house_number != '0')
@@ -118,7 +119,7 @@
                       </div>
 
                       <article class="ticket_description">
-                          {{$finishedticket->animal->description}}
+                          {{$finishedticket->animal['description']}}
                       </article>
                   </div>
               @endforeach
@@ -129,7 +130,7 @@
 <div class="pages" id="page2">
     <div ng-app="app">
         <div ng-controller="TableController" >
-            <div id="map" data-coordinates="{{ json_encode($unfinishedtickets) }}" class="panel panel-default panel-success">
+            <div id="map" data-coordinates="{{ $coordinates }}" class="panel panel-default panel-success">
             </div>
         </div>
     </div>
