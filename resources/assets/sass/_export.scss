@@ -3,8 +3,11 @@
 
   .wrapper
   {
-    margin-right: 21px;
-    margin-left: 21px;
+    @media screen and (max-width: 767.98px)
+    {
+      margin-right: 21px;
+      margin-left: 21px;
+    }
   }
 
   .dates
@@ -32,5 +35,14 @@
   label.finance
   {
     margin-left: rem-calc(14);
+  }
+
+  .btn
+  {
+    @media screen and (max-width: 767.98px)
+    {
+      margin-right: 0!important;
+      margin-top: 57px!important;
+    }
   }
 }

@@ -10748,7 +10748,6 @@ main {
 
 .wrapper .content .btn-success {
   float: right;
-  margin-top: 0 !important;
   margin-right: 21px;
   font-size: 16px;
   padding: 5px 18px 5px 18px;
@@ -10989,9 +10988,11 @@ input[type="checkbox"] {
   color: #fff;
 }
 
-.export .wrapper {
-  margin-right: 21px;
-  margin-left: 21px;
+@media screen and (max-width: 767.98px) {
+  .export .wrapper {
+    margin-right: 21px;
+    margin-left: 21px;
+  }
 }
 
 .export .dates {
@@ -11015,6 +11016,13 @@ input[type="checkbox"] {
 
 .export label.finance {
   margin-left: 0.875rem;
+}
+
+@media screen and (max-width: 767.98px) {
+  .export .btn {
+    margin-right: 0 !important;
+    margin-top: 57px !important;
+  }
 }
 
 @media (min-width: 992px) {
