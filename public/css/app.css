@@ -10585,6 +10585,7 @@ main {
   background: #fff;
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-top: 1px solid #E5E5E5;
 }
 
 @media (min-width: 992px) {
@@ -10592,6 +10593,7 @@ main {
     -webkit-box-shadow: none;
             box-shadow: none;
     border-right: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
     display: inline-block;
     width: 25%;
     vertical-align: top;
@@ -10601,7 +10603,7 @@ main {
 
 .admin-menu ul {
   list-style-type: none;
-  padding: 0px 21px 0 21px;
+  padding: 15px 21px 0 21px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10627,14 +10629,6 @@ main {
 .admin-menu ul li.menu-item {
   display: inline-block;
   border-bottom: #fff solid 5px;
-  width: 25%;
-}
-
-@media (min-width: 992px) {
-  .admin-menu ul li.menu-item {
-    width: 100%;
-    text-align: none;
-  }
 }
 
 .admin-menu ul li.menu-item.active {
@@ -10650,7 +10644,7 @@ main {
   }
 }
 
-.admin-menu ul li.menu-item.active a .svgwrapper path {
+.admin-menu ul li.menu-item.active a svg path {
   fill: black;
 }
 
@@ -10664,18 +10658,19 @@ main {
 .admin-menu ul li.menu-item a {
   color: #000;
   text-decoration: none;
-  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-.admin-menu ul li.menu-item .icon {
-  margin-bottom: 0.5rem;
+.admin-menu ul li.menu-item a svg {
+  margin-bottom: 8px;
 }
 
 @media (min-width: 992px) {
-  .admin-menu ul li.menu-item .icon {
-    margin-left: 1.625rem;
-    margin-right: 1.875rem;
+  .admin-menu ul li.menu-item a svg {
     margin-bottom: 0;
+    margin-left: 26px;
+    margin-right: 12px;
   }
 }
 
@@ -10709,7 +10704,7 @@ main {
   }
 }
 
-.svgwrapper path {
+svg path {
   fill: gray;
 }
 
@@ -10992,6 +10987,12 @@ input[type="checkbox"] {
   .export .wrapper {
     margin-right: 21px;
     margin-left: 21px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .export .wrapper .content {
+    padding-top: 57px;
   }
 }
 
