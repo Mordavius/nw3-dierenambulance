@@ -273,6 +273,7 @@
                     </div>
                 </div>
                 <input class="footer_button_submit" type="button" id="footer_button_submit" name="" value="Opslaan">
+                <input type="hidden" name="ticket_id" id="{{$ticket->id}}"/>
                 {!! Form::close() !!}
             </div>
         </div>
