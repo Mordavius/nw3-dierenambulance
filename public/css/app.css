@@ -10989,7 +10989,31 @@ input[type="checkbox"] {
   color: #fff;
 }
 
-.export label {
+.export .wrapper {
+  margin-right: 21px;
+  margin-left: 21px;
+}
+
+.export .dates {
+  width: 45%;
+  display: inline-block;
+}
+
+.export .dates.date-1 {
+  margin-right: 9%;
+}
+
+@media (min-width: 992px) {
+  .export .dates.date-1 {
+    margin-right: 8%;
+  }
+}
+
+.export label.date-label {
+  margin-bottom: 20px;
+}
+
+.export label.finance {
   margin-left: 0.875rem;
 }
 
@@ -11290,7 +11314,7 @@ input[type="checkbox"] {
 
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -12021,7 +12045,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 

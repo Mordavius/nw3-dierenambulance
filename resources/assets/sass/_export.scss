@@ -1,6 +1,35 @@
 .export
 {
-  label
+
+  .wrapper
+  {
+    margin-right: 21px;
+    margin-left: 21px;
+  }
+
+  .dates
+  {
+    width: 45%;
+    display: inline-block;
+
+    &.date-1
+    {
+      margin-right: 9%;
+
+      @include media-breakpoint-up(lg)
+      {
+        margin-right: 8%;
+      }
+    }
+  }
+
+  label.date-label
+  {
+      margin-bottom: 20px;
+      // display: block;
+  }
+
+  label.finance
   {
     margin-left: rem-calc(14);
   }
