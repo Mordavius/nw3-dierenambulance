@@ -12167,6 +12167,26 @@ input[type="checkbox"] {
   font-size: 14px;
 }
 
+.buschange .container.buswissel {
+  padding-top: 57px;
+  padding-bottom: 57px;
+}
+
+@media (min-width: 576px) {
+  .buschange .container.buswissel {
+    padding-left: 21px;
+    padding-right: 21px;
+  }
+}
+
+.buschange .container.buswissel h1 {
+  margin-bottom: 20px;
+}
+
+.buschange .container.buswissel select:invalid {
+  color: #B8B8B8;
+}
+
 .logo {
   max-width: 150px;
 }
