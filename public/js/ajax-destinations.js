@@ -12,8 +12,8 @@ function animalOwner() {
             url: "/animalowner/" + string2,
             success: function (data) {
                 console.log(data);
-                document.getElementById("name").value = data[0].reporter_name;
-                document.getElementById("telephone_number").value = data[0].telephone;
+                document.getElementById("owner_name").value = data[0].reporter_name;
+                document.getElementById("owner_telephone_number").value = data[0].telephone;
             }
         });
     });
