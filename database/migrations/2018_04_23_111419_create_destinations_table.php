@@ -23,6 +23,7 @@ class CreateDestinationsTable extends Migration
             $table->string('township');
             $table->string('coordinates')->nullable();
             $table->integer('milage')->nullable();
+            $table->integer('vehicle')->nullable();
             $table->timestamps();
         });
     }
