@@ -20,20 +20,11 @@
 
                   <div class="profile-wrapper">
                     <div class="profile-icon">
-                      <img src="/images/phone-icon.png">
-                    </div>
-                    <div class="profile-text">
-                      06 11609877
-                    </div>
-                  </div>
-
-                  <div class="profile-wrapper">
-                    <div class="profile-icon">
                       <img src="/images/home-icon.png">
                     </div>
                     <div class="profile-text">
-                      Nijverheidsweg 2 </br>
-                      <p class="profile-postalcode"> 9791DA Ten Boer </p>
+                      {{ $user->address }} {{ $user->house_number }} </br>
+                      <p class="profile-postalcode"> {{ $user->postal_code }} {{ $user->city }} </p>
                     </div>
                   </div>
 

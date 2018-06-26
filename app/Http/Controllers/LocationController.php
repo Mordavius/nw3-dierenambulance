@@ -54,21 +54,6 @@ class LocationController extends Controller
         }
     }
 
-    public function askLocationMail(Request $request)
-    {
-        $this->request = $request;
-        $data = array('name' => $request->name, 'link' => $request->id);
-
-        Mail::send('mail', $data, function($message) use ($request) {
-            $message->to($request->mail, $request->name)->subject
-                ('Laravel HTML Testing Mail');
-            //TODO: FF aanpassen @girgis
-            $message->from('@gmail.com','Dierenambulance');
-        });
-
-        return response('succes',200);
-    }
-
     public function askLocationSMS(Request $request)
     {
         $client = new Client('');
