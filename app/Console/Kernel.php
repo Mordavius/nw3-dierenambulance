@@ -29,12 +29,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('export')
             ->quarterly()
             ->emailOutputTo('info@dademeren.nl');
-            //->withoutOverlapping();
 
         //Anonymize reporters older than a month
         $schedule->command('anonymize')
-            ->daily()
-            ->withoutOverlapping();
+            ->daily();
     }
 
 
