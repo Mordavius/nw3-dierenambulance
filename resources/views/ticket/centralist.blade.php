@@ -53,7 +53,11 @@
           <div class="grid_main" id="unfinished">
               @foreach($unfinishedtickets as $unfinishedticket)
                   <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
+                    @if (count($unfinishedticket) < 2)
+                      <article class="grid_ticket single">
+                    @else
                       <article class="grid_ticket">
+                    @endif
                           <div class="test">
                           </div>
                           <div class="ticket_number">
@@ -71,18 +75,18 @@
                               </div>
                               <div class="ticket_address">
                                 <span>
-                                      {{$unfinishedticket->mainDestination()['address']}}
-                                      @if($unfinishedticket->mainDestination()['house_number'] != '0')
-                                          {{$unfinishedticket->mainDestination()['house_number']}}
-                                      @endif
-                                      ,<br>
-                                      {{$unfinishedticket->mainDestination()['postal_code']}}
-                                      {{$unfinishedticket->mainDestination()['city']}}
+                                  {{$unfinishedticket->mainDestination()['address']}}
+                                  @if($unfinishedticket->mainDestination()['house_number'] != '0')
+                                      {{$unfinishedticket->mainDestination()['house_number']}}
+                                  @endif
+                                  ,<br>
+                                  {{$unfinishedticket->mainDestination()['postal_code']}}
+                                  {{$unfinishedticket->mainDestination()['city']}}
                                 </span>
                               </div>
-                              <span class="ticket_description">{{str_limit($unfinishedticket->animal['description, 200'])}}</span>
-                              {{-- TODO: de beschrijving hierboven wordt nooit getoond. Als die weg moet, dan moet die ook uit filter.js --}}
                           </div>
+                          <p class="ticket_description">{{$unfinishedticket->animal['description']}}</p>
+                          {{-- TODO: de beschrijving hierboven wordt nooit getoond. Als die weg moet, dan moet die ook uit filter.js --}}
                       </article>
                   </a>
               @endforeach
@@ -106,21 +110,25 @@
                           </div>
                       </div>
                       <div class="ticket_main_info">
-                          <div class="ticket_title">{{$finishedticket->animal['animal_species']}}</div>
+                          <div class="ticket_title">
+                            <h3>{{$finishedticket->animal['animal_species']}}</h3>
+                            <span class="subheading">{{$finishedticket->animal['breed']}}</span>
+                          </div>
                           <div class="ticket_address">
+                            <span>
                               {{$finishedticket->mainDestination()->address}}
                               @if($finishedticket->mainDestination()->house_number != '0')
                                   {{$finishedticket->mainDestination()->house_number}}
                               @endif
-                              ,
+                              ,<br>
                               {{$finishedticket->mainDestination()->postal_code}}
                               {{$finishedticket->mainDestination()->city}}
+                            </span>
                           </div>
                       </div>
-
-                      <article class="ticket_description">
+                      <p class="ticket_description">
                           {{$finishedticket->animal['description']}}
-                      </article>
+                      </p>
                   </div>
               @endforeach
           </div>
