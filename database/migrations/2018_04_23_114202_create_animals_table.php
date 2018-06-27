@@ -20,8 +20,8 @@ class CreateAnimalsTable extends Migration
             $table->string('animal_species');
             $table->string('breed')->nullable();
             $table->string('injury')->nullable();
-            $table->string('gender');
-            $table->string('description')->nullable();
+            $table->string('gender')->default('onbekend');
+            $table->texr('description')->nullable();
             $table->timestamps();
         });
     }
