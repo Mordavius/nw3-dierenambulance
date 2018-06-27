@@ -11614,9 +11614,15 @@ input[type="checkbox"] {
 }
 
 .ticketcreate .main {
-  margin-top: 2.25rem;
+  margin-top: 0.5rem;
   grid-area: main;
   margin-bottom: 100px;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main {
+    margin-top: 2.25rem;
+  }
 }
 
 .ticketcreate .main .pages {
@@ -11738,6 +11744,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .page .searchStuff {
   width: 100%;
+  position: relative;
 }
 
 .ticketcreate .main .pages .page .searchStuff #searchTextBox {
@@ -11790,6 +11797,16 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticketcreate .main .pages .page .searchStuff #searchButton {
     width: 8%;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .ticketcreate .main .pages .page .searchStuff #sendLocationButton {
+    width: 100%;
+    position: fixed;
+    bottom: 55px;
+    left: 0;
+    z-index: 9;
   }
 }
 
@@ -12170,8 +12187,7 @@ input[type="checkbox"] {
 .ticketcreate .footer .address_info_grid {
   font-size: 14px;
   text-align: center;
-  width: 90%;
-  display: inline-block;
+  padding-top: 13px;
   margin: 0 auto;
 }
 
@@ -12187,12 +12203,14 @@ input[type="checkbox"] {
 .ticketcreate .footer #footer_button_forward {
   right: 12px;
   margin-top: 15px;
+  bottom: 18px;
 }
 
 .ticketcreate .footer #footer_button_back {
   left: 12px;
   margin-top: 15px;
   visibility: hidden;
+  bottom: 18px;
 }
 
 .login_page .navbar {
@@ -12280,6 +12298,7 @@ input[type="checkbox"] {
   background-color: #fff;
   -webkit-box-shadow: 0;
           box-shadow: 0;
+  border-bottom: 1px solid #E5E5E5;
 }
 
 @media (min-width: 992px) {

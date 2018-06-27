@@ -110,9 +110,14 @@
 
   .main
   {
-    margin-top: rem-calc(36);
+    margin-top: rem-calc(8);
     grid-area: main;
     margin-bottom: 100px;
+
+    @include media-breakpoint-up(lg)
+    {
+      margin-top: rem-calc(36);
+    }
 
     .pages
     {
@@ -235,6 +240,7 @@
         .searchStuff
         {
           width: 100%;
+          position: relative;
 
           #searchTextBox
           {
@@ -287,6 +293,18 @@
               {
                 width: 8%;
               }
+          }
+
+          #sendLocationButton
+          {
+            @media screen and (max-width: 767.98px)
+            {
+              width: 100%;
+              position: fixed;
+              bottom: 55px;
+              left: 0;
+              z-index: 9;
+            }
           }
         }
 
@@ -715,8 +733,7 @@
       {
         font-size: 14px;
         text-align: center;
-        width: 90%;
-        display: inline-block;
+        padding-top: 13px;
         margin: 0 auto;
       }
 
@@ -732,11 +749,13 @@
       #footer_button_forward{
           right: 12px;
           margin-top: 15px;
+          bottom: 18px;
       }
       #footer_button_back{
           left: 12px;
           margin-top: 15px;
           visibility: hidden;
+          bottom: 18px;
       }
   }
 }
