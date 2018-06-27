@@ -53,7 +53,7 @@
           <div class="grid_main" id="unfinished">
               @foreach($unfinishedtickets as $unfinishedticket)
                   <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
-                    @if (count($unfinishedticket) < 2)
+                    @if (count($unfinishedtickets) < 2)
                       <article class="grid_ticket single">
                     @else
                       <article class="grid_ticket">
@@ -98,7 +98,11 @@
           </div>
           <div class="grid_main" id="finished">
               @foreach($finishedtickets as $finishedticket)
-                  <div class="grid_ticket">
+                  @if (count($finishedtickets) < 2)
+                    <article class="grid_ticket single">
+                  @else
+                    <article class="grid_ticket">
+                  @endif
                       <div class="test">
                       </div>
                       <div class="ticket_number">
@@ -129,7 +133,7 @@
                       <p class="ticket_description">
                           {{$finishedticket->animal['description']}}
                       </p>
-                  </div>
+                  </article>
               @endforeach
           </div>
       </div>

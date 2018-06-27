@@ -225,6 +225,8 @@
                 @include media-breakpoint-up(lg)
                 {
                   display: block;
+                  line-height: 10px;
+                  margin-top: 10px;
                 }
               }
 
@@ -236,6 +238,12 @@
 
             .ticket_address
             {
+              margin-top: -8px;
+
+              @include media-breakpoint-up(lg)
+              {
+                margin-top: 0;
+              }
               span
               {
                 font-size: 14px;

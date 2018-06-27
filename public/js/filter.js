@@ -71,6 +71,9 @@ function filterTickets() {
                 });
 
 	            number_results.innerHTML = unfinished_counter.toString();
+              if (unfinished_counter < 2){
+                    $('.grid_ticket').addClass('single');
+                }
             }
         }
     });

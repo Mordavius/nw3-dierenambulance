@@ -11263,11 +11263,23 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title h3 {
     display: block;
+    line-height: 10px;
+    margin-top: 10px;
   }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title .subheading {
   display: inline-block;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
+  margin-top: -8px;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
+    margin-top: 0;
+  }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span {
