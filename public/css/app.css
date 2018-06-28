@@ -11100,6 +11100,10 @@ input[type="checkbox"] {
   margin-top: 80px;
 }
 
+.ticket_centralist .head .filters .btn-success {
+  line-height: 1.3;
+}
+
 .ticket_centralist .head .filters input:not([type="submit"]) {
   display: inline-block;
   width: auto;
@@ -12300,6 +12304,68 @@ input[type="checkbox"] {
 
 .buschange .container.buswissel select:invalid {
   color: #B8B8B8;
+}
+
+.navbar .navbar-toggler {
+  outline: 0;
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 88px;
+    left: 0;
+    background: #fff;
+    z-index: 9;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav {
+    padding: 21px;
+    background: #fff;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav li:not(:last-child) {
+    border-bottom: 1px solid #D1D1D1;
+  }
+}
+
+.navbar .navbar-collapse .navbar-nav li.active .nav-link {
+  color: #288B5F;
+}
+
+.navbar .navbar-collapse .navbar-nav .nav-link {
+  color: #000;
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav .nav-link {
+    font-size: 24px;
+    font-weight: 600;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav .dropdown-menu {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav .dropdown-menu .dropdown-item {
+    font-weight: normal;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
 }
 
 .logo {

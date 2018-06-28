@@ -9,8 +9,12 @@
         </button>
     </div>
     <div class="right">
+      <a href="">
         <img id="search-icon" src="/images/Search-icon.png">
+      </a>
+      <a href="#">
         <img id="filter-icon" src="/images/Filter-icon.png">
+      </a>
     </div>
 </div>
 <a href="/melding/create">
