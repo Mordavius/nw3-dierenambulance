@@ -108,7 +108,7 @@
         @include media-breakpoint-up(lg)
         {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
           grid-gap: 1rem;
           border: none;
         }
