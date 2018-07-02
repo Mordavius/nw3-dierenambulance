@@ -11,6 +11,11 @@ main
 
   @include media-breakpoint-up(lg)
   {
+    border-top: 0;
+  }
+
+  @include media-breakpoint-up(lg)
+  {
     box-shadow: none;
     border-right: 1px solid #E5E5E5;
     border-bottom: 1px solid #E5E5E5;

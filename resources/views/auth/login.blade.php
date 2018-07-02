@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="logo_wrap">
-    <img class="logo1" src="{{ asset('images/Dierenambulance-logo.svg') }}">
+    <img class="logo" src="{{ asset('images/Dierenambulance-logo.svg') }}">
   </div>
   @if(session('message'))
       <div class="alert alert-success">

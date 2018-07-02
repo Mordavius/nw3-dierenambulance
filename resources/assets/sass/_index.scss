@@ -58,6 +58,11 @@
     {
       margin-top: 80px;
 
+      .btn-success
+      {
+        line-height: 1.3;
+      }
+
       input:not([type="submit"])
       {
         display: inline-block;
@@ -103,7 +108,7 @@
         @include media-breakpoint-up(lg)
         {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
           grid-gap: 1rem;
           border: none;
         }
@@ -140,6 +145,18 @@
           border: 0;
           border-bottom: 1px solid #E5E5E5;
 
+          &:hover,
+          &:focus
+          {
+            background: $light-gray;
+
+            @include media-breakpoint-up(lg)
+            {
+              background: $white;
+              box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+            }
+          }
+
           @include media-breakpoint-up(lg)
           {
             border: 1px solid #E5E5E5;
@@ -148,6 +165,14 @@
           &.new
           {
             border-left: solid 7px $secondary-color;
+          }
+
+          &.single
+          {
+            @include media-breakpoint-up(lg)
+            {
+              width: 350px;
+            }
           }
 
           .ticket_number
@@ -189,13 +214,41 @@
 
           .ticket_main_info
           {
+
             @include media-breakpoint-up(lg)
             {
               margin-left: 17px;
             }
 
+            .ticket_title
+            {
+              h3
+              {
+                margin-bottom: 0;
+                display: inline-block;
+
+                @include media-breakpoint-up(lg)
+                {
+                  display: block;
+                  line-height: 10px;
+                  margin-top: 10px;
+                }
+              }
+
+              .subheading
+              {
+                display: inline-block;
+              }
+            }
+
             .ticket_address
             {
+              margin-top: -8px;
+
+              @include media-breakpoint-up(lg)
+              {
+                margin-top: 0;
+              }
               span
               {
                 font-size: 14px;
@@ -203,7 +256,7 @@
                 br
                 {
                   display: block;
-                  margin: -10px 0;
+                  margin-top: -10px;
                   content: "";
                 }
               }
@@ -212,13 +265,13 @@
           .ticket_description
           {
             grid-column: 1/6;
-            margin-left: 21px;
-            margin-right: 21px;
             font-size: 18px;
+            margin: 7px 21px 21px 21px;
 
             @include media-breakpoint-up(lg)
             {
               height: 175px;
+              margin-top: 14px;
             }
           }
         }
