@@ -16,7 +16,6 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
         /*
         this is the constructor, in the constructor the parameters will be bound to the variables which will be used in the function.
         */
-
         //the earlier date
         $this->startdate = $startdate;
         //the current date
@@ -36,12 +35,9 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
             'Datum',
             'Tijd',
             'Centralist',
-            'Bestuurder',
-            'Bijrijder',
             'Diersoort',
             'Ras',
             'Geslacht',
-            'Vangkooi',
             'Omschrijving dier',
             'Adres',
             'Postcode',
@@ -60,14 +56,11 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
         $new_ticket = [
             'date' => ' ',
             'time' => ' ',
-            'dispatcher' => 'onbekend',
-            'driver' => 'onbekend',
-            'passenger' => 'onbekend',
-            'species' => 'onbekend',
+            'centralist' => 'onbekend',
+            'animal_species' => 'onbekend',
             'breed' => 'onbekend',
             'gender' => 'onbekend',
-            'catch_cage' => 'n.v.t.',
-            'animal_description' => 'onbekend',
+            'description' => 'onbekend',
             'address' => 'onbekend',
             'postal_code' => 'geen postcode',
             'city' => 'onbekend',
@@ -85,123 +78,103 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
         return $new_ticket;
     }
 
+    function setTicketValue($ticket, array $new_ticket){
+        $ticket_keys = ["date", "time", "centralist"];
+        if ($this->with_finances == 'true'){
+            array_push($ticket_keys, "payment_invoice", "payment_method", "payment_gift");
+        }
+        $current_value = "";
+
+        for ($i = 0; $i <= count($ticket_keys)-1; $i++){
+            $current_value = $ticket_keys[$i];
+            if ($ticket->$current_value){
+                $new_ticket[$current_value] = $ticket->$current_value;
+            }
+        }
+        return $new_ticket;
+    }
+
+    function setAnimalValue($animal, array $new_ticket){
+        $animal_keys = ['animal_species', 'breed', 'gender', 'description'];
+        $current_value = "";
+        for ($i = 0; $i <= count($animal_keys)-1; $i++) {
+            $current_value = $animal_keys[$i];
+            if ($animal->$current_value) {
+                $new_ticket[$current_value] = $animal->$current_value;
+            }
+        }
+        return $new_ticket;
+    }
+
+    function setDestinationValue($destinations, array $new_ticket){
+        $destination_keys = ['address', 'postal_code', 'city', 'township'];
+        $current_value = "";
+        for ($i = 0; $i <= count($destination_keys)-1; $i++) {
+            $current_value = $destination_keys[$i];
+            if ($destinations->$current_value) {
+                $new_ticket[$current_value] = $destinations->$current_value;
+            }
+        }
+        return $new_ticket;
+    }
+
     // Grab all data from tickets between the $startdate and $enddate and all other constraints
     public function collection()
     {
         $collection_array = array();
-	    $destinations2 = array();
+        $destinations2 = array();
         //this should never happen but if it does it acts as a get all
         if ($this->startdate === null && $this->enddate === null) {
-            $tickets = Ticket::all();
+            $tickets = Ticket::select('date','time','centralist', 'payment_invoice', 'payment_method' ,'payment_gift', 'id')->get();
         } else {
             //gets all the tickets between the two dates
-            $tickets = Ticket::query()->whereBetween('date', [$this->enddate, $this->startdate])->get();
+            $tickets = Ticket::select('date','time','centralist', 'payment_invoice', 'payment_method' ,'payment_gift', 'id')->whereBetween('date', [$this->enddate, $this->startdate])->get();
         }
+
 
         // loops through all retrieved tickets and checks if there are constraints
         foreach ($tickets as $ticket) {
-	        $animal = null;
-	        $destinations = null;
-	        $destinations2 = null;
+            $animal = null;
+            $destinations = null;
+            $destinations2 = null;
 
-	        if ($this->animal_select != 'all') {
-		        if ($ticket->animal && ($ticket->animal->animal_species == $this->animal_select)) {
-			        $animal = $ticket->animal;
-		        }
-	        } else {
-		        if ($ticket->animal) {
-			        $animal = $ticket->animal;
-		        }
-	        }
+            if ($this->animal_select != 'all') {
+                if ($ticket->animal && ($ticket->animal->animal_species == $this->animal_select)) {
+                    $animal = $ticket->animal;
+                }
+            } else {
+                if ($ticket->animal) {
+                    $animal = $ticket->animal;
+                }
+            }
 
-	        if ($this->township != 'all') {
-		        if ($ticket->mainDestination() && ($ticket->mainDestination()->township == $this->township)) {
-			        $destinations = $ticket->mainDestination();
-		        }
-	        } else {
-		        if ($ticket->mainDestination()) {
-			        $destinations = $ticket->mainDestination();
-		        }
-	        }
+            if ($this->township != 'all') {
+                if ($ticket->mainDestination() && ($ticket->mainDestination()->township == $this->township)) {
+                    $destinations = $ticket->mainDestination();
+                }
+            } else {
+                if ($ticket->mainDestination()) {
+                    $destinations = $ticket->mainDestination();
+                }
+            }
 
-	        if ($ticket->destinations && count($ticket->destinations) > 1) {
-		        $destinations2 = end($ticket->destinations)[0];
-	        }
-
-            if ($this->with_finances == 'true') {
-                $bus = $ticket->bus; // TODO: dit lijkt heulemaal niks te doen @girgis
+            if ($ticket->destinations && count($ticket->destinations) > 1) {
+                $destinations2 = end($ticket->destinations)[0];
             }
 
             //if all three exist generate a new ticket and fill it with data
             if ($ticket && isset($animal) && isset($destinations)) {
                 $new_ticket = $this->getNewTicket();
-
-                if ($ticket->date) {
-                    $new_ticket['date'] = $ticket->date;
-                }
-                if ($ticket->time) {
-                    $new_ticket['time'] = $ticket->time;
-                }
-                if ($ticket->centralist) {
-                    $new_ticket['dispatcher'] = $ticket->centralist;
-                }
-                if ($ticket->driver) {
-                    $new_ticket['driver'] = $ticket->driver;
-                }
-                if ($ticket->passenger) {
-                    $new_ticket['passenger'] = $ticket->passenger;
-                }
-
-
-                if ($animal->animal_species) {
-                    $new_ticket['species'] = $animal->animal_species;
-                }
-                if ($animal->breed) {
-                    $new_ticket['breed'] = $animal->breed;
-                }
-                if ($animal->gender) {
-                    $new_ticket['gender'] = $animal->gender;
-                }
-                if ($animal->catch_cage) {
-                    $new_ticket['catch_cage'] = $animal->catch_cage;
-                }
-                if ($animal->description) {
-                    $new_ticket['animal_description'] = $animal->description;
-                }
-
-
-                if ($destinations->postal_code) {
-                    $new_ticket['postal_code'] = $destinations->postal_code;
-                }
-                if ($destinations->address) {
-                    $new_ticket['address'] = $destinations->address . ' ' . $destinations->house_number;
-                }
-                if ($destinations->city) {
-                    $new_ticket['city'] = $destinations->city;
-                }
-                if ($destinations->township) {
-                    $new_ticket['township'] = $destinations->township;
-                }
-
-	            if ($this->with_finances == 'true') {
-	                if ($destinations->milage) {
-	                    $new_ticket['startmilage'] = $destinations->milage;
-	                }
-	                if ($destinations2 && $destinations2->milage){
-	                    $new_ticket['endmilage'] = $destinations2->milage;
-	                }
-                }
-
+                $new_ticket = $this->setTicketValue($ticket, $new_ticket);
+                $new_ticket = $this->setAnimalValue($animal, $new_ticket);
+                $new_ticket = $this->setDestinationValue($destinations, $new_ticket);
 
                 if ($this->with_finances == 'true') {
-                    if ($ticket->payment_invoice) {
-                        $new_ticket['invoice'] = $ticket->payment_invoice;
+                    if ($destinations->milage) {
+                        $new_ticket['startmilage'] = $destinations->milage;
                     }
-                    if ($ticket->payment_method) {
-                        $new_ticket['payment_method'] = $ticket->payment_method;
-                    }
-                    if ($ticket->payment_gifts) {
-                        $new_ticket['gifts'] = $ticket->payment_gifts;
+                    if ($destinations2 && $destinations2->milage){
+                        $new_ticket['endmilage'] = $destinations2->milage;
                     }
                 }
                 //push new ticket to collection array
