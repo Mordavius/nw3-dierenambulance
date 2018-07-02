@@ -12429,6 +12429,7 @@ input[type="checkbox"] {
   -webkit-box-shadow: 0;
           box-shadow: 0;
   border-bottom: 1px solid #E5E5E5;
+  padding: 15px 56px;
 }
 
 @media (min-width: 992px) {
@@ -12436,6 +12437,15 @@ input[type="checkbox"] {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   }
+}
+
+.navbar-laravel .container {
+  max-width: none;
+  padding: 0;
+}
+
+.navbar-laravel .container .navbar-nav li:not(:last-child) {
+  margin-right: 56px;
 }
 
 .navbar-toggler {
