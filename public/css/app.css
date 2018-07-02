@@ -11528,9 +11528,8 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticketcreate .grid_container {
     padding-top: 2.3125rem;
-    padding-left: 316.5px;
-    padding-right: 316.5px;
-    max-width: none;
+    max-width: 60%;
+    margin: 0 auto;
   }
 }
 
@@ -11633,6 +11632,7 @@ input[type="checkbox"] {
   margin-top: 0.5rem;
   grid-area: main;
   margin-bottom: 100px;
+  position: relative;
 }
 
 @media (min-width: 992px) {
@@ -11711,7 +11711,13 @@ input[type="checkbox"] {
 .ticketcreate .main .pages .page .boodschap {
   color: #828282;
   font-size: 0.875rem;
-  margin: 2.8125rem 1.3125rem 0 1.3125rem;
+  margin: 1.9375rem 1.3125rem 0 1.3125rem;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .page .boodschap {
+    margin-left: 0;
+  }
 }
 
 .ticketcreate .main .pages .page .reporter_info {
@@ -11724,8 +11730,8 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticketcreate .main .pages .page .reporter_info {
     padding: 0px;
-    grid-template-columns: 50% 50%;
-    grid-column-gap: 10px;
+    grid-template-columns: 45% 45%;
+    grid-column-gap: 10%;
   }
 }
 
@@ -11756,6 +11762,10 @@ input[type="checkbox"] {
     grid-row: 1/1;
     grid-column: 2/3;
   }
+}
+
+.ticketcreate .main .pages .page .reporter_info .phone_number input {
+  margin-bottom: 0;
 }
 
 .ticketcreate .main .pages .page .searchStuff {
@@ -11942,6 +11952,10 @@ input[type="checkbox"] {
   padding: 0 20px 0 20px;
 }
 
+.ticketcreate .main .pages .page .new_ticket_information .ticket_label {
+  margin-bottom: 11px;
+}
+
 @media (min-width: 992px) {
   .ticketcreate .main .pages .page .new_ticket_information {
     display: grid;
@@ -12023,7 +12037,8 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .page .new_ticket_information .address_info_new_ticket {
   display: grid;
-  grid-template-columns: repeat(2, 50%);
+  grid-gap: 10%;
+  grid-template-columns: repeat(2, 45%);
 }
 
 .ticketcreate .main .pages .page .new_ticket_information .address_info_new_ticket .location_label {
@@ -12043,6 +12058,16 @@ input[type="checkbox"] {
   display: grid;
   grid-template-columns: 70% 30%;
   padding-bottom: 40px;
+}
+
+.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .form-group {
+  margin-bottom: 0;
+  margin-right: 16px;
+}
+
+.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .ticket_text_field {
+  text-align: right;
+  padding-right: 0.25rem;
 }
 
 .ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .priority_label {
@@ -12097,16 +12122,30 @@ input[type="checkbox"] {
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
   width: 100%;
   display: block;
-  margin: 0 35%;
+  margin: 0;
   font-size: 24px;
   color: #878787;
   border: 0;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
+    height: 50px;
+    padding-left: 12px;
+  }
 }
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
   grid-column: 2/5;
   grid-row: 1/1;
   font-size: 18px;
+  padding: 7px 0;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
+    padding: 12px 0;
+  }
 }
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info .animal_title {
@@ -12167,8 +12206,14 @@ input[type="checkbox"] {
   grid-row: 1/3;
   font-size: 24px;
   color: #878787;
-  padding-left: 35%;
+  padding-left: 0.25rem;
   font-weight: 300;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_priority {
+    padding-left: 12px;
+  }
 }
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_address {
@@ -12306,6 +12351,12 @@ input[type="checkbox"] {
   color: #B8B8B8;
 }
 
+.no-scroll {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
 .navbar .navbar-toggler {
   outline: 0;
 }
@@ -12319,6 +12370,7 @@ input[type="checkbox"] {
     left: 0;
     background: #fff;
     z-index: 9;
+    overflow-x: hidden;
   }
 }
 
