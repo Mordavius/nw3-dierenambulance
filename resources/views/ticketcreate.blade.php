@@ -220,19 +220,19 @@
                                 </div>
                             </div>
                         </div>
-                        <label class="general">Algemeen</label>
+                        <label class="ticket_label general">Algemeen</label>
                         <div class="new_ticket_info">
                             <label class="general_labels centralist">Centralist:</label>
-                            <input id="centralist" type="label" name="centralist" class="general_information centralist" value="{{ Auth::user()->name }}"></input>
+                            <span id="centralist" class="general_information centralist">{{ Auth::user()->name }}</span>
                             <label class="general_labels date">Datum:</label>
-                            <input type="label" name="date" class="general_information date" id="date" value="{{ Carbon::today()->format('Y-m-d') }}"></label>
+                            <span class="general_information date" id="date">{{ Carbon::today()->format('Y-m-d') }}</span>
                             <label class="general_labels time">Tijd</label>
-                            <input name="time" type="label" class="general_information time" id="time" value="{{Carbon::now('Europe/Amsterdam')->toTimeString()}}" ></text>
+                            <span class="general_information time" id="time">{{Carbon::now('Europe/Amsterdam')->toTimeString()}}</span>
                         </div>
                     </div>
                     <div class="right_info">
                         <div class="address_info_new_ticket">
-                            <label class="location_label">Locatie</label>
+                            <label class="ticket_label location_label">Locatie</label>
                             <input type="label" class="address_info" placeholder="Straat" name="address" id="address"/>
                             <input type="label" class="address_info" placeholder="Huisnummer" name="house_number" id="house_number"/>
                             <input type="label" class="address_info" placeholder="Postcode" name="postal_code" id="postal_code"/>
@@ -241,12 +241,12 @@
                             <input type="hidden" name="coordinates" id="coordinates"/>
                         </div>
                         <div class="reporter_new_ticket">
-                            <label class="reporter_label">Melder</label>
+                            <label class="ticket_label reporter_label">Melder</label>
                             <input type="text" id="reporter_name" class="ticket_text_field" placeholder="Naam" name="reporter_name"/>
                             <input type="text" id="phone_number" class="ticket_text_field" placeholder="Telefoonnummer" name="telephone"/>
                         </div>
                         <div class="animal_new_ticket">
-                            <label class="reporter_label">Dier</label>
+                            <label class="ticket_label reporter_label">Dier</label>
                             <div class="animal_info_new_ticket" id="animal_info">
                                 <input class="ticket_text_field" id="animal_species" type="text" name="animal_species" placeholder="Soort"/>
                                 <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
@@ -256,9 +256,8 @@
                             </div>
                         </div>
                         <div class="priority_new_ticket">
-                            <label class="priority_label">Prioriteit</label>
+                            <label class="ticket_label priority_label">Prioriteit</label>
                             <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
-                                {!! Form::label('Selecteer het voertuig') !!} <br />
                                 <select name="vehicle" id="vehicle">
                                     @foreach($bus as $buses)
                                     <option value="{{$buses}}">{{$buses}}</option>
@@ -276,6 +275,7 @@
                     </div>
                 </div>
                 <input class="footer_button_submit" type="button" id="footer_button_submit" name="" value="Opslaan">
+                <input type="hidden" name="ticket_id" id="{{$ticket->id}}"/>
                 {!! Form::close() !!}
             </div>
         </div>

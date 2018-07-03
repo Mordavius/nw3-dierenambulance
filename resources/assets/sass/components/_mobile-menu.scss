@@ -1,0 +1,118 @@
+.navbar
+{
+  .navbar-toggler
+  {
+    outline: 0;
+  }
+
+  .navbar-collapse
+  {
+    @media (max-width: 576px)
+    {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 88px;
+      left: 0;
+      background: $white;
+      z-index: 9;
+    }
+
+    .navbar-nav
+    {
+      @media (max-width: 576px)
+      {
+        padding: 21px;
+        background: $white;
+        // flex-direction: column;
+        // margin-left: 0!important;
+      }
+
+      li
+      {
+        @media (max-width: 576px)
+        {
+          &:not(:last-child)
+          {
+            border-bottom: 1px solid #D1D1D1;
+          }
+        }
+
+        &.active
+        {
+          .nav-link
+          {
+            color: $primary-color;
+          }
+        }
+      }
+
+      .nav-link
+      {
+        @media (max-width: 576px)
+        {
+          font-size: 24px;
+          font-weight: 600;
+          padding-top: 14px;
+          padding-bottom: 14px;
+        }
+
+        color: $black;
+      }
+
+      .dropdown-menu
+      {
+        @media (max-width: 576px)
+        {
+          border: 0;
+          padding: 0;
+          margin: 0;
+        }
+        .dropdown-item
+        {
+          @media (max-width: 576px)
+          {
+            font-weight: normal;
+            font-size: 24px;
+            margin-bottom: 16px;
+          }
+        }
+      }
+    }
+    //
+    // .menu-header
+    // {
+    //   width: 100%;
+    //   padding: 21px 18px;
+    //   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+    //   display: flex;
+    //   flex-direction: row;
+    //   justify-content: space-between;
+    //
+    //   @include media-breakpoint-up(lg)
+    //   {
+    //     display: none;
+    //   }
+    //
+    //   h1
+    //   {
+    //     display: inline-block;
+    //     margin-bottom: 0;
+    //   }
+    //
+    //   .close-toggle
+    //   {
+    //     font-size: 18px;
+    //     background: transparent;
+    //     padding: 0;
+    //     border: 0;
+    //     font-size: 32px;
+    //
+    //     &:focus
+    //     {
+    //       outline: 0;
+    //     }
+    //   }
+    // }
+  }
+}

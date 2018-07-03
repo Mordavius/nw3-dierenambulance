@@ -122,24 +122,16 @@
         <div class="edit-ticket-blok">
           <h2>Eigenaar</h2>
             @if($ticket->owner)
-                <input name="owner_name" type="text" value="{{$ticket->owner->name}}" placeholder="Naam">
-                <input name="owner_telephone_number" type="text" value="{{$ticket->owner->telephone_number}}" placeholder="Telefoonnummer">
+                {!! Form::label('owner-animal', 'Melder is ook eigenaar van het dier') !!}
+                <input type="checkbox" id="animalowner"  onclick="animalOwner()"><br /><br />
+                <input name="owner_name" id="owner_name" type="text" value="{{$ticket->owner->name}}" placeholder="Naam">
+                <input name="owner_telephone_number" id="owner_telephone_number" type="text" value="{{$ticket->owner->telephone_number}}" placeholder="Telefoonnummer">
                 <input name="owner_address" type="text" value="{{$ticket->owner->owner_address}}" placeholder="Adres">
                 <input name="owner_house_number" type="text" value="{{$ticket->owner->owner_house_number}}" placeholder="Huisnummer">
                 <input name="owner_postal_code" type="text" value="{{$ticket->owner->owner_postal_code}}" placeholder="Postcode">
                 <input name="owner_city" type="text" value="{{$ticket->owner->owner_city}}" placeholder="Plaatsnaam">
                 <input name="owner_township" type="text" value="{{$ticket->owner->owner_township}}" placeholder="Gemeente">
-                <button id="delete" name="delete" data-toggle="delete" class="delete-task-owner" value="{{$ticket->owner->id}}">
-                    <img src="{{asset('images/delete.svg')}}" alt="Verwijderen" class="delete-dest">&nbsp;&nbsp;Eigenaar Verwijderen&nbsp;
-                </button>
             @endif
-
-        @if(!$ticket->owner)
-            <span class="italic eigenaar"> Geen eigenaar gevonden </span>
-            <div class="btn-center">
-              {!! Form::button('Eigenaar toevoegen', ['class' => 'btn-success btn-add-payment', 'value' => 'btn-add-destination', 'id' => 'btn-add-owner', 'name' => 'btn-add-owner']) !!}
-          </div>
-        @endif
       </div>
 
         <div class="edit-ticket-blok financien">

@@ -10585,6 +10585,13 @@ main {
   background: #fff;
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-top: 1px solid #E5E5E5;
+}
+
+@media (min-width: 992px) {
+  .admin-menu {
+    border-top: 0;
+  }
 }
 
 @media (min-width: 992px) {
@@ -10592,6 +10599,7 @@ main {
     -webkit-box-shadow: none;
             box-shadow: none;
     border-right: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
     display: inline-block;
     width: 25%;
     vertical-align: top;
@@ -10601,7 +10609,7 @@ main {
 
 .admin-menu ul {
   list-style-type: none;
-  padding: 0px 21px 0 21px;
+  padding: 15px 21px 0 21px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10627,14 +10635,6 @@ main {
 .admin-menu ul li.menu-item {
   display: inline-block;
   border-bottom: #fff solid 5px;
-  width: 25%;
-}
-
-@media (min-width: 992px) {
-  .admin-menu ul li.menu-item {
-    width: 100%;
-    text-align: none;
-  }
 }
 
 .admin-menu ul li.menu-item.active {
@@ -10650,7 +10650,7 @@ main {
   }
 }
 
-.admin-menu ul li.menu-item.active a .svgwrapper path {
+.admin-menu ul li.menu-item.active a svg path {
   fill: black;
 }
 
@@ -10664,18 +10664,19 @@ main {
 .admin-menu ul li.menu-item a {
   color: #000;
   text-decoration: none;
-  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-.admin-menu ul li.menu-item .icon {
-  margin-bottom: 0.5rem;
+.admin-menu ul li.menu-item a svg {
+  margin-bottom: 8px;
 }
 
 @media (min-width: 992px) {
-  .admin-menu ul li.menu-item .icon {
-    margin-left: 1.625rem;
-    margin-right: 1.875rem;
+  .admin-menu ul li.menu-item a svg {
     margin-bottom: 0;
+    margin-left: 26px;
+    margin-right: 12px;
   }
 }
 
@@ -10709,7 +10710,7 @@ main {
   }
 }
 
-.svgwrapper path {
+svg path {
   fill: gray;
 }
 
@@ -10748,7 +10749,6 @@ main {
 
 .wrapper .content .btn-success {
   float: right;
-  margin-top: 0 !important;
   margin-right: 21px;
   font-size: 16px;
   padding: 5px 18px 5px 18px;
@@ -10989,8 +10989,47 @@ input[type="checkbox"] {
   color: #fff;
 }
 
-.export label {
+@media screen and (max-width: 767.98px) {
+  .export .wrapper {
+    margin-right: 21px;
+    margin-left: 21px;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .export .wrapper .content {
+    padding-top: 57px;
+  }
+}
+
+.export .dates {
+  width: 45%;
+  display: inline-block;
+}
+
+.export .dates.date-1 {
+  margin-right: 9%;
+}
+
+@media (min-width: 992px) {
+  .export .dates.date-1 {
+    margin-right: 8%;
+  }
+}
+
+.export label.date-label {
+  margin-bottom: 20px;
+}
+
+.export label.finance {
   margin-left: 0.875rem;
+}
+
+@media screen and (max-width: 767.98px) {
+  .export .btn {
+    margin-right: 0 !important;
+    margin-top: 57px !important;
+  }
 }
 
 @media (min-width: 992px) {
@@ -11061,6 +11100,10 @@ input[type="checkbox"] {
   margin-top: 80px;
 }
 
+.ticket_centralist .head .filters .btn-success {
+  line-height: 1.3;
+}
+
 .ticket_centralist .head .filters input:not([type="submit"]) {
   display: inline-block;
   width: auto;
@@ -11111,7 +11154,7 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
     grid-gap: 1rem;
     border: none;
   }
@@ -11146,6 +11189,20 @@ input[type="checkbox"] {
   border-bottom: 1px solid #E5E5E5;
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket:hover,
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket:focus {
+  background: #F2F2F2;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket:hover,
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket:focus {
+    background: #fff;
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket {
     border: 1px solid #E5E5E5;
@@ -11154,6 +11211,12 @@ input[type="checkbox"] {
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket.new {
   border-left: solid 7px #2D9CDB;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket.single {
+    width: 350px;
+  }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_number {
@@ -11196,26 +11259,48 @@ input[type="checkbox"] {
   }
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title h3 {
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+@media (min-width: 992px) {
+  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title h3 {
+    display: block;
+    line-height: 2px;
+    margin-top: 9px;
+  }
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title .subheading {
+  display: inline-block;
+  font-size: 12px;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
+  margin-top: 7px;
+}
+
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span {
   font-size: 14px;
+  display: block;
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span br {
   display: block;
-  margin: -10px 0;
   content: "";
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
   grid-column: 1/6;
-  margin-left: 21px;
-  margin-right: 21px;
   font-size: 18px;
+  margin: 7px 21px 21px 21px;
 }
 
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
     height: 175px;
+    margin-top: 14px;
   }
 }
 
@@ -11290,7 +11375,7 @@ input[type="checkbox"] {
 
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header' 'main' 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -11438,9 +11523,8 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticketcreate .grid_container {
     padding-top: 2.3125rem;
-    padding-left: 316.5px;
-    padding-right: 316.5px;
-    max-width: none;
+    max-width: 60%;
+    margin: 0 auto;
   }
 }
 
@@ -11540,9 +11624,16 @@ input[type="checkbox"] {
 }
 
 .ticketcreate .main {
-  margin-top: 2.25rem;
+  margin-top: 0.5rem;
   grid-area: main;
   margin-bottom: 100px;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main {
+    margin-top: 2.25rem;
+  }
 }
 
 .ticketcreate .main .pages {
@@ -11615,7 +11706,13 @@ input[type="checkbox"] {
 .ticketcreate .main .pages .page .boodschap {
   color: #828282;
   font-size: 0.875rem;
-  margin: 2.8125rem 1.3125rem 0 1.3125rem;
+  margin: 1.9375rem 1.3125rem 0 1.3125rem;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .page .boodschap {
+    margin-left: 0;
+  }
 }
 
 .ticketcreate .main .pages .page .reporter_info {
@@ -11628,8 +11725,8 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticketcreate .main .pages .page .reporter_info {
     padding: 0px;
-    grid-template-columns: 50% 50%;
-    grid-column-gap: 10px;
+    grid-template-columns: 45% 45%;
+    grid-column-gap: 10%;
   }
 }
 
@@ -11662,8 +11759,13 @@ input[type="checkbox"] {
   }
 }
 
+.ticketcreate .main .pages .page .reporter_info .phone_number input {
+  margin-bottom: 0;
+}
+
 .ticketcreate .main .pages .page .searchStuff {
   width: 100%;
+  position: relative;
 }
 
 .ticketcreate .main .pages .page .searchStuff .searchDiv {
@@ -11732,8 +11834,14 @@ input[type="checkbox"] {
   }
 }
 
-.ticketcreate .main .pages .page .searchStuff .ticket_create_send_location_button {
-  float: right;
+@media screen and (max-width: 767.98px) {
+  .ticketcreate .main .pages .page .searchStuff #sendLocationButton {
+    width: 100%;
+    position: fixed;
+    bottom: 55px;
+    left: 0;
+    z-index: 9;
+  }
 }
 
 @media (min-width: 992px) {
@@ -11852,6 +11960,10 @@ input[type="checkbox"] {
   padding: 0 20px 0 20px;
 }
 
+.ticketcreate .main .pages .page .new_ticket_information .ticket_label {
+  margin-bottom: 11px;
+}
+
 @media (min-width: 992px) {
   .ticketcreate .main .pages .page .new_ticket_information {
     display: grid;
@@ -11933,7 +12045,8 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .page .new_ticket_information .address_info_new_ticket {
   display: grid;
-  grid-template-columns: repeat(2, 50%);
+  grid-gap: 10%;
+  grid-template-columns: repeat(2, 45%);
 }
 
 .ticketcreate .main .pages .page .new_ticket_information .address_info_new_ticket .location_label {
@@ -11953,6 +12066,16 @@ input[type="checkbox"] {
   display: grid;
   grid-template-columns: 70% 30%;
   padding-bottom: 40px;
+}
+
+.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .form-group {
+  margin-bottom: 0;
+  margin-right: 16px;
+}
+
+.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .ticket_text_field {
+  text-align: right;
+  padding-right: 0.25rem;
 }
 
 .ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .priority_label {
@@ -12007,16 +12130,30 @@ input[type="checkbox"] {
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
   width: 100%;
   display: block;
-  margin: 0 35%;
+  margin: 0;
   font-size: 24px;
   color: #878787;
   border: 0;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
+    height: 50px;
+    padding-left: 12px;
+  }
 }
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
   grid-column: 2/5;
   grid-row: 1/1;
   font-size: 18px;
+  padding: 7px 0;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
+    padding: 12px 0;
+  }
 }
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info .animal_title {
@@ -12038,7 +12175,7 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 
@@ -12077,8 +12214,14 @@ input[type="checkbox"] {
   grid-row: 1/3;
   font-size: 24px;
   color: #878787;
-  padding-left: 35%;
+  padding-left: 0.25rem;
   font-weight: 300;
+}
+
+@media (min-width: 992px) {
+  .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_priority {
+    padding-left: 12px;
+  }
 }
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_address {
@@ -12113,8 +12256,7 @@ input[type="checkbox"] {
 .ticketcreate .footer .address_info_grid {
   font-size: 14px;
   text-align: center;
-  width: 90%;
-  display: inline-block;
+  padding-top: 13px;
   margin: 0 auto;
 }
 
@@ -12130,12 +12272,14 @@ input[type="checkbox"] {
 .ticketcreate .footer #footer_button_forward {
   right: 12px;
   margin-top: 15px;
+  bottom: 18px;
 }
 
 .ticketcreate .footer #footer_button_back {
   left: 12px;
   margin-top: 15px;
   visibility: hidden;
+  bottom: 18px;
 }
 
 .login_page .navbar {
@@ -12195,6 +12339,95 @@ input[type="checkbox"] {
   font-size: 14px;
 }
 
+.buschange .container.buswissel {
+  padding-top: 57px;
+  padding-bottom: 57px;
+}
+
+@media (min-width: 576px) {
+  .buschange .container.buswissel {
+    padding-left: 21px;
+    padding-right: 21px;
+  }
+}
+
+.buschange .container.buswissel h1 {
+  margin-bottom: 20px;
+}
+
+.buschange .container.buswissel select:invalid {
+  color: #B8B8B8;
+}
+
+.no-scroll {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+.navbar .navbar-toggler {
+  outline: 0;
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 88px;
+    left: 0;
+    background: #fff;
+    z-index: 9;
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav {
+    padding: 21px;
+    background: #fff;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav li:not(:last-child) {
+    border-bottom: 1px solid #D1D1D1;
+  }
+}
+
+.navbar .navbar-collapse .navbar-nav li.active .nav-link {
+  color: #288B5F;
+}
+
+.navbar .navbar-collapse .navbar-nav .nav-link {
+  color: #000;
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav .nav-link {
+    font-size: 24px;
+    font-weight: 600;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav .dropdown-menu {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .navbar-collapse .navbar-nav .dropdown-menu .dropdown-item {
+    font-weight: normal;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+}
+
 .logo {
   max-width: 150px;
 }
@@ -12203,6 +12436,8 @@ input[type="checkbox"] {
   background-color: #fff;
   -webkit-box-shadow: 0;
           box-shadow: 0;
+  border-bottom: 1px solid #E5E5E5;
+  padding: 15px 56px;
 }
 
 @media (min-width: 992px) {
@@ -12210,6 +12445,15 @@ input[type="checkbox"] {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   }
+}
+
+.navbar-laravel .container {
+  max-width: none;
+  padding: 0;
+}
+
+.navbar-laravel .container .navbar-nav li:not(:last-child) {
+  margin-right: 56px;
 }
 
 .navbar-toggler {
@@ -12593,4 +12837,3 @@ select .selected {
 .password_edit h2 {
   margin: 0;
 }
-

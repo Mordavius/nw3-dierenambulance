@@ -64,13 +64,11 @@ function filterTickets() {
 						                ticket.destinations[0].postal_code + ' ' +
 						                ticket.destinations[0].city +
 					                '</span></div>' +
-		                            '<p class="ticket_description">'+ticket.animal.description.substr(0, 200) +'</p>' +
 				                '</div>'+
+                        '<p class="ticket_description">'+ticket.animal.description.substr(0, 200) +'</p>' +
 			                '</article>' +
 		                '</a>';
                 });
-
-	            number_results.innerHTML = unfinished_counter.toString();
             }
         }
     });

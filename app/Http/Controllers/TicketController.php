@@ -32,7 +32,6 @@ class TicketController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->input('search'); // Get  the input from the search field
         // Grabs all the existing tickets and split the finished and unfinished
         $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
         $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
@@ -191,19 +190,6 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-//            'reporter_name' => 'required',
-//            'telephone' => 'required|numeric',
-//            'animal_species' => 'required',
-//            'injury' => 'required',
-//            'description' => 'required',
-//            'address' => 'required',
-//            'house_number' => 'required',
-//            'postal_code' => 'required',
-//            'city' => 'required',
-//            'township' => 'required'
-//        ]);
-
 	    $priority = $request->get('priority');
         $unfinishedtickets = Ticket::where('finished', '=', '0')->where('priority', '>=', $priority)->get();
 
@@ -243,11 +229,19 @@ class TicketController extends Controller
             'milage' => $request->get('milage'),
         ]);
 
+        $ticket_id = Ticket::all()->pluck('id')->last()+1;
+
+        // Stores the data for the requested fields
+        $owner = new Owner([
+           'ticket_id' => $ticket_id,
+            ]);
+
         try {
             $ticket->save();
 		    $ticket->animal()->save($animal);
 		    $bus->tickets()->save($ticket);
 		    $ticket->animal()->save($destination);
+		    $owner->save();
 	    } catch (\Exception $e) {
 	        return response()->json($e);
         }
@@ -328,7 +322,7 @@ class TicketController extends Controller
 	            'owner_township' => $request->get('owner_township'),
 	            'owner_postal_code' => $request->get('owner_postal_code'),
 	        ]);
-	    }
+	    };
 
         return redirect('/melding')->with('message', 'Melding is geupdate');
     }

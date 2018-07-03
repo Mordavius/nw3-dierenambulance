@@ -38,8 +38,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-                        </ul>
+                        <!-- <ul class="navbar-nav mr-auto">
+                        </ul> -->
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
@@ -50,35 +50,39 @@
                               <a class="nav-link" href="{{ route('melding.index') }}">
                                 Meldingen
                               </a>
-                          </li>
-                          <li class="nav-item dropdown {{ (Request::is(['administratie', 'bus', 'bekende-adressen', 'exporteren']) ? 'active' : '') }}">
-                              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Administratie
+                            </li>
+                            <li {{{ (Request::is('buswissel') ? 'class=active' : '') }}}>
+                              <a class="nav-link" href="{{ route('buswissel.index') }}">
+                                Buswissel
                               </a>
-                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('Administratie') }}"> Gebruikers </a>
-                                <a class="dropdown-item" href="{{ route('bus.index') }}"> Voertuigen </a>
-                                <a class="dropdown-item" href="{{ route('bekende-adressen.index') }}"> Bekende adressen </a>
-                                <a class="dropdown-item" href="{{ route('Exporteren') }}"> Exporteren </a>
-                              </div>
-                          </li>
-                              <li class="nav-item dropdown {{ (Request::is('profiel/*') ? 'active' : '') }}">
-                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      {{ Auth::user()->name }}
-                                  </a>
-                                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                      <a class="dropdown-item" href="../profiel">Profiel</a>
-                                      <a class="dropdown-item" href="{{ route('logout') }}"
-                                         onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
-                                         Uitloggen
-                                      </a>
-                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                          @csrf
-                                      </form>
-                                  </div>
-                              </li>
-                            @endguest
+                            </li>
+                            <li class="nav-item dropdown {{ (Request::is(['administratie', 'bus', 'bekende-adressen', 'exporteren']) ? 'active' : '') }}">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Administratie
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="{{ route('Administratie') }}"> Gebruikers </a>
+                                  <a class="dropdown-item" href="{{ route('bus.index') }}"> Voertuigen </a>
+                                  <a class="dropdown-item" href="{{ route('bekende-adressen.index') }}"> Bekende adressen </a>
+                                  <a class="dropdown-item" href="{{ route('Exporteren') }}"> Exporteren </a>
+                                </div>
+                            </li>
+                            <li {{{ (Request::is('profiel') ? 'class=active' : '') }}}>
+                              <a class="nav-link" href="{{ route('profiel.index') }}">
+                                Mijn profiel
+                              </a>
+                            </li>
+                            <li {{{ (Request::is('profiel/*') ? 'active' : '') }}}>
+                              <a class="nav-link" href="{{ route('logout') }}"
+                                 onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                                 Uitloggen
+                              </a>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @csrf
+                              </form>
+                            </li>
+                        @endguest
                         </ul>
                     </div>
                 </div>

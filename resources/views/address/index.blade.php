@@ -8,11 +8,13 @@
           </div>
       @endif
       <section class="content">
+        <br>
         <a href="/bekende-adressen/create" class="btn btn-success">
             Nieuw adres toevoegen
         </a>
-        <br>
-        <br>
+        <br />
+        <br />
+        <br />
           @if (! $known->count())
           <div class="alert alert-danger">
               <strong>Geen bekende adressen gevonden</strong>

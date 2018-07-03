@@ -5,10 +5,29 @@
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0;
+  border-bottom: 1px solid #E5E5E5;
+  padding: 15px 56px;
 
   @include media-breakpoint-up(lg)
   {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .container
+  {
+    max-width: none;
+    padding: 0;
+
+    .navbar-nav
+    {
+      li
+      {
+        &:not(:last-child)
+        {
+          margin-right: 56px;
+        }
+      }
+    }
   }
 }
 

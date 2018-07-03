@@ -1,4 +1,4 @@
-.svgwrapper path {
+svg path {
     fill: gray;
 }
 .wrapper
@@ -33,7 +33,7 @@
     .btn-success
     {
       float: right;
-      margin-top: 0!important;
+      // margin-top: 0!important;
       margin-right: 21px;
       font-size: 16px;
       padding: 5px 18px 5px 18px;

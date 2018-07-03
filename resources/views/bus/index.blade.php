@@ -8,9 +8,11 @@
           </div>
       @endif
       <section class="content">
+        <br />
         <a href="/bus/create" class="btn btn-success">
             Bus toevoegen
         </a>
+        <br />
         <br />
         <br />
           @if (! $buses->count())

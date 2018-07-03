@@ -1,7 +1,56 @@
 .export
 {
-  label
+
+  .wrapper
+  {
+    @media screen and (max-width: 767.98px)
+    {
+      margin-right: 21px;
+      margin-left: 21px;
+    }
+
+    .content
+    {
+      @media screen and (max-width: 767.98px)
+      {
+        padding-top: 57px;
+      }
+    }
+  }
+
+  .dates
+  {
+    width: 45%;
+    display: inline-block;
+
+    &.date-1
+    {
+      margin-right: 9%;
+
+      @include media-breakpoint-up(lg)
+      {
+        margin-right: 8%;
+      }
+    }
+  }
+
+  label.date-label
+  {
+      margin-bottom: 20px;
+      // display: block;
+  }
+
+  label.finance
   {
     margin-left: rem-calc(14);
+  }
+
+  .btn
+  {
+    @media screen and (max-width: 767.98px)
+    {
+      margin-right: 0!important;
+      margin-top: 57px!important;
+    }
   }
 }

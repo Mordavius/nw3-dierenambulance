@@ -7,11 +7,18 @@ main
 {
   background: $white;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  border-top: 1px solid #E5E5E5;
+
+  @include media-breakpoint-up(lg)
+  {
+    border-top: 0;
+  }
 
   @include media-breakpoint-up(lg)
   {
     box-shadow: none;
     border-right: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
     display: inline-block;
     width: 25%;
     vertical-align: top;
@@ -21,7 +28,7 @@ main
   ul
   {
     list-style-type: none;
-    padding: 0px 21px 0 21px;
+    padding: 15px 21px 0 21px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -36,12 +43,6 @@ main
     {
       display: inline-block;
       border-bottom: $white solid 5px;
-      width: 25%;
-      @include media-breakpoint-up(lg)
-      {
-        width: 100%;
-        text-align: none;
-      }
 
       &.active
       {
@@ -53,9 +54,9 @@ main
           border-bottom: 0;
           margin-bottom: 0;
           border-left: $primary-color solid 5px;
-
         }
-        a .svgwrapper path {
+
+        a svg path {
             fill: black;
         }
       }
@@ -70,18 +71,19 @@ main
       {
         color: $black;
         text-decoration: none;
-        text-align: center;
-      }
+        padding-left: rem-calc(8);
+        padding-right: rem-calc(8);
 
-      .icon
-      {
-        margin-bottom: rem-calc(8);
-
-        @include media-breakpoint-up(lg)
+        svg
         {
-          margin-left: rem-calc(26);
-          margin-right: rem-calc(30);
-          margin-bottom: 0;
+          margin-bottom: 8px;
+
+          @include media-breakpoint-up(lg)
+          {
+            margin-bottom: 0;
+            margin-left: 26px;
+            margin-right: 12px;
+          }
         }
       }
 
