@@ -74,8 +74,11 @@
                 <h1>Locatie</h1>
             </div>
             <div class="searchStuff">
-                <input id="searchTextBox" type="text" placeholder="Zoeken"/>
-                <button id="sendLocationButton" class="btn btn-success">Locatie van melder opvragen</button>
+                <div class="searchDiv">
+                    <input id="searchTextBox" type="text" placeholder="Zoeken"/>
+                    <button id="searchButton" type="button"><img src="{{asset('images/search-icon.png')}}" alt=""></button>
+                </div>
+                <button id="sendLocationButton" class="btn btn-success ticket_create_send_location_button">Locatie van melder opvragen</button>
             </div>
             <div id="app" ng-app="app">
                 <div ng-controller="TableController" >
@@ -133,7 +136,11 @@
                 <div class="selectedAnimal" id="selectedAnimal"><img id="image" src="" alt=""> <span id="selected_animal"></span></div>
                 <div class="animal_info" id="animal_info">
                     <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed_field"/>
-                    <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender_field"/>
+                    <select type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender_field">
+                        <option value="Geslacht">Geslacht</option>
+                        <option value="">Mannelijk</option>
+                        <option value="">Vrouwelijk</option>
+                    </select>
                     <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury_field"/>
                     <textarea class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description_field"/></textarea>
                 </div>
@@ -247,7 +254,11 @@
                             <div class="animal_info_new_ticket" id="animal_info">
                                 <input class="ticket_text_field" id="animal_species" type="text" name="animal_species" placeholder="Soort"/>
                                 <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
-                                <input type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender"/>
+                                <select type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender">
+                                    <option value="Geslacht"></option>
+                                    <option value="">Mannelijk</option>
+                                    <option value="">Vrouwelijk</option>
+                                </select>
                                 <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury"/>
                                 <textarea rows="4" wrap="soft" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description"/></textarea>
                             </div>

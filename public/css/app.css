@@ -10919,7 +10919,7 @@ input:not([type="checkbox"]):not([type="submit"]):focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #288B5F;
 }
 
 input:not([type="checkbox"]):not([type="submit"])::-webkit-inner-spin-button,
@@ -11267,32 +11267,27 @@ input[type="checkbox"] {
 @media (min-width: 992px) {
   .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title h3 {
     display: block;
-    line-height: 10px;
-    margin-top: 10px;
+    line-height: 2px;
+    margin-top: 9px;
   }
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title .subheading {
   display: inline-block;
+  font-size: 12px;
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
-  margin-top: -8px;
-}
-
-@media (min-width: 992px) {
-  .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
-    margin-top: 0;
-  }
+  margin-top: 7px;
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span {
   font-size: 14px;
+  display: block;
 }
 
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span br {
   display: block;
-  margin-top: -10px;
   content: "";
 }
 
@@ -11773,17 +11768,26 @@ input[type="checkbox"] {
   position: relative;
 }
 
-.ticketcreate .main .pages .page .searchStuff #searchTextBox {
-  width: 52%;
-  height: 41px;
+.ticketcreate .main .pages .page .searchStuff .searchDiv {
   border: 1px solid #ECECEC;
   float: left;
-  background-image: url(/images/search.svg?e3788fe847cbeace122baebf50d8dd49);
-  background-repeat: no-repeat;
-  background-position: 95% center;
-  background-size: 18px 18px;
+  width: 61%;
+  height: 53px;
+  margin: 0 20px 20px 0;
+}
+
+.ticketcreate .main .pages .page .searchStuff img {
+  height: 40px;
+  width: 40px;
+  margin: 0 auto;
+}
+
+.ticketcreate .main .pages .page .searchStuff #searchTextBox {
+  width: 80%;
   margin-bottom: 0;
   font-size: 14px;
+  height: 51px;
+  border: none;
 }
 
 @media (min-width: 992px) {
@@ -11791,6 +11795,10 @@ input[type="checkbox"] {
     margin-right: 12px;
     margin-bottom: 1.875rem;
   }
+}
+
+.ticketcreate .main .pages .page .searchStuff input:focus {
+  border: none;
 }
 
 .ticketcreate .main .pages .page .searchStuff #knownAddress {
@@ -11814,7 +11822,7 @@ input[type="checkbox"] {
   width: 11%;
   height: 41px;
   float: right;
-  border: 1px solid #ECECEC;
+  border: none;
   color: #2D9CDB;
   background: #fff;
   font-size: 14px;
@@ -12429,6 +12437,7 @@ input[type="checkbox"] {
   -webkit-box-shadow: 0;
           box-shadow: 0;
   border-bottom: 1px solid #E5E5E5;
+  padding: 15px 56px;
 }
 
 @media (min-width: 992px) {
@@ -12436,6 +12445,15 @@ input[type="checkbox"] {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   }
+}
+
+.navbar-laravel .container {
+  max-width: none;
+  padding: 0;
+}
+
+.navbar-laravel .container .navbar-nav li:not(:last-child) {
+  margin-right: 56px;
 }
 
 .navbar-toggler {
@@ -12819,4 +12837,3 @@ select .selected {
 .password_edit h2 {
   margin: 0;
 }
-

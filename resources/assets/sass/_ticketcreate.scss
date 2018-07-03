@@ -252,24 +252,34 @@
           width: 100%;
           position: relative;
 
-          #searchTextBox
-          {
-              width: 52%;
-              height: 41px;
+          .searchDiv{
               border: 1px solid #ECECEC;
               float: left;
-              background-image: url('../images/search.svg');
-              background-repeat: no-repeat;
-              background-position: 95% center;
-              background-size: 18px 18px;
+              width: 61%;
+              height: 53px;
+              margin: 0 20px 20px 0;
+          }
+          img{
+              height: 40px;
+              width: 40px;
+              margin: 0 auto;
+          }
+          #searchTextBox
+          {
+              width: 80%;
               margin-bottom: 0;
               font-size: 14px;
+              height: 51px;
+              border: none;
 
               @include media-breakpoint-up(lg)
               {
                 margin-right: 12px;
                 margin-bottom: rem-calc(30);
               }
+          }
+          input:focus{
+              border: none;
           }
 
           #knownAddress
@@ -294,7 +304,7 @@
               width: 11%;
               height: 41px;
               float: right;
-              border: 1px solid #ECECEC;
+              border: none;
               color: $secondary-color;
               background: $white;
               font-size: 14px;
@@ -303,6 +313,9 @@
               {
                 width: 8%;
               }
+          }
+          .ticket_create_send_location_button{
+              float: right;
           }
 
           #sendLocationButton
