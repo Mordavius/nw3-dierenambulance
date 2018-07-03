@@ -38,10 +38,10 @@
         <div class="edit-ticket-blok">
             <h2>Melder</h2>
             <div class="form-group {{ $errors->has('reporter_name') ? 'has-error' : '' }}">
-                {!! Form::text('reporter_name', null, ['placeholder'=> 'Melder', 'disabled']) !!}
+                {!! Form::text('reporter_name', null, ['placeholder'=> 'Melder']) !!}
             </div>
             <div class="form-group {{ $errors->has('telephone') ? 'has-error' : '' }}">
-                {!! Form::text('telephone', null, ['placeholder' => 'Telefoonnummer', 'disabled']) !!}
+                {!! Form::text('telephone', null, ['placeholder' => 'Telefoonnummer']) !!}
 
                 @if($errors->has('telephone'))
                 <span class="help-block">
