@@ -44,8 +44,61 @@ class TicketController extends Controller
         }
         $coordinates = json_encode($coordinates);
 
+        return view('ticket.administrator', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
+    }
+
+    public function administrator(Request $request)
+    {
+        // Grabs all the existing tickets and split the finished and unfinished
+        $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
+        $coordinates = [];
+
+        foreach ($unfinishedtickets as $unfinishedticket) {
+            if ($unfinishedticket->mainDestination()) {
+                array_push($coordinates, json_decode($unfinishedticket->mainDestination()->coordinates));
+            }
+        }
+        $coordinates = json_encode($coordinates);
+
+        return view('ticket.administrator', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
+    }
+
+    public function ambulance(Request $request)
+    {
+        // Grabs all the existing tickets and split the finished and unfinished
+        $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
+        $coordinates = [];
+
+        foreach ($unfinishedtickets as $unfinishedticket) {
+            if ($unfinishedticket->mainDestination()) {
+                array_push($coordinates, json_decode($unfinishedticket->mainDestination()->coordinates));
+            }
+        }
+        $coordinates = json_encode($coordinates);
+
+        return view('ticket.ambulance', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
+    }
+
+
+    public function centralist(Request $request)
+    {
+        // Grabs all the existing tickets and split the finished and unfinished
+        $finishedtickets = Ticket::where('finished', '1')->orderBy('date', 'desc')->get();
+        $unfinishedtickets = Ticket::where('finished', '0')->orderBy('created_at', 'desc')->get();
+        $coordinates = [];
+
+        foreach ($unfinishedtickets as $unfinishedticket) {
+            if ($unfinishedticket->mainDestination()) {
+                array_push($coordinates, json_decode($unfinishedticket->mainDestination()->coordinates));
+            }
+        }
+        $coordinates = json_encode($coordinates);
+
         return view('ticket.centralist', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
     }
+
 
 
     public function createAjaxDestination(Request $request)
