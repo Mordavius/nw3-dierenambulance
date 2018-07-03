@@ -47,7 +47,7 @@
                                 <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             @else
                             <li {{{ (Request::is('melding') ? 'class=active' : '') }}}>
-                              <a class="nav-link" href="{{ route('melding.index') }}">
+                              <a class="nav-link" href="/">
                                 Meldingen
                               </a>
                             </li>
