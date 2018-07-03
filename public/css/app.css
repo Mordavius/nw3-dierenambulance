@@ -10902,6 +10902,12 @@ svg path {
   border: none;
 }
 
+input[type="submit"]:focus,
+a:focus,
+button:focus {
+  outline: none;
+}
+
 input:not([type="checkbox"]):not([type="submit"]),
 textarea,
 select {
@@ -11834,6 +11840,10 @@ input[type="checkbox"] {
   }
 }
 
+.ticketcreate .main .pages .page .searchStuff .ticket_create_send_location_button {
+  float: right;
+}
+
 @media screen and (max-width: 767.98px) {
   .ticketcreate .main .pages .page .searchStuff #sendLocationButton {
     width: 100%;
@@ -12359,12 +12369,6 @@ input[type="checkbox"] {
   color: #B8B8B8;
 }
 
-.no-scroll {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-}
-
 .navbar .navbar-toggler {
   outline: 0;
 }
@@ -12378,7 +12382,6 @@ input[type="checkbox"] {
     left: 0;
     background: #fff;
     z-index: 9;
-    overflow-x: hidden;
   }
 }
 
@@ -12837,3 +12840,4 @@ select .selected {
 .password_edit h2 {
   margin: 0;
 }
+
