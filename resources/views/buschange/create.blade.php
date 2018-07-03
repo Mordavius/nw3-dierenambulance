@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance');
 @section('body_class', 'buschange')
 @section('content')
 <div class="container buswissel">
@@ -78,7 +78,7 @@
               {!! Form::text('milage', null, ['placeholder' => 'kilometerstand'], ['class' => 'form-control']) !!}
 
               @if($errors->has('milage'))
-                <span class="help-block">{{ $errors->first('milage') }}</span>
+                <span class="alert-danger">{{ $errors->first('milage') }}</span>
               @endif
           </div>
 

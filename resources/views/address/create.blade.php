@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance');
 
 @section('content')
 @include('administration.admin_menu')
@@ -20,7 +20,7 @@
             {!! Form::text('location_name', null, ['placeholder' => 'Naam'], ['class' => 'form-control']) !!}
 
             @if($errors->has('location_name'))
-                <br /><span class="alert alert-danger">{{ $errors->first('location_name') }}</span><br /><br />
+                <br /><span class="alert-danger">{{ $errors->first('location_name') }}</span><br /><br />
             @endif
         </div>
 
@@ -28,7 +28,7 @@
             {!! Form::text('postal_code', null, ['placeholder' => 'Postcode'], ['class' => 'form-control']) !!}
 
             @if($errors->has('postal_code'))
-                <br /><span class="alert alert-danger">{{ $errors->first('postal_code') }}</span><br /><br />
+                <br /><span class="alert-danger">{{ $errors->first('postal_code') }}</span><br /><br />
             @endif
         </div>
 
@@ -36,7 +36,7 @@
             {!! Form::text('address', null,['placeholder' => 'Adres'], ['class' => 'form-control']) !!}
 
             @if($errors->has('address'))
-                <br /><span class="alert alert-danger">{{ $errors->first('address') }}</span><br /><br />
+                <br /><span class="alert-danger">{{ $errors->first('address') }}</span><br /><br />
             @endif
         </div>
 
@@ -44,7 +44,7 @@
             {!! Form::text('house_number', null, ['placeholder' => 'Nummer'], ['class' => 'form-control']) !!}
 
             @if($errors->has('house_number'))
-                <br /><span class="alert alert-danger">{{ $errors->first('house_number') }}</span><br /><br />
+                <br /><span class="alert-danger">{{ $errors->first('house_number') }}</span><br /><br />
             @endif
         </div>
 
@@ -52,7 +52,7 @@
             {!! Form::text('city', null, ['placeholder' => 'Plaats'], ['class' => 'form-control']) !!}
 
             @if($errors->has('city'))
-                <br /><span class="alert alert-danger">{{ $errors->first('city') }}</span><br /><br />
+                <br /><span class="alert-danger">{{ $errors->first('city') }}</span><br /><br />
             @endif
         </div>
 
@@ -61,7 +61,7 @@
         </div>
 
         @if($errors->has('township'))
-            <br /><span class="alert alert-danger">{{ $errors->first('township') }}</span><br /><br />
+            <br /><span class="alert-danger">{{ $errors->first('township') }}</span><br /><br />
         @endif
 
             {!! Form::submit('Opslaan', ['class' => 'btn btn-success']) !!}

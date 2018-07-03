@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance');
 
 @section('content')
 @include('administration.admin_menu')
@@ -20,13 +20,13 @@
           {!! Form::text('bus_type', null, ['class' => 'form-control', 'placeholder' => 'Voertuig naam']) !!}
 
           @if($errors->has('bus_type'))
-            <br /><span class="alert alert-danger">{{ $errors->first('bus_type') }}</span><br /><br />
+            <br /><span class="alert-danger">{{ $errors->first('bus_type') }}</span><br /><br />
           @endif
       </div>
       {!! Form::text('milage', null, ['class' => 'form-control', 'placeholder' => 'Kilometerstand']) !!}
 
        @if($errors->has('milage'))
-        <br /><span class="alert alert-danger">{{ $errors->first('milage') }}</span><br /><br />
+        <br /><span class="alert-danger">{{ $errors->first('milage') }}</span><br /><br />
        @endif
 
        {!! Form::submit('Opslaan', ['class' => 'btn btn-success']) !!}

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance');
 <script type="text/javascript" src="{{asset('js/jquery-min.js')}}"></script>
 @section('map')
     @include('map')

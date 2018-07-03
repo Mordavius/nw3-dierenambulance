@@ -25,18 +25,18 @@ class HomeController extends Controller
     // Show the admin page
     public function admin()
     {
-        return redirect('/melding');
+        return view('ticket.centralist');
     }
     // Show the centralist page
     public function centralist()
     {
-        return view('centralist');
+        return view('ticket.centralist');
     }
 
     // Show the ambulance page
     public function ambulance()
     {
-        return view('ambulance');
+        return view('ticket.ambulance');
     }
 
     // Show the register page
