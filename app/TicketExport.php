@@ -11,7 +11,7 @@ use App\Ticket;
 class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
 {
     use Exportable;
-    public function __construct(string $startdate = null, string $enddate = null, string $animal = 'all', string $township = 'all', string $with_finances = 'true')
+    public function __construct(string $startdate = null, string $enddate = null, string $animal = null, string $township = null, string $with_finances = 'true')
     {
         /*
         this is the constructor, in the constructor the parameters will be bound to the variables which will be used in the function.
@@ -138,7 +138,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
             $destinations = null;
             $destinations2 = null;
 
-            if ($this->animal_select != 'all') {
+            if ($this->animal_select != null) {
                 if ($ticket->animal && ($ticket->animal->animal_species == $this->animal_select)) {
                     $animal = $ticket->animal;
                 }
@@ -148,7 +148,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
                 }
             }
 
-            if ($this->township != 'all') {
+            if ($this->township != null) {
                 if ($ticket->mainDestination() && ($ticket->mainDestination()->township == $this->township)) {
                     $destinations = $ticket->mainDestination();
                 }
