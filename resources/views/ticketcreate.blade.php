@@ -74,8 +74,11 @@
                 <h1>Locatie</h1>
             </div>
             <div class="searchStuff">
-                <input id="searchTextBox" type="text" placeholder="Zoeken"/>
-                <button id="sendLocationButton" class="btn btn-success">Locatie van melder opvragen</button>
+                <div class="searchDiv">
+                    <input id="searchTextBox" type="text" placeholder="Zoeken"/>
+                    <button id="searchButton" type="button"><img src="{{asset('images/search-icon.png')}}" alt=""></button>
+                </div>
+                <button id="sendLocationButton" class="btn btn-success ticket_create_send_location_button">Locatie van melder opvragen</button>
             </div>
             <div id="app" ng-app="app">
                 <div ng-controller="TableController" >

@@ -15,9 +15,9 @@ class Ticket extends Model
     public function destinations()
     {
        return $this->hasMany('App\Destination');
-    }
+   }
 
-	public function mainDestination()
+    public function mainDestination()
 	{
 		return $this->hasMany('App\Destination')->first();
 	}

@@ -23,6 +23,7 @@
         <script type="text/javascript" src="{{asset('js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{asset('js/register.js') }}"></script>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
     </head>
     <body class="@yield('body_class')">
         <div id="app">

@@ -11666,17 +11666,26 @@ input[type="checkbox"] {
   width: 100%;
 }
 
-.ticketcreate .main .pages .page .searchStuff #searchTextBox {
-  width: 52%;
-  height: 41px;
+.ticketcreate .main .pages .page .searchStuff .searchDiv {
   border: 1px solid #ECECEC;
   float: left;
-  background-image: url(/images/search.svg?e3788fe847cbeace122baebf50d8dd49);
-  background-repeat: no-repeat;
-  background-position: 95% center;
-  background-size: 18px 18px;
+  width: 61%;
+  height: 53px;
+  margin: 0 20px 20px 0;
+}
+
+.ticketcreate .main .pages .page .searchStuff img {
+  height: 40px;
+  width: 40px;
+  margin: 0 auto;
+}
+
+.ticketcreate .main .pages .page .searchStuff #searchTextBox {
+  width: 80%;
   margin-bottom: 0;
   font-size: 14px;
+  height: 51px;
+  border: none;
 }
 
 @media (min-width: 992px) {
@@ -11684,6 +11693,10 @@ input[type="checkbox"] {
     margin-right: 12px;
     margin-bottom: 1.875rem;
   }
+}
+
+.ticketcreate .main .pages .page .searchStuff input:focus {
+  border: none;
 }
 
 .ticketcreate .main .pages .page .searchStuff #knownAddress {
@@ -11707,7 +11720,7 @@ input[type="checkbox"] {
   width: 11%;
   height: 41px;
   float: right;
-  border: 1px solid #ECECEC;
+  border: none;
   color: #2D9CDB;
   background: #fff;
   font-size: 14px;
@@ -11717,6 +11730,10 @@ input[type="checkbox"] {
   .ticketcreate .main .pages .page .searchStuff #searchButton {
     width: 8%;
   }
+}
+
+.ticketcreate .main .pages .page .searchStuff .ticket_create_send_location_button {
+  float: right;
 }
 
 @media (min-width: 992px) {
