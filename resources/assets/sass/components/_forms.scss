@@ -14,7 +14,7 @@ select
   &:focus
   {
     outline: none;
-    border-bottom: 1px solid $black;
+    border-bottom: 1px solid $primary-color;
   }
 
   &::-webkit-inner-spin-button

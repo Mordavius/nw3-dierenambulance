@@ -10919,7 +10919,7 @@ input:not([type="checkbox"]):not([type="submit"]):focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #288B5F;
 }
 
 input:not([type="checkbox"]):not([type="submit"])::-webkit-inner-spin-button,
