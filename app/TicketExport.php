@@ -69,9 +69,9 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
         //checks if finances need to be exported
         if ($this->with_finances == 'true') {
             $new_ticket += [
-                'invoice' => 'n.v.t.',
+                'payment_invoice' => 'n.v.t.',
                 'payment_method' => 'n.v.t.',
-                'gifts' => 'n.v.t.',
+                'payment_gift' => 'n.v.t.',
                 'startmilage' => 'n.v.t.',
                 'endmilage' => 'n.v.t.'];
         }
