@@ -1,11 +1,3 @@
-.icon-bar
-{
-  @include media-breakpoint-up(lg)
-  {
-    display: none;
-  }
-}
-
 .ticket-wrapper
 {
   padding: rem-calc(22) 0;

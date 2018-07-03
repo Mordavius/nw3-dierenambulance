@@ -1,18 +1,6 @@
 @extends('layouts.appambulance')
 @section('body_class', 'ticket_ambulance')
 @section('content')
-<div class="icon-bar">
-    <div class="left">
-        <button id="toggle-button">
-            <img id="map-image" src="/images/Map-view.png" />
-            <img id="list-image" src="/images/List-view-active.png" />
-        </button>
-    </div>
-    <div class="right">
-      <a href="#">
-      </a>
-    </div>
-</div>
 <div class="pages current_page" id="page1">
   <div class="tickets ticket-wrapper" >
       <div class="grid_container current_page">

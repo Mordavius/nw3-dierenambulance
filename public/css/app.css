@@ -11038,12 +11038,6 @@ input[type="checkbox"] {
   }
 }
 
-@media (min-width: 992px) {
-  .icon-bar {
-    display: none;
-  }
-}
-
 .ticket-wrapper {
   padding: 1.375rem 0;
   background: #F4F4F4;
