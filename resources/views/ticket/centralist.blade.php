@@ -31,8 +31,7 @@
       <img id="map-image-desktop" src="/images/Map-view.png">
       <img id="list-image-desktop" src="/images/List-view-active.png">
     </button>
-      <input type="text" class="search_field" id="search" name="search" placeholder="Zoeken..">
-  </div>
+      </div>
   <div class="filters">
     <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
     <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
@@ -152,31 +151,9 @@
     </div>
 </div>
 @section('scripts')
-<script type="text/javascript">
-    $('#search').on('keyup',function(){
-        $value=$(this).val();
-        $.ajax({
-            type : 'get',
-            url : '{{URL::to('search')}}',
-            data:{'search':$value},
-            success:function(data){
-                $('tbody').html(data);
-            }
-        });
-    })
-</script>
-
-<script type="text/javascript">
-    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-</script>
-
-
-
-
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/leaflet.geometryutil.js') }}"></script>
-
 <script type="text/javascript" src="{{asset('js/filter.js') }}"></script>
 @endsection
 @endsection

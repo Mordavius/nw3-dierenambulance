@@ -78,7 +78,7 @@
               {!! Form::text('milage', null, ['placeholder' => 'kilometerstand'], ['class' => 'form-control']) !!}
 
               @if($errors->has('milage'))
-                <span class="help-block">{{ $errors->first('milage') }}</span>
+                <span class="alert-danger">{{ $errors->first('milage') }}</span>
               @endif
           </div>
 

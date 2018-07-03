@@ -5711,8 +5711,7 @@ input[type="button"].btn-block {
 }
 
 .alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
+  color: #FF0000;
   border-color: #f5c6cb;
 }
 
@@ -11375,7 +11374,9 @@ input[type="checkbox"] {
 
 .grid_container {
   display: grid;
-  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-areas: 'header'
+ 'main'
+ 'footer';
   font-style: normal;
   font-weight: normal;
   line-height: normal;
@@ -12175,7 +12176,8 @@ input[type="checkbox"] {
 
 .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
   display: grid;
-  grid-template-areas: "header" "main";
+  grid-template-areas: "header"
+ "main";
   padding-top: 15px;
 }
 
