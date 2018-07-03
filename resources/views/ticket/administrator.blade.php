@@ -8,12 +8,10 @@
             <img id="list-image" src="/images/List-view-active.png" />
         </button>
     </div>
+
     <div class="right">
-      <a href="">
-        <img id="search-icon" src="/images/Search-icon.png">
-      </a>
       <a href="#">
-        <img id="filter-icon" src="/images/Filter-icon.png">
+              <img id="btn-add-filter" class="filter-icon" src="/images/Filter-icon.png">
       </a>
     </div>
 </div>
@@ -146,6 +144,32 @@
     <div ng-app="app">
         <div ng-controller="TableController" >
             <div id="map" data-coordinates="{{ $coordinates }}" class="panel panel-default panel-success">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal (Pop up for filter button) -->
+<div class="modal fade" id="myModal-filter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content-ticket">
+            <div class="modal-header-ticket">
+                <h2 class="modal-title" id="myModalLabel">Filters</h2>
+                <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
+                    <img src="{{asset('images/close-black.svg')}}">
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-danger filter" style="display:none"></div>
+
+                <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
+                <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
+                <input type="text" name="location" value="" placeholder="Stad/Dorp" id="location">
+                <input class="btn btn-success" data-dismiss="modal" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+                <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
+
             </div>
         </div>
     </div>

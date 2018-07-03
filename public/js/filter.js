@@ -77,3 +77,14 @@ function filterTickets() {
 function resetFilter(){
     location.reload(true);
 }
+
+$(document).ready(function(){
+
+    //display modal form for creating new task
+    $('#btn-add-filter').click(function(){
+        // $('#btn-save-payment').val("add");
+        // $('#finances').trigger("reset");
+        $('#myModal-filter').modal('show');
+    });
+});
+

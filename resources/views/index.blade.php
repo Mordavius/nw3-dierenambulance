@@ -12,7 +12,6 @@
         </button>
     </div>
     <div class="right">
-        <img id="search-icon" src="/images/Search-icon.png">
         <img id="filter-icon" src="/images/Filter-icon.png">
     </div>
 </div>

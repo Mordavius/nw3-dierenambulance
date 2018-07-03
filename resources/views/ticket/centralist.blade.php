@@ -1,5 +1,5 @@
-@extends('layouts.appambulance')
-@section('body_class', 'ticket_ambulance')
+@extends('layouts.appcentralist')
+@section('body_class', 'ticket_centralist')
 @section('content')
 <div class="icon-bar">
     <div class="left">
@@ -10,9 +10,34 @@
     </div>
     <div class="right">
       <a href="#">
+          <img id="btn-add-filter" class="filter-icon" src="/images/Filter-icon.png">
       </a>
     </div>
 </div>
+<a href="/melding/create">
+    <button class="round">
+        <img src="/images/Plus.png" class="rotate-button"/>
+    </button>
+</a>
+<div class="head">
+  <div class="left">
+      <h1>Meldingen</h1>
+  </div>
+  <div class="right">
+    <button id="toggle-button-desktop">
+      <img id="map-image-desktop" src="/images/Map-view.png">
+      <img id="list-image-desktop" src="/images/List-view-active.png">
+    </button>
+      </div>
+  <div class="filters">
+    <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
+    <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
+    <input type="text" name="location" value="" placeholder="Stad/Dorp" id="location">
+    <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+    <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
+  </div>
+</div>
+
 <div class="pages current_page" id="page1">
   <div class="tickets ticket-wrapper" >
       <div class="grid_container current_page">
@@ -61,14 +86,17 @@
                               </div>
                           </div>
                           <p class="ticket_description">{{$unfinishedticket->animal['description']}}</p>
+                          {{-- TODO: de beschrijving hierboven wordt nooit getoond. Als die weg moet, dan moet die ook uit filter.js --}}
                       </article>
                   </a>
               @endforeach
           </div>
       </div>
       <div class="grid_container">
-          <div class="grid_main" id="rest_tickets">
-              <div class="overlay_rest"></div>
+          <div class="grid_header">
+              <div class="tickets closed_tickets"><h2>Afgeronde meldingen</h2></div>
+          </div>
+          <div class="grid_main" id="finished">
               @foreach($finishedtickets as $finishedticket)
                   @if (count($finishedtickets) < 2)
                     <article class="grid_ticket single">
@@ -120,6 +148,30 @@
     </div>
 </div>
 
+<!-- Modal (Pop up for filter button) -->
+<div class="modal fade" id="myModal-filter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content-ticket">
+            <div class="modal-header-ticket">
+                <h2 class="modal-title" id="myModalLabel">Filters</h2>
+                <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
+                    <img src="{{asset('images/close-black.svg')}}">
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-danger filter" style="display:none"></div>
+
+                <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
+                <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
+                <input type="text" name="location" value="" placeholder="Stad/Dorp" id="location">
+                <input class="btn btn-success" data-dismiss="modal"  type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+                <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
+
+            </div>
+        </div>
+    </div>
+</div>
 @section('scripts')
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
