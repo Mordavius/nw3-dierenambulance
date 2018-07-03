@@ -1,13 +1,156 @@
-.ticket_centralist
+.ticket-wrapper
 {
-  .icon-bar
+  padding: rem-calc(22) 0;
+  background: $background;
+
+  @media (min-width: 992px) { padding: rem-calc(22) rem-calc(100); }
+
+  @media (min-width: 1500px) { padding: rem-calc(22) rem-calc(176); }
+
+  .grid_container
   {
-    @include media-breakpoint-up(lg)
+    margin-bottom: 107px;
+
+    .grid_header
     {
-      display: none;
+      margin-bottom: 25px;
+      padding-left: 21px;
+
+      @include media-breakpoint-up(lg)
+      {
+        padding-left: 0;
+      }
+    }
+
+    .grid_main
+    {
+      background: $background;
+      border: 1px solid #E5E5E5;
+
+      a
+      {
+        text-decoration: none;
+      }
+
+      .grid_ticket
+      {
+        background: $white;
+        border: 0;
+        border-bottom: 1px solid #E5E5E5;
+
+        &:hover,
+        &:focus
+        {
+          background: $light-gray;
+        }
+
+        @include media-breakpoint-up(lg)
+        {
+          border: 1px solid #E5E5E5;
+        }
+
+        &.new
+        {
+          border-left: solid 7px $secondary-color;
+        }
+
+        &.single
+        {
+          @include media-breakpoint-up(lg)
+          {
+            width: 350px;
+          }
+        }
+
+        .ticket_number
+        {
+          margin-left: 0;
+          margin-right: 21px;
+        }
+
+        .grid_animal_icon
+        {
+          .ticket_icon
+          {
+
+            @include media-breakpoint-up(lg)
+            {
+              height: 78px;
+              width: 78px;
+              margin-right: 0;
+            }
+
+            img#animal_icon
+            {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+
+              @include media-breakpoint-up(lg)
+              {
+                height: 60%;
+                width: 60%;
+              }
+            }
+          }
+        }
+
+        .ticket_main_info
+        {
+
+          .ticket_title
+          {
+            h3
+            {
+              margin-bottom: 0;
+              display: inline-block;
+            }
+
+            .subheading
+            {
+              display: inline-block;
+              font-size: 12px;
+            }
+          }
+
+          .ticket_address
+          {
+            margin-top: 7px;
+
+            span
+            {
+              font-size: 14px;
+              display: block;
+
+              br
+              {
+                display: block;
+                // margin-top: -10px;
+                content: "";
+              }
+            }
+          }
+        }
+
+        .ticket_description
+        {
+          grid-column: 2/6;
+          font-size: 18px;
+          margin: 7px 21px 21px 0px;
+
+          @include media-breakpoint-up(lg)
+          {
+            margin-top: 14px;
+          }
+        }
+      }
     }
   }
+}
 
+.ticket_centralist
+{
   .head
   {
     @media (min-width: 992px) { padding: rem-calc(40) rem-calc(100); }
@@ -78,32 +221,12 @@
 
   .ticket-wrapper
   {
-    padding: rem-calc(22) 0;
-    background: $background;
-
-    @media (min-width: 992px) { padding: rem-calc(22) rem-calc(100); }
-
-    @media (min-width: 1500px) { padding: rem-calc(22) rem-calc(176); }
 
     .grid_container
     {
-      margin-bottom: 107px;
-
-      .grid_header
-      {
-        margin-bottom: 25px;
-        padding-left: 21px;
-
-        @include media-breakpoint-up(lg)
-        {
-          padding-left: 0;
-        }
-      }
 
       .grid_main
       {
-        background: $background;
-        border: 1px solid #E5E5E5;
 
         @include media-breakpoint-up(lg)
         {
@@ -111,22 +234,6 @@
           grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
           grid-gap: 1rem;
           border: none;
-        }
-
-        .table
-        {
-          background-color: $white;
-
-          thead
-          {
-            margin-top: 20px;
-            margin-bottom: 20px;
-          }
-
-          td
-          {
-            padding: 21px;
-          }
         }
 
         a
@@ -141,9 +248,6 @@
 
         .grid_ticket
         {
-          background: $white;
-          border: 0;
-          border-bottom: 1px solid #E5E5E5;
 
           &:hover,
           &:focus
@@ -155,30 +259,6 @@
               background: $white;
               box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
             }
-          }
-
-          @include media-breakpoint-up(lg)
-          {
-            border: 1px solid #E5E5E5;
-          }
-
-          &.new
-          {
-            border-left: solid 7px $secondary-color;
-          }
-
-          &.single
-          {
-            @include media-breakpoint-up(lg)
-            {
-              width: 350px;
-            }
-          }
-
-          .ticket_number
-          {
-            margin-left: 0;
-            margin-right: 21px;
           }
 
           .grid_animal_icon
@@ -195,26 +275,11 @@
                 width: 78px;
                 margin-right: 0;
               }
-
-              img#animal_icon
-              {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-
-                @include media-breakpoint-up(lg)
-                {
-                  height: 60%;
-                  width: 60%;
-                }
-              }
             }
           }
 
           .ticket_main_info
           {
-
             @include media-breakpoint-up(lg)
             {
               margin-left: 17px;
@@ -224,38 +289,11 @@
             {
               h3
               {
-                margin-bottom: 0;
-                display: inline-block;
-
                 @include media-breakpoint-up(lg)
                 {
                   display: block;
                   line-height: 2px;
                   margin-top: 9px;
-                }
-              }
-
-              .subheading
-              {
-                display: inline-block;
-                font-size: 12px;
-              }
-            }
-
-            .ticket_address
-            {
-              margin-top: 7px;
-
-              span
-              {
-                font-size: 14px;
-                display: block;
-
-                br
-                {
-                  display: block;
-                  // margin-top: -10px;
-                  content: "";
                 }
               }
             }
@@ -274,6 +312,53 @@
           }
         }
       }
+    }
+  }
+}
+
+
+.ticket_ambulance
+{
+
+  .tickets
+  {
+    padding-top: 57px;
+  }
+
+  #rest_tickets
+  {
+    position: relative;
+
+    .overlay_rest
+    {
+      background-color: rgba(196, 196, 196, 0.6);
+      background-image: url(../images/lock.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      z-index: 99999;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+
+  .grid_ticket
+  {
+    grid-template-columns: repeat(auto-fit);
+
+    .grid_animal_icon
+    {
+      .ticket_icon
+      {
+        padding: 0;
+        position: relative;
+        margin-right: 28px;
+      }
+    }
+
+    .ticket_address
+    {
+      margin-top: 17px;
     }
   }
 }
