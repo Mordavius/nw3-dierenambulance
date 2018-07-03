@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance');
 @section('body_class', 'buschange')
 @section('content')
 <div class="container buswissel">
