@@ -1,5 +1,5 @@
 @extends('layouts.appambulance')
-@section('body_class', 'ticket_centralist')
+@section('body_class', 'ticket_ambulance')
 @section('content')
 <div class="icon-bar">
     <div class="left">
@@ -17,24 +17,6 @@
       </a>
     </div>
 </div>
-<a href="/melding/create">
-    <button class="round">
-        <img src="/images/Plus.png" class="rotate-button"/>
-    </button>
-</a>
-<div class="head">
-  <div class="left">
-      <h1>Meldingen</h1>
-  </div>
-  <div class="right">
-    <button id="toggle-button-desktop">
-      <img id="map-image-desktop" src="/images/Map-view.png">
-      <img id="list-image-desktop" src="/images/List-view-active.png">
-    </button>
-      </div>
-
-</div>
-
 <div class="pages current_page" id="page1">
   <div class="tickets ticket-wrapper" >
       <div class="grid_container current_page">
@@ -83,17 +65,14 @@
                               </div>
                           </div>
                           <p class="ticket_description">{{$unfinishedticket->animal['description']}}</p>
-                          {{-- TODO: de beschrijving hierboven wordt nooit getoond. Als die weg moet, dan moet die ook uit filter.js --}}
                       </article>
                   </a>
               @endforeach
           </div>
       </div>
       <div class="grid_container">
-          <div class="grid_header">
-              <div class="tickets closed_tickets"><h2>Afgeronde meldingen</h2></div>
-          </div>
-          <div class="grid_main" id="finished">
+          <div class="grid_main" id="rest_tickets">
+              <div class="overlay_rest"></div>
               @foreach($finishedtickets as $finishedticket)
                   @if (count($finishedtickets) < 2)
                     <article class="grid_ticket single">
