@@ -79,7 +79,6 @@ function resetFilter(){
 }
 
 $(document).ready(function(){
-    var url = "/filter";
 
     //display modal form for creating new task
     $('#btn-add-filter').click(function(){
