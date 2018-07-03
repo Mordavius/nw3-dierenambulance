@@ -1,4 +1,4 @@
-@extends('layouts.appambulance')
+@extends('layouts.appcentralist')
 @section('body_class', 'ticket_centralist')
 @section('content')
 <div class="icon-bar">
@@ -10,6 +10,7 @@
     </div>
     <div class="right">
       <a href="#">
+          <img id="btn-add-filter" class="filter-icon" src="/images/Filter-icon.png">
       </a>
     </div>
 </div>
@@ -28,7 +29,13 @@
       <img id="list-image-desktop" src="/images/List-view-active.png">
     </button>
       </div>
-
+  <div class="filters">
+    <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
+    <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
+    <input type="text" name="location" value="" placeholder="Stad/Dorp" id="location">
+    <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+    <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
+  </div>
 </div>
 
 <div class="pages current_page" id="page1">
@@ -141,6 +148,30 @@
     </div>
 </div>
 
+<!-- Modal (Pop up for filter button) -->
+<div class="modal fade" id="myModal-filter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content-ticket">
+            <div class="modal-header-ticket">
+                <h2 class="modal-title" id="myModalLabel">Filters</h2>
+                <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
+                    <img src="{{asset('images/close-black.svg')}}">
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-danger filter" style="display:none"></div>
+
+                <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
+                <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
+                <input type="text" name="location" value="" placeholder="Stad/Dorp" id="location">
+                <input class="btn btn-success" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+                <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
+
+            </div>
+        </div>
+    </div>
+</div>
 @section('scripts')
 <script type="text/javascript" src="{{asset('js/leaflet.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/show-markers.js') }}"></script>
