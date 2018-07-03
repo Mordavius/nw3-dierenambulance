@@ -69,6 +69,7 @@ function filterTickets() {
 			                '</article>' +
 		                '</a>';
                 });
+                number_results.innerText = unfinished_counter;
             }
         }
     });
