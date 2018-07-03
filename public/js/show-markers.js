@@ -34,12 +34,20 @@ var img_array_list= new Array('images/List-view-active.png','images/List-view.pn
 var i = 0;
 
 function toggle () {
-    i++;
+    if(i == 1) {
+        i = 0
+    }
+    else{
+        i=1;
+    }
+    console.log(i);
+    console.log(img_array_list[i]);
+    console.log(img_array_map[i]);
     document.getElementById("map-image").src=img_array_map[i];
     document.getElementById("list-image").src=img_array_list[i];
-    if(i==img_array_map.length-1) {
-        i=-1;
-    }
+    document.getElementById("map-image-desktop").src=img_array_map[i];
+    document.getElementById("list-image-desktop").src=img_array_list[i];
+
     if(page1.className == "pages current_page"){
         page1.className = "pages";
         page2.className = "pages current_page";
