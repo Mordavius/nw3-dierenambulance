@@ -44,7 +44,7 @@ class TicketController extends Controller
         }
         $coordinates = json_encode($coordinates);
 
-        return view('ticket.administrator', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
+        return view('auth.error', compact('search', 'finishedtickets', 'unfinishedtickets', 'coordinates'));
     }
 
     public function administrator(Request $request)
@@ -299,7 +299,7 @@ class TicketController extends Controller
 	        return response()->json($e);
         }
 
-        return redirect('/melding')->with('message', 'Nieuwe melding is aangemaakt!');
+        return redirect('/')->with('message', 'Nieuwe melding is aangemaakt!');
     }
 
     public function finish($id)
@@ -309,7 +309,7 @@ class TicketController extends Controller
             ->where('id', $id)
             ->update(['finished' => 1]);
 
-        return redirect('melding')->with('message', 'Melding afgerond!');
+        return redirect('/')->with('message', 'Melding afgerond!');
     }
 
 	/**
@@ -377,7 +377,7 @@ class TicketController extends Controller
 	        ]);
 	    };
 
-        return redirect('/melding')->with('message', 'Melding is geupdate');
+        return redirect('/')->with('message', 'Melding is geupdate');
     }
 
     /**
