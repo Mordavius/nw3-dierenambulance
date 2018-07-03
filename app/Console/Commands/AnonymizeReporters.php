@@ -37,16 +37,15 @@ class AnonymizeReporters extends Command
      */
     public function handle()
     {
-        $checkdate = strtotime('-1 month');
-        $tickets = Ticket::all();
+        $checkdate = date("Y-m-d h:i:s", strtotime('-1 month'));
+            //strtotime('-1 month');
+        $tickets = Ticket::where([['created_at', '<=', $checkdate], ['reporter_name', '!=', 'anoniem'],])->get();
         if ($tickets) {
             try {
                 foreach ($tickets as $ticket) {
-                    if (strtotime($ticket->created_at) <= $checkdate && $ticket->reporter_name != "anoniem") {
                         $ticket->reporter_name = "anoniem";
                         $ticket->telephone = "0000000000";
                         $ticket->save();
-                    }
                 }
             }
             catch (\Exception $e){
