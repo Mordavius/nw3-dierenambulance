@@ -151,6 +151,14 @@
 
 .ticket_centralist
 {
+  .icon-bar
+  {
+    @include media-breakpoint-up(lg)
+    {
+      display: none;
+    }
+  }
+
   .head
   {
     @media (min-width: 992px) { padding: rem-calc(40) rem-calc(100); }

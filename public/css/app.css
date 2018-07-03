@@ -11170,6 +11170,12 @@ input[type="checkbox"] {
   }
 }
 
+@media (min-width: 992px) {
+  .ticket_centralist .icon-bar {
+    display: none;
+  }
+}
+
 .ticket_centralist .head {
   display: none;
 }
