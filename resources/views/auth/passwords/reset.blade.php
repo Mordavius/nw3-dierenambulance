@@ -1,12 +1,15 @@
 @extends('layouts.app')
-
+@section('body_class', 'reset_password')
 @section('content')
 <div class="container">
+  <div class="logo_wrap">
+    <img class="logo" src="{{ asset('images/Dierenambulance-logo.svg') }}">
+  </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Reset Password
+                    <h2>Wachtwoord opnieuw instellen</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}">
@@ -14,7 +17,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">
-                                E-Mail Address
+                                E-mailadres
                             </label>
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email or old('email') }}" required autofocus>
@@ -26,7 +29,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">
+                              Wachtwoord
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
@@ -38,7 +43,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">
+                              Herhaal uw nieuwe wachtwoord
+                            </label>
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
                                 @if ($errors->has('password_confirmation'))
@@ -50,8 +57,8 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
+                                <button type="submit" class="btn-success">
+                                    Wachtwoord opnieuw instellen
                                 </button>
                             </div>
                         </div>
