@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400);/*!
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500);/*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -11136,11 +11136,6 @@ input[type="checkbox"] {
 
 .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title .subheading {
   display: inline-block;
-  font-size: 12px;
-}
-
-.ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
-  margin-top: 7px;
 }
 
 .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span {
@@ -11308,6 +11303,14 @@ input[type="checkbox"] {
   }
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title .subheading {
+  font-size: 12px;
+}
+
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
+  margin-top: 7px;
+}
+
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
   grid-column: 1/6;
   font-size: 18px;
@@ -11321,8 +11324,10 @@ input[type="checkbox"] {
   }
 }
 
-.ticket_ambulance .tickets {
-  padding-top: 57px;
+@media (min-width: 992px) {
+  .ticket_ambulance .tickets {
+    padding-top: 57px;
+  }
 }
 
 .ticket_ambulance #rest_tickets {
@@ -11334,14 +11339,15 @@ input[type="checkbox"] {
   background-image: url(/images/lock.svg?10ae7f58d9208370d80b313dfd2b6bc9);
   background-repeat: no-repeat;
   background-position: center center;
-  z-index: 99999;
   width: 100%;
   height: 100%;
   position: absolute;
 }
 
-.ticket_ambulance .grid_ticket {
-  grid-template-columns: repeat(auto-fit);
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket {
+    grid-template-columns: 130px 1fr 1fr 1fr 78px;
+  }
 }
 
 .ticket_ambulance .grid_ticket .grid_animal_icon .ticket_icon {
@@ -11350,8 +11356,42 @@ input[type="checkbox"] {
   margin-right: 28px;
 }
 
-.ticket_ambulance .grid_ticket .ticket_address {
-  margin-top: 17px;
+.ticket_ambulance .grid_ticket .ticket_title .subheading {
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket .ticket_address {
+    margin-top: 19px;
+  }
+}
+
+.ticket_ambulance .grid_ticket .ticket_address img,
+.ticket_ambulance .grid_ticket .ticket_address span {
+  display: inline-block !important;
+  vertical-align: top;
+}
+
+.ticket_ambulance .grid_ticket .ticket_address img {
+  margin-right: 10px;
+}
+
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket .ticket_address img {
+    margin-right: 24px;
+  }
+}
+
+.ticket_ambulance .grid_ticket .ticket_description img {
+  margin-right: 7px;
+  vertical-align: top;
+}
+
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket .ticket_description img {
+    margin-right: 20px;
+  }
 }
 
 .round {
@@ -12413,6 +12453,10 @@ input[type="checkbox"] {
   color: #B8B8B8;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .navbar .navbar-toggler {
   outline: 0;
 }
@@ -12425,7 +12469,7 @@ input[type="checkbox"] {
     top: 88px;
     left: 0;
     background: #fff;
-    z-index: 9;
+    z-index: 999;
   }
 }
 
@@ -12453,7 +12497,7 @@ input[type="checkbox"] {
 @media (max-width: 576px) {
   .navbar .navbar-collapse .navbar-nav .nav-link {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     padding-top: 14px;
     padding-bottom: 14px;
   }
@@ -12481,16 +12525,16 @@ input[type="checkbox"] {
 
 .navbar-laravel {
   background-color: #fff;
-  -webkit-box-shadow: 0;
-          box-shadow: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   border-bottom: 1px solid #E5E5E5;
-  padding: 15px 56px;
 }
 
 @media (min-width: 992px) {
   .navbar-laravel {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    padding: 15px 56px;
   }
 }
 
@@ -12499,8 +12543,10 @@ input[type="checkbox"] {
   padding: 0;
 }
 
-.navbar-laravel .container .navbar-nav li:not(:last-child) {
-  margin-right: 56px;
+@media (min-width: 992px) {
+  .navbar-laravel .container .navbar-nav li:not(:last-child) {
+    margin-right: 56px;
+  }
 }
 
 .navbar-toggler {

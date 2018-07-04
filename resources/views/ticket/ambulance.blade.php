@@ -16,11 +16,7 @@
           <div class="grid_main" id="unfinished">
               @foreach($unfinishedtickets as $unfinishedticket)
                   <a href="{{ route('melding.edit', $unfinishedticket->id) }}">
-                    @if (count($unfinishedtickets) < 2)
-                      <article class="grid_ticket single">
-                    @else
                       <article class="grid_ticket">
-                    @endif
                           <div class="test">
                           </div>
                           <div class="ticket_number">
@@ -37,6 +33,7 @@
                                 <span class="subheading">{{$unfinishedticket->animal['breed']}}</span>
                               </div>
                               <div class="ticket_address">
+                                <img src="{{asset('images/location-black.svg') }}" alt="">
                                 <span>
                                   {{$unfinishedticket->mainDestination()['address']}}
                                   @if($unfinishedticket->mainDestination()['house_number'] != '0')
@@ -48,7 +45,10 @@
                                 </span>
                               </div>
                           </div>
-                          <p class="ticket_description">{{$unfinishedticket->animal['description']}}</p>
+                          <p class="ticket_description">
+                            <img src="{{asset('images/message-outline.svg') }}" alt="">
+                            {{$unfinishedticket->animal['description']}}
+                          </p>
                       </article>
                   </a>
               @endforeach
@@ -58,11 +58,7 @@
           <div class="grid_main" id="rest_tickets">
               <div class="overlay_rest"></div>
               @foreach($finishedtickets as $finishedticket)
-                  @if (count($finishedtickets) < 2)
-                    <article class="grid_ticket single">
-                  @else
                     <article class="grid_ticket">
-                  @endif
                       <div class="test">
                       </div>
                       <div class="ticket_number">
@@ -79,6 +75,7 @@
                             <span class="subheading">{{$finishedticket->animal['breed']}}</span>
                           </div>
                           <div class="ticket_address">
+                            <img src="{{asset('images/location-black.svg') }}" alt="">
                             <span>
                               {{$finishedticket->mainDestination()->address}}
                               @if($finishedticket->mainDestination()->house_number != '0')
@@ -91,6 +88,7 @@
                           </div>
                       </div>
                       <p class="ticket_description">
+                          <img src="{{asset('images/message-outline.svg') }}" alt="">
                           {{$finishedticket->animal['description']}}
                       </p>
                   </article>
