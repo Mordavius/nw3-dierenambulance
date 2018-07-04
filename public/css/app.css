@@ -12842,6 +12842,120 @@ select .selected {
   margin: 0 auto;
 }
 
+.send_reset_mail .info {
+  display: block;
+  margin-bottom: 1.875rem;
+  font-weight: 300;
+}
+
+.send_reset_mail nav {
+  display: none;
+}
+
+.send_reset_mail .container {
+  margin-top: 100px;
+}
+
+.send_reset_mail h2 {
+  margin-bottom: 0px;
+  font-weight: 300;
+}
+
+.send_reset_mail .back {
+  font-weight: 300;
+  display: block;
+  margin-top: 20px !important;
+}
+
+.send_reset_mail .centered {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.send_reset_mail .logo_wrap {
+  margin-bottom: 89px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .send_reset_mail .logo_wrap {
+    margin-bottom: 140px;
+  }
+}
+
+.send_reset_mail .logo_wrap .logo {
+  max-width: 241px;
+  width: 241px;
+  height: 86px;
+}
+
+@media (min-width: 992px) {
+  .send_reset_mail .logo_wrap .logo {
+    max-width: 418px;
+    width: 418px;
+    height: 149px;
+  }
+}
+
+.reset_password nav {
+  display: none;
+}
+
+.reset_password .info {
+  display: block;
+  margin-bottom: 1.875rem;
+  font-weight: 300;
+}
+
+.reset_password .container {
+  margin-top: 100px;
+}
+
+.reset_password h2 {
+  margin-bottom: 0px;
+  font-weight: 300;
+}
+
+.reset_password .centered {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.reset_password .logo_wrap {
+  margin-bottom: 89px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .reset_password .logo_wrap {
+    margin-bottom: 140px;
+  }
+}
+
+.reset_password .logo_wrap .logo {
+  max-width: 241px;
+  width: 241px;
+  height: 86px;
+}
+
+@media (min-width: 992px) {
+  .reset_password .logo_wrap .logo {
+    max-width: 418px;
+    width: 418px;
+    height: 149px;
+  }
+}
+
 @-webkit-keyframes leaflet-gestures-fadein {
   0% {
     opacity: 0;
