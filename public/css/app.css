@@ -11136,7 +11136,6 @@ input[type="checkbox"] {
 
 .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title .subheading {
   display: inline-block;
-  font-size: 12px;
 }
 
 .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
@@ -11308,6 +11307,10 @@ input[type="checkbox"] {
   }
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_title .subheading {
+  font-size: 12px;
+}
+
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
   grid-column: 1/6;
   font-size: 18px;
@@ -11321,8 +11324,10 @@ input[type="checkbox"] {
   }
 }
 
-.ticket_ambulance .tickets {
-  padding-top: 57px;
+@media (min-width: 992px) {
+  .ticket_ambulance .tickets {
+    padding-top: 57px;
+  }
 }
 
 .ticket_ambulance #rest_tickets {
@@ -11340,8 +11345,10 @@ input[type="checkbox"] {
   position: absolute;
 }
 
-.ticket_ambulance .grid_ticket {
-  grid-template-columns: repeat(auto-fit);
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket {
+    grid-template-columns: 130px 1fr 1fr 1fr 78px;
+  }
 }
 
 .ticket_ambulance .grid_ticket .grid_animal_icon .ticket_icon {
@@ -11350,8 +11357,40 @@ input[type="checkbox"] {
   margin-right: 28px;
 }
 
+.ticket_ambulance .grid_ticket .ticket_title .subheading {
+  font-size: 14px;
+  margin-left: 20px;
+}
+
 .ticket_ambulance .grid_ticket .ticket_address {
   margin-top: 17px;
+}
+
+.ticket_ambulance .grid_ticket .ticket_address img,
+.ticket_ambulance .grid_ticket .ticket_address span {
+  display: inline-block !important;
+  vertical-align: top;
+}
+
+.ticket_ambulance .grid_ticket .ticket_address img {
+  margin-right: 10px;
+}
+
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket .ticket_address img {
+    margin-right: 24px;
+  }
+}
+
+.ticket_ambulance .grid_ticket .ticket_description img {
+  margin-right: 7px;
+  vertical-align: top;
+}
+
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket .ticket_description img {
+    margin-right: 20px;
+  }
 }
 
 .round {
