@@ -12453,6 +12453,10 @@ input[type="checkbox"] {
   color: #B8B8B8;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .navbar .navbar-toggler {
   outline: 0;
 }
