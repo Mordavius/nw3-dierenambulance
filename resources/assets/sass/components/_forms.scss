@@ -1,8 +1,9 @@
-input[type="submit"], a, button
+input, a, button
 {
   &:focus
   {
     outline: none;
+    box-shadow: none!important;
   }
 }
 
@@ -18,12 +19,6 @@ select
   font-size: rem-calc(18);
   width: 100%;
   padding-left: rem-calc(4);
-
-  &:focus
-  {
-    outline: none;
-    border-bottom: 1px solid $primary-color;
-  }
 
   &::-webkit-inner-spin-button
   {
