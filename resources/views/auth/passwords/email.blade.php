@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('body_class', 'sendresetmail')
+@section('body_class', 'send_reset_mail')
 @section('content')
 <div class="container">
   <div class="logo_wrap">

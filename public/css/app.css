@@ -12808,37 +12808,37 @@ select .selected {
   margin: 0 auto;
 }
 
-.sendresetmail .info {
+.send_reset_mail .info {
   display: block;
   margin-bottom: 1.875rem;
   font-weight: 300;
 }
 
-.sendresetmail .navbar {
+.send_reset_mail .navbar {
   display: none;
 }
 
-.sendresetmail .container {
+.send_reset_mail .container {
   margin-top: 100px;
 }
 
-.sendresetmail h2 {
+.send_reset_mail h2 {
   margin-bottom: 0px;
   font-weight: 300;
 }
 
-.sendresetmail .back {
+.send_reset_mail .back {
   font-weight: 300;
   display: block;
   margin-top: 20px !important;
 }
 
-.sendresetmail .centered {
+.send_reset_mail .centered {
   margin: 0 auto;
   text-align: center;
 }
 
-.sendresetmail .logo_wrap {
+.send_reset_mail .logo_wrap {
   margin-bottom: 89px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -12849,19 +12849,19 @@ select .selected {
 }
 
 @media (min-width: 992px) {
-  .sendresetmail .logo_wrap {
+  .send_reset_mail .logo_wrap {
     margin-bottom: 140px;
   }
 }
 
-.sendresetmail .logo_wrap .logo {
+.send_reset_mail .logo_wrap .logo {
   max-width: 241px;
   width: 241px;
   height: 86px;
 }
 
 @media (min-width: 992px) {
-  .sendresetmail .logo_wrap .logo {
+  .send_reset_mail .logo_wrap .logo {
     max-width: 418px;
     width: 418px;
     height: 149px;
