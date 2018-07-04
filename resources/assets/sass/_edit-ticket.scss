@@ -2,22 +2,42 @@
 //                               Algemeen
 //=============================================================================
 .edit_ticket {
-  nav {
-    display: none;
-  }
-  main {
-    margin-bottom: 100px;
-    overflow: hidden;
-  }
-  .content h2 {
-    color: #828282;
-    margin: rem-calc(0);
-  }
+    nav {
+      display: none;
+    }
+    main {
+      margin-bottom: 100px;
+      overflow: hidden;
+    }
+    .content h2 {
+      color: #828282;
+      margin: rem-calc(0);
+    }
+    .container:nth-child(2) {
 
-  .container:nth-child(2) {
-
-    padding-top: 100px;
-  }
+      padding-top: 100px;
+    }
+    .afronden {
+      border-top: 1px solid lightgrey;
+      margin: 40px 0 100px;
+      @include media-breakpoint-down(lg)
+      {
+        margin: 40px 0 0;
+      }
+    }
+    .btn-afronden {
+      margin: 80px 0px;
+      margin: 80px 0px;
+      border: 1px solid #288B5F;
+      border-radius: 30px;
+      background: none;
+      color: #288B5F;
+      box-shadow: 2px 2px 10px 0px #a5a5a5;
+      padding: 13px 18px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
 }
 
 .edit-ticket-blok {
@@ -54,6 +74,9 @@ input:focus {
   button {
     background: none;
     border: none;
+  }
+  h6 {
+    padding: 0 0 0 5px;
   }
 }
 
@@ -128,15 +151,6 @@ input:focus {
   .btn-delete-location, .close-model {
     background: none;
     border: none;
-  }
-
-  .btn-add-location, .btn-add-payment {
-    color: $white !important;
-    background-color: $primary-color;
-    width: 50% !important;
-    border: none;
-    margin-bottom: rem-calc(30);
-    padding: rem-calc(5) !important;
   }
 
   .btn-center {

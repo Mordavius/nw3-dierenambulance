@@ -195,8 +195,8 @@
                 {!! Form::button('Wijzig betaling', ['class' => 'btn-success btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
             </div>
                 {!! Form::close() !!}
-            {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'btn-center'])!!}
-                {{Form::submit('Afronden',['class' => 'btn-success btn-success'])}}
+            {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'btn-center afronden'])!!}
+                {{Form::submit('Melding afronden',['class' => 'btn-afronden'])}}
             {!!Form::close()!!}
         </div>
 

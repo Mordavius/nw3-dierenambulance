@@ -12558,6 +12558,33 @@ input[type="checkbox"] {
   padding-top: 100px;
 }
 
+.edit_ticket .afronden {
+  border-top: 1px solid lightgrey;
+  margin: 40px 0 100px;
+}
+
+@media (max-width: 1199.98px) {
+  .edit_ticket .afronden {
+    margin: 40px 0 0;
+  }
+}
+
+.edit_ticket .btn-afronden {
+  margin: 80px 0px;
+  margin: 80px 0px;
+  border: 1px solid #288B5F;
+  border-radius: 30px;
+  background: none;
+  color: #288B5F;
+  -webkit-box-shadow: 2px 2px 10px 0px #a5a5a5;
+          box-shadow: 2px 2px 10px 0px #a5a5a5;
+  padding: 13px 18px;
+}
+
+.edit_ticket .btn-afronden:hover {
+  cursor: pointer;
+}
+
 .edit-ticket-blok {
   margin-bottom: 1.25rem;
 }
@@ -12598,6 +12625,10 @@ input:focus {
 .edit-menu-ticket button {
   background: none;
   border: none;
+}
+
+.edit-menu-ticket h6 {
+  padding: 0 0 0 5px;
 }
 
 .edit-menu-balk {
@@ -12668,16 +12699,6 @@ img.delete-dest {
 .close-model {
   background: none;
   border: none;
-}
-
-.btn-add-location,
-.btn-add-payment {
-  color: #fff !important;
-  background-color: #288B5F;
-  width: 50% !important;
-  border: none;
-  margin-bottom: 1.875rem;
-  padding: 0.3125rem !important;
 }
 
 .btn-center {
