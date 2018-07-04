@@ -1,4 +1,4 @@
-@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance');
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance')
 @section('content')
 @include('administration.admin_menu')
 <div class="wrapper">

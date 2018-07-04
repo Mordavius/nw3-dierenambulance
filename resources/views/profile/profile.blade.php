@@ -1,4 +1,4 @@
-@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appcentralist');
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appcentralist')
 
 @section('content')
 <div class="container">
