@@ -1,4 +1,4 @@
-@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance');
+@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance')
 @section('content')
 @section('body_class', 'edit_ticket')
 
@@ -6,7 +6,13 @@
     <div class="edit-menu-ticket container">
         <a href="../../"><img src="{{asset('images/Close.svg')}}" alt=""></a>
 
-        <div><h1>{{$ticket->animal->animal_species}}</h1> <h6>{{$ticket->animal->breed}}</h6></div>
+        <div>
+          <h1>{{$ticket->animal->animal_species}}</h1>
+          <h6>{{$ticket->animal->breed}}</h6>
+          <div class="ticket_parent">
+            <div class="ticket_number">#{{$ticket->id}}</div>
+          </div>
+        </div>
 
         <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
             <img src="{{asset('images/Check.svg')}}">
@@ -189,8 +195,8 @@
                 {!! Form::button('Wijzig betaling', ['class' => 'btn-success btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
             </div>
                 {!! Form::close() !!}
-            {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'btn-center'])!!}
-                {{Form::submit('Afronden',['class' => 'btn-success btn-success'])}}
+            {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'btn-center afronden'])!!}
+                {{Form::submit('Melding afronden',['class' => 'btn-afronden'])}}
             {!!Form::close()!!}
         </div>
 
