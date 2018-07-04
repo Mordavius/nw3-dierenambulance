@@ -6,7 +6,13 @@
     <div class="edit-menu-ticket container">
         <a href="../../"><img src="{{asset('images/Close.svg')}}" alt=""></a>
 
-        <div><h1>{{$ticket->animal->animal_species}}</h1> <h6>{{$ticket->animal->breed}}</h6></div>
+        <div>
+          <h1>{{$ticket->animal->animal_species}}</h1>
+          <h6>{{$ticket->animal->breed}}</h6>
+          <div class="ticket_parent">
+            <div class="ticket_number">#{{$ticket->id}}</div>
+          </div>
+        </div>
 
         <button type="button" id="edit-save-btn" onclick="edit_ticket();" >
             <img src="{{asset('images/Check.svg')}}">

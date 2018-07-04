@@ -16,7 +16,7 @@
 
   .container:nth-child(2) {
 
-    padding-top: 80px;
+    padding-top: 100px;
   }
 }
 
@@ -80,6 +80,28 @@ input:focus {
       }
     }
   }
+
+  .edit_ticket {
+    .ticket_parent {
+      text-align: center;
+      margin: 10px 0 -5px;
+    }
+  }
+
+  .edit_ticket {
+    .ticket_number {
+      text-align: center;
+      font-size: 18px;
+      background-color: #219653;
+      color: white;
+      border-radius: 6px;
+      height: 24px;
+      display: inline;
+      padding: 2px 17px;
+      margin: 5px auto -4px;
+     }
+  }
+
 
   //=============================================================================
   //                                Content
