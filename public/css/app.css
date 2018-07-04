@@ -11138,10 +11138,6 @@ input[type="checkbox"] {
   display: inline-block;
 }
 
-.ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
-  margin-top: 7px;
-}
-
 .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address span {
   font-size: 14px;
   display: block;
@@ -11311,6 +11307,10 @@ input[type="checkbox"] {
   font-size: 12px;
 }
 
+.ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_main_info .ticket_address {
+  margin-top: 7px;
+}
+
 .ticket_centralist .ticket-wrapper .grid_container .grid_main .grid_ticket .ticket_description {
   grid-column: 1/6;
   font-size: 18px;
@@ -11362,8 +11362,10 @@ input[type="checkbox"] {
   margin-left: 20px;
 }
 
-.ticket_ambulance .grid_ticket .ticket_address {
-  margin-top: 17px;
+@media (min-width: 992px) {
+  .ticket_ambulance .grid_ticket .ticket_address {
+    margin-top: 19px;
+  }
 }
 
 .ticket_ambulance .grid_ticket .ticket_address img,

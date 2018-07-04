@@ -115,7 +115,6 @@
 
           .ticket_address
           {
-            margin-top: 7px;
 
             span
             {
@@ -308,6 +307,10 @@
                 font-size: 12px;
               }
             }
+            .ticket_address
+            {
+              margin-top: 7px;
+            }
           }
           .ticket_description
           {
@@ -386,6 +389,11 @@
 
     .ticket_address
     {
+      @include media-breakpoint-up(lg)
+      {
+        margin-top: 19px;
+      }
+
       img, span
       {
         display: inline-block!important;
@@ -401,8 +409,6 @@
 
           margin-right: 10px;
       }
-
-      margin-top: 17px;
     }
 
     .ticket_description
