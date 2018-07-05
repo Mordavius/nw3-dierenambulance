@@ -1,7 +1,5 @@
-
 @extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance')
-
-
+@section('body_class', 'buschange')
 @section('content')
 <div class="container">
   <section class="content">
@@ -23,30 +21,19 @@
                   <strong>Geen buswissels gevonden</strong>
               </div>
           @else
-              <table class="table table-bordered">
-                  <thead>
-                      <tr>
-                          <td>Bus</td>
-                          <td>Datum</td>
-                          <td>Van</td>
-                          <td>Naar</td>
-                          <td>Kilometer stand</td>
-                      </tr>
-                  </thead>
-
-
-                <tbody>
-                  @foreach($buschanges as $buschange)
-                    <tr>
-                      <td>{{$buschange->bus}}</td>
-                      <td>{{$buschange->date}}</td>
-                      <td>{{$buschange->from}}</td>
-                      <td>{{$buschange->to}}</td>
-                      <td>{{$buschange->milage}}</td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
+            <div class="buschange-list">
+                @foreach($buschanges as $buschange)
+                <div class="buschange-item">
+                  <h2>{{$buschange->bus}}</h2>
+                  <div class="from-to">
+                     <span class="from">{{$buschange->from}}</span>
+                     -
+                     <span class="to">{{$buschange->to}}</span>
+                  </div>
+                  <span class="subheading">Datum: {{$buschange->date}} - Kilometerstand: {{$buschange->milage}}</span>
+                </div>
+                @endforeach
+              </div>
           @endif
       </div>
   </section>
