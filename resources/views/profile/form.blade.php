@@ -33,28 +33,34 @@
 <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
     <ul class="segmented-control">
         <li class="segmented-control__item">
-            <input class="segmented-control__input" type="radio" id="option-ambulance" value="3" name="role_id">
+            {{--<input class="segmented-control__input" type="radio" id="option-ambulance" value="3" name="role_id">--}}
             @if($user->role_id == 3)
+                <input class="segmented-control__input" type="radio" id="option-ambulance" value="3" name="role_id" checked>
                 <label class="segmented-control__label selected" for="option-ambulance" value="Ambulance">Ambulance</label>
             @else
+                <input class="segmented-control__input" type="radio" id="option-ambulance" value="3" name="role_id">
                 <label class="segmented-control__label" for="option-ambulance" value="Ambulance">Ambulance</label>
             @endif
 
         </li>
         <li class="segmented-control__item">
-            <input class="segmented-control__input" type="radio" id="option-centralist" value="2" name="role_id">
+            {{--<input class="segmented-control__input" type="radio" id="option-centralist" value="2" name="role_id">--}}
             @if($user->role_id == 2)
-            <label class="segmented-control__label selected" for="option-centralist" value="Ambulance">Centralist</label>
+                <input class="segmented-control__input" type="radio" id="option-centralist" value="2" name="role_id" checked>
+                <label class="segmented-control__label selected" for="option-centralist" value="Ambulance">Centralist</label>
             @else
-            <label class="segmented-control__label" for="option-centralist" value="Centralist">Centralist</label>
+                <input class="segmented-control__input" type="radio" id="option-centralist" value="2" name="role_id">
+                <label class="segmented-control__label" for="option-centralist" value="Centralist">Centralist</label>
             @endif
         </li>
         <li class="segmented-control__item">
-            <input class="segmented-control__input" type="radio" id="option-beheerder" value="1" name="role_id">
+            {{--<input class="segmented-control__input" type="radio" id="option-beheerder" value="1" name="role_id">--}}
             @if($user->role_id == 1)
-            <label class="segmented-control__label selected" for="option-beheerder" value="Beheerder">Beheerder</label>
+                <input class="segmented-control__input" type="radio" id="option-beheerder" value="1" name="role_id" checked>
+                <label class="segmented-control__label selected" for="option-beheerder" value="Beheerder">Beheerder</label>
             @else
-            <label class="segmented-control__label" for="option-beheerder" value="Beheerder">Beheerder</label>
+                <input class="segmented-control__input" type="radio" id="option-beheerder" value="1" name="role_id">
+                <label class="segmented-control__label" for="option-beheerder" value="Beheerder">Beheerder</label>
             @endif
         </li>
     </ul>

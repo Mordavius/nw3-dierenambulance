@@ -99,6 +99,7 @@
           </div>
           <div class="grid_main" id="finished">
               @foreach($finishedtickets as $finishedticket)
+                  <a href="{{ route('melding.edit', $finishedticket->id) }}">
                   @if (count($finishedtickets) < 2)
                     <article class="grid_ticket single">
                   @else
@@ -135,6 +136,7 @@
                           {{$finishedticket->animal['description']}}
                       </p>
                   </article>
+                  </a>
               @endforeach
           </div>
       </div>

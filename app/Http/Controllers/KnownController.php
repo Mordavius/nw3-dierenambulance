@@ -8,6 +8,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Known;
 use App\Http\Requests\KnownAddressRequest;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class KnownController extends Controller
 {
@@ -63,7 +66,7 @@ class KnownController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -74,7 +77,8 @@ class KnownController extends Controller
      */
     public function edit($id)
     {
-        //
+        $known = Known::where('id', $id)->first();
+        return view('address.edit', compact('known'));
     }
 
     /**
@@ -86,7 +90,16 @@ class KnownController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $known = Known::find($id);
+        $known->location_name = $request->get('location_name');
+        $known->postal_code = $request->get('postal_code');
+        $known->address = $request->get('address');
+        $known->house_number = $request->get('house_number');
+        $known->city = $request->get('city');
+        $known->township = $request->get('township');
+        $known->save();
+
+        return Redirect::to('/bekende-adressen')->with('success', 'Adress '.$known->location_name.' is geupdate');
     }
 
     /**
