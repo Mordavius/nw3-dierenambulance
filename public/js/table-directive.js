@@ -200,7 +200,6 @@ var app = angular.module("app", [])
             footer_button_back.style.visibility = "visible";
             page1.style.marginLeft = "-100%";
             page2.style.marginLeft = "0%";
-            page2.style.height = "110%"
             page2.className = "pages current_page";
             map.style.height = "100%";
             map.style.width = "100%";
