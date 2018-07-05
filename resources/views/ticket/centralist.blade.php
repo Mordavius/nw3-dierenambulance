@@ -88,7 +88,7 @@
                           <p class="ticket_description">{{$unfinishedticket->animal['description']}}</p>
                           {{-- TODO: de beschrijving hierboven wordt nooit getoond. Als die weg moet, dan moet die ook uit filter.js --}}
                       </article>
-                  </a>
+                  <a/>
               @endforeach
           </div>
       </div>
