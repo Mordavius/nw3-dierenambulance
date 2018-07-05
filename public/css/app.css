@@ -12460,14 +12460,22 @@ input[type="checkbox"] {
   }
 }
 
+.buschange .container h1 {
+  margin-left: 21px;
+}
+
 @media (min-width: 992px) {
   .buschange .container h1 {
-    margin-left: 21px;
+    margin-left: 0px;
   }
 }
 
 .buschange .container .box-body {
   text-align: right;
+}
+
+.buschange .container .box-body .btn {
+  margin-right: 21px;
 }
 
 .buschange .container .buschange-list {

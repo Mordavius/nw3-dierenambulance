@@ -32,9 +32,11 @@
 
     h1
     {
+      margin-left: 21px;
+
       @include media-breakpoint-up(lg)
       {
-        margin-left: 21px;
+        margin-left: 0px;
       }
     }
 
@@ -42,6 +44,11 @@
     .box-body
     {
       text-align: right;
+
+      .btn
+      {
+        margin-right: 21px;
+      }
     }
     .buschange-list
     {
