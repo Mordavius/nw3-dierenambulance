@@ -155,7 +155,7 @@
     <div class="modal-dialog">
         <div class="modal-content-ticket">
             <div class="modal-header-ticket">
-                <h2 class="modal-title" id="myModalLabel">Filters</h2>
+                <h1 class="modal-title" id="myModalLabel">Filteren</h1>
                 <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
                     <img src="{{asset('images/close-black.svg')}}">
                 </button>
@@ -167,8 +167,8 @@
                 <input type="date" name="date" value="" placeholder="Datum (0000-00-00)" id="date">
                 <input type="text" name="animal_species" placeholder="Dier" id="animal_species">
                 <input type="text" name="location" value="" placeholder="Stad/Dorp" id="location">
-                <input class="btn btn-success" data-dismiss="modal" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
-                <input class="btn btn-success" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
+                <input class="btn btn-success full-width" data-dismiss="modal" type="submit" name="submit" value="Filteren" onclick="filterTickets()">
+                <input class="btn btn-success full-width" type="submit" name="resetfilter" value="Reset filter" onclick="resetFilter()">
 
             </div>
         </div>

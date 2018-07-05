@@ -1,4 +1,30 @@
-.filter-modal
+#myModal-filter
 {
+  .modal-dialog
+  {
+    .modal-content-ticket
+    {
+      height: 97vh;
 
+      .modal-header-ticket
+      {
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+
+        padding: 12px 21px;
+
+        h2
+        {
+          padding: 7px;
+        }
+      }
+
+      .modal-body
+      {
+        .btn
+        {
+          margin-bottom: 29px;
+        }
+      }
+    }
+  }
 }
