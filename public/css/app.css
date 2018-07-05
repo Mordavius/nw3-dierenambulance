@@ -12460,6 +12460,12 @@ input[type="checkbox"] {
   }
 }
 
+@media (min-width: 992px) {
+  .buschange .container h1 {
+    margin-left: 21px;
+  }
+}
+
 .buschange .container .box-body {
   text-align: right;
 }

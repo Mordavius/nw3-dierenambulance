@@ -30,6 +30,14 @@
       padding: 0;
     }
 
+    h1
+    {
+      @include media-breakpoint-up(lg)
+      {
+        margin-left: 21px;
+      }
+    }
+
 
     .box-body
     {
