@@ -12478,6 +12478,12 @@ input[type="checkbox"] {
   margin-right: 21px;
 }
 
+@media (min-width: 992px) {
+  .buschange .container .box-body .btn {
+    margin-right: 0px;
+  }
+}
+
 .buschange .container .buschange-list {
   text-align: left;
   border: 1px solid #E5E5E5;

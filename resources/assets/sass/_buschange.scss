@@ -48,6 +48,11 @@
       .btn
       {
         margin-right: 21px;
+
+        @include media-breakpoint-up(lg)
+        {
+          margin-right: 0px;
+        }
       }
     }
     .buschange-list
