@@ -1,16 +1,16 @@
 <div class="admin-menu">
   <ul>
-    <li class="menu-item {{ (Request::is('administratie') ? 'active' : '') }}">
+    <li class="menu-item {{ (Request::is('administratie') ? 'active' : '') }} {{ (Request::is('register') ? 'active' : '') }}">
         <a href="/administratie">
             <?php echo file_get_contents("images/Users.svg"); ?> <span class="icon"> Gebruikers </span>
         </a>
     </li>
-    <li class="menu-item {{ (Request::is('bus') ? 'active' : '') }}">
+    <li class="menu-item {{ (Request::is('bus') ? 'active' : '') }} {{ (Request::is('bus/*') ? 'active' : '') }}">
       <a href="/bus">
           <?php echo file_get_contents("images/Car.svg"); ?> <span class="icon"> Voertuigen </span>
       </a>
     </li>
-    <li class="menu-item {{ (Request::is('bekende-adressen') ? 'active' : '') }}">
+    <li class="menu-item {{ (Request::is('bekende-adressen') ? 'active' : '') }} {{ (Request::is('bekende-adressen/*') ? 'active' : '') }}">
       <a href="/bekende-adressen">
           <?php echo file_get_contents("images/Location.svg"); ?> <span class="icon"> Bekende adressen </span>
       </a>

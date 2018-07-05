@@ -18,13 +18,16 @@
 
 .rotate-button:hover{
     -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     transform: rotate(360deg);
 }
 
 .rotate-button{
     -ms-transition: all .75s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
     -webkit-transition: all .75s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
     height: 30px;
     width: 30px;

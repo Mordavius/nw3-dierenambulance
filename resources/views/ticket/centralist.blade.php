@@ -153,7 +153,7 @@
     <div class="modal-dialog">
         <div class="modal-content-ticket">
             <div class="modal-header-ticket">
-                <h2 class="modal-title" id="myModalLabel">Filters</h2>
+                <h1 class="modal-title" id="myModalLabel">Filteren</h1>
                 <button type="button" class="close-model" data-dismiss="modal" aria-label="Close">
                     <img src="{{asset('images/close-black.svg')}}">
                 </button>

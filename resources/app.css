@@ -12343,16 +12343,6 @@ img.delete-dest {
   border: none;
 }
 
-.btn-add-location,
-.btn-add-payment {
-  color: #fff !important;
-  background-color: #288B5F;
-  width: 50% !important;
-  border: none;
-  margin-bottom: 1.875rem;
-  padding: 0.3125rem !important;
-}
-
 .btn-center {
   display: -webkit-box;
   display: -ms-flexbox;

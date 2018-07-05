@@ -1,3 +1,8 @@
+.fixed
+{
+  position: fixed;
+}
+
 .navbar
 {
   .navbar-toggler
@@ -15,7 +20,7 @@
       top: 88px;
       left: 0;
       background: $white;
-      z-index: 9;
+      z-index: 999;
     }
 
     .navbar-nav
@@ -52,7 +57,7 @@
         @media (max-width: 576px)
         {
           font-size: 24px;
-          font-weight: 600;
+          font-weight: $font-weight-medium;
           padding-top: 14px;
           padding-bottom: 14px;
         }
