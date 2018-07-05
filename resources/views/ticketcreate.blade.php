@@ -133,7 +133,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="selectedAnimal" id="selectedAnimal"><img id="image" src="" alt=""> <span id="selected_animal"></span></div>
+                <div class="selectedAnimal" id="selectedAnimal">
+                  <img id="image" src="" alt="animal icon"> 
+                  <span id="selected_animal"></span>
+                </div>
                 <div class="animal_info" id="animal_info">
                     <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed_field"/>
                     <select type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender_field">

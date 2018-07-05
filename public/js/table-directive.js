@@ -549,6 +549,7 @@ function selectAnimalSpieces(animal_species, image_animal){
           if (!selectedAnimal.clientHeight) {
               growDiv.style.display = "none";
               selectedAnimal.style.height = "45px";
+              selectedAnimal.style.padding = "8px 16px";
               image.src =  "/" + image_animal;
               console.log(image.src);
 
