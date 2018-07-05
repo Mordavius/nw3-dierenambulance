@@ -12454,6 +12454,74 @@ input[type="checkbox"] {
   color: #B8B8B8;
 }
 
+@media (max-width: 576px) {
+  .buschange .container {
+    padding: 0;
+  }
+}
+
+.buschange .container h1 {
+  margin-left: 21px;
+}
+
+@media (min-width: 992px) {
+  .buschange .container h1 {
+    margin-left: 0px;
+  }
+}
+
+.buschange .container .box-body {
+  text-align: right;
+}
+
+.buschange .container .box-body .btn {
+  margin-right: 21px;
+}
+
+@media (min-width: 992px) {
+  .buschange .container .box-body .btn {
+    margin-right: 0px;
+  }
+}
+
+.buschange .container .buschange-list {
+  text-align: left;
+  border: 1px solid #E5E5E5;
+}
+
+@media (max-width: 576px) {
+  .buschange .container .buschange-list {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+.buschange .container .buschange-list .buschange-item {
+  padding: 8px 21px;
+}
+
+@media (min-width: 992px) {
+  .buschange .container .buschange-list .buschange-item {
+    padding: 24px 64px;
+  }
+}
+
+.buschange .container .buschange-list .buschange-item:not(:first-child) {
+  border-top: 1px solid #E5E5E5;
+}
+
+.buschange .container .buschange-list .buschange-item .from-to {
+  margin-bottom: 10px;
+}
+
+.buschange .container .buschange-list .buschange-item .from-to .from {
+  margin-right: 7.5px;
+}
+
+.buschange .container .buschange-list .buschange-item .from-to .to {
+  margin-left: 7.5px;
+}
+
 #myModal-filter .modal-dialog .modal-content-ticket {
   height: 97vh;
 }

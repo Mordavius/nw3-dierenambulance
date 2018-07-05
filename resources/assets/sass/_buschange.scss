@@ -21,4 +21,82 @@
       color: $gray;
     }
   }
+
+  .container
+  {
+
+    @media (max-width: 576px)
+    {
+      padding: 0;
+    }
+
+    h1
+    {
+      margin-left: 21px;
+
+      @include media-breakpoint-up(lg)
+      {
+        margin-left: 0px;
+      }
+    }
+
+
+    .box-body
+    {
+      text-align: right;
+
+      .btn
+      {
+        margin-right: 21px;
+
+        @include media-breakpoint-up(lg)
+        {
+          margin-right: 0px;
+        }
+      }
+    }
+    .buschange-list
+    {
+      text-align: left;
+      border: 1px solid #E5E5E5;
+
+
+      @media (max-width: 576px)
+      {
+        border-left: 0;
+        border-right: 0;
+      }
+
+
+      .buschange-item
+      {
+        padding: 8px 21px;
+
+        @include media-breakpoint-up(lg)
+        {
+          padding: 24px 64px;
+        }
+
+        &:not(:first-child)
+        {
+          border-top: 1px solid #E5E5E5;
+        }
+
+        .from-to
+        {
+          margin-bottom: 10px;
+
+          .from
+          {
+            margin-right: 7.5px;
+          }
+
+          .to
+          {
+            margin-left: 7.5px;
+          }
+        }
+      }
+    }
+  }
 }
