@@ -71,14 +71,11 @@
     <div class="pages" id="page2">
         <div class="page">
             <div class="title_page">
-                <h1>Locatie</h1>
+                <h1>Locatie</h1> <button id="sendLocationButton" class="btn-sms ticket_create_send_location_button">Stuur SMS</button>
             </div>
             <div class="searchStuff">
-                <div class="searchDiv">
                     <input id="searchTextBox" type="text" placeholder="Zoeken"/>
-                    <button id="searchButton" type="button"><img src="{{asset('images/search-icon.png')}}" alt=""></button>
-                </div>
-                <button id="sendLocationButton" class="btn btn-success ticket_create_send_location_button">Locatie van melder opvragen</button>
+                    <button type="button" class="btn btn-success">ZOEKEN</button>
             </div>
             <div id="app" ng-app="app">
                 <div ng-controller="TableController" >
@@ -134,7 +131,7 @@
                     </div>
                 </div>
                 <div class="selectedAnimal" id="selectedAnimal">
-                  <img id="image" src="" alt="animal icon"> 
+                  <img id="image" src="" alt="animal icon">
                   <span id="selected_animal"></span>
                 </div>
                 <div class="animal_info" id="animal_info">

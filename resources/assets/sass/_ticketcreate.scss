@@ -118,7 +118,25 @@
     {
       margin-top: rem-calc(36);
     }
-
+    #page2 {
+      h1 {
+        float: left;
+      }
+      .btn-sms {
+        margin: 5px 0px 0px 22px;
+        border: 1px solid #288B5F;
+        border-radius: 30px;
+        background: none;
+        color: #288B5F;
+        padding: 7px 18px;
+        &:hover {
+          cursor: pointer;
+        }
+      .btn-success {
+        float: left;
+        margin-left: 20px;
+      }
+    }}
     .pages
     {
       position: absolute;
@@ -150,7 +168,6 @@
           width: 100%;
         }
       }
-
       .page
       {
         position: relative;
@@ -247,18 +264,13 @@
             }
           }
         }
+        }
         .searchStuff
         {
           width: 100%;
           position: relative;
+          float: left;
 
-          .searchDiv{
-              border: 1px solid #ECECEC;
-              float: left;
-              width: 61%;
-              height: 53px;
-              margin: 0 20px 20px 0;
-          }
           img{
               height: 40px;
               width: 40px;
@@ -266,11 +278,11 @@
           }
           #searchTextBox
           {
-              width: 80%;
               margin-bottom: 0;
               font-size: 14px;
               height: 51px;
-              border: none;
+              float: left;
+              width: 70%;
 
               @include media-breakpoint-up(lg)
               {
@@ -821,4 +833,3 @@
           bottom: 18px;
       }
   }
-}
