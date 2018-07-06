@@ -38,8 +38,8 @@ if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'demo.notepet.nl' 
 |
 */
 
-if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'notepet.nl' ) {
-   $app = require_once __DIR__.'/../../../applications/nw3-dierenambulance/bootstrap/app.php';
+if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'demo.notepet.nl' ) {
+   $app = require_once __DIR__.'/../../../applications/demo/bootstrap/app.php';
 } else {
    $app = require_once __DIR__.'/../bootstrap/app.php';
 }
