@@ -278,9 +278,18 @@ var app = angular.module("app", [])
             }else if(page4.className == "pages current_page") {
                 jQuery("p.alert").remove();
                 if (priority_field.value == "") {
-                    jQuery('.alert-danger.name').hide();
-                    jQuery('.alert-danger.name').show();
-                    jQuery('.alert-danger.name').append('<p class="alert">Prioriteit niet ingevuld</p>');
+                    priority_field.value = "99";
+                    footer_button_forward.style.visibility = "hidden";
+                    ticket_information.priority = priority_field.value;
+                    page4.style.marginLeft = "-100%";
+                    page5.style.marginLeft = "0%";
+                    page5.className = "pages current_page";
+                    page4.className = "pages";
+                    circle4.className = "circle previous";
+                    span4.className = "span previous";
+                    divider4.className = "divider previous";
+                    circle5.className = "circle highlighted";
+                    loadTicketInformation();
                 } else {
                     footer_button_forward.style.visibility = "hidden";
                     ticket_information.priority = priority_field.value;
