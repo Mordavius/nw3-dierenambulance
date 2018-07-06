@@ -529,7 +529,6 @@ var app = angular.module("app", [])
             },
             success: function (data) {
                 alert("SMS verzonden");
-                console.log(data);
                 getLocationRecord();
             },
             error: function () {
