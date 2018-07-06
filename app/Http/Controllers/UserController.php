@@ -86,12 +86,21 @@ class UserController extends Controller
         }
 
         // Update the requested data for the fields
-        $user->update([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($new_password), // Hash the password
-            'role_id' => $request['role_id'],
-        ]);
+        if ($new_password == null && $new_password == "") {
+            $user->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'role_id' => $request['role_id'],
+            ]);
+        }
+        else {
+            $user->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($new_password), // Hash the password
+                'role_id' => $request['role_id'],
+            ]);
+        }
 
         return redirect("/administratie")->with("message", "Gebruiker is geupdate!");
     }
