@@ -119,7 +119,7 @@ class TicketController extends Controller
             $ticket = Ticket::findOrFail($request->get('ticket_id'));
             $bus = $ticket->bus;
 
-	        $bus->update(['milage' => $request->get('milage')]);
+            $bus->update(['milage' => $request->get('milage')]);
 
             return response()->json($destination);
         }
@@ -243,11 +243,11 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-	    $priority = $request->get('priority');
+        $priority = $request->get('priority');
         $unfinishedtickets = Ticket::where('finished', '=', '0')->where('priority', '>=', $priority)->get();
 
         foreach ($unfinishedtickets as $unfinishedticket) {
-	        $unfinishedticket->update(['priority' => $unfinishedticket->priority + 1]);
+            $unfinishedticket->update(['priority' => $unfinishedticket->priority + 1]);
         }
 
         // Stores the data for the requested fields
@@ -286,15 +286,16 @@ class TicketController extends Controller
 
         // Stores the data for the requested fields
         $owner = new Owner([
-           'ticket_id' => $ticket_id,
-            ]);
-
+            'ticket_id' => $ticket_id,
+        ]);
+        try {
             $ticket->save();
-		    $ticket->animal()->save($animal);
-		    $bus->tickets()->save($ticket);
-		    $ticket->animal()->save($destination);
-		    $owner->save();
-
+            $ticket->animal()->save($animal);
+            $bus->tickets()->save($ticket);
+            $ticket->animal()->save($destination);
+        } catch (\Exception $e) {
+            return response()->json($e);
+        }
         return redirect('/')->with('message', 'Nieuwe melding is aangemaakt!');
     }
 
@@ -308,13 +309,13 @@ class TicketController extends Controller
         return redirect('/')->with('message', 'Melding afgerond!');
     }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param $ticket_id
-	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
+    /**
+     * Display the specified resource.
+     *
+     * @param $ticket_id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($ticket_id)
     {
         $user = User::all()->pluck('name'); // Grabs all the existing users and plucks the name field
@@ -322,32 +323,32 @@ class TicketController extends Controller
         return view("ticket.show", compact('ticket', 'user', 'tickets'));
     }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param $ticket_id
-	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param $ticket_id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($ticket_id)
     {
-    	$ticket = Ticket::findOrFail($ticket_id);
+        $ticket = Ticket::findOrFail($ticket_id);
         $known_addresses = Known::all();
         $known_users = User::all();
         return view("ticket.edit", compact('ticket', 'known_addresses', 'known_users'));
     }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param Request $request
-	 * @param         $ticket_id
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param         $ticket_id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $ticket_id)
     {
-    	$ticket = Ticket::findOrFail($ticket_id);
+        $ticket = Ticket::findOrFail($ticket_id);
         $ticket->telephone = $request->get('telephone');
         $ticket->save();
 
@@ -360,18 +361,18 @@ class TicketController extends Controller
             'description' => $request->get('description'),
         ]);
 
-	    $owner = $ticket->owner;
-	    if ($owner) {
-		    $owner->update([
-	            'name' => $request->get('owner_name'),
-	            'owner_house_number' => $request->get('owner_house_number'),
-	            'telephone_number' => $request->get('owner_telephone_number'),
-	            'owner_address' => $request->get('owner_address'),
-	            'owner_city' => $request->get('owner_city'),
-	            'owner_township' => $request->get('owner_township'),
-	            'owner_postal_code' => $request->get('owner_postal_code'),
-	        ]);
-	    };
+        $owner = $ticket->owner;
+        if ($owner) {
+            $owner->update([
+                'name' => $request->get('owner_name'),
+                'owner_house_number' => $request->get('owner_house_number'),
+                'telephone_number' => $request->get('owner_telephone_number'),
+                'owner_address' => $request->get('owner_address'),
+                'owner_city' => $request->get('owner_city'),
+                'owner_township' => $request->get('owner_township'),
+                'owner_postal_code' => $request->get('owner_postal_code'),
+            ]);
+        };
 
         return redirect('/')->with('message', 'Melding is geupdate');
     }
@@ -384,10 +385,10 @@ class TicketController extends Controller
      */
     public function destroy($ticket_id)
     {
-    	$ticket = Ticket::findOrFail($ticket_id);// Grabs the animal id based on the ticket id
-	    $ticket->destinations->delete();
-	    $ticket->animal->delete();
-	    $ticket->delete();
+        $ticket = Ticket::findOrFail($ticket_id);// Grabs the animal id based on the ticket id
+        $ticket->destinations->delete();
+        $ticket->animal->delete();
+        $ticket->delete();
 
         return redirect('/melding')->with('message', 'Melding is verwijderd');
     }
@@ -421,33 +422,33 @@ class TicketController extends Controller
 
     public function filterTickets()
     {
-	    $ticket_search = Ticket::query(); // Start search query
-	    $date_filter = Input::get('date', null);
-	    $animal_filter = Input::get('animal', null);
-	    $city_filter = Input::get('city', null);
+        $ticket_search = Ticket::query(); // Start search query
+        $date_filter = Input::get('date', null);
+        $animal_filter = Input::get('animal', null);
+        $city_filter = Input::get('city', null);
 
-	    // Add date query
-	    if ($date_filter) {
-		    $ticket_search->whereBetween('date', [$date_filter, date(now())]);
-	    }
+        // Add date query
+        if ($date_filter) {
+            $ticket_search->whereBetween('date', [$date_filter, date(now())]);
+        }
 
-	    // Add animal query
-	    if ($animal_filter) {
-		    $ticket_search->whereHas('animal', function($query) use ($animal_filter) {
-			    $query->where('animals.animal_species', 'LIKE', '%' . $animal_filter . '%');
-		    });
-	    }
+        // Add animal query
+        if ($animal_filter) {
+            $ticket_search->whereHas('animal', function($query) use ($animal_filter) {
+                $query->where('animals.animal_species', 'LIKE', '%' . $animal_filter . '%');
+            });
+        }
 
-	    // Add place query
-	    if ($city_filter) {
-		    $ticket_search->whereHas('destinations', function($query) use ($city_filter)  {
-			    $query->where('destinations.city', 'LIKE', '%' . $city_filter . '%');
-		    });
-	    }
-	    $ticket_search->with(['animal', 'destinations']);
-	    $ticket_search->orderBy('created_at', 'desc');
+        // Add place query
+        if ($city_filter) {
+            $ticket_search->whereHas('destinations', function($query) use ($city_filter)  {
+                $query->where('destinations.city', 'LIKE', '%' . $city_filter . '%');
+            });
+        }
+        $ticket_search->with(['animal', 'destinations']);
+        $ticket_search->orderBy('created_at', 'desc');
 
-	    $result = $ticket_search->get();
+        $result = $ticket_search->get();
         return response()->json($result, 200);
     }
 

@@ -80,6 +80,15 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
         return $new_ticket;
     }
 
+    function getNewBusChange(){
+        $new_bus_change = ['date' => ' ',
+            'from' => 'onbekend',
+            'to' => 'onbekend',
+            'bus' => 'onbekend',
+            'milage' => 'onbekend'];
+        return $new_bus_change;
+    }
+
     function setTicketValue($ticket, array $new_ticket){
         $ticket_keys = ["id","date", "time", "centralist"];
         if ($this->with_finances == 'true'){
@@ -118,6 +127,18 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
             }
         }
         return $new_ticket;
+    }
+
+    function setBusChangeValue($buschanges, array $new_buschange){
+        $buschangekeys = ['date', 'from', 'to','bus', 'milage'];
+        $current_value = "";
+        for ($i = 0; $i <= count($buschangekeys)-1; $i++) {
+            $current_value = $buschangekeys[$i];
+            if ($buschanges->$current_value) {
+                $new_buschange[$current_value] = $buschanges->$current_value;
+            }
+        }
+        return $new_buschange;
     }
 
     // Grab all data from tickets between the $startdate and $enddate and all other constraints
@@ -182,6 +203,17 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
                 //push new ticket to collection array
                 array_push($collection_array, $new_ticket);
             }
+        }
+        array_push($collection_array, ' ');
+        array_push($collection_array, 'buswissel');
+        array_push($collection_array, ['Datum', 'Van', 'Naar', 'Bus', 'Kilometerstand']);
+
+        $buschanges = Buschange::query()->whereBetween('date', [$this->enddate, $this->startdate])->get();
+
+        foreach ($buschanges as $buschange){
+            $new_buschange = $this->getNewBusChange();
+            $new_buschange = $this->setBusChangeValue($buschange, $new_buschange);
+            array_push($collection_array, $new_buschange);
         }
 
         //return collection to laravel/excel

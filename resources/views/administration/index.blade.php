@@ -3,7 +3,7 @@
 @include('administration.admin_menu')
 <div class="wrapper">
     @if (session('message'))
-        <div class="alert alert-danger">
+        <div class="alert alert-success">
             {{ session('message') }}
         </div>
     @endif
