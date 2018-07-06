@@ -141,8 +141,9 @@
                     <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed_field"/>
                     <select type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender_field">
                         <option value="Geslacht">Geslacht</option>
-                        <option value="">Mannelijk</option>
-                        <option value="">Vrouwelijk</option>
+                        <option value="Mannelijk">Mannelijk</option>
+                        <option value="Vrouwelijk">Vrouwelijk</option>
+                        <option value="Onbekend">Onbekend</option>
                     </select>
                     <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury_field"/>
                     <textarea class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description_field"/></textarea>
@@ -230,11 +231,17 @@
                         <label class="ticket_label general">Algemeen</label>
                         <div class="new_ticket_info">
                             <label class="general_labels centralist">Centralist:</label>
-                            <span id="centralist" class="general_information centralist">{{ Auth::user()->name }}</span>
+                            <input id="centralist" type="label" name="centralist" class="general_information centralist" value="{{ Auth::user()->name }}"></input>
                             <label class="general_labels date">Datum:</label>
-                            <span class="general_information date" id="date">{{ Carbon::today()->format('Y-m-d') }}</span>
+                            <input id="date" class="general_information date" type="date" name="date"
+                                   @if($ticket && $ticket->date)
+                                   value="{{ date('Y-m-d', strtotime($ticket->date)) }}"
+                                   @else
+                                   value="{{ date('Y-m-d') }}"
+                                    @endif
+                            />
                             <label class="general_labels time">Tijd</label>
-                            <span class="general_information time" id="time">{{Carbon::now('Europe/Amsterdam')->toTimeString()}}</span>
+                            <input name="time" type="label" class="general_information time" id="time" value="{{Carbon::now('Europe/Amsterdam')->toTimeString()}}" >
                         </div>
                     </div>
                     <div class="right_info">
@@ -259,8 +266,9 @@
                                 <input type="text" class="ticket_text_field breed" placeholder="Ras" name="breed" id="breed"/>
                                 <select type="text" class="ticket_text_field gender" placeholder="Geslacht" name="gender" id="gender">
                                     <option value="Geslacht"></option>
-                                    <option value="">Mannelijk</option>
-                                    <option value="">Vrouwelijk</option>
+                                    <option value="Mannelijjk">Mannelijk</option>
+                                    <option value="Vrouwelijk">Vrouwelijk</option>
+                                    <option value="Onbekend">Onbekend</option>
                                 </select>
                                 <input type="text" class="ticket_text_field injury" placeholder="Verwondingen" name="injury" id="injury"/>
                                 <textarea rows="4" wrap="soft" class="ticket_text_field description" placeholder="Opmerkingen" name="description" id="description"/></textarea>
