@@ -56,7 +56,7 @@
                                 Buswissel
                               </a>
                             </li>
-                            <li class="nav-item dropdown {{ (Request::is(['administratie', 'bus', 'bekende-adressen', 'exporteren']) ? 'active' : '') }}">
+                            <li class="nav-item dropdown {{ (Request::is(['administratie', 'bus', 'bekende-adressen', 'exporteren', 'kwartaalverslag']) ? 'active' : '') }}">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Administratie
                                 </a>
@@ -65,6 +65,7 @@
                                   <a class="dropdown-item" href="{{ route('bus.index') }}"> Voertuigen </a>
                                   <a class="dropdown-item" href="{{ route('bekende-adressen.index') }}"> Bekende adressen </a>
                                   <a class="dropdown-item" href="{{ route('Exporteren') }}"> Exporteren </a>
+                                  <a class="dropdown-item" href="{{ route('Kwartaaloverzicht') }}"> Kwartaaloverzicht </a>
                                 </div>
                             </li>
                             <li {{{ (Request::is('profiel') ? 'class=active' : '') }}}>
