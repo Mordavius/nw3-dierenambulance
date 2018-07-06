@@ -32,6 +32,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
     {
         //the headings that will be added to the top of the excel file
         $headings = [
+            'Ticketnummer',
             'Datum',
             'Tijd',
             'Centralist',
@@ -54,6 +55,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
     //creates an instance of a new ticket with default values
     function getNewTicket(){
         $new_ticket = [
+            'id' => '0',
             'date' => ' ',
             'time' => ' ',
             'centralist' => 'onbekend',
@@ -79,7 +81,7 @@ class TicketExport implements FromCollection, ShouldAutoSize, WithHeadings
     }
 
     function setTicketValue($ticket, array $new_ticket){
-        $ticket_keys = ["date", "time", "centralist"];
+        $ticket_keys = ["id","date", "time", "centralist"];
         if ($this->with_finances == 'true'){
             array_push($ticket_keys, "payment_invoice", "payment_method", "payment_gift");
         }
