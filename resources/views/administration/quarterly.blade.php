@@ -18,7 +18,6 @@
                             </tr>
                             </thead>
                             <tbody>
-
                             @if(!empty($errors->first()))
                                 <div class="row col-lg-12">
                                     <div class="alert alert-danger">
