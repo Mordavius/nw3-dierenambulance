@@ -97,6 +97,7 @@
                       </p>
                   </article>
                     <a/>
+                  @endif
               @endforeach
           </div>
       </div>
