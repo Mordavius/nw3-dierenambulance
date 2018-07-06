@@ -11726,6 +11726,28 @@ input[type="checkbox"] {
   }
 }
 
+.ticketcreate .main #page2 h1 {
+  float: left;
+}
+
+.ticketcreate .main #page2 .btn-sms {
+  margin: 5px 0px 0px 22px;
+  border: 1px solid #288B5F;
+  border-radius: 30px;
+  background: none;
+  color: #288B5F;
+  padding: 7px 18px;
+}
+
+.ticketcreate .main #page2 .btn-sms:hover {
+  cursor: pointer;
+}
+
+.ticketcreate .main #page2 .btn-sms .btn-success {
+  float: left;
+  margin-left: 20px;
+}
+
 .ticketcreate .main .pages {
   position: absolute;
   visibility: hidden;
@@ -11853,45 +11875,38 @@ input[type="checkbox"] {
   margin-bottom: 0;
 }
 
-.ticketcreate .main .pages .page .searchStuff {
+.ticketcreate .main .pages .searchStuff {
   width: 100%;
   position: relative;
-}
-
-.ticketcreate .main .pages .page .searchStuff .searchDiv {
-  border: 1px solid #ECECEC;
   float: left;
-  width: 61%;
-  height: 53px;
-  margin: 0 20px 20px 0;
 }
 
-.ticketcreate .main .pages .page .searchStuff img {
+.ticketcreate .main .pages .searchStuff img {
   height: 40px;
   width: 40px;
   margin: 0 auto;
 }
 
-.ticketcreate .main .pages .page .searchStuff #searchTextBox {
-  width: 80%;
+.ticketcreate .main .pages .searchStuff #searchTextBox {
   margin-bottom: 0;
   font-size: 14px;
   height: 51px;
-  border: none;
+  float: left;
+  width: 70%;
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .searchStuff #searchTextBox {
+  .ticketcreate .main .pages .searchStuff #searchTextBox {
     margin-right: 12px;
     margin-bottom: 1.875rem;
   }
 }
 
-.ticketcreate .main .pages .page .searchStuff input:focus {
+.ticketcreate .main .pages .searchStuff input:focus {
   border: none;
 }
 
-.ticketcreate .main .pages .page .searchStuff #knownAddress {
+.ticketcreate .main .pages .searchStuff #knownAddress {
   width: 37%;
   /* float: left; */
   height: 41px;
@@ -11902,13 +11917,13 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .searchStuff #knownAddress {
+  .ticketcreate .main .pages .searchStuff #knownAddress {
     margin-right: 12px;
     margin-bottom: 1.875rem;
   }
 }
 
-.ticketcreate .main .pages .page .searchStuff #searchButton {
+.ticketcreate .main .pages .searchStuff #searchButton {
   width: 11%;
   height: 41px;
   float: right;
@@ -11919,17 +11934,17 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .searchStuff #searchButton {
+  .ticketcreate .main .pages .searchStuff #searchButton {
     width: 8%;
   }
 }
 
-.ticketcreate .main .pages .page .searchStuff .ticket_create_send_location_button {
+.ticketcreate .main .pages .searchStuff .ticket_create_send_location_button {
   float: right;
 }
 
 @media screen and (max-width: 767.98px) {
-  .ticketcreate .main .pages .page .searchStuff #sendLocationButton {
+  .ticketcreate .main .pages .searchStuff #sendLocationButton {
     width: 100%;
     position: fixed;
     bottom: 55px;
@@ -11939,13 +11954,13 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .animal_page {
+  .ticketcreate .main .pages .animal_page {
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
   }
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_cards {
+.ticketcreate .main .pages .animal_page .animal_cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -11957,14 +11972,14 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .animal_page .animal_cards {
+  .ticketcreate .main .pages .animal_page .animal_cards {
     grid-column: 1/4;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
   }
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_cards .animal_card {
+.ticketcreate .main .pages .animal_page .animal_cards .animal_card {
   position: relative;
   -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
@@ -11976,7 +11991,7 @@ input[type="checkbox"] {
   width: 138px;
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_cards .animal_card img {
+.ticketcreate .main .pages .animal_page .animal_cards .animal_card img {
   height: 30px;
   position: absolute;
   top: 50%;
@@ -11985,41 +12000,41 @@ input[type="checkbox"] {
           transform: translate(-50%, -50%);
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_cards .animal_card .animal_grid {
+.ticketcreate .main .pages .animal_page .animal_cards .animal_card .animal_grid {
   grid-column: 1/4;
   grid-row: 4/4;
   margin-bottom: 12px;
   text-align: center;
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_cards .animal_card .selectedAnimal {
+.ticketcreate .main .pages .animal_page .animal_cards .animal_card .selectedAnimal {
   width: auto;
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_info {
+.ticketcreate .main .pages .animal_page .animal_info {
   grid-template-rows: repeat(5, 20%);
   padding: 0 21px 0 21px;
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .animal_page .animal_info {
+  .ticketcreate .main .pages .animal_page .animal_info {
     grid-column: 4/6;
     padding: 0 0 0 21px;
   }
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_info textarea.description {
+.ticketcreate .main .pages .animal_page .animal_info textarea.description {
   -webkit-transition: height 1s ease-in;
   transition: height 1s ease-in;
 }
 
-.ticketcreate .main .pages .page .animal_page .animal_info textarea.description:focus {
+.ticketcreate .main .pages .animal_page .animal_info textarea.description:focus {
   height: 150px;
   -webkit-transition: height 1s ease-in;
   transition: height 1s ease-in;
 }
 
-.ticketcreate .main .pages .page .animal_page .selectedAnimal {
+.ticketcreate .main .pages .animal_page .selectedAnimal {
   -webkit-box-shadow: 1px 1px 4px rgba(32, 32, 32, 0.25);
           box-shadow: 1px 1px 4px rgba(32, 32, 32, 0.25);
   -webkit-transition: height .5s;
@@ -12031,65 +12046,65 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .animal_page .selectedAnimal {
+  .ticketcreate .main .pages .animal_page .selectedAnimal {
     grid-row: 1/2;
     grid-column: 1/3;
     margin: 0;
   }
 }
 
-.ticketcreate .main .pages .page .animal_page .selectedAnimal img {
+.ticketcreate .main .pages .animal_page .selectedAnimal img {
   display: inline-block;
   height: 30px;
   vertical-align: middle;
 }
 
-.ticketcreate .main .pages .page .animal_page #selected_animal {
+.ticketcreate .main .pages .animal_page #selected_animal {
   margin-left: 15px;
   font-size: 18px;
   display: inline-block;
   vertical-align: middle;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information {
+.ticketcreate .main .pages .new_ticket_information {
   padding: 0 20px 0 20px;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .ticket_label {
+.ticketcreate .main .pages .new_ticket_information .ticket_label {
   margin-bottom: 11px;
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .new_ticket_information {
+  .ticketcreate .main .pages .new_ticket_information {
     display: grid;
   }
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .new_ticket_information .left_info {
+  .ticketcreate .main .pages .new_ticket_information .left_info {
     grid-column: 1/4;
     margin-right: 73px;
   }
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .new_ticket_information .right_info {
+  .ticketcreate .main .pages .new_ticket_information .right_info {
     grid-column: 4/8;
   }
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .new_ticket_information {
+  .ticketcreate .main .pages .new_ticket_information {
     padding: 0;
   }
 }
 
-.ticketcreate .main .pages .page .new_ticket_information #map3 {
+.ticketcreate .main .pages .new_ticket_information #map3 {
   display: none;
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .page .new_ticket_information #map3 {
+  .ticketcreate .main .pages .new_ticket_information #map3 {
     display: block;
     height: 300px;
     width: 415px;
@@ -12097,116 +12112,116 @@ input[type="checkbox"] {
   }
 }
 
-.ticketcreate .main .pages .page .new_ticket_information label {
+.ticketcreate .main .pages .new_ticket_information label {
   color: #B8B8B8;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .general {
+.ticketcreate .main .pages .new_ticket_information .general {
   font-size: 18px;
   color: #828282;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .new_ticket_info {
+.ticketcreate .main .pages .new_ticket_information .new_ticket_info {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: repeat(3, 20px);
   padding-bottom: 25px;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .new_ticket_info .general_labels {
+.ticketcreate .main .pages .new_ticket_information .new_ticket_info .general_labels {
   grid-column: 1/1;
   font-size: 14px;
   height: auto;
   color: #000;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .new_ticket_info .general_information {
+.ticketcreate .main .pages .new_ticket_information .new_ticket_info .general_information {
   grid-column: 2/2;
   font-size: 14px;
   height: 14px;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .new_ticket_info .centralist {
+.ticketcreate .main .pages .new_ticket_information .new_ticket_info .centralist {
   grid-row: 1/1;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .new_ticket_info .date {
+.ticketcreate .main .pages .new_ticket_information .new_ticket_info .date {
   grid-row: 2/2;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .new_ticket_info .time {
+.ticketcreate .main .pages .new_ticket_information .new_ticket_info .time {
   grid-row: 3/3;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .address_info_new_ticket {
+.ticketcreate .main .pages .new_ticket_information .address_info_new_ticket {
   display: grid;
   grid-gap: 10%;
   grid-template-columns: repeat(2, 45%);
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .address_info_new_ticket .location_label {
+.ticketcreate .main .pages .new_ticket_information .address_info_new_ticket .location_label {
   grid-column: 1/3;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .reporter_new_ticket {
+.ticketcreate .main .pages .new_ticket_information .reporter_new_ticket {
   display: grid;
   padding-top: 30px;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .animal_new_ticket {
+.ticketcreate .main .pages .new_ticket_information .animal_new_ticket {
   padding-top: 30px;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket {
+.ticketcreate .main .pages .new_ticket_information .priority_new_ticket {
   display: grid;
   grid-template-columns: 70% 30%;
   padding-bottom: 40px;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .form-group {
+.ticketcreate .main .pages .new_ticket_information .priority_new_ticket .form-group {
   margin-bottom: 0;
   margin-right: 16px;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .ticket_text_field {
+.ticketcreate .main .pages .new_ticket_information .priority_new_ticket .ticket_text_field {
   text-align: right;
   padding-right: 0.25rem;
 }
 
-.ticketcreate .main .pages .page .new_ticket_information .priority_new_ticket .priority_label {
+.ticketcreate .main .pages .new_ticket_information .priority_new_ticket .priority_label {
   grid-column: 1/3;
 }
 
-.ticketcreate .main .pages .map_grid #map2 {
+.ticketcreate .main .map_grid #map2 {
   height: 320px !important;
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .map_grid #map2 {
+  .ticketcreate .main .map_grid #map2 {
     height: 600px !important;
   }
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .map_grid {
+  .ticketcreate .main .map_grid {
     display: grid;
     grid-template-columns: 60% 40%;
   }
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid {
+.ticketcreate .main .map_grid .ticket_cards_grid {
   display: grid;
   grid-template-rows: auto;
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .map_grid .ticket_cards_grid {
+  .ticketcreate .main .map_grid .ticket_cards_grid {
     grid-column: 2/3;
     grid-template-rows: 10% 10% 1fr;
   }
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket {
+.ticketcreate .main .map_grid .ticket_cards_grid .new_ticket {
   grid-row: 1/1;
   display: grid;
   grid-template-columns: 10% repeat(3, 1fr);
@@ -12215,14 +12230,14 @@ input[type="checkbox"] {
   border-top: 1px solid #ED940F;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio {
+.ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio {
   grid-column: 1/2;
   grid-row: 1/3;
   display: block;
   margin: 0 auto;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
+.ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
   width: 100%;
   display: block;
   margin: 0;
@@ -12232,13 +12247,13 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
+  .ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .new_ticket_prio .new_ticket_priority {
     height: 50px;
     padding-left: 12px;
   }
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
+.ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
   grid-column: 2/5;
   grid-row: 1/1;
   font-size: 18px;
@@ -12246,35 +12261,35 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
+  .ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .animal_main_info {
     padding: 12px 0;
   }
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info .animal_title {
+.ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .animal_main_info .animal_title {
   display: inline-block;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .animal_main_info .animal_breed {
+.ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .animal_main_info .animal_breed {
   display: inline-block;
   font-size: 16px;
   color: #828282;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .new_ticket .destination_info {
+.ticketcreate .main .map_grid .ticket_cards_grid .new_ticket .destination_info {
   grid-column: 2/5;
   grid-row: 2/3;
   font-size: 13px;
   font-weight: 300;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name {
   display: grid;
   grid-template-areas: "header" "main";
   padding-top: 15px;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_name_title {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_name_title {
   grid-area: header;
   font-size: 18px;
   font-weight: 500;
@@ -12283,18 +12298,18 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_name_title {
+  .ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_name_title {
     font-size: 1.5rem;
   }
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_task_list {
   grid-area: main;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket {
   grid-column: 1/4;
   display: grid;
   grid-template-columns: 10% 90%;
@@ -12304,7 +12319,7 @@ input[type="checkbox"] {
   padding-bottom: 7px;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_priority {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_priority {
   grid-column: 1/1;
   grid-row: 1/3;
   font-size: 24px;
@@ -12314,29 +12329,29 @@ input[type="checkbox"] {
 }
 
 @media (min-width: 992px) {
-  .ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_priority {
+  .ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_priority {
     padding-left: 12px;
   }
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_address {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .ticket_address {
   grid-column: 2/4;
   grid-row: 2/4;
   font-weight: 300;
   font-size: 13px;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .unfinishedtickets_animal_title {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .unfinishedtickets_animal_title {
   font-size: 18px;
 }
 
-.ticketcreate .main .pages .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .unfinishedtickets_animal_breed {
+.ticketcreate .main .map_grid .ticket_cards_grid .bus_name .bus_task_list .ticket .unfinishedtickets_animal_breed {
   font-weight: 300;
   font-size: 16px;
   color: #828282;
 }
 
-.ticketcreate .footer {
+.footer {
   grid-area: footer;
   position: fixed;
   bottom: 0;
@@ -12348,14 +12363,14 @@ input[type="checkbox"] {
   background-color: #FFFFFF;
 }
 
-.ticketcreate .footer .address_info_grid {
+.footer .address_info_grid {
   font-size: 14px;
   text-align: center;
   padding-top: 13px;
   margin: 0 auto;
 }
 
-.ticketcreate .footer .footer_button {
+.footer .footer_button {
   position: fixed;
   color: #238644;
   font-size: 14px;
@@ -12364,13 +12379,13 @@ input[type="checkbox"] {
   border: 0;
 }
 
-.ticketcreate .footer #footer_button_forward {
+.footer #footer_button_forward {
   right: 12px;
   margin-top: 15px;
   bottom: 18px;
 }
 
-.ticketcreate .footer #footer_button_back {
+.footer #footer_button_back {
   left: 12px;
   margin-top: 15px;
   visibility: hidden;
