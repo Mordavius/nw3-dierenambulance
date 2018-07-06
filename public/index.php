@@ -21,8 +21,8 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'notepet.nl' ) {
-   require __DIR__ . '/../../../applications/nw3-dierenambulance/vendor/autoload.php';
+if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'demo.notepet.nl' ) {
+   require __DIR__ . '/../../../../applications/demo/vendor/autoload.php';
 } else {
    require __DIR__.'/../vendor/autoload.php';
 }
