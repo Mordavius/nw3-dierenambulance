@@ -1,4 +1,4 @@
-@extends(Auth::user()->isAdmin() ? 'layouts.app' : 'layouts.appambulance')
+@extends('Auth' ? 'layouts.app' : 'layouts.appambulance')
 @section('content')
 @section('body_class', 'edit_ticket')
 
@@ -195,9 +195,13 @@
                 {!! Form::button('Wijzig betaling', ['class' => 'btn-success btn-add-payment', 'value' => 'btn-add-payment', 'id' => 'btn-add-payment', 'name' => 'btn-add-payment']) !!}
             </div>
                 {!! Form::close() !!}
+            @if ($ticket->finished == 0)
+            @if (Auth::user()->isAdmin() || Auth::user()->isCentralist())
             {!!Form::open(['route' => ['ticket.finish', $ticket->id], 'class' => 'btn-center afronden'])!!}
                 {{Form::submit('Melding afronden',['class' => 'btn-afronden'])}}
             {!!Form::close()!!}
+            @endif
+            @endif
         </div>
 
         <!-- Modal (Pop up when detail destinations button clicked) -->
