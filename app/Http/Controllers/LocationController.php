@@ -56,7 +56,7 @@ class LocationController extends Controller
 
     public function askLocationSMS(Request $request)
     {
-        $client = new Client('');
+        $client = new Client(env("MESSAGEBIRD_API_KEY"));
         $messagebird = new Messagebird($client);
         $phonenumber = substr($request->phonenumber, 1);
         $message = $messagebird->createMessage("Dierenambu", ["+31".$phonenumber], URL('/api/location/'.$request->id));
