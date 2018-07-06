@@ -289,15 +289,11 @@ class TicketController extends Controller
            'ticket_id' => $ticket_id,
             ]);
 
-        try {
             $ticket->save();
 		    $ticket->animal()->save($animal);
 		    $bus->tickets()->save($ticket);
 		    $ticket->animal()->save($destination);
 		    $owner->save();
-	    } catch (\Exception $e) {
-	        return response()->json($e);
-        }
 
         return redirect('/')->with('message', 'Nieuwe melding is aangemaakt!');
     }
