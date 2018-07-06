@@ -452,6 +452,7 @@ var app = angular.module("app", [])
                         }
                         if (address.value != "" && postal_code.value != "" && city.value != "") {
                             document.forms["submit_form"].submit();
+                        }else {
                             alert('stad, straat, postcode moeten ingevuld zijn')
                         }
                     });
