@@ -12,7 +12,7 @@ Je bent geregistreerd met dit e-mail adres: {{$user['email']}}
 <br/>
 Druk op de knop hieronder om je gegevens in te vullen en je wachtwoord wijzigen.
 <br/>
-<a href="https://notepet.nl/passwords/reset/{{$user['id']}}/{{$user['token']}}"><button>Wachtwoord wijzigen</button></a>
+<a href="https://demo.notepet.nl/passwords/reset/{{$user['id']}}/{{$user['token']}}"><button>Wachtwoord wijzigen</button></a>
 </body>
 
 </html>
