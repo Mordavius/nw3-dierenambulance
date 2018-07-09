@@ -24,7 +24,7 @@ class BusChangeController extends Controller
     public function index()
     {
         $buschanges = Buschange::All(); // Grabs all the existing bus change details
-        return view('BusChange.index', compact('buschanges'));
+        return view('buschange.index', compact('buschanges'));
     }
 
     /**
@@ -36,7 +36,7 @@ class BusChangeController extends Controller
     {
         $bus = Bus::all('bus_type')->pluck("bus_type");
         $users = User::all()->pluck('name'); // Grabs all the users and plucks the name field from the table
-        return view('BusChange.create', compact('buschange', 'users', 'bus'));
+        return view('buschange.create', compact('buschange', 'users', 'bus'));
     }
 
     /**
