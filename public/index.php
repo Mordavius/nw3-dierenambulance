@@ -21,11 +21,8 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'demo.notepet.nl' ) {
    require __DIR__ . '/../../../../applications/demo/vendor/autoload.php';
-} else {
-   require __DIR__.'/../vendor/autoload.php';
-}
+
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights
@@ -38,11 +35,9 @@ if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'demo.notepet.nl' 
 |
 */
 
-if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] === 'demo.notepet.nl' ) {
+
    $app = require_once __DIR__.'/../../../applications/demo/bootstrap/app.php';
-} else {
-   $app = require_once __DIR__.'/../bootstrap/app.php';
-}
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application
