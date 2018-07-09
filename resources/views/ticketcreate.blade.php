@@ -75,7 +75,7 @@
             </div>
             <div class="searchStuff">
                     <input id="searchTextBox" type="text" placeholder="Zoeken"/>
-                    <button type="button" class="btn btn-success">ZOEKEN</button>
+                    <button type="button" id="searchButton" class="btn btn-success">ZOEKEN</button>
             </div>
             <div id="app" ng-app="app">
                 <div ng-controller="TableController" >
